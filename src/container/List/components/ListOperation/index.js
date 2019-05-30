@@ -1,4 +1,5 @@
 import React, { useReducer, useContext } from 'react';
+import { get as LAGet } from 'zero-element-global/lib/listAction';
 import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
 import PageContext from 'zero-element/lib/context/PageContext';
 import checkExpected from '@/utils/checkExpected';
@@ -53,7 +54,7 @@ function handleAction(type, options, props, dispatch) {
       actionFunc({
         record,
         options,
-        ACTIONTYPE: 'edit',
+        // ACTIONTYPE: 'edit',
       });
     }
 
@@ -133,6 +134,14 @@ function renderMemu(menuItemList) {
 }
 
 export default function ListOperationWrapped(props) {
-  const context = useContext(PageContext)
-  return <ListOperation {...props} context={context} />
+  const context = useContext(PageContext);
+  const { handle = {} } = props;
+  return <ListOperation
+    {...props}
+    context={context}
+    handle={{
+      ...handle,
+      ...LAGet(),
+    }}
+  />
 }
