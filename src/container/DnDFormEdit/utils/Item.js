@@ -1,14 +1,13 @@
 
-let assigned = 0;
+let assigned = 1;
+let fieldCount = 1;
 
 class Item {
   constructor(obj) {
-    const rst = {...obj};
-    if (obj.id === 0) {
-      assigned = obj.id;
-    }
-    if (obj.type === 'Layout') {
-      rst.items = [];
+    const rst = { ...obj };
+    // 只有 layout 才有 tips
+    if (obj.tips === undefined) {
+      rst.options.base.field.value = `field_${fieldCount++}`;
     }
     rst.id = assigned++;
     return rst;

@@ -37,7 +37,7 @@ function handleAction(type, options, props, dispatch) {
   const { API, saveToForm } = options;
   const { namespace } = context;
   const dataPool = getDataPool(namespace);
-  
+
   if (type === undefined) {
     console.warn('请指定 list operation 所用的 action');
     return false;
@@ -61,7 +61,7 @@ function handleAction(type, options, props, dispatch) {
         record,
         options: {
           ...options,
-          API: formatAPI(API, { namespace, }),
+          API: API ? formatAPI(API, { namespace, }) : API,
         },
       });
     }

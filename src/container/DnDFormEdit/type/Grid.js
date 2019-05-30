@@ -1,6 +1,5 @@
 import React from 'react';
-import { Row, Col, Icon } from 'antd';
-import DnDContext from '../utils/context';
+import { Row, Col } from 'antd';
 
 import Render from './Layout';
 
