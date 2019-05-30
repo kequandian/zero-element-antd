@@ -2,6 +2,8 @@ import React, { useReducer, useContext } from 'react';
 import { get as LAGet } from 'zero-element-global/lib/listAction';
 import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
 import PageContext from 'zero-element/lib/context/PageContext';
+import { getDataPool } from 'zero-element/lib/DataPool';
+import { formatAPI } from 'zero-element/lib/utils/format';
 import checkExpected from '@/utils/checkExpected';
 import operationMap from './type';
 import '../../index.css';
@@ -31,8 +33,11 @@ function reducer(state, { type }) {
 }
 
 function handleAction(type, options, props, dispatch) {
-  const { record, handle } = props;
-  const { saveToForm } = options;
+  const { record, handle, context } = props;
+  const { API, saveToForm } = options;
+  const { namespace } = context;
+  const dataPool = getDataPool(namespace);
+  
   if (type === undefined) {
     console.warn('请指定 list operation 所用的 action');
     return false;
@@ -41,6 +46,7 @@ function handleAction(type, options, props, dispatch) {
 
   const actionFunc = handle[`on${type}`];
   if (actionFunc) {
+    dataPool.setRecord(record);
 
     if (saveToForm) {
       console.warn(`saveToForm TODO`);
@@ -53,8 +59,10 @@ function handleAction(type, options, props, dispatch) {
     } else {
       actionFunc({
         record,
-        options,
-        // ACTIONTYPE: 'edit',
+        options: {
+          ...options,
+          API: formatAPI(API, { namespace, }),
+        },
       });
     }
 
