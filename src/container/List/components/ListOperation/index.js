@@ -63,7 +63,9 @@ function handleAction(type, options, props, dispatch) {
           ...options,
           API: API ? formatAPI(API, { namespace, }) : API,
         },
-      });
+      },
+        context
+      );
     }
 
   } else {

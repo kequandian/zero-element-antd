@@ -9,13 +9,15 @@
   },
   "dependencies": {
     "antd": "^3.19.1",
+    "final-form": "^4.13.1",
     "layout-flex": "github:kequandian/layout-flex",
     "react": "^16.8.6",
     "react-contextmenu": "^2.11.0",
     "react-dnd": "^7.4.5",
     "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "^16.8.6",
-    "zero-element": "github:kequandian/zero-element",
+    "react-final-form": "^6.0.1",
+    "zero-element": "github:kequandian/zero-element#1.0",
     "zero-element-global": "github:kequandian/zero-element-global"
   },
   "devDependencies": {
