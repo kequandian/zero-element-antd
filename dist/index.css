@@ -118,9 +118,6 @@
 .ZEle-DnDFormEdit-rightClickMenu {
   z-index: 1000;
 }
-.ZEle-BaseForm-textALignRight{
-  text-align: right;
-}
 .ZEle-table-operation{
   height: 40px;
   line-height: 40px;

@@ -7,14 +7,24 @@ export default function onModal(props, context) {
   const { namespace, extra } = context;
   const { modalTitle, ...rest } = options;
 
+  function handleClose() {
+    extra.modal = null;
+  }
+
   extra.modal = <Modal
     title={modalTitle}
     visible={true}
-    onCancel={() => {
-      extra.modal = null;
+    onCancel={handleClose}
+    bodyStyle={{
+      padding: 0,
     }}
-    footer={extra.modalFooter || null}
+    footer={null}
   >
-    <ZEle namespace={namespace} config={rest} />
+    <ZEle
+      MODAL={true}
+      namespace={namespace}
+      config={rest}
+      onClose={handleClose}
+    />
   </Modal>
 }

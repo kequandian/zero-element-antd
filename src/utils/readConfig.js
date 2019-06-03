@@ -27,8 +27,8 @@ export function getFormItem(field, modelStatus) {
   >
     {({ input, meta }) => {
       return <>
-        {label}:
-      <Render n={type} options={options} {...rest} />
+        {`${label}: `}
+        <Render n={type} options={options} {...input} {...rest} />
       </>
     }}
   </Field>

@@ -1,18 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Form } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
-import { Spin } from 'antd';
+import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
 
-import './index.css';
-
 export default function BaseForm(props) {
-  const { namespace, config } = props;
-  const { layout = 'Empty', fields } = config;
+  const formRef = useRef(null);
+  const symbolRef = useRef(Symbol());
+  const { namespace, config, onClose } = props;
+  const { API = {}, layout = 'Empty', fields } = config;
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
+    symbol: symbolRef.current,
   }, config);
 
   const { data, modelStatus, handle } = formProps;
@@ -20,24 +21,63 @@ export default function BaseForm(props) {
 
   const layoutConfig = {};
 
-  // useEffect(_ => {
-  //   onGetOne({});
-  // }, []);
+  useEffect(_ => {
+    if (API.getAPI) {
+      onGetOne({});
+    }
+  }, []);
 
-  function handleSubmit(data) {
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (API.updateAPI) {
+      onUpdateForm({
+        fields: formRef.current.values,
+      }).then(handleResponse);
+    } else {
+      onCreateForm({
+        fields: formRef.current.values,
+      }).then(handleResponse);
+    }
+  }
+  function handleResponse(data = {}) {
+    if (data.code === 200) {
+      message.success('操作成功');
+      if (onClose) {
+        onClose();
+      }
+    } else {
+      message.error(`操作失败: ${data.message}`);
+    }
+  }
+
+  function handleReset() {
+    formRef.current.form.reset();
+  }
+  function renderFooter() {
+    return <div className="ant-modal-footer">
+      <Button onClick={handleReset}>重置</Button>
+      <Button type="primary" htmlType="submit" onClick={handleSubmit}>保存</Button>
+    </div>
   }
 
   return <Spin spinning={false}>
-    <Form
-      onSubmit={handleSubmit}
-      render={({ handleSubmit, form, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
-          <Render n={layout} {...layoutConfig}>
-            {fields.map(field => getFormItem(field, modelStatus))}
-            {/* {MODAL ? null : this.renderFooter()} */}
-          </Render>
-        </form>
-      )}
-    />
+    <div className="ant-modal-body">
+      <Form
+        initialValues={data}
+        onSubmit={handleSubmit}
+        render={({ handleSubmit, form, submitting, pristine, values }) => {
+          formRef.current = {
+            form,
+            values,
+          };
+          return <form onSubmit={handleSubmit}>
+            <Render n={layout} {...layoutConfig}>
+              {fields.map(field => getFormItem(field, modelStatus))}
+            </Render>
+          </form>
+        }}
+      />
+    </div>
+    {renderFooter()}
   </Spin>
 }
