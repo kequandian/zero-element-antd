@@ -6,7 +6,7 @@ import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
 
 export default function BaseForm(props) {
-  const formRef = useRef(null);
+  const formRef = useRef({});
   const symbolRef = useRef(Symbol());
   const { namespace, config, onClose } = props;
   const { API = {}, layout = 'Empty', fields } = config;
@@ -29,6 +29,9 @@ export default function BaseForm(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    if(meta.error) {
+      ;
+    }
     if (API.updateAPI) {
       onUpdateForm({
         fields: formRef.current.values,
@@ -54,9 +57,10 @@ export default function BaseForm(props) {
     formRef.current.form.reset();
   }
   function renderFooter() {
+    const { onSubmit } = formRef.current;
     return <div className="ant-modal-footer">
       <Button onClick={handleReset}>重置</Button>
-      <Button type="primary" htmlType="submit" onClick={handleSubmit}>保存</Button>
+      <Button type="primary" htmlType="submit" onClick={onSubmit}>保存</Button>
     </div>
   }
 
@@ -69,6 +73,7 @@ export default function BaseForm(props) {
           formRef.current = {
             form,
             values,
+            onSubmit: handleSubmit,
           };
           return <form onSubmit={handleSubmit}>
             <Render n={layout} {...layoutConfig}>

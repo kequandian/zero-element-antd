@@ -1,6 +1,6 @@
 import React from 'react';
 import { Field } from 'react-final-form';
-import { Render } from 'zero-element-global/lib/formItenType';
+import FormIten from '@/container/Form/FormItemWrapped';
 
 import checkExpected from './checkExpected';
 
@@ -23,14 +23,18 @@ export function getFormItem(field, modelStatus) {
   return <Field
     key={fieldName}
     name={fieldName}
+    span={span}
+    {...rest}
     validate={composeValidators(required)}
   >
-    {({ input, meta }) => {
-      return <>
-        {`${label}: `}
-        <Render n={type} options={options} {...input} {...rest} />
-      </>
-    }}
+    {({ input, meta }) => <FormIten
+      label={label}
+      type={type}
+      options={options}
+      input={input}
+      meta={meta}
+      {...rest}
+    />}
   </Field>
 }
 

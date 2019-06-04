@@ -1,0 +1,13 @@
+.ZEle-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner {
+  background: #ff4d4f;
+}
+.ZEle-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
+  border-top-color: #ff4d4f;
+}
+
+.ZEle-Form-ruleTips-error.ant-tooltip-open,
+.ZEle-Form-ruleTips-error.ant-tooltip-open:hover,
+.ZEle-Form-ruleTips-error.ant-tooltip-open:focus {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 0 2px  #ff4d4f33;
+}
