@@ -27,11 +27,7 @@ export default function BaseForm(props) {
     }
   }, []);
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    if(meta.error) {
-      ;
-    }
+  function handleSubmitForm() {
     if (API.updateAPI) {
       onUpdateForm({
         fields: formRef.current.values,
@@ -68,7 +64,7 @@ export default function BaseForm(props) {
     <div className="ant-modal-body">
       <Form
         initialValues={data}
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmitForm}
         render={({ handleSubmit, form, submitting, pristine, values }) => {
           formRef.current = {
             form,
