@@ -7,24 +7,65 @@ export default function formatToConfig(cfg) {
     title: '表单',
     items: [],
   }
-  items.forEach(item => {
-    config.items.push({
-      layout: item.type,
+  let count = 0;
+  config.items.push({
+    layout: 'Empty',
+    component: 'BaseForm',
+    config: {
+      layout: 'Grid',
       layoutConfig: {
-        value: item.value,
+        // value: item.value,
+        layoutArea: [].concat(...items.map(row => ({
+          layout: row.type,
+          length: row.items.length,
+          value: row.value,
+        }))),
       },
-      component: 'BaseForm',
-      config: {
-        fields: item.items.map(field => {
+      fields: [].concat(...items.map(row => {
+        return row.items.map(field => {
+          if (!field) {
+            return {
+              label: '',
+              field: `empty_${count++}`,
+              type: 'empty',
+            }
+          }
           return {
             label: field.title,
             field: field.options.base.field.value,
-            type: field.type,
+            type: field.type.toLowerCase(),
           }
         })
-      }
-    });
+      }))
+    }
   });
+  // items.forEach(item => {
+  //   config.items.push({
+  //     // layout: item.type,
+  //     layout: 'Empty',
+  //     component: 'BaseForm',
+  //     config: {
+  //       layout: 'Grid',
+  //       layoutConfig: {
+  //         value: item.value,
+  //       },
+  //       fields: item.items.map((field, i) => {
+  //         if (!field) {
+  //           return {
+  //             label: '',
+  //             field: `empty_${i}`,
+  //             type: 'empty',
+  //           }
+  //         }
+  //         return {
+  //           label: field.title,
+  //           field: field.options.base.field.value,
+  //           type: field.type.toLowerCase(),
+  //         }
+  //       })
+  //     }
+  //   });
+  // });
 
   return config;
 }

@@ -1,8 +1,57 @@
 import React from 'react';
+import { Render } from 'zero-element-global/lib/layout';
 import { Row, Col } from 'antd';
 
 export default function Grid(props) {
-  const { children } = props;
+  const { layoutArea, value, children } = props;
+
+  if (layoutArea && Array.isArray(layoutArea)) {
+    const fields = React.Children.toArray(children);
+    const rst = [];
+    layoutArea.forEach((rowLayout, i) => {
+      rst.push({
+        key: i,
+        layout: rowLayout.layout,
+        value: rowLayout.value,
+        items: fields.splice(0, rowLayout.length)
+      })
+    });
+
+    return rst.map(row => {
+      const { layout, items, ...rest } = row;
+      return <Render n={layout} {...rest}>
+        {items}
+      </Render>
+    })
+  }
+
+  if (value && Array.isArray(value)) {
+    const rowSize = value.length;
+    const colSize = 24 / rowSize;
+    const rst = [];
+    React.Children.forEach(children, (child, i) => {
+      if (i % rowSize === 0) {
+        rst.push({
+          items: [],
+        });
+      }
+      rst[rst.length - 1].items.push(child);
+    });
+    return rst.map((row, i) => {
+      return <Row key={i} gutter={{
+        xs: 1,
+        sm: 2,
+        md: 4,
+      }}>
+        {row.items.map((child, i) => {
+          return <Col key={i} sm={colSize}>
+            {child}
+          </Col>
+        })}
+      </Row>
+    })
+  }
+
   return <Row gutter={{
     xs: 1,
     sm: 2,

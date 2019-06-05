@@ -8,7 +8,7 @@ export default (props) => {
   const { value, items } = config;
 
   return <Row>
-    {Array(value.length).fill(1).map((_, i) => {
+    {[...Array(value.length)].map((_, i) => {
       const itemCfg = items[i] || {};
 
       return <Col key={i} span={value[i]}>

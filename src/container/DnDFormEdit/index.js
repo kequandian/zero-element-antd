@@ -54,7 +54,7 @@ function DndFormEdit(props) {
     });
 
     const data = formatToConfig(config);
-    formProps.onCreateForm({
+    formProps.handle.onCreateForm({
       fields: data,
     })
     .finally(_ => {

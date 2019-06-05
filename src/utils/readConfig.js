@@ -25,7 +25,7 @@ export function getFormItem(field, modelStatus) {
     name={fieldName}
     span={span}
     {...rest}
-    validate={composeValidators(required)}
+    validate={composeValidators(...rules.map(handleRule))}
   >
     {({ input, meta }) => <FormIten
       label={label}
@@ -38,7 +38,16 @@ export function getFormItem(field, modelStatus) {
   </Field>
 }
 
+function handleRule(rule) {
+  if (typeof rule === 'string') {
+    return defaultRule[rule] || defaultRule['undefined'];
+  }
+}
+
 const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
-const required = value => (value ? undefined : '必填');
+const defaultRule = {
+  required: value => (value ? undefined : '必填'),
+  undefined: value => (console.warn(`值: ${value} 使用了未知的校验规则`) && undefined),
+};

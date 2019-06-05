@@ -9,7 +9,7 @@ export default function BaseForm(props) {
   const formRef = useRef({});
   const symbolRef = useRef(Symbol());
   const { namespace, config, onClose } = props;
-  const { API = {}, layout = 'Empty', fields } = config;
+  const { API = {}, layout = 'Empty', fields, layoutConfig ={} } = config;
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
@@ -19,8 +19,6 @@ export default function BaseForm(props) {
   const { data, modelStatus, handle } = formProps;
   const { onGetOne, onCreateForm, onUpdateForm } = handle;
 
-  const layoutConfig = {};
-
   useEffect(_ => {
     if (API.getAPI) {
       onGetOne({});
@@ -28,6 +26,7 @@ export default function BaseForm(props) {
   }, []);
 
   function handleSubmitForm() {
+    console.log(8888, formRef.current.values);
     if (API.updateAPI) {
       onUpdateForm({
         fields: formRef.current.values,
@@ -53,10 +52,12 @@ export default function BaseForm(props) {
     formRef.current.form.reset();
   }
   function renderFooter() {
-    const { onSubmit } = formRef.current;
+    function onSublit() {
+      formRef.current.onSubmit();
+    }
     return <div className="ant-modal-footer">
       <Button onClick={handleReset}>重置</Button>
-      <Button type="primary" htmlType="submit" onClick={onSubmit}>保存</Button>
+      <Button type="primary" htmlType="submit" onClick={onSublit}>保存</Button>
     </div>
   }
 

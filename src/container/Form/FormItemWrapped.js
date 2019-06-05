@@ -5,6 +5,9 @@ import './index.css';
 
 export default function FormItemWrapped({ label, type, input, meta, options, ...rest }) {
   const visibleError = Boolean(meta.error && meta.touched);
+  if (type === 'empty') {
+    return <></>;
+  }
   return <>
     <label>
       {`${label}: `}
