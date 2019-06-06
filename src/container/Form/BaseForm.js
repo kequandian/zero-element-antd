@@ -8,7 +8,7 @@ import { Render } from 'zero-element-global/lib/layout';
 export default function BaseForm(props) {
   const formRef = useRef({});
   const symbolRef = useRef(Symbol('BaseForm'));
-  const { namespace, config, onClose } = props;
+  const { namespace, config, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
   const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({
@@ -27,6 +27,10 @@ export default function BaseForm(props) {
   }, []);
 
   function handleSubmitForm() {
+    if(onSubmit) {
+      onSubmit(formRef.current.values);
+      return false;
+    }
     if (API.updateAPI) {
       onUpdateForm({
         fields: formRef.current.values,
@@ -77,7 +81,10 @@ export default function BaseForm(props) {
             onSubmit={handleSubmit}
           >
             <Render n={layout} {...layoutConfig}>
-              {fields.map(field => getFormItem(field, modelStatus))}
+              {fields.map(field => getFormItem(field, modelStatus, {
+                namespace,
+                values,
+              }))}
             </Render>
           </form>
         }}

@@ -6,9 +6,7 @@ import ActionItem from '@/container/List/ActionItemWrapped';
 import checkExpected from './checkExpected';
 
 
-
-
-export function getFormItem(field, modelStatus) {
+export function getFormItem(field, modelStatus, { namespace, values }) {
   const {
     field: fieldName, label, value, extra = '', span,
     rules = [],
@@ -17,7 +15,10 @@ export function getFormItem(field, modelStatus) {
     ...rest } = field;
   const formData = modelStatus[options.expectedPath || 'formData'];
 
-  if (!checkExpected(formData, options)) {
+  if (!checkExpected({
+    ...formData,
+    ...values,
+  }, options)) {
     return null;
   }
 
@@ -34,12 +35,13 @@ export function getFormItem(field, modelStatus) {
       options={options}
       input={input}
       meta={meta}
+      namespace={namespace}
       {...rest}
     />}
   </Field>
 }
 
-export function getActionItem(action, modelStatus) {
+export function getActionItem(action, modelStatus, namespace) {
   const { options = {} } = action;
   const listData = modelStatus[options.expectedPath || 'listData'];
 
@@ -47,6 +49,7 @@ export function getActionItem(action, modelStatus) {
     return null;
   }
   return <ActionItem
+    namespace={namespace}
     {...action}
   />
 }

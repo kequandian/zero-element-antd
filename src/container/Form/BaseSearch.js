@@ -58,7 +58,10 @@ export default function BaseSearch(props) {
           onSubmit={handleSubmit}
         >
           <Render n={layout} {...layoutConfig}>
-            {fields.map(field => getFormItem(field, modelStatus))}
+            {fields.map(field => getFormItem(field, modelStatus, {
+              namespace,
+              values,
+            }))}
             {renderFooter()}
           </Render>
         </form>

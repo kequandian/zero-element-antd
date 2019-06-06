@@ -1,42 +1,36 @@
 import React, { useEffect, useRef } from 'react';
-import useBaseList from 'zero-element/lib/helper/list/useBaseList';
+import useBaseChildren from 'zero-element/lib/helper/list/useBaseChildren';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 
-export default function BaseList(props) {
-  const symbolRef = useRef(Symbol('BaseList'));
+export default function BaseChildren(props) {
+  const symbolRef = useRef(Symbol('BaseChildren'));
   const { namespace, config } = props;
   const {
-    layout = 'Empty', layoutConfig = {},
-    API = {},
+    layout = 'Empty',
     fields, operation, actions = [],
-    props: propsCfg = {},
+    props: propsCfg = {}, layoutConfig = {},
     actionLayout = 'Empty',
     actionLayoutConfig = {},
   } = config;
-  const listProps = useBaseList({
+  const childrenProps = useBaseChildren({
     namespace,
     modelPath: 'listData',
     symbol: symbolRef.current,
   }, config);
 
-  const { data, handle, modelStatus } = listProps;
-  const { onGetList } = handle;
+  const { data, handle, modelStatus } = childrenProps;
+  const { onCreate } = handle;
   const columns = formatTableFields(fields, operation, handle);
-
-  useEffect(_ => {
-    if (API.listAPI) {
-      onGetList({});
-    }
-  }, []);
 
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
+        onCreate,
       }, modelStatus, namespace))}
     </Render>
     <Table
