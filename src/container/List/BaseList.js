@@ -4,7 +4,7 @@ import { formatTableFields } from './utils/format';
 import { Table } from 'antd';
 
 export default function BaseList(props) {
-  const symbolRef = useRef(Symbol());
+  const symbolRef = useRef(Symbol('BaseList'));
   const { namespace, config } = props;
   const { fields, operation, props: propsCfg = {} } = config;
   const listProps = useBaseList({

@@ -131,6 +131,18 @@
   border-color: #ff4d4f;
   box-shadow: 0 0 0 2px  #ff4d4f33;
 }
+
+.ZEle-Form-horizontal .ZEle-Form-item {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+.ZEle-Form-item-label {
+  margin-right: 8px;
+}
+.ZEle-Form-horizontal .ZEle-Form-item-element {
+  flex: 1;
+}
 .ZEle-table-operation{
   height: 40px;
   line-height: 40px;

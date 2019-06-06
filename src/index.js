@@ -6,6 +6,7 @@ import { set as FITSet } from 'zero-element-global/lib/formItenType';
 import Grid from '@/layout/Grid';
 
 import BaseList from '@/container/List/BaseList';
+import BaseSearch from '@/container/Form/BaseSearch';
 import BaseForm from '@/container/Form/BaseForm';
 import DnDFormEdit from '@/container/DnDFormEdit';
 
@@ -20,6 +21,7 @@ LayoutSet({
 
 CSet({
   BaseList,
+  BaseSearch,
   BaseForm,
   DnDFormEdit,
 });

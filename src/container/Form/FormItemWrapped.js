@@ -8,9 +8,9 @@ export default function FormItemWrapped({ label, type, input, meta, options, ...
   if (type === 'empty') {
     return <></>;
   }
-  return <>
-    <label>
-      {`${label}: `}
+  return <div className="ZEle-Form-item">
+    <label className="ZEle-Form-item-label">
+      {`${label}:`}
     </label>
     <Tooltip
       visible={visibleError}
@@ -19,9 +19,9 @@ export default function FormItemWrapped({ label, type, input, meta, options, ...
       overlayClassName="ZEle-Form-ruleTips"
     >
       <Render n={type}
-        className={visibleError ? 'ZEle-Form-ruleTips-error' : ''}
+        className={`ZEle-Form-item-element ${visibleError ? 'ZEle-Form-ruleTips-error' : ''}`}
         options={options} {...input} {...rest}
       />
     </Tooltip>
-  </>
+  </div>
 }

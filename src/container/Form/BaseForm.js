@@ -7,9 +7,10 @@ import { Render } from 'zero-element-global/lib/layout';
 
 export default function BaseForm(props) {
   const formRef = useRef({});
-  const symbolRef = useRef(Symbol());
+  const symbolRef = useRef(Symbol('BaseForm'));
   const { namespace, config, onClose } = props;
-  const { API = {}, layout = 'Empty', fields, layoutConfig ={} } = config;
+  const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
+  const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
@@ -26,7 +27,6 @@ export default function BaseForm(props) {
   }, []);
 
   function handleSubmitForm() {
-    console.log(8888, formRef.current.values);
     if (API.updateAPI) {
       onUpdateForm({
         fields: formRef.current.values,
@@ -72,7 +72,10 @@ export default function BaseForm(props) {
             values,
             onSubmit: handleSubmit,
           };
-          return <form onSubmit={handleSubmit}>
+          return <form
+            className={`ZEle-Form-${layoutType}`}
+            onSubmit={handleSubmit}
+          >
             <Render n={layout} {...layoutConfig}>
               {fields.map(field => getFormItem(field, modelStatus))}
             </Render>
