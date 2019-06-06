@@ -14,6 +14,7 @@ export default function onModal(props, context) {
   extra.modal = <Modal
     title={modalTitle}
     visible={true}
+    destroyOnClose={true}
     onCancel={handleClose}
     bodyStyle={{
       padding: 0,

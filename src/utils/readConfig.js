@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'react-final-form';
 import FormIten from '@/container/Form/FormItemWrapped';
+import ActionItem from '@/container/List/ActionItemWrapped';
 
 import checkExpected from './checkExpected';
 
@@ -36,6 +37,18 @@ export function getFormItem(field, modelStatus) {
       {...rest}
     />}
   </Field>
+}
+
+export function getActionItem(action, modelStatus) {
+  const { options = {} } = action;
+  const listData = modelStatus[options.expectedPath || 'listData'];
+
+  if (!checkExpected(listData, options)) {
+    return null;
+  }
+  return <ActionItem
+    {...action}
+  />
 }
 
 function handleRule(rule) {
