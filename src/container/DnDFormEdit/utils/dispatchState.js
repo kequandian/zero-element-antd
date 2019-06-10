@@ -11,10 +11,16 @@ export default function handleState(state, { type, payload = {} }) {
         ...payload,
       }
     },
+    initConfig() {
+      return {
+        ...state,
+        config: payload,
+      }
+    },
     addLayout() {
       const index = config.items.length + 1;
       const { id = index, ...rest } = payload;
-      config.items.splice(id - 1, 0, 
+      config.items.splice(id - 1, 0,
         new Item(JSON.parse(JSON.stringify(rest)))
       );
 
@@ -24,7 +30,7 @@ export default function handleState(state, { type, payload = {} }) {
       }
     },
     insertLayout() {
-      config.items.push(new Item( JSON.parse(JSON.stringify(payload)) ));
+      config.items.push(new Item(JSON.parse(JSON.stringify(payload))));
 
       return {
         ...state,
@@ -117,7 +123,7 @@ export default function handleState(state, { type, payload = {} }) {
     },
     delCopyElement() {
       const { id } = payload;
-      
+
       return {
         ...state,
         copyList: [

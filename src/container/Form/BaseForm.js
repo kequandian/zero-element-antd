@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useContext } from 'react';
 import { Form } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
+import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
@@ -24,11 +25,15 @@ export default function BaseForm(props) {
   const initData = useRef(data);
   const { onGetOne, onCreateForm, onUpdateForm } = handle;
 
-  useEffect(_ => {
+  useDidMount(_ => {
     if (API.getAPI) {
-      onGetOne({});
+      onGetOne({}).then(({ code, data }) => {
+        if (code === 200) {
+          initData.current = data;
+        }
+      });
     }
-  }, []);
+  });
 
   function handleSubmitForm() {
     if (onSubmit) {

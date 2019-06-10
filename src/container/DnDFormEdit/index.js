@@ -3,6 +3,7 @@ import { Button, Spin } from 'antd';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
+import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import PageContext from 'zero-element/lib/context/PageContext';
 import { Flex } from 'layout-flex';
@@ -44,6 +45,19 @@ function DndFormEdit(props) {
     modelPath: 'formData',
   }, props.config);
 
+  useDidMount(_ => {
+    if (props.config.API.getAPI) {
+      formProps.handle.onGetOne({}).then(({ code, data }) => {
+        if (code === 200) {
+          dispatch({
+            type: 'initConfig',
+            payload: data,
+          });
+        }
+      });
+    }
+  });
+
   function handleSave() {
     dispatch({
       type: 'save',
@@ -55,17 +69,20 @@ function DndFormEdit(props) {
 
     const data = formatToConfig(config);
     formProps.handle.onCreateForm({
-      fields: data,
+      fields: {
+        config: data,
+        originConfig: state.config,
+      },
     })
-    .finally(_ => {
-      dispatch({
-        type: 'save',
-        payload: {
-          spinning: false,
-          spinningTip: '',
-        }
+      .finally(_ => {
+        dispatch({
+          type: 'save',
+          payload: {
+            spinning: false,
+            spinningTip: '',
+          }
+        });
       });
-    });
   }
 
   return <DnDContext.Provider value={state}>
