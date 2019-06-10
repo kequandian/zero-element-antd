@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { Form } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
+import { getModel } from 'zero-element/lib/Model';
 
 export default function BaseForm(props) {
   const formRef = useRef({});
@@ -17,7 +18,10 @@ export default function BaseForm(props) {
     symbol: symbolRef.current,
   }, config);
 
+  const model = getModel(namespace);
+
   const { data, modelStatus, handle } = formProps;
+  const initData = useRef(data);
   const { onGetOne, onCreateForm, onUpdateForm } = handle;
 
   useEffect(_ => {
@@ -27,7 +31,7 @@ export default function BaseForm(props) {
   }, []);
 
   function handleSubmitForm() {
-    if(onSubmit) {
+    if (onSubmit) {
       onSubmit(formRef.current.values);
       return false;
     }
@@ -54,6 +58,12 @@ export default function BaseForm(props) {
 
   function handleReset() {
     formRef.current.form.reset();
+    model.dispatch({
+      type: 'save',
+      payload: {
+        formData: initData.current,
+      }
+    });
   }
   function renderFooter() {
     function onSublit() {
@@ -68,7 +78,7 @@ export default function BaseForm(props) {
   return <Spin spinning={false}>
     <div className="ant-modal-body">
       <Form
-        initialValues={data}
+        initialValues={initData.current}
         onSubmit={handleSubmitForm}
         render={({ handleSubmit, form, submitting, pristine, values }) => {
           formRef.current = {
@@ -76,6 +86,7 @@ export default function BaseForm(props) {
             values,
             onSubmit: handleSubmit,
           };
+          model.setState('formData', values);
           return <form
             className={`ZEle-Form-${layoutType}`}
             onSubmit={handleSubmit}

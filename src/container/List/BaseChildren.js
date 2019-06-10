@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import useBaseChildren from 'zero-element/lib/helper/list/useBaseChildren';
+import React, { useRef } from 'react';
+import useBaseChildren from 'zero-element/lib/helper/form/useBaseChildren';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
@@ -17,7 +17,7 @@ export default function BaseChildren(props) {
   } = config;
   const childrenProps = useBaseChildren({
     namespace,
-    modelPath: 'listData',
+    modelPath: 'formData',
     symbol: symbolRef.current,
   }, config);
 
@@ -34,7 +34,7 @@ export default function BaseChildren(props) {
       }, modelStatus, namespace))}
     </Render>
     <Table
-      rowKey="id"
+      rowKey={(row) => row._id || row.id}
       dataSource={data}
       columns={columns}
       {...propsCfg}
