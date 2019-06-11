@@ -13,12 +13,12 @@ export default ({ label, value, index, onChange, onRemove }) => {
     extra={<div>
       <Icon
         type="delete"
-        className="ZEle-DnDFormEdit-ItemEdit-icon ZEle-DnDFormEdit-ItemEdit-icon-delete"
+        className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-delete"
         onClick={onRemove.bind(null, index)}
       />
       <Icon
         type={edit ? 'up' : 'down'}
-        className="ZEle-DnDFormEdit-ItemEdit-icon ZEle-DnDFormEdit-ItemEdit-icon-edit"
+        className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
         onClick={switchEdit}
       />
     </div>}

@@ -31,7 +31,7 @@ export default ({ dispatch, copyList }) => {
     mask={false}
     closable={false}
   >
-    <div className="ZEle-DnDFormEdit-title">布局组件</div>
+    <div className="ZEleA-DnDFormEdit-title">布局组件</div>
     {layoutList.map((cfg, i) => {
       return <Render
         key={i}
@@ -39,7 +39,7 @@ export default ({ dispatch, copyList }) => {
         dispatch={dispatch}
       />
     })}
-    <div className="ZEle-DnDFormEdit-title">基本组件</div>
+    <div className="ZEleA-DnDFormEdit-title">基本组件</div>
     {elementList.map((cfg, i) => {
       return <Render
         key={i}
@@ -49,7 +49,7 @@ export default ({ dispatch, copyList }) => {
     })}
     {copyList.length ? (
       <>
-        <div className="ZEle-DnDFormEdit-title">复制组件</div>
+        <div className="ZEleA-DnDFormEdit-title">复制组件</div>
         {copyList.map((cfg, i) => {
           return <RightClick key={i}
             dispatch={dispatch}

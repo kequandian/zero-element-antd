@@ -2,7 +2,7 @@ import React from 'react';
 import './index.css';
 
 export default function Content({ children }) {
-  return <div className="ZEle-Layout-Content">
+  return <div className="ZEleA-Layout-Content">
     {children}
   </div>
 }

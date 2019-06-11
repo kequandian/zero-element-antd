@@ -35,7 +35,7 @@ export function getFormItem(field, modelStatus, { namespace, values }) {
       options={options}
       input={input}
       meta={meta}
-      // defaultValue={value}
+      defaultValue={value}
       namespace={namespace}
       {...rest}
     />}

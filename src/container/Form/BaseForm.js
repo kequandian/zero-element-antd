@@ -93,7 +93,7 @@ export default function BaseForm(props) {
           };
           model.setState('formData', values);
           return <form
-            className={`ZEle-Form-${layoutType}`}
+            className={`ZEleA-Form-${layoutType}`}
             onSubmit={handleSubmit}
           >
             <Render n={layout} {...layoutConfig}>

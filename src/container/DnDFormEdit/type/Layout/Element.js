@@ -10,8 +10,8 @@ import '../../index.css';
 export default ({ index, data, onRemove, onEdit, onCopy }) => {
   const { current = {} } = useContext(DnDContext);
   const className = classNames({
-    'ZEle-DnDFormEdit-row': true,
-    'ZEle-DnDFormEdit-current': current.id === data.id,
+    'ZEleA-DnDFormEdit-row': true,
+    'ZEleA-DnDFormEdit-current': current.id === data.id,
   });
   return <div>
     <ContextMenuTrigger id={`element_${data.id}`}>
@@ -20,15 +20,15 @@ export default ({ index, data, onRemove, onEdit, onCopy }) => {
       </div>
     </ContextMenuTrigger>
     <ContextMenu
-      id={`element_${data.id}`} className="ZEle-DnDFormEdit-rightClickMenu"
+      id={`element_${data.id}`} className="ZEleA-DnDFormEdit-rightClickMenu"
     >
       <MenuItem>
         <Menu selectedKeys={[]}>
           <Menu.Item onClick={onCopy.bind(null, index)} >
-            <Icon type="copy" className="ZEle-DnDFormEdit-primary" />复制元素
+            <Icon type="copy" className="ZEleA-DnDFormEdit-primary" />复制元素
           </Menu.Item>
           <Menu.Item onClick={onRemove.bind(null, index)} >
-            <Icon type="delete" className="ZEle-DnDFormEdit-danger" />移除元素
+            <Icon type="delete" className="ZEleA-DnDFormEdit-danger" />移除元素
           </Menu.Item>
         </Menu>
       </MenuItem>

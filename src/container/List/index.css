@@ -1,35 +1,35 @@
-.ZEle-table-operation{
+.ZEleA-table-operation{
   height: 40px;
   line-height: 40px;
 }
 
-.ZEle-table-action{
+.ZEleA-table-action{
   display: flex;
 }
-.ZEle-table-action-Outside{
+.ZEleA-table-action-Outside{
   flex: 1;
   text-align: right;
 }
-.ZEle-table-action-Outside>span{
+.ZEleA-table-action-Outside>span{
   margin-right: 12px;
 }
-.ZEle-table-action-empty {
+.ZEleA-table-action-empty {
   color: #e8e8e8;
 }
-.ZEle-table-action-Outside-normal{
+.ZEleA-table-action-Outside-normal{
   vertical-align: middle;
 }
-.ZEle-table-action .anticon-ellipsis{
+.ZEleA-table-action .anticon-ellipsis{
   cursor: pointer;
 }
-.ZEle-table-action-menuItem{
+.ZEleA-table-action-menuItem{
   min-width: 100px;
 }
-.ZEle-table-action-menuItem i{
+.ZEleA-table-action-menuItem i{
   margin-right: 8px;
 }
 
-.ZEle-ListFieldsEdit-divider{
+.ZEleA-ListFieldsEdit-divider{
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -40,26 +40,26 @@
   background: #fff;
   border-radius: 0 0 4px 4px;
 }
-.ZEle-ListFieldsEdit-FieldItem{
+.ZEleA-ListFieldsEdit-FieldItem{
   margin-bottom: .5em;
   padding: 8px;
   transition: all .2s;
 }
-.ZEle-ListFieldsEdit-FieldItem:hover{
+.ZEleA-ListFieldsEdit-FieldItem:hover{
   background: #188fff2f;
 }
-.ZEle-ListFieldsEdit-FieldItem-label{
+.ZEleA-ListFieldsEdit-FieldItem-label{
   cursor: pointer;
   margin-left: .5em;
 }
-.ZEle-ListFieldsEdit-FieldItem-icon{
+.ZEleA-ListFieldsEdit-FieldItem-icon{
   margin: 0 .5em;
 }
 
-.ZEle-table-action-Sort{
+.ZEleA-table-action-Sort{
   text-align: right;
 }
-.ZEle-table-action-Sort>i{
+.ZEleA-table-action-Sort>i{
   margin-right: 8px;
   cursor: pointer;
 }

@@ -35,6 +35,6 @@ export default DragSource('layout', itemSource, collect)((props) => {
     ...restProps
   } = props;
 
-  return connectDragSource(<div className="ZEle-DnDFormEdit-ComponentItem">{children}
+  return connectDragSource(<div className="ZEleA-DnDFormEdit-ComponentItem">{children}
   </div>);
 });

@@ -77,11 +77,11 @@ export default ({ current, dispatch }) => {
     mask={false}
     onClose={handleClose}
   >
-    <div className="ZEle-DnDFormEdit-title">基本属性</div>
+    <div className="ZEleA-DnDFormEdit-title">基本属性</div>
     {renderBaseOptions(base, handleBaseChange)}
     {items ? (
       <>
-        <div className="ZEle-DnDFormEdit-title">子项</div>
+        <div className="ZEleA-DnDFormEdit-title">子项</div>
         <Button type="dashed" icon="plus"
           onClick={handleItemAdd}>
           添加子项
@@ -92,7 +92,7 @@ export default ({ current, dispatch }) => {
     ) : null}
     {style ? (
       <>
-        <div className="ZEle-DnDFormEdit-title">样式</div>
+        <div className="ZEleA-DnDFormEdit-title">样式</div>
         {renderStyleOptions(style, handleStyleChange)}
       </>
     ) : null}

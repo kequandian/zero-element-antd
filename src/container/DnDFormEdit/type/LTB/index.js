@@ -12,9 +12,9 @@ export default (props) => {
   const { config, dispatch } = props;
   const { value, items } = config;
 
-  return <div className="ZEle-Layout-table">
-    <div className="ZEle-Layout-table-row">
-      <div style={{ width: value[0] }} className="ZEle-Layout-table-cell" >
+  return <div className="ZEleA-Layout-table">
+    <div className="ZEleA-Layout-table-row">
+      <div style={{ width: value[0] }} className="ZEleA-Layout-table-cell" >
         <Render
           index={0}
           itemCfg={items[0]}
@@ -22,7 +22,7 @@ export default (props) => {
           dispatch={dispatch}
         />
       </div>
-      <div style={{ width: value[1] }} className="ZEle-Layout-table-cell">
+      <div style={{ width: value[1] }} className="ZEleA-Layout-table-cell">
         <Render
           index={1}
           itemCfg={items[1]}

@@ -42,7 +42,7 @@ export default DragSource('element', itemSource, collect)((props) => {
     ...restProps
   } = props;
 
-  return connectDragSource(<div className="ZEle-DnDFormEdit-ComponentItem" onClick={handleClick.bind(null, props)}>
+  return connectDragSource(<div className="ZEleA-DnDFormEdit-ComponentItem" onClick={handleClick.bind(null, props)}>
     {children}
   </div>);
 });

@@ -15,7 +15,7 @@ export default (item, i, { index, record }, onAction) => {
     'default': '#666',
   };
   return (
-    <Menu.Item key={i} className="ZEle-table-action-menuItem" onClick={onAction.bind(null, item.action, item.options)} >
+    <Menu.Item key={i} className="ZEleA-table-action-menuItem" onClick={onAction.bind(null, item.action, item.options)} >
       <span>
         <Icon
           type={item.options.icon || iconMap[item.action] || iconMap['default']}

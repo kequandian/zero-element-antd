@@ -17,12 +17,12 @@ export default ({ data, dispatch, children }) => {
 
     <ContextMenu
       id={`right_${data.id}`}
-      className="ZEle-DnDFormEdit-rightClickMenu"
+      className="ZEleA-DnDFormEdit-rightClickMenu"
     >
       <MenuItem>
         <Menu>
           <Menu.Item onClick={handleRemove} >
-            <Icon type="delete" className="ZEle-DnDFormEdit-danger" />移除
+            <Icon type="delete" className="ZEleA-DnDFormEdit-danger" />移除
           </Menu.Item>
         </Menu>
       </MenuItem>

@@ -54,7 +54,7 @@ export default function BaseSearch(props) {
           onSubmit: handleSubmit,
         };
         return <form
-          className={`ZEle-Form-${layoutType}`}
+          className={`ZEleA-Form-${layoutType}`}
           onSubmit={handleSubmit}
         >
           <Render n={layout} {...layoutConfig}>

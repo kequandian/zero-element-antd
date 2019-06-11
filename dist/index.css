@@ -1,31 +1,31 @@
-.ZEle-Layout-Content{
+.ZEleA-Layout-Content{
   padding: 20px;
   background: #fff;
 }
-.ZEle-DnDFormEdit-tips{
+.ZEleA-DnDFormEdit-tips{
   text-align: center;
   color: #cbc5c5;
 }
-.ZEle-DnDFormEdit-primary{
+.ZEleA-DnDFormEdit-primary{
   color: #1890ff;
 }
-.ZEle-DnDFormEdit-danger{
+.ZEleA-DnDFormEdit-danger{
   color: #f5222d;
 }
-.ZEle-DnDFormEdit-title{
+.ZEleA-DnDFormEdit-title{
   font-size: 16px;
   font-weight: bold;
   margin: 8px 0;
 }
-.ZEle-DnDFormEdit-empty {
+.ZEleA-DnDFormEdit-empty {
   font-size: 14px;
   color: #cbc5c5;
 }
-.ZEle-DnDFormEdit-br {
+.ZEleA-DnDFormEdit-br {
   padding: 8px;
 }
 
-.ZEle-DnDFormEdit-hide{
+.ZEleA-DnDFormEdit-hide{
   width: 0 !important;
   height: 0 !important;
   min-height: 0 !important;
@@ -34,16 +34,16 @@
   transition: all .2s;
 }
 
-.ZEle-DnDFormEdit-row{
+.ZEleA-DnDFormEdit-row{
   min-height: 60px;
   border: 1px transparent dashed;
   position: relative;
   transition: all .2s;
 }
-.ZEle-DnDFormEdit-current {
+.ZEleA-DnDFormEdit-current {
   border-color: #1890ff;
 }
-.ZEle-DnDFormEdit-rowTool{
+.ZEleA-DnDFormEdit-rowTool{
   height: 0;
   opacity: 0;
   text-align: right;
@@ -52,18 +52,18 @@
   top: 0;
   right: 0;
 }
-.ZEle-DnDFormEdit-rowTool i{
+.ZEleA-DnDFormEdit-rowTool i{
   cursor: pointer;
 }
-.ZEle-DnDFormEdit-rowTool i + i{
+.ZEleA-DnDFormEdit-rowTool i + i{
   margin-left: 6px;
 }
-.ZEle-DnDFormEdit-row:hover .ZEle-DnDFormEdit-rowTool{
+.ZEleA-DnDFormEdit-row:hover .ZEleA-DnDFormEdit-rowTool{
   top: -20px;
   height: 20px;
   opacity: 1;
 }
-.ZEle-DnDFormEdit-Container{
+.ZEleA-DnDFormEdit-Container{
   width: 100%;
   height: 100%;
   min-height: 60px;
@@ -75,28 +75,28 @@
   transition: all .2s;
   position: relative;
 }
-.ZEle-DnDFormEdit-Container-Current{
+.ZEleA-DnDFormEdit-Container-Current{
   background: #52c41a;
 }
-.ZEle-DnDFormEdit-Container-Available{
+.ZEleA-DnDFormEdit-Container-Available{
   background: #1890ff;
 }
-.ZEle-DnDFormEdit-Container-Disable{
+.ZEleA-DnDFormEdit-Container-Disable{
   background: #f5222d;
 }
-.ZEle-DnDFormEdit-Container > i{
+.ZEleA-DnDFormEdit-Container > i{
   font-size: 24px;
   vertical-align: middle;
 }
-.ZEle-DnDFormEdit-Container-Current > i,
-.ZEle-DnDFormEdit-Container-Available > i,
-.ZEle-DnDFormEdit-Container-Disable > i{
+.ZEleA-DnDFormEdit-Container-Current > i,
+.ZEleA-DnDFormEdit-Container-Available > i,
+.ZEleA-DnDFormEdit-Container-Disable > i{
   color: #fff;
 }
-.ZEle-DnDFormEdit-Container-active{
+.ZEleA-DnDFormEdit-Container-active{
   border-color: #1890ff;
 }
-.ZEle-DnDFormEdit-itemBox .ZEle-DnDFormEdit-itemTool{
+.ZEleA-DnDFormEdit-itemBox .ZEleA-DnDFormEdit-itemTool{
   position: absolute;
   top: -8px;
   right: 4px;
@@ -104,81 +104,85 @@
   z-index: 99;
   transition: all .2s;
 }
-.ZEle-DnDFormEdit-itemBox:hover .ZEle-DnDFormEdit-itemTool{
+.ZEleA-DnDFormEdit-itemBox:hover .ZEleA-DnDFormEdit-itemTool{
   opacity: 1;
 }
-.ZEle-DnDFormEdit-itemTool i{
+.ZEleA-DnDFormEdit-itemTool i{
   cursor: pointer;
 }
-.ZEle-DnDFormEdit-itemTool i + i{
+.ZEleA-DnDFormEdit-itemTool i + i{
   margin-left: 6px;
 }
 
-.ZEle-DnDFormEdit-ComponentItem {
+.ZEleA-DnDFormEdit-ComponentItem {
   display: inline-block;
   margin: 4px;
 }
 
-.ZEle-DnDFormEdit-rightClickMenu {
+.ZEleA-DnDFormEdit-rightClickMenu {
   z-index: 1000;
 }
-.ZEle-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner {
+.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner {
   background: #ff4d4f;
 }
-.ZEle-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
+.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
   border-top-color: #ff4d4f;
 }
 
-.ZEle-Form-ruleTips-error.ant-tooltip-open,
-.ZEle-Form-ruleTips-error.ant-tooltip-open:hover,
-.ZEle-Form-ruleTips-error.ant-tooltip-open:focus {
+.ZEleA-Form-ruleTips-error.ant-tooltip-open,
+.ZEleA-Form-ruleTips-error.ant-tooltip-open:hover,
+.ZEleA-Form-ruleTips-error.ant-tooltip-open:focus {
   border-color: #ff4d4f;
   box-shadow: 0 0 0 2px  #ff4d4f33;
 }
 
-.ZEle-Form-horizontal .ZEle-Form-item {
+.ZEleA-Form-vertical>.ant-row ,
+.ZEleA-Form-horizontal>.ant-row {
+  margin-bottom: 8px;
+}
+.ZEleA-Form-horizontal .ZEleA-Form-item {
   display: flex;
   align-items: baseline;
   margin-bottom: 8px;
 }
-.ZEle-Form-item-label {
+.ZEleA-Form-item-label {
   margin-right: 8px;
 }
-.ZEle-Form-horizontal .ZEle-Form-item-element {
+.ZEleA-Form-horizontal .ZEleA-Form-item-element {
   flex: 1;
 }
-.ZEle-table-operation{
+.ZEleA-table-operation{
   height: 40px;
   line-height: 40px;
 }
 
-.ZEle-table-action{
+.ZEleA-table-action{
   display: flex;
 }
-.ZEle-table-action-Outside{
+.ZEleA-table-action-Outside{
   flex: 1;
   text-align: right;
 }
-.ZEle-table-action-Outside>span{
+.ZEleA-table-action-Outside>span{
   margin-right: 12px;
 }
-.ZEle-table-action-empty {
+.ZEleA-table-action-empty {
   color: #e8e8e8;
 }
-.ZEle-table-action-Outside-normal{
+.ZEleA-table-action-Outside-normal{
   vertical-align: middle;
 }
-.ZEle-table-action .anticon-ellipsis{
+.ZEleA-table-action .anticon-ellipsis{
   cursor: pointer;
 }
-.ZEle-table-action-menuItem{
+.ZEleA-table-action-menuItem{
   min-width: 100px;
 }
-.ZEle-table-action-menuItem i{
+.ZEleA-table-action-menuItem i{
   margin-right: 8px;
 }
 
-.ZEle-ListFieldsEdit-divider{
+.ZEleA-ListFieldsEdit-divider{
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -189,46 +193,46 @@
   background: #fff;
   border-radius: 0 0 4px 4px;
 }
-.ZEle-ListFieldsEdit-FieldItem{
+.ZEleA-ListFieldsEdit-FieldItem{
   margin-bottom: .5em;
   padding: 8px;
   transition: all .2s;
 }
-.ZEle-ListFieldsEdit-FieldItem:hover{
+.ZEleA-ListFieldsEdit-FieldItem:hover{
   background: #188fff2f;
 }
-.ZEle-ListFieldsEdit-FieldItem-label{
+.ZEleA-ListFieldsEdit-FieldItem-label{
   cursor: pointer;
   margin-left: .5em;
 }
-.ZEle-ListFieldsEdit-FieldItem-icon{
+.ZEleA-ListFieldsEdit-FieldItem-icon{
   margin: 0 .5em;
 }
 
-.ZEle-table-action-Sort{
+.ZEleA-table-action-Sort{
   text-align: right;
 }
-.ZEle-table-action-Sort>i{
+.ZEleA-table-action-Sort>i{
   margin-right: 8px;
   cursor: pointer;
 }
-.ZEle-Layout-table {
+.ZEleA-Layout-table {
   display: table;
 }
-.ZEle-Layout-table-row {
+.ZEleA-Layout-table-row {
   display: table-row;
 }
-.ZEle-Layout-table-cell {
+.ZEleA-Layout-table-cell {
   display: table-cell;
 }
-.ZEle-DnDFormEdit-ItemEdit-icon{
+.ZEleA-DnDFormEdit-ItemEdit-icon{
   user-select: none;
   padding-left: 8px;
   transition: all .2s;
 }
-.ZEle-DnDFormEdit-ItemEdit-icon-delete:hover {
+.ZEleA-DnDFormEdit-ItemEdit-icon-delete:hover {
   color: #f5222d;
 }
-.ZEle-DnDFormEdit-ItemEdit-icon-edit:hover {
+.ZEleA-DnDFormEdit-ItemEdit-icon-edit:hover {
   color: #1890ff;
 }

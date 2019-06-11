@@ -22,7 +22,7 @@ export default ({
     {advancedConfig && advancedConfig.map(item => {
       return <FieldItem data={item} key={item.field} {...fieldItemProps} />
     })}
-    <div className="ZEle-ListFieldsEdit-divider">
+    <div className="ZEleA-ListFieldsEdit-divider">
       <Button onClick={onSwitchVisibel}>取消</Button>
       <Button type="primary" onClick={onSaveFields}>确定</Button>
     </div>

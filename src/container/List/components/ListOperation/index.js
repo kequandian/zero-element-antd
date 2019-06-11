@@ -120,8 +120,8 @@ function ListOperation(props) {
   })
 
   return <Popconfirm {...popconfirmProps}>
-    <div className="ZEle-table-action">
-      <div className="ZEle-table-action-Outside">
+    <div className="ZEleA-table-action">
+      <div className="ZEleA-table-action-Outside">
         {outsideList}
       </div>
       {dropdownList.length ? (
@@ -129,7 +129,7 @@ function ListOperation(props) {
           <Icon style={{ fontSize: '24px' }} type="ellipsis" />
         </Dropdown>
       ) : outsideList.length === 0 ?
-          (<span className="ZEle-table-action-empty">暂无</span>) : null}
+          (<span className="ZEleA-table-action-empty">暂无</span>) : null}
     </div>
   </Popconfirm>
 }

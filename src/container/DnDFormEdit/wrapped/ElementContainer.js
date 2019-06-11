@@ -50,12 +50,12 @@ export default DropTarget('element', containerSquareTarget, collect)((props) => 
     children,
   } = props;
   const className = classNames({
-    'ZEle-DnDFormEdit-Container': true,
-    'ZEle-DnDFormEdit-itemBox': true,
-    'ZEle-DnDFormEdit-Container-Current': isOverCurrent && canDrop,
-    'ZEle-DnDFormEdit-Container-Available': !isOverCurrent && canDrop,
-    'ZEle-DnDFormEdit-Container-Disable': isOverCurrent && !canDrop,
-    // 'ZEle-DnDFormEdit-Container-active': itemData.parentId === parentId,
+    'ZEleA-DnDFormEdit-Container': true,
+    'ZEleA-DnDFormEdit-itemBox': true,
+    'ZEleA-DnDFormEdit-Container-Current': isOverCurrent && canDrop,
+    'ZEleA-DnDFormEdit-Container-Available': !isOverCurrent && canDrop,
+    'ZEleA-DnDFormEdit-Container-Disable': isOverCurrent && !canDrop,
+    // 'ZEleA-DnDFormEdit-Container-active': itemData.parentId === parentId,
   });
   return connectDropTarget(
     <div>

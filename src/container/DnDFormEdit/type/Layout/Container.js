@@ -9,20 +9,20 @@ export default ({ layoutId, index, onEditRow, onRemoveRow }) => {
   return <div>
     <ContextMenuTrigger id={`layout_${layoutId}_${index}`}>
       <ElementContainer layoutId={layoutId} index={index}>
-        <span className="ZEle-DnDFormEdit-empty">暂无内容</span>
+        <span className="ZEleA-DnDFormEdit-empty">暂无内容</span>
       </ElementContainer>
     </ContextMenuTrigger>
     <ContextMenu
       id={`layout_${layoutId}_${index}`}
-      className="ZEle-DnDFormEdit-rightClickMenu"
+      className="ZEleA-DnDFormEdit-rightClickMenu"
     >
       <MenuItem>
         <Menu selectedKeys={[]}>
           <Menu.Item onClick={onEditRow.bind(null, index)}>
-            <Icon type="edit" className="ZEle-DnDFormEdit-primary" />编辑布局
+            <Icon type="edit" className="ZEleA-DnDFormEdit-primary" />编辑布局
           </Menu.Item>
           <Menu.Item onClick={onRemoveRow.bind(null, index)}>
-            <Icon type="delete" className="ZEle-DnDFormEdit-danger" />移除整行
+            <Icon type="delete" className="ZEleA-DnDFormEdit-danger" />移除整行
           </Menu.Item>
         </Menu>
       </MenuItem>

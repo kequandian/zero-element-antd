@@ -1,11 +1,11 @@
-.ZEle-DnDFormEdit-ItemEdit-icon{
+.ZEleA-DnDFormEdit-ItemEdit-icon{
   user-select: none;
   padding-left: 8px;
   transition: all .2s;
 }
-.ZEle-DnDFormEdit-ItemEdit-icon-delete:hover {
+.ZEleA-DnDFormEdit-ItemEdit-icon-delete:hover {
   color: #f5222d;
 }
-.ZEle-DnDFormEdit-ItemEdit-icon-edit:hover {
+.ZEleA-DnDFormEdit-ItemEdit-icon-edit:hover {
   color: #1890ff;
 }

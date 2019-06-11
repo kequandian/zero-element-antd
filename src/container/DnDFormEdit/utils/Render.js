@@ -25,7 +25,7 @@ export default function Render(props) {
   const { base } = options;
   return <>
     {base.label.value ? (
-      <label className="ZEle-Form-item-label">
+      <label className="ZEleA-Form-item-label">
         {`${base.label.value}:`}
       </label>
     ) : null}
