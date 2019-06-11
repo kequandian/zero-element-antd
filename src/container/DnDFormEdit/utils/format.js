@@ -16,7 +16,7 @@ export default function formatToConfig(cfg) {
       layoutConfig: {
         layoutArea: [].concat(...items.map(row => ({
           layout: row.type,
-          length: row.items.length,
+          length: row.value.length,
           value: row.value,
         }))),
       },
@@ -32,7 +32,7 @@ export default function formatToConfig(cfg) {
           const rst = {
             label: field.options.base.label.value || '',
             field: field.options.base.field.value,
-            value: field.options.base.value.value,
+            value: formatToValue(field.options.base),
             type: field.type.toLowerCase(),
             props: {
               style: formatToStyle(field.options.style),
@@ -62,4 +62,8 @@ function formatToStyle(style) {
 function formatToPlaceholder(base) {
   if (!base.placeholder) return undefined;
   return base.placeholder.value;
+}
+function formatToValue(base) {
+  if (!base.value) return undefined;
+  return base.value.value;
 }

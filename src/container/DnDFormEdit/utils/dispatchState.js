@@ -43,6 +43,14 @@ export default function handleState(state, { type, payload = {} }) {
       const node = findNode(id, config);
       node.value = value;
 
+      if (node.value.length > node.items.length) {
+        node.items.splice(node.items.length, 0,
+          ...Array(node.value.length - node.items.length));
+
+      } else if (node.value.length !== node.items.length) {
+        node.items.splice(node.value.length);
+      }
+
       return {
         ...state,
         config: config,

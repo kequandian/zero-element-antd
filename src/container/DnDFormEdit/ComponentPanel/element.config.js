@@ -28,6 +28,17 @@ export default [
           ],
           value: 'left',
         },
+        fontSize: {
+          label: '字号',
+          type: 'radio',
+          options: [
+            { label: '小', value: '12px' },
+            { label: '默认', value: '14px' },
+            { label: '中', value: '16px' },
+            { label: '大', value: '18px' },
+          ],
+          value: '14px',
+        },
         padding: {
           label: '内间距',
           value: '0px 0px 0px 0px',
@@ -48,10 +59,10 @@ export default [
         field: {
           label: '字段值',
         },
-        value: {
-          label: '内容',
-          value: '',
-        },
+        // value: {
+        //   label: '内容',
+        //   value: '',
+        // },
         placeholder: {
           label: '占位符',
           value: '请输入……',
@@ -68,10 +79,10 @@ export default [
         field: {
           label: '字段值',
         },
-        value: {
-          label: '默认值',
-          value: '1',
-        }
+        // value: {
+        //   label: '默认值',
+        //   value: '1',
+        // }
       },
       items: [
         { label: '选项1', value: '1' },
@@ -88,10 +99,10 @@ export default [
         field: {
           label: '字段值',
         },
-        value: {
-          label: '默认值',
-          value: '1',
-        }
+        // value: {
+        //   label: '默认值',
+        //   value: '1',
+        // }
       },
       items: [
         { label: '选项1', value: '1' },

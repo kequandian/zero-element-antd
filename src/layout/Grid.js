@@ -27,7 +27,6 @@ export default function Grid(props) {
 
   if (value && Array.isArray(value)) {
     const rowSize = value.length;
-    const colSize = 24 / rowSize;
     const rst = [];
     React.Children.forEach(children, (child, i) => {
       if (i % rowSize === 0) {
@@ -44,7 +43,7 @@ export default function Grid(props) {
         md: 4,
       }}>
         {row.items.map((child, i) => {
-          return <Col key={i} sm={colSize}>
+          return <Col key={i} sm={value[i]}>
             {child}
           </Col>
         })}
