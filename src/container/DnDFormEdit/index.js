@@ -15,6 +15,7 @@ import AttributesPanel from './AttributesPanel';
 import DnDContext from './utils/context';
 import handleState from './utils/dispatchState';
 import formatToConfig from './utils/format';
+import { assigned, fieldCount, setInitId } from './utils/Item';
 
 const { FlexItem } = Flex;
 
@@ -53,6 +54,7 @@ function DndFormEdit(props) {
             type: 'initConfig',
             payload: data,
           });
+          setInitId(data.finalId, data.fieldCount);
         }
       });
     }
@@ -71,7 +73,11 @@ function DndFormEdit(props) {
     formProps.handle.onCreateForm({
       fields: {
         config: data,
-        originConfig: state.config,
+        originConfig: {
+          ...state.config,
+          finalId: assigned,
+          fieldCount: fieldCount,
+        },
       },
     })
       .finally(_ => {
@@ -86,22 +92,18 @@ function DndFormEdit(props) {
   }
 
   return <DnDContext.Provider value={state}>
-    <Spin spinning={spinning} tip={spinningTip}>
-      <Flex>
-        <FlexItem>
+    <Flex>
+      <FlexItem flex={1}>
+        <Spin spinning={spinning} tip={spinningTip}>
           <Button type="primary" onClick={handleSave}>保存</Button>
-        </FlexItem>
-      </Flex>
-      <Flex>
-        <FlexItem flex={1}>
           <EchoPanel config={config} dispatch={dispatch} />
-        </FlexItem>
-        <FlexItem style={{ width: '256px' }}>
-          <ComponentPanel dispatch={dispatch} copyList={copyList} />
-          <AttributesPanel current={state.current} dispatch={dispatch} />
-        </FlexItem>
-      </Flex>
-    </Spin>
+        </Spin>
+      </FlexItem>
+      <FlexItem style={{ width: '256px' }}>
+        <ComponentPanel dispatch={dispatch} copyList={copyList} />
+        <AttributesPanel current={state.current} dispatch={dispatch} />
+      </FlexItem>
+    </Flex>
   </DnDContext.Provider>
 }
 

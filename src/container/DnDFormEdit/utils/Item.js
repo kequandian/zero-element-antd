@@ -14,4 +14,15 @@ class Item {
   }
 }
 
+function setInitId(id = 1, count = 1) {
+  assigned = id;
+  fieldCount = count;
+}
+
 export default Item;
+
+export {
+  assigned,
+  fieldCount,
+  setInitId,
+}

@@ -10,5 +10,5 @@ export default ({ config }) => {
     return rst;
   }, [style]);
 
-  return <span style={styleObj}>{value.value}</span>;
+  return <div style={styleObj}>{value.value}</div>;
 }

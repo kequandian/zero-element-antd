@@ -3,7 +3,7 @@
 export default function formatToConfig(cfg) {
   const { items = [] } = cfg;
   const config = {
-    layout: 'Empty',
+    layout: 'Content',
     title: '表单',
     items: [],
   }
@@ -34,38 +34,23 @@ export default function formatToConfig(cfg) {
             label: field.title,
             field: field.options.base.field.value,
             type: field.type.toLowerCase(),
+            props: {
+              style: formatToStyle(field.options.style),
+            },
           }
         })
       }))
     }
   });
-  // items.forEach(item => {
-  //   config.items.push({
-  //     // layout: item.type,
-  //     layout: 'Empty',
-  //     component: 'BaseForm',
-  //     config: {
-  //       layout: 'Grid',
-  //       layoutConfig: {
-  //         value: item.value,
-  //       },
-  //       fields: item.items.map((field, i) => {
-  //         if (!field) {
-  //           return {
-  //             label: '',
-  //             field: `empty_${i}`,
-  //             type: 'empty',
-  //           }
-  //         }
-  //         return {
-  //           label: field.title,
-  //           field: field.options.base.field.value,
-  //           type: field.type.toLowerCase(),
-  //         }
-  //       })
-  //     }
-  //   });
-  // });
 
   return config;
+}
+
+function formatToStyle(style) {
+  if (!style) return undefined;
+  const rst = {};
+  Object.keys(style).forEach(key => {
+    rst[key] = style[key].value;
+  });
+  return rst;
 }

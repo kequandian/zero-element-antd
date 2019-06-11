@@ -15,6 +15,16 @@ export default [
           label: '颜色',
           value: '#666666',
         },
+        textAlign: {
+          label: '对齐',
+          type: 'radio',
+          options: [
+            { label: '左', value: 'left' },
+            { label: '中', value: 'center' },
+            { label: '右', value: 'right' },
+          ],
+          value: 'left',
+        },
       },
     }
   },
@@ -33,6 +43,23 @@ export default [
   },
   {
     title: '单选框', type: 'Radio', options: {
+      base: {
+        field: {
+          label: '字段',
+        },
+        value: {
+          label: '默认值',
+          value: '1',
+        }
+      },
+      items: [
+        { label: '选项1', value: '1' },
+        { label: '选项2', value: '2' }
+      ],
+    }
+  },
+  {
+    title: '多选框', type: 'Checkbox', options: {
       base: {
         field: {
           label: '字段',

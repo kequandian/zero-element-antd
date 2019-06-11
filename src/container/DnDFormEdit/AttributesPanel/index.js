@@ -1,37 +1,14 @@
 import React from 'react';
-import { Drawer, Input, Button } from 'antd';
+import { Drawer, Input, Radio, Button } from 'antd';
 
 import ItemEdit from './components/ItemEdit';
+import { renderBaseOptions, renderStyleOptions } from './components/render';
 
 import '../index.css';
 
-function renderBaseOptions(opt, handle) {
-  return Object.keys(opt).map(key => {
-    return <span key={key}>
-      <span>{opt[key].label}</span>
-      <Input
-        value={opt[key].value}
-        onChange={handle.bind(null, key)}
-      />
-    </span>
-  })
-}
-
-function renderStyleOptions(opt, handle) {
-  return Object.keys(opt).map(key => {
-    return <span key={key}>
-      <span>{opt[key].label}</span>
-      <Input
-        value={opt[key].value}
-        onChange={handle.bind(null, key)}
-      />
-    </span>
-  })
-}
-
 function renderItemsOptions(items, handle, onRemove) {
   return items.map((item, i) => {
-    return <span key={i}>
+    return <div key={i}>
       <ItemEdit
         label={item.label}
         value={item.value}
@@ -40,7 +17,7 @@ function renderItemsOptions(items, handle, onRemove) {
         onRemove={onRemove}
       />
       <br />
-    </span>
+    </div>
   })
 }
 

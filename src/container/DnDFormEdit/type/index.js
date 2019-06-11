@@ -6,13 +6,15 @@ import LTB from './LTB';
 import Plain from './Plain';
 import Input from './Input';
 import Radio from './Radio';
+import Checkbox from './Checkbox';
 
 const typeMap = {
-  Canvas: Canvas,
-  Grid: Grid,
-  LTB: LTB,
-  Plain: Plain,
-  Input: Input,
-  Radio: Radio,
+  Canvas,
+  Grid,
+  LTB,
+  Plain,
+  Input,
+  Radio,
+  Checkbox,
 };
 export default typeMap;
