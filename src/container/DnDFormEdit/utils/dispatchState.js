@@ -1,5 +1,6 @@
 import Item from './Item';
 import { findNode, findEmptyNode } from './nodeTree';
+import { setInitId } from './Item';
 
 export default function handleState(state, { type, payload = {} }) {
   const config = { ...state.config };
@@ -50,6 +51,10 @@ export default function handleState(state, { type, payload = {} }) {
     delRow() {
       const { id } = payload;
       config.items = config.items.filter(cfg => cfg.id !== id);
+
+      if (config.items.length === 0) {
+        setInitId(1, 1);
+      }
 
       return {
         ...state,

@@ -1,18 +1,10 @@
 import React from 'react';
-import SRadio from './SRadio';
+import { Radio } from 'antd';
 
-const { Item } = SRadio;
-
-export default function Radio({ config }) {
+export default function SRadio({ config }) {
   const { options = {} } = config;
   const { base = {}, style = {}, items = [] } = options;
   const { value = {} } = base;
 
-  return <SRadio value={value.value}>
-    {items.map((item, i) => {
-      return <Item key={i} value={item.value}>
-        {item.label}
-      </Item>
-    })}
-  </SRadio>
+  return <Radio.Group options={items} value={[value]} />
 }

@@ -14,7 +14,6 @@ export default function formatToConfig(cfg) {
     config: {
       layout: 'Grid',
       layoutConfig: {
-        // value: item.value,
         layoutArea: [].concat(...items.map(row => ({
           layout: row.type,
           length: row.items.length,
@@ -30,14 +29,20 @@ export default function formatToConfig(cfg) {
               type: 'empty',
             }
           }
-          return {
-            label: field.title,
+          const rst = {
+            label: field.options.base.label.value || '',
             field: field.options.base.field.value,
+            value: field.options.base.value.value,
             type: field.type.toLowerCase(),
             props: {
               style: formatToStyle(field.options.style),
+              placeholder: formatToPlaceholder(field.options.base),
             },
+          };
+          if(field.options.items) {
+            rst.options = field.options.items;
           }
+          return rst;
         })
       }))
     }
@@ -53,4 +58,8 @@ function formatToStyle(style) {
     rst[key] = style[key].value;
   });
   return rst;
+}
+function formatToPlaceholder(base) {
+  if (!base.placeholder) return undefined;
+  return base.placeholder.value;
 }

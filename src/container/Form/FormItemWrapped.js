@@ -9,9 +9,11 @@ export default function FormItemWrapped({ label, type, input, meta, options, ...
     return <></>;
   }
   return <div className="ZEle-Form-item">
-    <label className="ZEle-Form-item-label">
-      {`${label}:`}
-    </label>
+    {label ? (
+      <label className="ZEle-Form-item-label">
+        {`${label}:`}
+      </label>
+    ) : null}
     <Tooltip
       visible={visibleError}
       title={meta.error}

@@ -3,6 +3,6 @@ import { Input } from 'antd';
 
 export default ({ config }) => {
   const { options = {} } = config;
-  const { value = {} } = options.base || {};
-  return <Input value={value.value} />;
+  const { value = {}, placeholder = {} } = options.base || {};
+  return <Input value={value.value} placeholder={placeholder.value} />;
 }

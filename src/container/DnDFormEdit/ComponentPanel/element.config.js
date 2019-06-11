@@ -2,8 +2,11 @@ export default [
   {
     title: '纯文本', type: 'Plain', options: {
       base: {
+        label: {
+          label: '字段名',
+        },
         field: {
-          label: '字段',
+          label: '字段值',
         },
         value: {
           label: '文本',
@@ -25,17 +28,32 @@ export default [
           ],
           value: 'left',
         },
+        padding: {
+          label: '内间距',
+          value: '0px 0px 0px 0px',
+        },
+        margin: {
+          label: '外间距',
+          value: '0px 0px 0px 0px',
+        },
       },
     }
   },
   {
     title: '输入框', type: 'Input', options: {
       base: {
+        label: {
+          label: '字段名',
+        },
         field: {
-          label: '字段',
+          label: '字段值',
         },
         value: {
           label: '内容',
+          value: '',
+        },
+        placeholder: {
+          label: '占位符',
           value: '请输入……',
         },
       },
@@ -44,8 +62,11 @@ export default [
   {
     title: '单选框', type: 'Radio', options: {
       base: {
+        label: {
+          label: '字段名',
+        },
         field: {
-          label: '字段',
+          label: '字段值',
         },
         value: {
           label: '默认值',
@@ -61,8 +82,11 @@ export default [
   {
     title: '多选框', type: 'Checkbox', options: {
       base: {
+        label: {
+          label: '字段名',
+        },
         field: {
-          label: '字段',
+          label: '字段值',
         },
         value: {
           label: '默认值',

@@ -15,7 +15,10 @@ import DnDFormEdit from '@/container/DnDFormEdit';
 
 import onModal from '@/listAction/onModal';
 
+import Plain from '@/formItemType/Plain';
 import Input from '@/formItemType/Input';
+import Radio from '@/formItemType/Radio';
+import Checkbox from '@/formItemType/Checkbox';
 import SelectFetch from '@/formItemType/SelectFetch';
 
 import Modal from '@/actionItemType/Modal';
@@ -40,7 +43,10 @@ LASet({
 });
 
 FITSet({
+  'plain': Plain,
   input: Input,
+  'radio': Radio,
+  'checkbox': Checkbox,
   'select-fetch': SelectFetch,
 });
 

@@ -4,7 +4,7 @@ import LayoutContainer from '../wrapped/LayoutContainer';
 
 export default function Render(props) {
   const { config } = props;
-  const { type, items } = config;
+  const { type, tips, items, options } = config;
 
   const Component = match(type);
   if (type === 'Canvas') {
@@ -19,7 +19,18 @@ export default function Render(props) {
       </Component>
     </>
   }
-  return <Component {...props} />
+  if (tips) {
+    return <Component {...props} />;
+  }
+  const { base } = options;
+  return <>
+    {base.label.value ? (
+      <label className="ZEle-Form-item-label">
+        {`${base.label.value}:`}
+      </label>
+    ) : null}
+    <Component {...props} />
+  </>
 }
 
 function match(type) {
