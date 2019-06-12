@@ -34,7 +34,7 @@ export function findEmptyNode(node) {
     let curNode = queue.shift();
     if (curNode) {
       if (curNode.items) {
-        if (curNode.items.length === 0 || curNode.items.includes(null)) {
+        if (curNode.items.length === 0 || curNode.items.includes() || curNode.items.includes(null)) {
           return curNode;
         } else {
           queue = queue.concat(curNode.items);

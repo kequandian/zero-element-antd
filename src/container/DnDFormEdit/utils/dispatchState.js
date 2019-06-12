@@ -1,6 +1,7 @@
 import Item from './Item';
 import { findNode, findEmptyNode } from './nodeTree';
 import { setInitId } from './Item';
+import { message } from 'antd';
 
 export default function handleState(state, { type, payload = {} }) {
   const config = { ...state.config };
@@ -36,6 +37,39 @@ export default function handleState(state, { type, payload = {} }) {
       return {
         ...state,
         config: config,
+      }
+    },
+    rowMoveUp() {
+      const index = config.items.findIndex((row) => {
+        return row === payload;
+      });
+      const arr = config.items;
+
+      if (index > 0) {
+        [arr[index - 1], arr[index]] = [arr[index], arr[index - 1]];
+        return {
+          ...state,
+          config: config,
+        };
+      } else {
+        return state;
+      }
+    },
+    rowMoveDown() {
+      const index = config.items.findIndex((row) => {
+        return row === payload;
+      });
+      const arr = config.items;
+
+      if (index < config.items.length) {
+        [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]];
+
+        return {
+          ...state,
+          config: config,
+        };
+      } else {
+        return state;
       }
     },
     editRowValue() {
@@ -132,6 +166,25 @@ export default function handleState(state, { type, payload = {} }) {
           ...copyList,
           JSON.parse(JSON.stringify(new Item(rest))),
         ],
+      }
+    },
+    pasteElement() {
+      const { layoutId, index } = payload;
+      if (copyList.length > 0) {
+        const node = findNode(layoutId, config);
+        node.items[index] = new Item({
+          ...copyList[copyList.length - 1],
+          index,
+          parentId: node.id,
+        });
+
+        return {
+          ...state,
+          config: config,
+        }
+      } else {
+        message.info('暂无可粘贴的内容');
+        return state;
       }
     },
     delCopyElement() {

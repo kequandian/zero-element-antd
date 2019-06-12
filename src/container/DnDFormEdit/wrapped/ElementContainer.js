@@ -51,7 +51,6 @@ export default DropTarget('element', containerSquareTarget, collect)((props) => 
   } = props;
   const className = classNames({
     'ZEleA-DnDFormEdit-Container': true,
-    'ZEleA-DnDFormEdit-itemBox': true,
     'ZEleA-DnDFormEdit-Container-Current': isOverCurrent && canDrop,
     'ZEleA-DnDFormEdit-Container-Available': !isOverCurrent && canDrop,
     'ZEleA-DnDFormEdit-Container-Disable': isOverCurrent && !canDrop,

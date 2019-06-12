@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react';
 import typeMap from '../type';
-import LayoutContainer from '../wrapped/LayoutContainer';
+import RowTool from './components/RowTool';
 
 export default function Render(props) {
-  const { config } = props;
+  const { config, dispatch } = props;
   const { type, tips, items, options } = config;
 
   const Component = match(type);
@@ -12,15 +12,18 @@ export default function Render(props) {
       <Component {...props}>
         {items.map(config => (
           <Fragment key={config.id}>
-            <LayoutContainer config={config} />
-            <Render config={config} dispatch={props.dispatch} />
+            <Render config={config} dispatch={dispatch} />
           </Fragment>
         ))}
       </Component>
     </>
   }
   if (tips) {
-    return <Component {...props} />;
+    return <RowTool
+      dispatch={dispatch}
+      config={config}
+      component={<Component {...props} />}
+    />;
   }
   const { base } = options;
   return <>

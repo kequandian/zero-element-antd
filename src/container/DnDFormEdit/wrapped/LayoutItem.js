@@ -29,12 +29,21 @@ function collect(connect, monitor) {
   };
 }
 
+function handleClick(props) {
+  const { children, connectDragSource, dispatch, isDragging, ...rest } = props;
+  dispatch({
+    type: 'insertLayout',
+    payload: rest,
+  });
+}
+
 export default DragSource('layout', itemSource, collect)((props) => {
   const { isDragging, connectDragSource,
     children,
     ...restProps
   } = props;
 
-  return connectDragSource(<div className="ZEleA-DnDFormEdit-ComponentItem">{children}
+  return connectDragSource(<div className="ZEleA-DnDFormEdit-ComponentItem" onClick={handleClick.bind(null, props)}>
+    {children}
   </div>);
 });

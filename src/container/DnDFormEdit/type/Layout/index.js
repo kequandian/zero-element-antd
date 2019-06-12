@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Container from './Container';
 import Element from './Element';
-import EditModal from './EditModal';
 
 export default (props) => {
   const { itemCfg = {}, config, index, dispatch } = props;
-  const { value, items } = config;
-  const [visible, setVisible] = useState(false);
+  const { items } = config;
 
   function handleRemove(i, e) {
     e && e.stopPropagation && e.stopPropagation();
@@ -33,33 +31,18 @@ export default (props) => {
     });
   }
 
-  function handleOpenModal() {
-    setVisible(true);
-  }
-  function handleCloseModal() {
-    setVisible(false);
-  }
-
-  function handleChangeRowValue(newValue) {
+  function handlePaste() {
     dispatch({
-      type: 'editRowValue',
+      type: 'pasteElement',
       payload: {
-        id: config.id,
-        value: newValue,
+        layoutId: config.id,
+        index,
       },
-    });
-    handleCloseModal();
-  }
-
-  function handleRemoveRow() {
-    dispatch({
-      type: 'delRow',
-      payload: config,
     });
   }
 
   return <>
-    {itemCfg.id ? (
+    {itemCfg && itemCfg.id ? (
       <Element
         index={index}
         data={itemCfg}
@@ -71,15 +54,8 @@ export default (props) => {
         <Container
           layoutId={config.id}
           index={index}
-          onEditRow={handleOpenModal}
-          onRemoveRow={handleRemoveRow}
+          onPaste={handlePaste}
         />
       )}
-    <EditModal
-      visible={visible}
-      config={config}
-      onCancel={handleCloseModal}
-      onSave={handleChangeRowValue}
-    />
   </>;
 }
