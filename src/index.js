@@ -1,56 +1,37 @@
+import Load from '@/utils/Load';
 import { set as LayoutSet } from 'zero-element-global/lib/layout';
 import { set as CSet } from 'zero-element-global/lib/container';
 import { set as LASet } from 'zero-element-global/lib/listAction';
 import { set as FITSet } from 'zero-element-global/lib/formItemType';
 import { set as AITSet } from 'zero-element-global/lib/actionItemType';
 
-import Grid from '@/layout/Grid';
-import Content from '@/layout/Content';
-
-import BaseList from '@/container/List/BaseList';
-import BaseChildren from '@/container/List/BaseChildren';
-import BaseSearch from '@/container/Form/BaseSearch';
-import BaseForm from '@/container/Form/BaseForm';
-import DnDFormEdit from '@/container/DnDFormEdit';
-
-import onModal from '@/listAction/onModal';
-
-import Plain from '@/formItemType/Plain';
-import Input from '@/formItemType/Input';
-import Radio from '@/formItemType/Radio';
-import Checkbox from '@/formItemType/Checkbox';
-import SelectFetch from '@/formItemType/SelectFetch';
-
-import Modal from '@/actionItemType/Modal';
-import ChildrenModal from '@/actionItemType/ChildrenModal';
-
 LayoutSet({
   'Empty': ({ children }) => children,
-  Grid,
-  Content,
+  Grid: Load('layout/Grid'),
+  Content: Load('layout/Content'),
 });
 
 CSet({
-  BaseList,
-  BaseChildren,
-  BaseSearch,
-  BaseForm,
-  DnDFormEdit,
+  BaseList: Load('container/List/BaseList'),
+  BaseChildren: Load('container/List/BaseChildren'),
+  BaseSearch: Load('container/Form/BaseSearch'),
+  BaseForm: Load('container/Form/BaseForm'),
+  DnDFormEdit: Load('container/Form/DnDFormEdit'),
 });
 
 LASet({
-  onModal,
+  onModal: Load('listAction/onModal'),
 });
 
 FITSet({
-  'plain': Plain,
-  input: Input,
-  'radio': Radio,
-  'checkbox': Checkbox,
-  'select-fetch': SelectFetch,
+  plain: Load('formItemType/Plain'),
+  input: Load('formItemType/Input'),
+  radio: Load('formItemType/Radio'),
+  checkbox: Load('formItemType/Checkbox'),
+  'select-fetch': Load('formItemType/SelectFetch'),
 });
 
 AITSet({
-  modal: Modal,
-  'children-modal': ChildrenModal,
+  modal: Load('actionItemType/Modal'),
+  'children-modal': Load('actionItemType/ChildrenModal'),
 });

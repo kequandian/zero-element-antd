@@ -1,6 +1,5 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
-// const gulpIgnore = require('gulp-ignore');
 const concat = require('gulp-concat');
 
 gulp.task('babel', () => {

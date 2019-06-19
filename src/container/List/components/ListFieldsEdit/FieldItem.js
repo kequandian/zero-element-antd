@@ -1,7 +1,7 @@
 import React from 'react';
-import { Flex } from 'zero-layout';
+import { Flex } from 'layout-flex';
 import { Checkbox, Icon } from 'antd';
-import '../index.css';
+import '../../index.css';
 
 const { FlexItem } = Flex;
 

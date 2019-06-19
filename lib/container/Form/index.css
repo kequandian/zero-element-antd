@@ -18,7 +18,7 @@
 }
 .ZEleA-Form-horizontal .ZEleA-Form-item {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   margin-bottom: 8px;
 }
 .ZEleA-Form-item-label {

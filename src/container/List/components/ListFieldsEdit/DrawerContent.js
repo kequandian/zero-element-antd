@@ -1,7 +1,7 @@
 import React from 'react';
 import { Drawer, Button } from 'antd';
 import FieldItem from './FieldItem';
-import '../index.css';
+import '../../index.css';
 
 export default ({
   visible, onSwitchVisibel, onSaveFields,
