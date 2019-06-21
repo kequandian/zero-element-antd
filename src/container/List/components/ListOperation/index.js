@@ -1,6 +1,7 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useState } from 'react';
+import ZEle from 'zero-element';
 import { get as LAGet } from 'zero-element-global/lib/listAction';
-import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
+import { Icon, Dropdown, Menu, Popconfirm, Modal } from 'antd';
 import PageContext from 'zero-element/lib/context/PageContext';
 import { getDataPool } from 'zero-element/lib/DataPool';
 import { formatAPI } from 'zero-element/lib/utils/format';
@@ -9,19 +10,36 @@ import operationMap from './type';
 import '../../index.css';
 
 const initialState = {
-  visible: false,
+  deleteConfirm: false,
+  modal: false,
+  modalTitle: '',
+  modalConfig: {},
 };
 
-function reducer(state, { type }) {
+function reducer(state, { type, payload }) {
   const map = {
     deleteConfirm() {
       return {
-        visible: true,
+        deleteConfirm: true,
       };
     },
     deleteCancel() {
       return {
-        visible: false,
+        deleteConfirm: false,
+      };
+    },
+    openModal() {
+      return {
+        modalTitle: payload.modalTitle,
+        modalConfig: payload.modalConfig,
+        modal: true,
+      };
+    },
+    closeModal() {
+      return {
+        modalTitle: '',
+        modalConfig: {},
+        modal: false,
       };
     },
     defaults() {
@@ -45,7 +63,7 @@ function handleAction(type, options, props, dispatch) {
   type = type.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
 
   const actionFunc = handle[`on${type}`];
-  if (actionFunc) {
+  if (typeof actionFunc === 'function') {
     dataPool.setRecord(record);
 
     if (saveToForm) {
@@ -74,9 +92,7 @@ function handleAction(type, options, props, dispatch) {
 }
 
 function ListOperation(props) {
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const { index, record, operation, context, handle } = props;
+  const { state, dispatch, index, record, operation, context, handle } = props;
   const { records = [] } = context;
 
   function handleCancel() {
@@ -96,7 +112,7 @@ function ListOperation(props) {
 
   const popconfirmProps = {
     title: '确定要删除该项吗？',
-    visible: state.visible,
+    visible: state.deleteConfirm,
     onCancel: handleCancel,
     onConfirm: handleConfirm,
   };
@@ -145,13 +161,57 @@ function renderMemu(menuItemList) {
 
 export default function ListOperationWrapped(props) {
   const context = useContext(PageContext);
+  const [state, dispatch] = useReducer(reducer, initialState);
   const { handle = {} } = props;
-  return <ListOperation
-    {...props}
-    context={context}
-    handle={{
-      ...handle,
-      ...LAGet(),
-    }}
-  />
+
+  function onModal(props) {
+    const { options } = props;
+    const { modalTitle, ...rest } = options;
+    dispatch({
+      type: 'openModal',
+      payload: {
+        modalTitle,
+        modalConfig: rest,
+      }
+    });
+  }
+  function handleClose() {
+    dispatch({
+      type: 'closeModal',
+      payload: {
+        modal: false,
+      }
+    });
+  }
+
+  return <>
+    <ListOperation
+      {...props}
+      state={state}
+      dispatch={dispatch}
+      context={context}
+      handle={{
+        ...handle,
+        onModal,
+        ...LAGet(),
+      }}
+    />
+    <Modal
+      visible={state.modal}
+      title={state.modalTitle}
+      destroyOnClose={true}
+      onCancel={handleClose}
+      bodyStyle={{
+        padding: 0,
+      }}
+      footer={null}
+    >
+      <ZEle
+        MODAL={true}
+        namespace={context.namespace}
+        config={state.modalConfig}
+        onClose={handleClose}
+      />
+    </Modal>
+  </>
 }

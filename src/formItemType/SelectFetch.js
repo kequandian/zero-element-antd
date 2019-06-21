@@ -8,7 +8,9 @@ const Option = Select.Option;
 
 export default function SelectFetch(props) {
   const { className, value, onChange, options, namespace } = props;
-  const { API } = options;
+  const { API, dataField = 'records',
+    label: optLabel = 'label', value: optValue = 'value'
+  } = options;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
 
@@ -21,7 +23,7 @@ export default function SelectFetch(props) {
       });
       setLoading(true);
       query(fAPI).then(({ data }) => {
-        const list = data.data;
+        const list = data[dataField];
         if (Array.isArray(list)) {
           setOptionList(list);
         } else {
@@ -44,7 +46,7 @@ export default function SelectFetch(props) {
     <Spin spinning={loading}>
       <Select onChange={handleChange} value={value}>
         {optionList.map(opt => (
-          <Option key={opt.value} value={opt.value}>{opt.title}</Option>
+          <Option key={opt[optValue]} value={opt[optValue]}>{opt[optLabel]}</Option>
         ))}
       </Select>
     </Spin>

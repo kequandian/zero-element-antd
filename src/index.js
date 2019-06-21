@@ -5,6 +5,7 @@ import { set as LASet } from 'zero-element-global/lib/listAction';
 import { set as FITSet } from 'zero-element-global/lib/formItemType';
 import { set as AITSet } from 'zero-element-global/lib/actionItemType';
 
+
 LayoutSet({
   'Empty': ({ children }) => children,
   Grid: Load('layout/Grid'),
@@ -19,9 +20,8 @@ CSet({
   DnDFormEdit: Load('container/Form/DnDFormEdit'),
 });
 
-LASet({
-  onModal: Load('listAction/onModal'),
-});
+// LASet({
+// });
 
 FITSet({
   plain: Load('formItemType/Plain'),

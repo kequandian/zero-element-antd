@@ -24,6 +24,7 @@ export default function BaseList(props) {
 
   const { data, handle, modelStatus } = listProps;
   const { onGetList } = handle;
+
   const columns = formatTableFields(fields, operation, handle);
 
   useEffect(_ => {
@@ -41,7 +42,7 @@ export default function BaseList(props) {
     </Render>
     <Table
       rowKey="id"
-      dataSource={data}
+      dataSource={props.data || data}
       columns={columns}
       {...propsCfg}
     />
