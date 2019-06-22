@@ -1,5 +1,5 @@
 import React, { useReducer, useContext } from 'react';
-import { Button, Spin } from 'antd';
+import { Button, Spin, Input } from 'antd';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -21,6 +21,7 @@ const { FlexItem } = Flex;
 
 const initState = {
   current: {},
+  name: '',
   config: {
     id: 0,
     title: '画布',
@@ -60,6 +61,15 @@ function DndFormEdit(props) {
     }
   });
 
+  function handleName(e) {
+    const name = e.target.value;
+    dispatch({
+      type: 'save',
+      payload: {
+        name,
+      }
+    });
+  }
   function handleSave() {
     dispatch({
       type: 'save',
@@ -72,6 +82,7 @@ function DndFormEdit(props) {
     const data = formatToConfig(config);
     formProps.handle.onCreateForm({
       fields: {
+        title: state.name,
         config: data,
         originConfig: {
           ...state.config,
@@ -92,10 +103,16 @@ function DndFormEdit(props) {
   }
 
   return <DnDContext.Provider value={state}>
+    <div>
+      <h3>表单名称：</h3>
+      <Input value={state.name} onChange={handleName} />
+    </div>
+    <br />
     <Flex>
       <FlexItem flex={1}>
         <Spin spinning={spinning} tip={spinningTip}>
           <Button type="primary" onClick={handleSave}>保存</Button>
+          <br/><br/>
           <EchoPanel config={config} dispatch={dispatch} />
         </Spin>
       </FlexItem>

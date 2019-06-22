@@ -16,7 +16,8 @@ export default function handleState(state, { type, payload = {} }) {
     initConfig() {
       return {
         ...state,
-        config: payload,
+        config: payload.originConfig,
+        name: payload.title,
       }
     },
     addLayout() {
