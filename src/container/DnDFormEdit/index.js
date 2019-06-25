@@ -24,7 +24,7 @@ const initState = {
   name: '',
   config: {
     id: 0,
-    title: '画布',
+    title: '表单',
     type: 'Canvas',
     items: [],
   },
@@ -50,12 +50,13 @@ function DndFormEdit(props) {
   useDidMount(_ => {
     if (props.config.API.getAPI) {
       formProps.handle.onGetOne({}).then(({ code, data }) => {
+        const { originConfig = {} } = data;
         if (code === 200) {
           dispatch({
             type: 'initConfig',
             payload: data,
           });
-          setInitId(data.finalId, data.fieldCount);
+          setInitId(originConfig.finalId, originConfig.fieldCount);
         }
       });
     }
@@ -86,6 +87,7 @@ function DndFormEdit(props) {
         config: data,
         originConfig: {
           ...state.config,
+          title: state.name,
           finalId: assigned,
           fieldCount: fieldCount,
         },
@@ -112,7 +114,7 @@ function DndFormEdit(props) {
       <FlexItem flex={1}>
         <Spin spinning={spinning} tip={spinningTip}>
           <Button type="primary" onClick={handleSave}>保存</Button>
-          <br/><br/>
+          <br /><br />
           <EchoPanel config={config} dispatch={dispatch} />
         </Spin>
       </FlexItem>

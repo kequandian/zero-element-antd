@@ -15,7 +15,7 @@ export default function BaseSearch(props) {
   const { layoutType = 'horizontal' } = layoutConfig;
   const searchProps = useBaseSearch({
     namespace,
-    modelPath: 'formData',
+    modelPath: 'searchData',
     symbol: symbolRef.current,
   }, config);
 

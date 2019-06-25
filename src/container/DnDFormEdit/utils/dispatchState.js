@@ -41,6 +41,8 @@ export default function handleState(state, { type, payload = {} }) {
       }
     },
     rowMoveUp() {
+      if (config.items.length < 2) return state;
+
       const index = config.items.findIndex((row) => {
         return row === payload;
       });
@@ -57,6 +59,8 @@ export default function handleState(state, { type, payload = {} }) {
       }
     },
     rowMoveDown() {
+      if (config.items.length < 2) return state;
+      
       const index = config.items.findIndex((row) => {
         return row === payload;
       });
