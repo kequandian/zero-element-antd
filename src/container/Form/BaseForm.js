@@ -9,7 +9,6 @@ import { getModel } from 'zero-element/lib/Model';
 
 export default function BaseForm(props) {
   const formRef = useRef({});
-  const symbolRef = useRef(Symbol('BaseForm'));
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
@@ -17,7 +16,6 @@ export default function BaseForm(props) {
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
-    symbol: symbolRef.current,
   }, config);
 
   const model = getModel(namespace);
