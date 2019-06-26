@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useContext } from 'react';
+import React, { useReducer, useRef } from 'react';
 import { Form } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -10,6 +10,7 @@ import { getModel } from 'zero-element/lib/Model';
 export default function BaseForm(props) {
   const formRef = useRef({});
   const symbolRef = useRef(Symbol('BaseForm'));
+  const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
   const { layoutType = 'vertical' } = layoutConfig;
@@ -30,6 +31,7 @@ export default function BaseForm(props) {
       onGetOne({}).then(({ code, data }) => {
         if (code === 200) {
           initData.current = data;
+          forceUpdate();
         }
       });
     }
