@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 
 export default (props) => {
-  const { title, options, namespace } = props;
+  const { title, options, namespace, handle } = props;
   const { modalTitle, ...rest } = options;
   const [visible, setViseble] = useState(false);
 
@@ -12,6 +12,12 @@ export default (props) => {
   }
   function handleClose() {
     setViseble(false);
+  }
+  function handleCloseAndQuery() {
+    setViseble(false);
+    if (typeof handle.onRefresh === 'function') {
+      handle.onRefresh();
+    }
   }
 
   return <div>
@@ -35,7 +41,7 @@ export default (props) => {
           layout: 'Empty',
           ...rest,
         }}
-        onClose={handleClose}
+        onClose={handleCloseAndQuery}
       />
     </Modal>
   </div>

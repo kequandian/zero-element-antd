@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
+import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
@@ -27,18 +28,18 @@ export default function BaseList(props) {
 
   const columns = formatTableFields(fields, operation, handle);
 
-  useEffect(_ => {
+  useDidMount(_ => {
     if (API.listAPI) {
       onGetList({});
     }
-  }, []);
+  });
 
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, modelStatus, namespace))}
+      }, modelStatus, namespace, handle))}
     </Render>
     <Table
       rowKey="id"

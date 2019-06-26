@@ -1,7 +1,7 @@
 import React, { useReducer, useRef } from 'react';
 import { Form } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
-import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
@@ -24,7 +24,7 @@ export default function BaseForm(props) {
 
   const { data, modelStatus, handle } = formProps;
   const initData = useRef(data);
-  const { onGetOne, onCreateForm, onUpdateForm } = handle;
+  const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
 
   useDidMount(_ => {
     if (API.getAPI) {
@@ -36,6 +36,7 @@ export default function BaseForm(props) {
       });
     }
   });
+  useWillUnmount(onClearForm);
 
   function handleSubmitForm() {
     if (onSubmit) {
@@ -57,6 +58,7 @@ export default function BaseForm(props) {
       message.success('操作成功');
       if (onClose) {
         onClose();
+        // 这里刷新数据
       }
     } else {
       message.error(`操作失败: ${data.message}`);
