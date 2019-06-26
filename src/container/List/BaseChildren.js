@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import useBaseChildren from 'zero-element/lib/helper/form/useBaseChildren';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
@@ -6,7 +6,6 @@ import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 
 export default function BaseChildren(props) {
-  const symbolRef = useRef(Symbol('BaseChildren'));
   const { namespace, config } = props;
   const {
     layout = 'Empty',
@@ -18,7 +17,6 @@ export default function BaseChildren(props) {
   const childrenProps = useBaseChildren({
     namespace,
     modelPath: 'formData',
-    symbol: symbolRef.current,
   }, config);
 
   const { data, handle, modelStatus } = childrenProps;
