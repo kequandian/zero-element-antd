@@ -17,7 +17,7 @@ export default function BaseSearch(props) {
     modelPath: 'searchData',
   }, config);
 
-  const { data, modelStatus, handle } = searchProps;
+  const { loading, data, modelStatus, handle } = searchProps;
   const { onSearch } = handle;
 
   function handleSubmitForm() {
@@ -37,7 +37,7 @@ export default function BaseSearch(props) {
       <Tooltip title="重置">
         <Button onClick={handleReset} type="link" icon="rollback"></Button>
       </Tooltip>
-      <Button type="primary" htmlType="submit">搜索</Button>
+      <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
     </div>
   }
 

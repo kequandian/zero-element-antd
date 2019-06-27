@@ -21,7 +21,7 @@ export default function BaseList(props) {
     modelPath: 'listData',
   }, config);
 
-  const { data, handle, modelStatus } = listProps;
+  const { loading, data, handle, modelStatus } = listProps;
   const { onGetList } = handle;
 
   const columns = formatTableFields(fields, operation, handle);
@@ -43,6 +43,7 @@ export default function BaseList(props) {
       rowKey="id"
       dataSource={props.data || data}
       columns={columns}
+      loading={loading}
       {...propsCfg}
     />
   </Render>

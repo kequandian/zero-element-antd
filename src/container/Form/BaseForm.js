@@ -20,7 +20,7 @@ export default function BaseForm(props) {
 
   const model = getModel(namespace);
 
-  const { data, modelStatus, handle } = formProps;
+  const { loading, data, modelStatus, handle } = formProps;
   const initData = useRef(data);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
 
@@ -56,7 +56,6 @@ export default function BaseForm(props) {
       message.success('操作成功');
       if (onClose) {
         onClose();
-        // 这里刷新数据
       }
     } else {
       message.error(`操作失败: ${data.message}`);
@@ -82,7 +81,7 @@ export default function BaseForm(props) {
     </div>
   }
 
-  return <Spin spinning={false}>
+  return <Spin spinning={loading}>
     <div className="ant-modal-body">
       <Form
         initialValues={initData.current}
