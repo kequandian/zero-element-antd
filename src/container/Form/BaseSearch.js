@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Form } from 'react-final-form';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
+import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
@@ -18,13 +19,15 @@ export default function BaseSearch(props) {
   }, config);
 
   const { loading, data, modelStatus, handle } = searchProps;
-  const { onSearch } = handle;
+  const { onSearch, onClearSearch } = handle;
+
+  useWillUnmount(onClearSearch);
 
   function handleSubmitForm() {
     onSearch({
       queryData: {
-        ...formRef.current.values,
         ...data,
+        ...formRef.current.values,
       },
     });
   }

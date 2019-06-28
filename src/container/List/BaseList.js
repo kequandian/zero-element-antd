@@ -1,6 +1,6 @@
 import React from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
-import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
@@ -22,7 +22,7 @@ export default function BaseList(props) {
   }, config);
 
   const { loading, data, handle, modelStatus } = listProps;
-  const { onGetList } = handle;
+  const { onGetList, onClearList } = handle;
 
   const columns = formatTableFields(fields, operation, handle);
 
@@ -31,6 +31,7 @@ export default function BaseList(props) {
       onGetList({});
     }
   });
+  useWillUnmount(onClearList);
 
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>

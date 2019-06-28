@@ -26,6 +26,7 @@ export function getFormItem(field, modelStatus, { namespace, values }) {
     key={fieldName}
     name={fieldName}
     span={span}
+    parse={(value) => value}
     {...rest}
     validate={composeValidators(...rules.map(handleRule))}
   >
