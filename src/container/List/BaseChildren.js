@@ -32,7 +32,7 @@ export default function BaseChildren(props) {
       }, modelStatus, namespace))}
     </Render>
     <Table
-      rowKey={(row) => row._id || row.id}
+      rowKey={row => String(row._id || row.id)}
       dataSource={data}
       columns={columns}
       {...propsCfg}

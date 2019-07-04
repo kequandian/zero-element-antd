@@ -17,6 +17,7 @@ CSet({
   BaseChildren: Load('container/List/BaseChildren'),
   BaseSearch: Load('container/Form/BaseSearch'),
   BaseForm: Load('container/Form/BaseForm'),
+  ChildrenForm: Load('container/Form/ChildrenForm'),
   DnDFormEdit: Load('container/DnDFormEdit'),
 });
 

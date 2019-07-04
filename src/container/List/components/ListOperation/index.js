@@ -162,7 +162,7 @@ function renderMemu(menuItemList) {
 export default function ListOperationWrapped(props) {
   const context = useContext(PageContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { handle = {} } = props;
+  const { index, handle = {} } = props;
 
   function onModal(props) {
     const { options } = props;
@@ -208,6 +208,7 @@ export default function ListOperationWrapped(props) {
     >
       <ZEle
         MODAL={true}
+        index={index}
         namespace={context.namespace}
         config={state.modalConfig}
         onClose={handleClose}
