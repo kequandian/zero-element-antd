@@ -28,6 +28,7 @@ FITSet({
   plain: Load('formItemType/Plain'),
   input: Load('formItemType/Input'),
   radio: Load('formItemType/Radio'),
+  select: Load('formItemType/Select'),
   checkbox: Load('formItemType/Checkbox'),
   'select-fetch': Load('formItemType/SelectFetch'),
 });
