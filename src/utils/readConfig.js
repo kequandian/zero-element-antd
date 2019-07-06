@@ -61,6 +61,7 @@ function handleRule(rule) {
   if (typeof rule === 'string') {
     return defaultRule[rule] || defaultRule['undefined'];
   }
+  return defaultRule['error'];
 }
 
 const composeValidators = (...validators) => value =>
@@ -68,5 +69,6 @@ const composeValidators = (...validators) => value =>
 
 const defaultRule = {
   required: value => (value ? undefined : '必填'),
+  error: value => (console.warn(`非法的 rules 子项: ${value}`) && undefined),
   undefined: value => (console.warn(`值: ${value} 使用了未知的校验规则`) && undefined),
 };
