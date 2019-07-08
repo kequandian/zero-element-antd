@@ -4,7 +4,7 @@ import ZEle from 'zero-element';
 
 export default (props) => {
   const { title, options, namespace, handle } = props;
-  const { modalTitle, ...rest } = options;
+  const { modalTitle, modalWidth, ...rest } = options;
   const [visible, setViseble] = useState(false);
 
   function handleOpen() {
@@ -26,6 +26,7 @@ export default (props) => {
     </Button>
     <Modal
       title={modalTitle}
+      width={modalWidth}
       visible={visible}
       destroyOnClose={true}
       onCancel={handleClose}

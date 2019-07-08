@@ -31,6 +31,7 @@ function reducer(state, { type, payload }) {
     openModal() {
       return {
         modalTitle: payload.modalTitle,
+        modalWidth: payload.modalWidth,
         modalConfig: payload.modalConfig,
         modal: true,
       };
@@ -38,6 +39,7 @@ function reducer(state, { type, payload }) {
     closeModal() {
       return {
         modalTitle: '',
+        modalWidth: undefined,
         modalConfig: {},
         modal: false,
       };
@@ -166,11 +168,12 @@ export default function ListOperationWrapped(props) {
 
   function onModal(props) {
     const { options } = props;
-    const { modalTitle, ...rest } = options;
+    const { modalTitle, modalWidth, ...rest } = options;
     dispatch({
       type: 'openModal',
       payload: {
         modalTitle,
+        modalWidth,
         modalConfig: rest,
       }
     });
@@ -199,6 +202,7 @@ export default function ListOperationWrapped(props) {
     <Modal
       visible={state.modal}
       title={state.modalTitle}
+      width={state.modalWidth}
       destroyOnClose={true}
       onCancel={handleClose}
       bodyStyle={{
