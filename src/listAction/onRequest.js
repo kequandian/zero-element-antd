@@ -9,8 +9,14 @@ const methodMap = {
 };
 
 export default function onRequest({ options, record }) {
-  const { API, method = 'get', message = '操作失败' } = options;
+  const { API, method = 'get', message = '操作成功' } = options;
   const match = methodMap[method];
 
-  match(API).catch(_ => msg.error(message));
+  match(API)
+    .then(_ => {
+      if (message) {
+        msg.success(message);
+      }
+    })
+    .catch(_ => msg.error(JSON.stringify(_)));
 }

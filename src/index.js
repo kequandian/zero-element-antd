@@ -32,6 +32,10 @@ FITSet({
   radio: Load('formItemType/Radio'),
   select: Load('formItemType/Select'),
   checkbox: Load('formItemType/Checkbox'),
+  date: Load('formItemType/Date/date'),
+  week: Load('formItemType/Date/week'),
+  month: Load('formItemType/Date/month'),
+  range: Load('formItemType/Date/range'),
   'select-fetch': Load('formItemType/SelectFetch'),
 });
 
