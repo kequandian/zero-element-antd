@@ -5,19 +5,21 @@ import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCy
 import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
+import global from 'zero-element-global/lib/global';
 import { getModel } from 'zero-element/lib/Model';
 
 export default function BaseForm(props) {
   const formRef = useRef({});
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, extraData, onClose, onSubmit } = props;
-  const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
+  const { API = {}, layout = 'Empty', fields, path, layoutConfig = {} } = config;
   const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
     extraData,
   }, config);
+  const { router } = global;
 
   const model = getModel(namespace);
 
@@ -68,6 +70,9 @@ export default function BaseForm(props) {
       message.success('操作成功');
       if (onClose) {
         onClose();
+      }
+      if(path && router) {
+        router(path);
       }
     } else {
       message.error(`操作失败: ${data.message}`);
