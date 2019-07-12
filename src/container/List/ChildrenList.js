@@ -5,7 +5,7 @@ import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 
-export default function BaseChildren(props) {
+export default function ChildrenList(props) {
   const { namespace, config } = props;
   const {
     layout = 'Empty',
@@ -20,7 +20,7 @@ export default function BaseChildren(props) {
   }, config);
 
   const { data, handle, modelStatus } = childrenProps;
-  const { onCreate } = handle;
+  const { onCreate, onEdit } = handle;
   const columns = formatTableFields(fields, operation, handle);
 
   return <Render n={layout} {...layoutConfig}>
@@ -29,6 +29,7 @@ export default function BaseChildren(props) {
         key: i,
         ...action,
         onCreate,
+        onEdit,
       }, modelStatus, namespace))}
     </Render>
     <Table

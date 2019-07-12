@@ -15,7 +15,7 @@ LayoutSet({
 
 CSet({
   BaseList: Load('container/List/BaseList'),
-  BaseChildren: Load('container/List/BaseChildren'),
+  ChildrenList: Load('container/List/ChildrenList'),
   BaseSearch: Load('container/Form/BaseSearch'),
   BaseForm: Load('container/Form/BaseForm'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
@@ -41,5 +41,5 @@ FITSet({
 
 AITSet({
   modal: Load('actionItemType/Modal'),
-  'children-modal': Load('actionItemType/ChildrenModal'),
+  'children-modal-add': Load('actionItemType/ChildrenModalAdd'),
 });

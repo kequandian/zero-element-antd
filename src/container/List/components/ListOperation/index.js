@@ -33,6 +33,8 @@ function reducer(state, { type, payload }) {
         modalTitle: payload.modalTitle,
         modalWidth: payload.modalWidth,
         modalConfig: payload.modalConfig,
+        onSubmit: payload.onSubmit,
+        data: payload.data,
         modal: true,
       };
     },
@@ -41,6 +43,8 @@ function reducer(state, { type, payload }) {
         modalTitle: '',
         modalWidth: undefined,
         modalConfig: {},
+        onSubmit: undefined,
+        data: undefined,
         modal: false,
       };
     },
@@ -166,8 +170,8 @@ export default function ListOperationWrapped(props) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { index, handle = {} } = props;
 
-  function onModal(props) {
-    const { options } = props;
+  function onModal(cfg) {
+    const { options } = cfg;
     const { modalTitle, modalWidth, ...rest } = options;
     dispatch({
       type: 'openModal',
@@ -186,6 +190,20 @@ export default function ListOperationWrapped(props) {
       }
     });
   }
+  function onChildEditModal(cfg) {
+    const { options } = cfg;
+    const { modalTitle, modalWidth, ...rest } = options;
+    dispatch({
+      type: 'openModal',
+      payload: {
+        modalTitle,
+        modalWidth,
+        modalConfig: rest,
+        onSubmit: handle.onEdit,
+        data: props.record,
+      }
+    });
+  }
 
   return <>
     <ListOperation
@@ -196,6 +214,7 @@ export default function ListOperationWrapped(props) {
       handle={{
         ...handle,
         onModal,
+        onChildEditModal,
         ...LAGet(),
       }}
     />
@@ -216,6 +235,8 @@ export default function ListOperationWrapped(props) {
         namespace={context.namespace}
         config={state.modalConfig}
         onClose={handleClose}
+        onSubmit={state.onSubmit}
+        data={state.data}
       />
     </Modal>
   </>
