@@ -20,7 +20,7 @@ const formatMap = {
 function date(componentName) {
   const Match = componentMap[componentName];
   return function DateConstructor(props) {
-    const { value, options = {}, onChange } = props;
+    const { value, options = {}, onChange, ...restProps } = props;
     const { nowTime = true, format = formatMap[componentName] } = options;
 
     const dateProps = {

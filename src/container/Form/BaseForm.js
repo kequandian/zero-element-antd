@@ -10,12 +10,13 @@ import { getModel } from 'zero-element/lib/Model';
 export default function BaseForm(props) {
   const formRef = useRef({});
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const { namespace, config, onClose, onSubmit } = props;
+  const { namespace, config, extraData, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
   const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
+    extraData,
   }, config);
 
   const model = getModel(namespace);
@@ -37,17 +38,28 @@ export default function BaseForm(props) {
   useWillUnmount(onClearForm);
 
   function handleSubmitForm() {
+    const extraSubmit = {};
+    fields.forEach(field => {
+      if (field.type === 'hidden') {
+        extraSubmit[field.field] = extraData[field.field] || field.value;
+      }
+    })
+    const submitData = {
+      ...extraSubmit,
+      ...formRef.current.values,
+    };
+
     if (onSubmit) {
-      onSubmit(formRef.current.values);
+      onSubmit(submitData);
       return false;
     }
     if (API.updateAPI) {
       onUpdateForm({
-        fields: formRef.current.values,
+        fields: submitData,
       }).then(handleResponse);
     } else {
       onCreateForm({
-        fields: formRef.current.values,
+        fields: submitData,
       }).then(handleResponse);
     }
   }
