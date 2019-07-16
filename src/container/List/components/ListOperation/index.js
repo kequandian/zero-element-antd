@@ -101,6 +101,10 @@ function ListOperation(props) {
   const { state, dispatch, index, record, operation, context, handle } = props;
   const { records = [] } = context;
 
+  if(record.operation === false) {
+    return null;
+  }
+
   function handleCancel() {
     dispatch({
       type: 'deleteCancel',
