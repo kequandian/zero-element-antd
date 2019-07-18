@@ -27,7 +27,7 @@ function date(componentName) {
       showToday: true,
       allowClear: false,
       ...restProps,
-      value,
+      value: value ? moment(value || new Date(), format) : undefined,
       format,
       onChange: handleChange,
     };

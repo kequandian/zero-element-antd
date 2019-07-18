@@ -193,6 +193,7 @@ export default function ListOperationWrapped(props) {
         modal: false,
       }
     });
+    handle.onRefresh();
   }
   function onChildEditModal(cfg) {
     const { options } = cfg;
