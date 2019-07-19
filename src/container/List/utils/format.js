@@ -1,7 +1,7 @@
 import React from 'react';
 import ListOperation from '../components/ListOperation';
 // import ListFieldsEdit from '../components/ListFieldsEdit';
-// import { valueTypeRender } from './valueTypeRender';
+import { Render } from 'zero-element-global/lib/valueType';
 
 /**
  *
@@ -16,7 +16,7 @@ export function formatTableFields(fields = [], operation = [], handle) {
   const rst = fields.map((fieldCfg, i) => {
     const { field, label,
       valueType,
-      // render = valueTypeRender(valueType, fieldCfg),
+      render = valueTypeRender(valueType, fieldCfg),
       ...rest
     } = fieldCfg;
 
@@ -52,4 +52,18 @@ export function formatTableFields(fields = [], operation = [], handle) {
     });
   }
   return rst;
+}
+
+function valueTypeRender(type, config) {
+  if (!type) return undefined;
+  return (text, record, index) => <Render
+    n={type}
+    {...config}
+    data={{
+      text,
+      record,
+      index,
+      type,
+    }}
+  />;
 }
