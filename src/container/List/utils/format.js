@@ -28,7 +28,7 @@ export function formatTableFields(fields = [], operation = [], handle) {
     return {
       dataIndex: field,
       title: label,
-      // render,
+      render,
       ...rest,
     };
   }).filter(fieldCfg => fieldCfg.dataIndex);
