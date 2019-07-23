@@ -24,7 +24,7 @@ export function formatTableFields(fields = [], operation = [], handle) {
       operationCfg = fieldCfg;
       return {};
     }
-
+    
     return {
       dataIndex: field,
       title: label,
@@ -53,7 +53,6 @@ export function formatTableFields(fields = [], operation = [], handle) {
   }
   return rst;
 }
-
 function valueTypeRender(type, config) {
   if (!type) return undefined;
   return (text, record, index) => <Render
