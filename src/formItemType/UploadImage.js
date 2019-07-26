@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Upload, Icon, Modal } from 'antd';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
@@ -90,82 +90,3 @@ function format(value) {
   });
   return rst;
 }
-
-// export default class UploadImage extends PureComponent {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       previewVisible: false,
-//       previewImage: '',
-//       value: props.value,
-//       fileList: format(props.value),
-//       loading: false,
-//     }
-//   }
-//   static getDerivedStateFromProps(nextProps, prevState) {
-//     if (nextProps.value !== prevState.value) {
-//       return {
-//         value: nextProps.value,
-//         reFormat: true,
-//       }
-//     }
-//     return null;
-//   }
-//   componentDidUpdate(prevProps, prevState) {
-//     const { reFormat, value } = this.state;
-//     if (reFormat) {
-//       this.setState({
-//         fileList: format(value),
-//         reFormat: false,
-//       });
-//     }
-//   }
-
-//   render() {
-//     const { previewVisible, previewImage, fileList } = this.state;
-//     const { options = {} } = this.props;
-//     const { API = '/api/upload/files', max = 9, data } = options;
-//     const formData = getPageContext().dataPool.getToFormAll();
-
-//     const uploadProps = {
-//       accept: 'image/*',
-//       name: 'file',
-//       action: `${getEndpoint()}${API}`,
-//       listType: 'picture-card',
-//       fileList: fileList,
-//       showUploadList: true,
-//       headers: {
-//         authorization: `Bearer ${getToken()}`,
-//       },
-//       onPreview: this.handlePreview,
-//       onChange: this.handleChange
-//     }
-//     if (data) {
-//       const extraData = {};
-//       Object.keys(data).forEach(key => {
-//         extraData[data[key]] = formData[key];
-//       })
-//       uploadProps.data = extraData;
-//     }
-
-//     const uploadButton = (
-//       <div>
-//         <Icon type={this.state.loading ? 'loading' : 'plus'} />
-//         <div className="ant-upload-text">点击上传</div>
-//       </div>
-//     );
-
-//     return (
-//       <div className="clearfix" style={{ marginTop: '0.5em' }}>
-//         <Upload
-//           {...uploadProps}
-//         >
-//           {fileList.length >= max ? '' : uploadButton}
-//         </Upload>
-//         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-//           <img alt="image" style={{ width: '100%' }} src={previewImage} />
-//         </Modal>
-//       </div>
-//     )
-//   }
-// }
