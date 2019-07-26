@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 
@@ -20,13 +20,15 @@ const formatMap = {
 function date(componentName) {
   const Match = componentMap[componentName];
   return function DateConstructor(props) {
-    const { value, options = {}, onChange, ...restProps } = props;
+    const { value, options = {}, onChange,
+      // ...restProps
+    } = props;
     const { nowTime = true, format = formatMap[componentName] } = options;
 
     const dateProps = {
       showToday: true,
       allowClear: false,
-      ...restProps,
+      // ...restProps,
       value: value ? moment(value || new Date(), format) : undefined,
       format,
       onChange: handleChange,
@@ -36,7 +38,7 @@ function date(componentName) {
       onChange(dateString);
     }
 
-    useDidMount(_ => {
+    useWillUnmount(_ => {
       if (!value && nowTime) {
         if (componentName === 'range') {
           onChange([

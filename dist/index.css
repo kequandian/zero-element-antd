@@ -135,7 +135,9 @@
   background: #ff4d4f;
 }
 .ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
+  border-right-color: #ff4d4f;
   border-top-color: #ff4d4f;
+  border-bottom-color: #ff4d4f;
 }
 
 .ZEleA-Form-ruleTips-error.ant-tooltip-open,

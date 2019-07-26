@@ -37,6 +37,7 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
+  'upload-image': Load('formItemType/UploadImage'),
   'select-fetch': Load('formItemType/SelectFetch'),
 });
 
