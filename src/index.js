@@ -48,4 +48,5 @@ AITSet({
 
 VTSet({
   'status': Load('valueType/status'),
+  'image': Load('valueType/image'),
 });
