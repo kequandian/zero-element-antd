@@ -3,6 +3,10 @@
   background: #fff;
   height: 100%;
 }
+.ZEleA-Layout-Alone{
+  width: inherit;
+  height: inherit;
+}
 .ZEleA-DnDFormEdit-tips{
   text-align: center;
   color: #cbc5c5;

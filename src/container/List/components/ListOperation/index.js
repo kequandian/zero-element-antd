@@ -90,11 +90,11 @@ function handleAction(type, options, props, dispatch) {
       },
         context
       );
-      rst.finally(_ => {
+      rst && rst.then(_ => {
         if (handle.onRefresh) {
           handle.onRefresh();
         }
-      });
+      }).catch(_ => 0);
     }
 
   } else {

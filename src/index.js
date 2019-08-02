@@ -9,7 +9,8 @@ import { set as VTSet } from 'zero-element-global/lib/valueType';
 import onRequest from '@/listAction/onRequest';
 
 LayoutSet({
-  'Empty': ({ children }) => children,
+  Empty: Load('layout/Empty'),
+  Alone: Load('layout/Alone'),
   Grid: Load('layout/Grid'),
   Content: Load('layout/Content'),
 });
@@ -49,4 +50,5 @@ AITSet({
 VTSet({
   'status': Load('valueType/status'),
   'image': Load('valueType/image'),
+  'tag': Load('valueType/tag'),
 });
