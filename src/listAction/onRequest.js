@@ -12,7 +12,7 @@ export default function onRequest({ options, record }) {
   const { API, method = 'get', message = '操作成功' } = options;
   const match = methodMap[method];
 
-  match(API)
+  return match(API)
     .then(_ => {
       if (message) {
         msg.success(message);

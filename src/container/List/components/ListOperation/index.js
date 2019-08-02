@@ -81,7 +81,7 @@ function handleAction(type, options, props, dispatch) {
         type: 'deleteConfirm',
       });
     } else {
-      actionFunc({
+      const rst = actionFunc({
         record,
         options: {
           ...options,
@@ -90,6 +90,11 @@ function handleAction(type, options, props, dispatch) {
       },
         context
       );
+      rst.finally(_ => {
+        if (handle.onRefresh) {
+          handle.onRefresh();
+        }
+      });
     }
 
   } else {
@@ -101,7 +106,7 @@ function ListOperation(props) {
   const { state, dispatch, index, record, operation, context, handle } = props;
   const { records = [] } = context;
 
-  if(record.operation === false) {
+  if (record.operation === false) {
     return null;
   }
 
@@ -193,7 +198,7 @@ export default function ListOperationWrapped(props) {
         modal: false,
       }
     });
-    if(handle.onRefresh) {
+    if (handle.onRefresh) {
       handle.onRefresh();
     }
   }
