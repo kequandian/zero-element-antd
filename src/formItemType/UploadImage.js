@@ -47,7 +47,7 @@ export default function UploadImage(props) {
   const uploadProps = {
     accept: 'image/*',
     name: 'file',
-    action: `${get()}${API}`,
+    action: /^http(s)*:\/\//.test(API) ? API : `${get()}${API}`,
     listType: 'picture-card',
     fileList: fileList,
     showUploadList: true,

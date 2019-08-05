@@ -18,6 +18,7 @@ LayoutSet({
 CSet({
   BaseList: Load('container/List/BaseList'),
   ChildrenList: Load('container/List/ChildrenList'),
+  TreeList: Load('container/List/TreeList'),
   BaseSearch: Load('container/Form/BaseSearch'),
   BaseForm: Load('container/Form/BaseForm'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
