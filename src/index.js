@@ -34,6 +34,7 @@ FITSet({
   input: Load('formItemType/Input'),
   radio: Load('formItemType/Radio'),
   select: Load('formItemType/Select'),
+  switch: Load('formItemType/Switch'),
   checkbox: Load('formItemType/Checkbox'),
   date: Load('formItemType/Date/date'),
   week: Load('formItemType/Date/week'),
