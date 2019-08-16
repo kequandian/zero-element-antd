@@ -81,7 +81,9 @@ function DndFormEdit(props) {
     });
 
     const data = formatToConfig(config);
-    formProps.handle.onCreateForm({
+    const method = props.config.API.updateAPI ?
+      formProps.handle.onUpdateForm : formProps.handle.onCreateForm;
+    method({
       fields: {
         title: state.name,
         config: data,
