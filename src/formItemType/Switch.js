@@ -6,7 +6,7 @@ const checkedMap = {
   'false': false,
 };
 export default function SwitchWrapped(props) {
-  const { value, options = {}, onChange } = props;
+  const { value, options = {}, onChange, props: p } = props;
 
   function hanldeChange(value) {
     onChange(value);
@@ -15,5 +15,6 @@ export default function SwitchWrapped(props) {
   return <Switch checked={checkedMap[value]}
     onChange={hanldeChange}
     {...options}
+    {...p}
   />;
 }
