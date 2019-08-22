@@ -187,6 +187,8 @@
 }
 .ZEleA-table-action-Outside-normal{
   vertical-align: middle;
+  cursor: pointer;
+  color: #1890ff;
 }
 .ZEleA-table-action .anticon-ellipsis{
   cursor: pointer;
