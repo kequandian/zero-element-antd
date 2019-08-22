@@ -23,6 +23,8 @@ export default function BaseList(props) {
 
   const { loading, data, handle, modelStatus } = listProps;
   const { onGetList, onClearList } = handle;
+  const { listData } = modelStatus;
+  const { records, ...pagination } = listData;
 
   const columns = formatTableFields(fields, operation, handle);
 
@@ -45,6 +47,7 @@ export default function BaseList(props) {
       dataSource={props.data || data}
       columns={columns}
       loading={loading}
+      pagination={pagination}
       {...propsCfg}
     />
   </Render>
