@@ -6,7 +6,7 @@ import ActionItem from '@/container/List/ActionItemWrapped';
 import checkExpected from './checkExpected';
 
 
-export function getFormItem(field, modelStatus, { namespace, values }) {
+export function getFormItem(field, modelStatus, { namespace, values, handle }) {
   const {
     field: fieldName, label, value, extra = '', span,
     rules = [],
@@ -38,6 +38,7 @@ export function getFormItem(field, modelStatus, { namespace, values }) {
       meta={meta}
       defaultValue={value}
       namespace={namespace}
+      handle={handle}
       {...rest}
     />}
   </Field>

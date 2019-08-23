@@ -8,8 +8,18 @@ import { Render } from 'zero-element-global/lib/layout';
 import global from 'zero-element-global/lib/global';
 import { getModel } from 'zero-element/lib/Model';
 
+const toTypeMap = {
+  'html': function (value) {
+    return value.toHTML();
+  },
+  'raw': function (value) {
+    return value.toRAW();
+  },
+};
+
 export default function BaseForm(props) {
   const formRef = useRef({});
+  const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, extraData, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, path, layoutConfig = {} } = config;
@@ -39,6 +49,10 @@ export default function BaseForm(props) {
   });
   useWillUnmount(onClearForm);
 
+  function formatValue(field, toType) {
+    // 保存需要 format 的 字段与 format 的方式
+    formatValueRef.current[field] = toType;
+  }
   function handleSubmitForm() {
     const extraSubmit = {};
     fields.forEach(field => {
@@ -50,6 +64,13 @@ export default function BaseForm(props) {
       ...extraSubmit,
       ...formRef.current.values,
     };
+
+    // 提交数据之前，格式化 value
+    Object.keys(formatValueRef.current).forEach(field => {
+      const type = formatValueRef.current[field];
+      const value = submitData[field];
+      submitData[field] = toTypeMap[type](value);
+    });
 
     if (onSubmit) {
       onSubmit(submitData);
@@ -71,7 +92,7 @@ export default function BaseForm(props) {
       if (onClose) {
         onClose();
       }
-      if(path && router) {
+      if (path && router) {
         router(path);
       }
     } else {
@@ -118,6 +139,9 @@ export default function BaseForm(props) {
               {fields.map(field => getFormItem(field, modelStatus, {
                 namespace,
                 values,
+                handle: {
+                  onFormatValue: formatValue,
+                }
               }))}
             </Render>
           </form>

@@ -43,6 +43,7 @@ FITSet({
   range: Load('formItemType/Date/range'),
   'upload-image': Load('formItemType/UploadImage'),
   'select-fetch': Load('formItemType/SelectFetch'),
+  'rich-text': Load('formItemType/RichText'),
 });
 
 AITSet({
