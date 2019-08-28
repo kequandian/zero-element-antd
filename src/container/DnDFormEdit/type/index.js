@@ -7,6 +7,7 @@ import Plain from './Plain';
 import Input from './Input';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
+import Date from './Date';
 
 const typeMap = {
   Canvas,
@@ -16,5 +17,6 @@ const typeMap = {
   Input,
   Radio,
   Checkbox,
+  Date,
 };
 export default typeMap;

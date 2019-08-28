@@ -110,4 +110,20 @@ export default [
       ],
     }
   },
+  {
+    title: '日期', type: 'Date', options: {
+      base: {
+        label: {
+          label: '字段名',
+        },
+        field: {
+          label: '字段值',
+        },
+        placeholder: {
+          label: '占位符',
+          value: '前选择日期',
+        },
+      },
+    }
+  },
 ];
