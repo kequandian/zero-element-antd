@@ -2,6 +2,9 @@
 
 export default function formatToConfig(cfg) {
   const { items = [] } = cfg;
+
+  const fields = [].concat(...items.map(row => row.items));
+
   const config = {
     layout: 'Content',
     title: '表单',
@@ -20,31 +23,29 @@ export default function formatToConfig(cfg) {
           value: row.value,
         }))),
       },
-      fields: [].concat(...items.map(row => {
-        return row.items.map(field => {
-          if (!field) {
-            return {
-              label: '',
-              field: `empty_${count++}`,
-              type: 'empty',
-            }
+      fields: fields.map(field => {
+        if (!field) {
+          return {
+            label: '',
+            field: `empty_${count++}`,
+            type: 'empty',
           }
-          const rst = {
-            label: field.options.base.label.value || '',
-            field: field.options.base.field.value,
-            value: formatToValue(field.options.base),
-            type: field.type.toLowerCase(),
-            props: {
-              style: formatToStyle(field.options.style),
-              placeholder: formatToPlaceholder(field.options.base),
-            },
-          };
-          if(field.options.items) {
-            rst.options = field.options.items;
-          }
-          return rst;
-        })
-      }))
+        }
+        const rst = {
+          label: field.options.base.label.value || '',
+          field: field.options.base.field.value,
+          value: formatToValue(field.options.base),
+          type: field.type.toLowerCase(),
+          props: {
+            style: formatToStyle(field.options.style),
+            placeholder: formatToPlaceholder(field.options.base),
+          },
+        };
+        if (field.options.items) {
+          rst.options = field.options.items;
+        }
+        return rst;
+      })
     }
   });
 
