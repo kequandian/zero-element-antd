@@ -9,6 +9,8 @@ import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Date from './Date';
 
+import OneMany from './OneMany';
+
 const typeMap = {
   Canvas,
   Grid,
@@ -18,5 +20,7 @@ const typeMap = {
   Radio,
   Checkbox,
   Date,
+
+  OneMany,
 };
 export default typeMap;

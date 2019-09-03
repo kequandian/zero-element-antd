@@ -121,7 +121,7 @@ export default [
         },
         placeholder: {
           label: '占位符',
-          value: '前选择日期',
+          value: '请选择日期',
         },
       },
     }

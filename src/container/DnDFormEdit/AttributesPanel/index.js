@@ -2,7 +2,7 @@ import React from 'react';
 import { Drawer, Input, Radio, Button } from 'antd';
 
 import ItemEdit from './components/ItemEdit';
-import { renderBaseOptions, renderStyleOptions } from './components/render';
+import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
 
 import '../index.css';
 
@@ -23,7 +23,7 @@ function renderItemsOptions(items, handle, onRemove) {
 
 export default ({ current, dispatch }) => {
   const { options = {} } = current;
-  const { base = {}, style, items } = options;
+  const { base = {}, style, items, advanced, table } = options;
 
   function onSave() {
     dispatch({
@@ -56,6 +56,11 @@ export default ({ current, dispatch }) => {
     options.style = { ...style };
     onSave();
   }
+  function handleAdvancedChange(key, value) {
+    advanced[key].value = value;
+    options.advanced = { ...advanced };
+    onSave();
+  }
   function handleItemsChange(i, type, e) {
     items[i][type] = e.target.value;
     onSave();
@@ -69,6 +74,22 @@ export default ({ current, dispatch }) => {
   }
   function handleItemDel(i) {
     items.splice(i, 1);
+    onSave();
+  }
+
+  function handleTableChange(i, type, e) {
+    table[i][type] = e.target.value;
+    onSave();
+  }
+  function handleTableAdd() {
+    table.push({
+      label: `字段${table.length + 1}`,
+      value: table.length + 1,
+    });
+    onSave();
+  }
+  function handleTableDel(i) {
+    table.splice(i, 1);
     onSave();
   }
 
@@ -88,6 +109,19 @@ export default ({ current, dispatch }) => {
         </Button>
         <br /><br />
         {renderItemsOptions(items, handleItemsChange, handleItemDel)}
+      </>
+    ) : null}
+    {advanced ? (
+      <>
+        <div className="ZEleA-DnDFormEdit-title">高级</div>
+        {renderAdvancedOptions(advanced, handleAdvancedChange)}
+        <div className="ZEleA-DnDFormEdit-title">显示字段</div>
+        <Button type="dashed" icon="plus"
+          onClick={handleTableAdd}>
+          添加字段
+        </Button>
+        <br /><br />
+        {renderItemsOptions(table, handleTableChange, handleTableDel)}
       </>
     ) : null}
     {style ? (

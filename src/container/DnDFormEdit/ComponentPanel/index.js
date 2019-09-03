@@ -6,6 +6,7 @@ import ElementType from '../compoments/ElementType';
 
 import layoutList from './layout.config';
 import elementList from './element.config';
+import advancedList from './advanced.config';
 
 import '../index.css';
 
@@ -41,6 +42,14 @@ export default ({ dispatch, copyList }) => {
     })}
     <div className="ZEleA-DnDFormEdit-title">基本组件</div>
     {elementList.map((cfg, i) => {
+      return <Render
+        key={i}
+        cfg={cfg}
+        dispatch={dispatch}
+      />
+    })}
+    <div className="ZEleA-DnDFormEdit-title">高级组件</div>
+    {advancedList.map((cfg, i) => {
       return <Render
         key={i}
         cfg={cfg}
