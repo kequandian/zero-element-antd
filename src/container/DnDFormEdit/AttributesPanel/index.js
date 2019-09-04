@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer, Input, Radio, Button } from 'antd';
+import { Drawer, Button } from 'antd';
 
 import ItemEdit from './components/ItemEdit';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
@@ -114,7 +114,10 @@ export default ({ current, dispatch }) => {
     {advanced ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">高级</div>
-        {renderAdvancedOptions(advanced, handleAdvancedChange)}
+        {renderAdvancedOptions(advanced, options, {
+          onAdvancedChange: handleAdvancedChange,
+          onSave,
+        })}
         <div className="ZEleA-DnDFormEdit-title">显示字段</div>
         <Button type="dashed" icon="plus"
           onClick={handleTableAdd}>

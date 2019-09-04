@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
-import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from 'zero-element/lib/utils/request';
 import { Select } from 'antd';
 import qs from 'qs';
@@ -17,11 +16,14 @@ function getSearch(location) {
 
 export default function SelectSQL(props) {
   const { field, label, value, handle } = props;
+  const { onAdvancedChange } = handle;
+
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
-  useDidMount(queryData);
-  function queryData() {
+  useDidMount(querySQLData);
+
+  function querySQLData() {
     setLoading(true);
     const { location = {} } = window;
     const qsObj = qs.parse(getSearch(location));
@@ -36,12 +38,13 @@ export default function SelectSQL(props) {
       setLoading(false);
     });
   }
+
   return <>
     <div>{label}</div>
     <Select
       style={{ minWidth: 120 }}
       value={value}
-      onChange={handle.bind(null, field)}
+      onChange={onAdvancedChange.bind(null, field)}
       loading={loading}
     >
       {data.map(item => {
