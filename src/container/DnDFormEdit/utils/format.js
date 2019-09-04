@@ -1,9 +1,38 @@
 
+const unusualType = {
+  OneMany: function (field, config) {
+    const { options } = field;
+    const { base, advanced, table } = options;
+    config.items.push({
+      layout: 'Empty',
+      component: 'ChildrenList',
+      config: {
+        itemsField: base.field.value,
+        actions: [],
+        fields: table.map(f => ({
+          label: f.label,
+          field: f.value,
+        }))
+      },
+    });
+  },
+};
 
 export default function formatToConfig(cfg) {
   const { items = [] } = cfg;
+  const unusualFields = [];
 
   const fields = [].concat(...items.map(row => row.items));
+  const filterFields = fields.filter(field => {
+    if (field && unusualType[field.type]) {
+      unusualFields.push({
+        field,
+        func: unusualType[field.type],
+      });
+      return false;
+    }
+    return true;
+  });
 
   const config = {
     layout: 'Content',
@@ -23,7 +52,7 @@ export default function formatToConfig(cfg) {
           value: row.value,
         }))),
       },
-      fields: fields.map(field => {
+      fields: filterFields.map(field => {
         if (!field) {
           return {
             label: '',
@@ -47,6 +76,10 @@ export default function formatToConfig(cfg) {
         return rst;
       })
     }
+  });
+
+  unusualFields.forEach(cfg => {
+    cfg.func(cfg.field, config);
   });
 
   return config;
