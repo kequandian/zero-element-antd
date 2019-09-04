@@ -71,6 +71,22 @@ export default [
     }
   },
   {
+    title: '日期', type: 'Date', options: {
+      base: {
+        label: {
+          label: '字段名',
+        },
+        field: {
+          label: '字段值',
+        },
+        placeholder: {
+          label: '占位符',
+          value: '请选择日期',
+        },
+      },
+    }
+  },
+  {
     title: '单选框', type: 'Radio', options: {
       base: {
         label: {
@@ -111,7 +127,7 @@ export default [
     }
   },
   {
-    title: '日期', type: 'Date', options: {
+    title: '下拉框', type: 'Select', options: {
       base: {
         label: {
           label: '字段名',
@@ -119,11 +135,11 @@ export default [
         field: {
           label: '字段值',
         },
-        placeholder: {
-          label: '占位符',
-          value: '请选择日期',
-        },
       },
+      items: [
+        { label: '选项1', value: '1' },
+        { label: '选项2', value: '2' },
+      ],
     }
   },
 ];

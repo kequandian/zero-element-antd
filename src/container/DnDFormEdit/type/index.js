@@ -7,6 +7,7 @@ import Plain from './Plain';
 import Input from './Input';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
+import Select from './Select';
 import Date from './Date';
 
 import OneMany from './OneMany';
@@ -19,6 +20,7 @@ const typeMap = {
   Input,
   Radio,
   Checkbox,
+  Select,
   Date,
 
   OneMany,

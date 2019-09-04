@@ -8,7 +8,12 @@ export default function SelectWrapped(props) {
     onChange(value);
   }
 
-  return <Select onChange={hanldeChange} value={value} {...p}>
+  return <Select
+    onChange={hanldeChange}
+    value={value}
+    style={{ minWidth: 120 }}
+    {...p}
+  >
     {options.map((option, i) =>
       <Select.Option value={option.value} key={i}>
         {option.label}
