@@ -29,7 +29,7 @@ function date(componentName) {
       showToday: true,
       allowClear: false,
       // ...restProps,
-      value: value ? moment(value || new Date(), format) : undefined,
+      value: formatDate(value, format),
       format,
       onChange: handleChange,
     };
@@ -53,6 +53,16 @@ function date(componentName) {
 
     return <Match {...dateProps} />;
   }
+}
+
+function formatDate(value, format) {
+  if (Array.isArray(value)) {
+    return [
+      formatDate(value[0], format),
+      formatDate(value[1], format),
+    ]
+  }
+  return value ? moment(value || new Date(), format) : undefined
 }
 
 export default date;
