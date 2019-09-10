@@ -21,7 +21,7 @@ export default function BaseForm(props) {
   const formRef = useRef({});
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const { namespace, config, extraData, onClose, onSubmit } = props;
+  const { namespace, config, extraData = {}, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, path, layoutConfig = {} } = config;
   const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({

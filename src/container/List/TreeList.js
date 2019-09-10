@@ -211,38 +211,6 @@ function checkData(rspData) {
   }
   return listData;
 }
-/**
- * 把扁平的数组根据 pid 格式化为树状
- * 
- * @param {array} list 扁平的数组
- * @returns {array} tree 树状结构
- */
-function formatToTree(list) {
-  const rst = [];
-  const IDRecords = {};
-
-  const cloneList = list.map(item => {
-    const clone = {
-      ...item,
-      key: item.id,
-    };
-    IDRecords[item.id] = clone;
-    return clone;
-  });
-
-  cloneList.forEach(node => {
-    const parentNode = IDRecords[node.pid];
-
-    if (parentNode) {
-      parentNode.children = parentNode.children || [];
-      parentNode.children.push(node);
-    } else {
-      rst.push(node); v
-    }
-  });
-
-  return rst;
-}
 
 /**
  * 渲染树状数据
@@ -285,6 +253,13 @@ function findNode(id, treeData) {
   return rst;
 }
 
+/**
+ * 找到含有相同标题的 node
+ *
+ * @param {string} value 需要找的标题的值
+ * @param {object} treeDat 树状数据结构
+ * @returns {array} 找到的数据列表 
+ */
 function findNodes(value, treeData) {
   const stack = [treeData];
   const rst = [];

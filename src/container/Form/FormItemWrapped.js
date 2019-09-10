@@ -5,7 +5,7 @@ import './index.css';
 
 export default function FormItemWrapped({ label, type, input, meta, options, ...rest }) {
   const visibleError = Boolean(meta.error && meta.touched);
-  if (type === 'empty') {
+  if (type === 'hidden') {
     return <></>;
   }
   return <div className="ZEleA-Form-item">
