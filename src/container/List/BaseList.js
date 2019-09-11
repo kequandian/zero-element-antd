@@ -35,6 +35,13 @@ export default function BaseList(props) {
   });
   useWillUnmount(onClearList);
 
+  function handlePageChange(current, pageSize) {
+    onGetList({
+      current,
+      pageSize,
+    });
+  }
+
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actions.map((action, i) => getActionItem({
@@ -44,10 +51,16 @@ export default function BaseList(props) {
     </Render>
     <Table
       rowKey="id"
+      size="middle"
       dataSource={props.data || data}
       columns={columns}
       loading={loading}
-      pagination={pagination}
+      pagination={{
+        ...pagination,
+        onChange: handlePageChange,
+        // onShowSizeChange: handlePageChange,
+        // showSizeChanger: true,
+      }}
       {...propsCfg}
     />
   </Render>
