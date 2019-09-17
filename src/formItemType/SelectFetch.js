@@ -7,7 +7,7 @@ import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 const Option = Select.Option;
 
 export default function SelectFetch(props) {
-  const { className, value, onChange, options, namespace } = props;
+  const { className, value, onChange, options, namespace, ...rest } = props;
   const { API, dataField = 'records',
     label: optLabel = 'label', value: optValue = 'value'
   } = options;
@@ -44,7 +44,7 @@ export default function SelectFetch(props) {
 
   return <div className={className}>
     <Spin spinning={loading}>
-      <Select onChange={handleChange} value={value}>
+      <Select onChange={handleChange} value={value} {...rest}>
         {optionList.map(opt => (
           <Option key={opt[optValue]} value={opt[optValue]}>{opt[optLabel]}</Option>
         ))}

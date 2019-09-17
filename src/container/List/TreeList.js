@@ -75,6 +75,8 @@ export default function TreeList(props) {
 
       if (status === 200 && code === 200) {
         setTreeData(rspData);
+      } else {
+        throw new Error('服务器返回了非预期的数据格式');
       }
     }).catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setTreeLoading(false));

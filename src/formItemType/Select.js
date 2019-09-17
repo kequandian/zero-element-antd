@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'antd';
 
 export default function SelectWrapped(props) {
-  const { value, options = {}, onChange, props: p } = props;
+  const { value, options = {}, onChange, props: p, ...rest } = props;
 
   function hanldeChange(value) {
     onChange(value);
@@ -12,6 +12,7 @@ export default function SelectWrapped(props) {
     onChange={hanldeChange}
     value={value}
     style={{ minWidth: 120 }}
+    {...rest}
     {...p}
   >
     {options.map((option, i) =>

@@ -4,7 +4,7 @@ import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 
 export default function UploadImage(props) {
-  const { value, options } = props;
+  const { value, options, ...rest } = props;
   const { API = '/api/upload/files', max = 9 } = options;
   const [fileList, setFileList] = useState([]);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -58,7 +58,7 @@ export default function UploadImage(props) {
     onChange: handleChange
   }
 
-  return <div className="clearfix" style={{ marginTop: '0.5em' }}>
+  return <div className="clearfix" style={{ marginTop: '0.5em' }} {...rest}>
     <Upload
       {...uploadProps}
     >
