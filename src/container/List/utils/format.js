@@ -1,6 +1,5 @@
 import React from 'react';
 import ListOperation from '../components/ListOperation';
-// import ListFieldsEdit from '../components/ListFieldsEdit';
 import { Render } from 'zero-element-global/lib/valueType';
 
 /**
@@ -9,14 +8,16 @@ import { Render } from 'zero-element-global/lib/valueType';
  * @export
  * @param {array} fields 标准化的 fields
  * @param {array} operation 对该行的操作
+ * @param {object} handle 传递给 ListOperation
+ * @param {object} props 传递给 valueType
  * @returns antd Table columns
  */
-export function formatTableFields(fields = [], operation = [], handle) {
+export function formatTableFields(fields = [], operation = [], handle, props = {}) {
   let operationCfg = {};
   const rst = fields.map((fieldCfg, i) => {
     const { field, label,
       valueType,
-      render = valueTypeRender(valueType, fieldCfg),
+      render = valueTypeRender(valueType, fieldCfg, props),
       ...rest
     } = fieldCfg;
 
@@ -24,7 +25,7 @@ export function formatTableFields(fields = [], operation = [], handle) {
       operationCfg = fieldCfg;
       return {};
     }
-    
+
     return {
       dataIndex: field,
       title: label,
@@ -53,11 +54,12 @@ export function formatTableFields(fields = [], operation = [], handle) {
   }
   return rst;
 }
-function valueTypeRender(type, config) {
+function valueTypeRender(type, config, props) {
   if (!type) return undefined;
   return (text, record, index) => <Render
     n={type}
     {...config}
+    {...props}
     data={{
       text,
       record,

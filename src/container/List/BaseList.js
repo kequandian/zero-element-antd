@@ -26,7 +26,9 @@ export default function BaseList(props) {
   const { listData } = modelStatus;
   const { records, ...pagination } = listData;
 
-  const columns = formatTableFields(fields, operation, handle);
+  const columns = formatTableFields(fields, operation, handle, {
+    namespace,
+  });
 
   useDidMount(_ => {
     if (API.listAPI) {
@@ -42,7 +44,10 @@ export default function BaseList(props) {
     });
   }
 
-  return <Render n={layout} {...layoutConfig}>
+  return <Render n={layout} {...layoutConfig}
+    handle={handle}
+    namespace={namespace}
+  >
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actions.map((action, i) => getActionItem({
         key: i,
