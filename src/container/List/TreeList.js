@@ -107,8 +107,12 @@ export default function TreeList(props) {
     setAutoExpandParent(false);
   }
   function handleSelect(selectedKeys) {
+    const id = selectedKeys[0];
+    const find = findNode(id, treeData);
+
     setExtraData({
-      id: selectedKeys[0],
+      id,
+      ...find,
     });
   }
   function handleLocalSearch(e) {
@@ -240,11 +244,17 @@ function read(item) {
  * @returns object node
  */
 function findNode(id, treeData) {
-  const stack = [treeData];
+  const stack = [];
+  if (Array.isArray(treeData)) {
+    stack.push(...treeData);
+  } else {
+    stack.push(treeData);
+  }
+
   let rst;
   while (stack.length) {
     const item = stack.shift();
-    if (item.id === id) {
+    if (String(item.id) === id) {
       rst = item;
       break;
     }
