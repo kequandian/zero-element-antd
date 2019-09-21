@@ -12,9 +12,14 @@ import checkData from './checkData';
 const { Search } = Input;
 
 export default (props) => {
-  const { API, searchField = 'search', namespace, onChange } = props;
+  const {
+    API, searchField = 'search',
+    namespace,
+    initData = {},
+    onChange
+  } = props;
 
-  const [treeData, setTreeData] = useState({});
+  const [treeData, setTreeData] = useState(initData);
   const [expandedKeys, setExpandedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
   const [treeLoading, setTreeLoading] = useState(false);
@@ -27,6 +32,10 @@ export default (props) => {
 
 
   function handleLoadInitData() {
+    if (API.initAPI === undefined) {
+      return false;
+    }
+
     const api = formatAPI(API.initAPI, { namespace });
 
     setTreeLoading(true);
@@ -44,6 +53,11 @@ export default (props) => {
   }
   function handleLoadData(treeNode) {
     const { id } = treeNode.props;
+
+    if (API.appendAPI === undefined) {
+      return new Promise((res) => res());;
+    }
+
     const api = formatAPI(API.appendAPI, {
       namespace,
       data: { id },
@@ -87,6 +101,10 @@ export default (props) => {
     }
   }
   function handleRemoteSearch(value) {
+    if (API.searchAPI === undefined) {
+      return false;
+    }
+
     const api = formatAPI(API.searchAPI, {
       namespace,
     });
@@ -118,7 +136,7 @@ export default (props) => {
   return <Spin spinning={treeLoading}>
     <Search
       style={{
-        marginTop: 16,
+        // marginTop: 16,
         marginBottom: 8,
       }}
       placeholder="搜索"
