@@ -7,7 +7,7 @@ class Item {
     const rst = { ...obj };
     // 只有 layout 才有 tips
     if (obj.tips === undefined) {
-      rst.options.base.field.value = `field_${fieldCount++}`;
+      rst.options.field.value = `field_${fieldCount++}`;
     }
     rst.id = assigned++;
     return rst;

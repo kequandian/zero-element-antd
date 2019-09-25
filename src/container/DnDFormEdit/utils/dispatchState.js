@@ -60,7 +60,7 @@ export default function handleState(state, { type, payload = {} }) {
     },
     rowMoveDown() {
       if (config.items.length < 2) return state;
-      
+
       const index = config.items.findIndex((row) => {
         return row === payload;
       });
@@ -208,6 +208,39 @@ export default function handleState(state, { type, payload = {} }) {
         current: payload,
       }
     },
+
+    // 字段
+    appendField() {
+      const { fields } = state;
+      fields.push(`field_${fields.length + 1}`);
+
+      return {
+        ...state,
+        fields: [...fields],
+      }
+    },
+    changeField() {
+      const { fields } = state;
+      const { field, value } = payload;
+      const index = fields.findIndex(f => f === field);
+      fields.splice(index, 1, value);
+
+      return {
+        ...state,
+        fields: [...fields],
+      }
+    },
+    removeField() {
+      const { fields } = state;
+      const { field } = payload;
+      const fFields = fields.filter(f => f !== field);
+
+      return {
+        ...state,
+        fields: [...fFields],
+      }
+    },
+
     defaults() {
       console.log('未定义的方法: ', type);
       return state;

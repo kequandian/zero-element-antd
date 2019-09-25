@@ -7,7 +7,7 @@ const unusualType = {
       layout: 'Empty',
       component: 'ChildrenList',
       config: {
-        itemsField: base.field.value,
+        itemsField: options.field.value,
         actions: [],
         fields: table.map(f => ({
           label: f.label,
@@ -18,11 +18,12 @@ const unusualType = {
   },
 };
 
-export default function formatToConfig(cfg) {
+export default function formatToConfig(cfg, formName) {
   const { items = [] } = cfg;
   const unusualFields = [];
 
   const fields = [].concat(...items.map(row => row.items));
+
   const filterFields = fields.filter(field => {
     if (field && unusualType[field.type]) {
       unusualFields.push({
@@ -36,7 +37,7 @@ export default function formatToConfig(cfg) {
 
   const config = {
     layout: 'Content',
-    title: '表单',
+    title: formName || '表单',
     items: [],
   }
   let count = 0;
@@ -62,7 +63,7 @@ export default function formatToConfig(cfg) {
         }
         const rst = {
           label: field.options.base.label.value || '',
-          field: field.options.base.field.value,
+          field: field.options.field.value,
           value: formatToValue(field.options.base),
           type: field.type.toLowerCase(),
           props: {

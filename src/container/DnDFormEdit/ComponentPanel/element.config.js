@@ -1,12 +1,10 @@
 export default [
   {
     title: '纯文本', type: 'Plain', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
         value: {
           label: '文本',
@@ -52,12 +50,10 @@ export default [
   },
   {
     title: '输入框', type: 'Input', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
         // value: {
         //   label: '内容',
@@ -72,12 +68,10 @@ export default [
   },
   {
     title: '日期', type: 'Date', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
         placeholder: {
           label: '占位符',
@@ -88,12 +82,10 @@ export default [
   },
   {
     title: '单选框', type: 'Radio', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
         // value: {
         //   label: '默认值',
@@ -108,12 +100,10 @@ export default [
   },
   {
     title: '多选框', type: 'Checkbox', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
         // value: {
         //   label: '默认值',
@@ -128,12 +118,10 @@ export default [
   },
   {
     title: '下拉框', type: 'Select', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
       },
       items: [

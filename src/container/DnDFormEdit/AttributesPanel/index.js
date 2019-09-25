@@ -1,10 +1,12 @@
 import React from 'react';
-import { Drawer, Button } from 'antd';
+import { Drawer, Button, Select } from 'antd';
 
 import ItemEdit from './components/ItemEdit';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
 
 import '../index.css';
+
+const { Option } = Select;
 
 function renderItemsOptions(items, handle, onRemove) {
   return items.map((item, i) => {
@@ -21,9 +23,20 @@ function renderItemsOptions(items, handle, onRemove) {
   })
 }
 
-export default ({ current, dispatch }) => {
+function renderFieldsSelect(list, value, handleChange) {
+  return <Select style={{ width: '100%' }}
+    value={value}
+    onChange={handleChange}
+  >
+    {list.map((item, i) => {
+      return <Option key={i} value={item}>{item}</Option>
+    })}
+  </Select>
+}
+
+export default ({ current, dispatch, fields }) => {
   const { options = {} } = current;
-  const { base = {}, style, items, advanced, table } = options;
+  const { field = {}, base = {}, style, items, advanced, table } = options;
 
   function onSave() {
     dispatch({
@@ -46,6 +59,10 @@ export default ({ current, dispatch }) => {
         current: {},
       }
     });
+  }
+  function handleFieldChange(value) {
+    field.value = value;
+    onSave();
   }
   function handleBaseChange(key, e) {
     base[key].value = e.target.value;
@@ -99,6 +116,8 @@ export default ({ current, dispatch }) => {
     onClose={handleClose}
   >
     <div className="ZEleA-DnDFormEdit-title">基本属性</div>
+    <div className="ZEleA-DnDFormEdit-title">字段值</div>
+    {renderFieldsSelect(fields, field.value, handleFieldChange)}
     {renderBaseOptions(base, handleBaseChange)}
     {items ? (
       <>

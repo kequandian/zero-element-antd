@@ -1,5 +1,5 @@
 import React, { useReducer, useContext } from 'react';
-import { Button, Spin, Input } from 'antd';
+import { Button, Spin, Input, Card } from 'antd';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -9,6 +9,7 @@ import PageContext from 'zero-element/lib/context/PageContext';
 import { Flex } from 'layout-flex';
 
 import ComponentPanel from './ComponentPanel';
+import Fields from './Fields';
 import EchoPanel from './EchoPanel';
 import AttributesPanel from './AttributesPanel';
 
@@ -17,11 +18,14 @@ import handleState from './utils/dispatchState';
 import formatToConfig from './utils/format';
 import { assigned, fieldCount, setInitId } from './utils/Item';
 
+import Panel from '@/components/Panel';
+
 const { FlexItem } = Flex;
 
 const initState = {
-  current: {},
-  name: '',
+  current: {}, // 当前编辑的元素
+  name: '', // 表单名称
+  fields: [],
   config: {
     id: 0,
     title: '表单',
@@ -39,7 +43,7 @@ function DndFormEdit(props) {
     initState,
     () => JSON.parse(JSON.stringify(initState))
   );
-  const { config, copyList, spinning, spinningTip } = state;
+  const { fields, config, copyList, spinning, spinningTip } = state;
   const context = useContext(PageContext);
   const { namespace } = context;
   const formProps = useBaseForm({
@@ -80,7 +84,7 @@ function DndFormEdit(props) {
       }
     });
 
-    const data = formatToConfig(config);
+    const data = formatToConfig(config, state.name);
     const method = props.config.API.updateAPI ?
       formProps.handle.onUpdateForm : formProps.handle.onCreateForm;
     method({
@@ -107,22 +111,33 @@ function DndFormEdit(props) {
   }
 
   return <DnDContext.Provider value={state}>
-    <div>
-      <h3>表单名称：</h3>
-      <Input value={state.name} onChange={handleName} />
-    </div>
-    <br />
     <Flex>
       <FlexItem flex={1}>
         <Spin spinning={spinning} tip={spinningTip}>
-          <Button type="primary" onClick={handleSave}>保存</Button>
-          <br /><br />
-          <EchoPanel config={config} dispatch={dispatch} />
+          <Card size="small">
+            <div>
+              <h3>表单名称：</h3>
+              <Input value={state.name} onChange={handleName} />
+            </div>
+            <br />
+            <Button type="primary" onClick={handleSave}>保存</Button>
+          </Card>
+          <br />
+          <Panel title="表单字段">
+            <Fields data={fields} dispatch={dispatch} />
+          </Panel>
+          <Panel title="表单画布">
+            <EchoPanel config={config} dispatch={dispatch} />
+          </Panel>
         </Spin>
       </FlexItem>
       <FlexItem style={{ width: '256px' }}>
         <ComponentPanel dispatch={dispatch} copyList={copyList} />
-        <AttributesPanel current={state.current} dispatch={dispatch} />
+        <AttributesPanel
+          current={state.current}
+          dispatch={dispatch}
+          fields={fields}
+        />
       </FlexItem>
     </Flex>
   </DnDContext.Provider>
