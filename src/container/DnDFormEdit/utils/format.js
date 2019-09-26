@@ -83,7 +83,7 @@ export default function formatToConfig(cfg, formName) {
     cfg.func(cfg.field, config);
   });
 
-  return config;
+  return [config, pureFields(fields)];
 }
 
 function formatToStyle(style) {
@@ -101,4 +101,14 @@ function formatToPlaceholder(base) {
 function formatToValue(base) {
   if (!base.value) return undefined;
   return base.value.value;
+}
+
+/**
+ * 返回有效的字段列表
+ *
+ * @param {Array} fields
+ * @returns
+ */
+function pureFields(fields) {
+  return fields.filter(i => i).map(item => item.options.field.value);
 }

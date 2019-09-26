@@ -1,12 +1,10 @@
 export default [
   {
     title: '一对多关系', type: 'OneMany', options: {
+      field: {},
       base: {
         label: {
           label: '字段名',
-        },
-        field: {
-          label: '字段值',
         },
       },
       advanced: {

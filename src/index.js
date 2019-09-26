@@ -48,6 +48,7 @@ LASet({
 
 FITSet({
   plain: Load('formItemType/Plain'),
+  empty: Load('formItemType/Empty'),
   input: Load('formItemType/Input'),
   number: Load('formItemType/Number'),
   radio: Load('formItemType/Radio'),

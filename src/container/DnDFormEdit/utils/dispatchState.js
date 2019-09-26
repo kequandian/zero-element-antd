@@ -18,6 +18,7 @@ export default function handleState(state, { type, payload = {} }) {
         ...state,
         config: payload.originConfig,
         name: payload.title,
+        fields: payload.fields,
       }
     },
     addLayout() {

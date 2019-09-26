@@ -8,6 +8,8 @@ import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import PageContext from 'zero-element/lib/context/PageContext';
 import { Flex } from 'layout-flex';
 
+import { unique } from '@/utils/tool';
+
 import ComponentPanel from './ComponentPanel';
 import Fields from './Fields';
 import EchoPanel from './EchoPanel';
@@ -53,16 +55,34 @@ function DndFormEdit(props) {
 
   useDidMount(_ => {
     if (props.config.API.getAPI) {
-      formProps.handle.onGetOne({}).then(({ code, data }) => {
-        const { originConfig = {} } = data;
-        if (code === 200) {
-          dispatch({
-            type: 'initConfig',
-            payload: data,
-          });
-          setInitId(originConfig.finalId, originConfig.fieldCount);
+      dispatch({
+        type: 'save',
+        payload: {
+          spinning: true,
+          spinningTip: '正在读取……',
         }
       });
+
+      formProps.handle.onGetOne({})
+        .then(({ code, data }) => {
+          const { originConfig = {} } = data;
+          if (code === 200) {
+            dispatch({
+              type: 'initConfig',
+              payload: data,
+            });
+            setInitId(originConfig.finalId, originConfig.fieldCount);
+          }
+        })
+        .finally(_=> {
+          dispatch({
+            type: 'save',
+            payload: {
+              spinning: false,
+              spinningTip: '',
+            }
+          });
+        })
     }
   });
 
@@ -84,13 +104,16 @@ function DndFormEdit(props) {
       }
     });
 
-    const data = formatToConfig(config, state.name);
+    const [data, otherFields] = formatToConfig(config, state.name);
     const method = props.config.API.updateAPI ?
-      formProps.handle.onUpdateForm : formProps.handle.onCreateForm;
+      formProps.handle.onUpdateForm
+      : formProps.handle.onCreateForm;
+
     method({
       fields: {
         title: state.name,
         config: data,
+        fields: unique([fields, otherFields]),
         originConfig: {
           ...state.config,
           title: state.name,
