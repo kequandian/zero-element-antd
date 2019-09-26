@@ -1,5 +1,6 @@
 import React, { useReducer, useRef } from 'react';
 import { Form } from 'react-final-form';
+import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, message } from 'antd';
@@ -93,7 +94,10 @@ export default function BaseForm(props) {
         onClose();
       }
       if (path && router) {
-        router(path);
+        const fPath = formatAPI(path, {
+          namespace,
+        });
+        router(fPath);
       }
     } else {
       message.error(`操作失败: ${data.message}`);
