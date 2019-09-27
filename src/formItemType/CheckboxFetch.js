@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Select, Spin } from 'antd';
+import { Checkbox, Spin } from 'antd';
 import { query } from 'zero-element/lib/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
-const Option = Select.Option;
-
-export default function SelectFetch(props) {
-  const { className, value, onChange, options, namespace, ...rest } = props;
+export default function CheckboxFetch({
+  className,
+  props, defaultValue, value,
+  options, namespace,
+  ...rest
+}) {
   const { API, dataField = 'records',
     label: optLabel = 'label', value: optValue = 'value'
   } = options;
@@ -29,7 +31,10 @@ export default function SelectFetch(props) {
             : data[dataField];
 
           if (Array.isArray(list)) {
-            setOptionList(list);
+            setOptionList(list.map(item => ({
+              label: item[optLabel],
+              value: item[optValue],
+            })));
           } else {
             console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
           }
@@ -39,19 +44,14 @@ export default function SelectFetch(props) {
       })
     }
   }
-  function handleChange(value) {
-    onChange({
-      target: {
-        value,
-      }
-    })
-  }
 
   return <Spin className={className} spinning={loading}>
-    <Select onChange={handleChange} value={value} {...rest}>
-      {optionList.map(opt => (
-        <Option key={opt[optValue]} value={opt[optValue]}>{opt[optLabel]}</Option>
-      ))}
-    </Select>
+    <Checkbox.Group
+      defaultValue={typeof defaultValue === 'string' ? [] : defaultValue}
+      value={typeof value === 'string' ? [] : value}
+      options={optionList}
+      {...rest}
+      {...props}
+    />
   </Spin>
 }

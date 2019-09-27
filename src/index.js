@@ -60,6 +60,7 @@ FITSet({
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
   'upload-image': Load('formItemType/UploadImage'),
+  'checkbox-fetch': Load('formItemType/CheckboxFetch'),
   'select-fetch': Load('formItemType/SelectFetch'),
   'rich-text': Load('formItemType/RichText'),
 });
