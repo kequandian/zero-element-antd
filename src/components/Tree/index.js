@@ -136,12 +136,12 @@ export default (props) => {
 
   const treeProps = {
     loadData: handleLoadData,
-    onExpand: handleExpand,
     onSelect: handleSelect,
     ...rest,
   };
-  if (expandedKeys) {
+  if (treeProps.expandedKeys === true) {
     treeData.expandedKeys = expandedKeys;
+    treeData.onExpand = handleExpand;
   }
 
   return <Spin spinning={treeLoading}>
