@@ -3,12 +3,15 @@ import LabelInput from './LabelComponents/LabelInput';
 import LabelRadio from './LabelComponents/LabelRadio';
 import SelectSQL from './LabelComponents/SelectSQL';
 import SelectTable from './LabelComponents/SelectTable';
+import SelectTableField from './LabelComponents/SelectTableField';
+
 
 const labelSet = {
   'input': LabelInput,
   'radio': LabelRadio,
   'selectSQL': SelectSQL,
   'selectTable': SelectTable,
+  'selectTableField': SelectTableField,
   'undefined': LabelInput,
 };
 

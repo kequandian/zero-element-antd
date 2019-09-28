@@ -8,6 +8,10 @@ const unusualType = {
       component: 'ChildrenList',
       config: {
         itemsField: options.field.value,
+        oneMany: {
+          tableName: advanced.tableName.value,
+          field: advanced.field.value,
+        },
         actions: [],
         fields: table.map(f => ({
           label: f.label,

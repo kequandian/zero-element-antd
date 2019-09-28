@@ -13,9 +13,9 @@ function getSearch(location) {
   }
 }
 
-export default function SelectTable(props) {
+export default function SelectTableField(props) {
   const { field, label, value, handle, config, options } = props;
-  const { sql } = config;
+  const { sql, tableName } = config;
   const { table } = options;
   const { onAdvancedChange, onSave } = handle;
 
@@ -30,30 +30,30 @@ export default function SelectTable(props) {
       prevSqlValue.current = sql.value;
       clearValue();
     }
-    if (sql.value) {
-      queryTableData(sql.value);
+    if (sql.value && tableName.value) {
+      queryTableData(sql.value, tableName.value);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sql.value]);
+  }, [sql.value, tableName.value]);
 
   function clearValue() {
     onAdvancedChange(field, '');
   }
-  function queryTableData() {
+  function queryTableData(sql, tableName) {
     setLoading(true);
     const { location = {} } = window;
     const qsObj = qs.parse(getSearch(location));
 
-    const fAPI = `/api/generate/sql/${qsObj.uuid}/${sql.value}`;
+    const fAPI = `/api/generate/sql/${qsObj.uuid}/${sql}/table/${tableName}`;
+
     query(fAPI).then((response) => {
       const { status, data } = response;
       if (status === 200 && data.code === 200) {
-          setData(data.data.items.map(table => {
+          setData(data.data.map(field => {
             return {
-              id: table.id,
-              title: table.tableName,
-              value: table.tableName,
-              children: table.children,
+              id: field.field,
+              title: field.comment || field.field,
+              value: field.field,
             }
           }));
       }
