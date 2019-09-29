@@ -220,25 +220,20 @@ export default function handleState(state, { type, payload = {} }) {
         fields: [...fields],
       }
     },
-    changeField() {
+    saveFields() {
+      return {
+        ...state,
+        fields: [...payload],
+      }
+    },
+    removeFieldIndex() {
       const { fields } = state;
-      const { field, value } = payload;
-      const index = fields.findIndex(f => f === field);
-      fields.splice(index, 1, value);
+      const { index } = payload;
+      fields.splice(index, 1);
 
       return {
         ...state,
         fields: [...fields],
-      }
-    },
-    removeField() {
-      const { fields } = state;
-      const { field } = payload;
-      const fFields = fields.filter(f => f !== field);
-
-      return {
-        ...state,
-        fields: [...fFields],
       }
     },
 

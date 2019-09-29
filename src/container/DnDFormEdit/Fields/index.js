@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button, Input } from 'antd';
 import { Flex } from 'layout-flex';
 
@@ -6,7 +6,14 @@ const { FlexItem } = Flex;
 
 export default function ({ data, dispatch }) {
   const [editField, setEditField] = useState(null);
-  const editValue = useRef('');
+  const [inputData, setInputData] = useState('');
+  const editValue = useRef([]);
+
+  useEffect(_ => {
+    if (editField === null) {
+      editValue.current = JSON.parse(JSON.stringify(data));
+    }
+  }, [data, editField]);
 
   function handleAppend() {
     dispatch({
@@ -15,40 +22,39 @@ export default function ({ data, dispatch }) {
   }
   function handleEdit(field) {
     setEditField(field);
-    editValue.current = field;
+    setInputData(editValue.current[field]);
   }
   function handleCancelEdit() {
     setEditField(null);
   }
   function handleValueChange(e) {
-    editValue.current = e.target.value;
+    const value = e.target.value;
+    editValue.current[editField] = value;
+    setInputData(value);
   }
   function handleSave() {
     dispatch({
-      type: 'changeField',
-      payload: {
-        field: editField,
-        value: editValue.current,
-      }
+      type: 'saveFields',
+      payload: editValue.current,
     });
     handleCancelEdit();
   }
   function handleRemove() {
     dispatch({
-      type: 'removeField',
+      type: 'removeFieldIndex',
       payload: {
-        field: editField,
+        index: editField,
       }
     });
     handleCancelEdit();
   }
 
   return <div>
-    {editField ? (
+    {editField !== null ? (
       <Flex>
         <FlexItem flex={1}>
           <Input autoFocus
-            defaultValue={editField}
+            value={inputData}
             onChange={handleValueChange}
           />
         </FlexItem>
@@ -72,12 +78,8 @@ export default function ({ data, dispatch }) {
     ) : null}
 
     {data.map((field, i) => {
-      const isThisEdit = field === editField;
-      const disabled = editField && !isThisEdit;
-
       return <Button key={i} size="small" className="ZEleA-margin-left"
-        disabled={disabled}
-        onClick={handleEdit.bind(null, field)}
+        onClick={handleEdit.bind(null, i)}
       >
         {field}
       </Button>;
@@ -85,7 +87,6 @@ export default function ({ data, dispatch }) {
 
     <Button type="dashed" className="ZEleA-margin-left" size="small"
       icon="plus"
-      disabled={editField}
       onClick={handleAppend}
     ></Button>
   </div>

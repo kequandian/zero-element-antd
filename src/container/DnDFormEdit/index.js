@@ -9,8 +9,6 @@ import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import PageContext from 'zero-element/lib/context/PageContext';
 import { Flex } from 'layout-flex';
 
-import { unique } from '@/utils/tool';
-
 import global from 'zero-element-global/lib/global';
 
 import ComponentPanel from './ComponentPanel';
@@ -118,7 +116,8 @@ function DndFormEdit(props) {
       fields: {
         title: state.name,
         config: data,
-        fields: unique([fields, otherFields]),
+        // TODO
+        // fields: unique([fields, otherFields]),
         originConfig: {
           ...state.config,
           title: state.name,
