@@ -11,6 +11,8 @@ import { Flex } from 'layout-flex';
 
 import global from 'zero-element-global/lib/global';
 
+import { unique } from '@/utils/tool';
+
 import ComponentPanel from './ComponentPanel';
 import Fields from './Fields';
 import EchoPanel from './EchoPanel';
@@ -116,8 +118,7 @@ function DndFormEdit(props) {
       fields: {
         title: state.name,
         config: data,
-        // TODO
-        // fields: unique([fields, otherFields]),
+        fields: unique([fields, otherFields]),
         originConfig: {
           ...state.config,
           title: state.name,
