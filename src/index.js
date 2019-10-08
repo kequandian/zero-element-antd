@@ -30,6 +30,7 @@ LayoutSet({
   Alone: Load('layout/Alone'),
   Grid: Load('layout/Grid'),
   Content: Load('layout/Content'),
+  Items: Load('layout/Items'),
 });
 
 CSet({
@@ -60,6 +61,7 @@ FITSet({
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
   'upload-image': Load('formItemType/UploadImage'),
+  'upload-file': Load('formItemType/UploadFile'),
   'checkbox-fetch': Load('formItemType/CheckboxFetch'),
   'select-fetch': Load('formItemType/SelectFetch'),
   'rich-text': Load('formItemType/RichText'),

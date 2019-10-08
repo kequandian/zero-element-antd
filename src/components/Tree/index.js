@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Spin, Input, Tree } from 'antd';
+import { Spin, Input, Tree, Empty } from 'antd';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from 'zero-element/lib/utils/request';
@@ -154,7 +154,7 @@ export default (props) => {
       onChange={handleLocalSearch}
       onSearch={handleRemoteSearch}
     />
-    {treeData ? (
+    {treeData &&　treeData.length ? (
       <Tree
         showLine
         autoExpandParent={autoExpandParent}
@@ -162,7 +162,7 @@ export default (props) => {
       >
         {read(treeData)}
       </Tree>
-    ) : null}
+    ) : <Empty />}
   </Spin>
 
 }
