@@ -5,8 +5,9 @@ import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
 
 export default function UploadFile(props) {
-  const { value, options, namespace, ...rest } = props;
+  const { value, options, namespace, handle, ...rest } = props;
   const { API = '/api/upload/files', max = 9 } = options;
+  const { onSaveOtherValue } = handle;
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
   const fAPI = formatAPI(API, {
@@ -29,7 +30,9 @@ export default function UploadFile(props) {
     if (info.file.status === 'uploading' && fileList.length > 0) {
       setLoading(true);
     }
-    if (info.file.status === 'done' || info.file.status === 'error' || info.file.status === 'removed') {
+    if (info.file.status === 'done' ||
+      info.file.status === 'error' ||
+      info.file.status === 'removed') {
       setLoading(false);
 
       const doneImageList = fileList.filter(file => file.status === 'done');
@@ -38,6 +41,9 @@ export default function UploadFile(props) {
         url: file.response ? file.response.data.url : file.url
       }));
       props.onChange(saveFileList);
+      if (max === 1) {
+        onSaveOtherValue('fileName', saveFileList[0].name);
+      }
     }
   }
 

@@ -50,6 +50,19 @@ export default function BaseForm(props) {
   });
   useWillUnmount(onClearForm);
 
+  function handleSaveOtherValue(field, value) {
+    const values = formRef.current.values;
+
+    values[field] = value;
+    formRef.current.values = values;
+
+    model.dispatch({
+      type: 'save',
+      payload: {
+        formData: values,
+      }
+    });
+  }
   function formatValue(field, toType) {
     // 保存需要 format 的 字段与 format 的方式
     formatValueRef.current[field] = toType;
@@ -145,6 +158,7 @@ export default function BaseForm(props) {
                 values,
                 handle: {
                   onFormatValue: formatValue,
+                  onSaveOtherValue: handleSaveOtherValue,
                 }
               }))}
             </Render>
