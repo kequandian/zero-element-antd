@@ -8,7 +8,7 @@ import { Render } from 'zero-element-global/lib/layout';
 
 export default function BaseSearch(props) {
   const formRef = useRef({});
-  const { namespace, config } = props;
+  const { namespace, config, extraData } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {}
   } = config;
@@ -16,6 +16,7 @@ export default function BaseSearch(props) {
   const searchProps = useBaseSearch({
     namespace,
     modelPath: 'searchData',
+    extraData,
   }, config);
 
   const { loading, data, modelStatus, handle } = searchProps;

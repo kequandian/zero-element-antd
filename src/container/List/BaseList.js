@@ -7,7 +7,7 @@ import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 
 export default function BaseList(props) {
-  const { namespace, config } = props;
+  const { namespace, config, extraData } = props;
   const {
     layout = 'Empty', layoutConfig = {},
     API = {},
@@ -19,6 +19,7 @@ export default function BaseList(props) {
   const listProps = useBaseList({
     namespace,
     modelPath: 'listData',
+    extraData,
   }, config);
 
   const { loading, data, handle, modelStatus } = listProps;
