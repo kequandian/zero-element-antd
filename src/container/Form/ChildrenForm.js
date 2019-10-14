@@ -9,7 +9,7 @@ import { Render } from 'zero-element-global/lib/layout';
 export default function ChildrenForm(props) {
   const formRef = useRef({});
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const { namespace, config, onClose, onSubmit } = props;
+  const { namespace, config, index, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
   const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({
@@ -18,7 +18,7 @@ export default function ChildrenForm(props) {
   }, config);
 
   const { loading, data, modelStatus, handle } = formProps;
-  const initData = useRef({});
+  const initData = useRef(props.data || {});
   const { onGetOne } = handle;
 
   useDidMount(_ => {
@@ -34,7 +34,13 @@ export default function ChildrenForm(props) {
 
   function handleSubmitForm() {
     if (onSubmit) {
-      onSubmit(formRef.current.values);
+      if (index !== undefined) {
+        // 一对多的编辑
+        onSubmit(index, formRef.current.values);
+      } else {
+        // 一对多的新增
+        onSubmit(formRef.current.values);
+      }
       if (onClose) {
         formRef.current.onSubmit();
         onClose();

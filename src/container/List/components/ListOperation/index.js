@@ -213,6 +213,7 @@ export default function ListOperationWrapped(props) {
         modalConfig: rest,
         onSubmit: handle.onEdit,
         data: props.record,
+        index,
       }
     });
   }
