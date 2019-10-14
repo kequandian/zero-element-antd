@@ -137,7 +137,7 @@ export default function BaseForm(props) {
   }
 
   return <Spin spinning={loading}>
-    <div className="ant-modal-body">
+    <div className={fields.length ? 'ant-modal-body' : undefined}>
       <Form
         initialValues={initData.current}
         onSubmit={handleSubmitForm}
