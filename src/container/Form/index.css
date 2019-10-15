@@ -1,9 +1,10 @@
 .ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner {
   background: #ff4d4f;
 }
+
 .ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
-  border-right-color: #ff4d4f;
-  border-top-color: #ff4d4f;
+  border-right-color : #ff4d4f;
+  border-top-color   : #ff4d4f;
   border-bottom-color: #ff4d4f;
 }
 
@@ -11,21 +12,29 @@
 .ZEleA-Form-ruleTips-error.ant-tooltip-open:hover,
 .ZEleA-Form-ruleTips-error.ant-tooltip-open:focus {
   border-color: #ff4d4f;
-  box-shadow: 0 0 0 2px  #ff4d4f33;
+  box-shadow  : 0 0 0 2px #ff4d4f33;
 }
 
-.ZEleA-Form-vertical>.ant-row ,
+.ZEleA-Form-vertical>.ant-row,
 .ZEleA-Form-horizontal>.ant-row {
   margin-bottom: 8px;
 }
-.ZEleA-Form-horizontal .ZEleA-Form-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-}
+
 .ZEleA-Form-item-label {
   margin-right: 8px;
 }
+
+.ZEleA-Form-horizontal .ZEleA-Form-item {
+  display      : flex;
+  align-items  : center;
+  margin-bottom: 8px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-label {
+  width     : 8em;
+  text-align: right;
+}
+
 .ZEleA-Form-horizontal .ZEleA-Form-item-element {
   flex: 1;
 }

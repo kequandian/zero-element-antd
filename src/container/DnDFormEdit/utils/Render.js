@@ -32,7 +32,9 @@ export default function Render(props) {
         {`${base.label.value}:`}
       </label>
     ) : null}
-    <Component {...props} />
+    <div className="ZEleA-Form-item-element">
+      <Component {...props} />
+    </div>
   </>
 }
 

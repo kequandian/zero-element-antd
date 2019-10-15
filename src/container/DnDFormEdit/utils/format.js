@@ -51,6 +51,7 @@ export default function formatToConfig(cfg, formName) {
     config: {
       layout: 'Grid',
       layoutConfig: {
+        layoutType: 'horizontal', // horizontal vertical
         layoutArea: [].concat(...items.map(row => ({
           layout: row.type,
           length: row.value.length,

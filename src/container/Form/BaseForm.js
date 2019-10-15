@@ -24,7 +24,7 @@ export default function BaseForm(props) {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, extraData = {}, onClose, onSubmit } = props;
   const { API = {}, layout = 'Empty', fields, path, layoutConfig = {} } = config;
-  const { layoutType = 'vertical' } = layoutConfig;
+  const { layoutType = 'horizontal' } = layoutConfig; // vertical horizontal
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',

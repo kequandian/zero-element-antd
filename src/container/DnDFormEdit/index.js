@@ -38,6 +38,7 @@ const initState = {
     items: [],
   },
   copyList: [],
+  layoutType: 'horizontal',
   spinning: false,
   spinningTip: '',
 };
@@ -48,7 +49,7 @@ function DndFormEdit(props) {
     initState,
     () => JSON.parse(JSON.stringify(initState))
   );
-  const { fields, config, copyList, spinning, spinningTip } = state;
+  const { fields, config, copyList, layoutType, spinning, spinningTip } = state;
   const { API, path } = props.config;
   const context = useContext(PageContext);
   const { namespace } = context;
@@ -163,12 +164,20 @@ function DndFormEdit(props) {
             <Fields data={fields} dispatch={dispatch} />
           </Panel>
           <Panel title="表单画布">
-            <EchoPanel config={config} dispatch={dispatch} />
+            <EchoPanel
+              layoutType={layoutType}
+              config={config}
+              dispatch={dispatch}
+            />
           </Panel>
         </Spin>
       </FlexItem>
       <FlexItem style={{ width: '256px' }}>
-        <ComponentPanel dispatch={dispatch} copyList={copyList} />
+        <ComponentPanel
+          layoutType={layoutType}
+          dispatch={dispatch}
+          copyList={copyList}
+        />
         <AttributesPanel
           current={state.current}
           dispatch={dispatch}

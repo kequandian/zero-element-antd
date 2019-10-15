@@ -20,10 +20,12 @@ export default function FormItemWrapped({ label, type, input, meta, options, ...
       arrowPointAtCenter={true}
       overlayClassName="ZEleA-Form-ruleTips"
     >
-      <Render n={type}
-        className={`ZEleA-Form-item-element ${visibleError ? 'ZEleA-Form-ruleTips-error' : ''}`}
-        options={options} {...input} {...rest}
-      />
+      <div className="ZEleA-Form-item-element">
+        <Render n={type}
+          className={visibleError ? 'ZEleA-Form-ruleTips-error' : ''}
+          options={options} {...input} {...rest}
+        />
+      </div>
     </Tooltip>
   </div>
 }
