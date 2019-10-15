@@ -110,7 +110,9 @@ function DndFormEdit(props) {
       }
     });
 
-    const [data, otherFields] = formatToConfig(config, state.name);
+    const [data, otherFields] = formatToConfig(config, state.name, {
+      layoutType,
+    });
     const method = API.updateAPI ?
       formProps.handle.onUpdateForm
       : formProps.handle.onCreateForm;

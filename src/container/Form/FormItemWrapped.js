@@ -4,16 +4,20 @@ import { Render } from 'zero-element-global/lib/formItemType';
 import './index.css';
 
 export default function FormItemWrapped({ label, type, input, meta, options, ...rest }) {
+  const { required } = options;
   const visibleError = Boolean(meta.error && meta.touched);
   if (type === 'hidden') {
     return <></>;
   }
+  const labelClassNames = [
+    'ZEleA-Form-item-label',
+    required ? 'ant-form-item-required' : '',
+    label ? 'ZEleA-Form-item-label-colon' : '',
+  ];
   return <div className="ZEleA-Form-item">
-    {label ? (
-      <label className="ZEleA-Form-item-label">
-        {`${label}:`}
-      </label>
-    ) : null}
+    <label className={labelClassNames.join(' ')}>
+      {label}
+    </label>
     <Tooltip
       visible={visibleError}
       title={meta.error}

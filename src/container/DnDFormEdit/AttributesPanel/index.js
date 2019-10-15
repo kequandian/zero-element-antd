@@ -5,6 +5,7 @@ import ItemEdit from './components/ItemEdit';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
 
 import '../index.css';
+import RequiredCheckbox from './components/RequiredCheckbox';
 
 const { Option } = Select;
 
@@ -36,7 +37,10 @@ function renderFieldsSelect(list, value, handleChange) {
 
 export default ({ current, dispatch, fields }) => {
   const { options = {} } = current;
-  const { field = {}, base = {}, style, items, advanced, table } = options;
+  const {
+    field = {}, base = {}, rules = {}, style,
+    items, advanced, table
+  } = options;
 
   function onSave() {
     dispatch({
@@ -109,6 +113,10 @@ export default ({ current, dispatch, fields }) => {
     table.splice(i, 1);
     onSave();
   }
+  function handleRulesChange(key, value) {
+    rules[key].value = value;
+    onSave();
+  }
 
   return <Drawer
     visible={Boolean(current.id)}
@@ -116,6 +124,10 @@ export default ({ current, dispatch, fields }) => {
     onClose={handleClose}
   >
     <div className="ZEleA-DnDFormEdit-title">基本属性</div>
+    <RequiredCheckbox
+      data={rules}
+      onChange={handleRulesChange}
+    />
     <div className="ZEleA-DnDFormEdit-title">字段值</div>
     {renderFieldsSelect(fields, field.value, handleFieldChange)}
     {renderBaseOptions(base, handleBaseChange)}

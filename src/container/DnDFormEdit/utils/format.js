@@ -22,8 +22,9 @@ const unusualType = {
   },
 };
 
-export default function formatToConfig(cfg, formName) {
+export default function formatToConfig(cfg, formName, opt) {
   const { items = [] } = cfg;
+  const { layoutType } = opt;
   const unusualFields = [];
 
   const fields = [].concat(...items.map(row => row.items));
@@ -51,7 +52,7 @@ export default function formatToConfig(cfg, formName) {
     config: {
       layout: 'Grid',
       layoutConfig: {
-        layoutType: 'horizontal', // horizontal vertical
+        layoutType: layoutType, // horizontal vertical
         layoutArea: [].concat(...items.map(row => ({
           layout: row.type,
           length: row.value.length,
@@ -75,6 +76,7 @@ export default function formatToConfig(cfg, formName) {
             style: formatToStyle(field.options.style),
             placeholder: formatToPlaceholder(field.options.base),
           },
+          rules: formatToRules(field.options.rules),
         };
         if (field.options.items) {
           rst.options = field.options.items;
@@ -106,6 +108,12 @@ function formatToPlaceholder(base) {
 function formatToValue(base) {
   if (!base.value) return undefined;
   return base.value.value;
+}
+function formatToRules(rules) {
+  if (!rules || !Object.keys(rules).length) return undefined;
+  return Object.values(rules).map(item => {
+    return item.value;
+  }).filter(i => i)
 }
 
 /**

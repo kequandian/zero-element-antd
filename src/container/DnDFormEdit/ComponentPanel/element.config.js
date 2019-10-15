@@ -64,6 +64,12 @@ export default [
           value: '请输入……',
         },
       },
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
     }
   },
   {
@@ -76,6 +82,12 @@ export default [
         placeholder: {
           label: '占位符',
           value: '请选择日期',
+        },
+      },
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
         },
       },
     }
@@ -96,6 +108,12 @@ export default [
         { label: '选项1', value: '1' },
         { label: '选项2', value: '2' }
       ],
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
     }
   },
   {
@@ -114,6 +132,12 @@ export default [
         { label: '选项1', value: '1' },
         { label: '选项2', value: '2' }
       ],
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
     }
   },
   {
@@ -128,6 +152,12 @@ export default [
         { label: '选项1', value: '1' },
         { label: '选项2', value: '2' },
       ],
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
     }
   },
 ];

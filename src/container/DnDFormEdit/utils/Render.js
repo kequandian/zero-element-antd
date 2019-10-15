@@ -25,13 +25,16 @@ export default function Render(props) {
       component={<Component {...props} />}
     />;
   }
-  const { base } = options;
+  const { base, rules = {} } = options;
+  const labelClassNames = [
+    'ZEleA-Form-item-label',
+    rules.required && rules.required.value ? 'ant-form-item-required' : '',
+    base.label.value ? 'ZEleA-Form-item-label-colon' : '',
+  ];
   return <>
-    {base.label.value ? (
-      <label className="ZEleA-Form-item-label">
-        {`${base.label.value}:`}
-      </label>
-    ) : null}
+    <label className={labelClassNames.join(' ')}>
+      {base.label.value}
+    </label>
     <div className="ZEleA-Form-item-element">
       <Component {...props} />
     </div>

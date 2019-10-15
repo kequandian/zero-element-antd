@@ -230,6 +230,13 @@
   margin-right: 8px;
 }
 
+.ZEleA-Form-item-label-colon::after {
+  content : ':';
+  position: relative;
+  top     : -0.5px;
+  margin  : 0 8px 0 2px;
+}
+
 .ZEleA-Form-horizontal .ZEleA-Form-item {
   display      : flex;
   align-items  : center;
@@ -237,8 +244,11 @@
 }
 
 .ZEleA-Form-horizontal .ZEleA-Form-item-label {
-  width     : 8em;
   text-align: right;
+}
+
+.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
+  width: 6em;
 }
 
 .ZEleA-Form-horizontal .ZEleA-Form-item-element {
