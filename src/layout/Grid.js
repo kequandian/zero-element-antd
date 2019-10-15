@@ -43,7 +43,9 @@ export default function Grid(props) {
         md: 4,
       }}>
         {row.items.map((child, i) => {
-          return <Col key={i} sm={value[i]}>
+          const { props = {} } = child;
+          const { span } = props;
+          return <Col key={i} sm={span || value[i]}>
             {child}
           </Col>
         })}

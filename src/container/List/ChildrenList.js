@@ -13,10 +13,12 @@ export default function ChildrenList(props) {
     props: propsCfg = {}, layoutConfig = {},
     actionLayout = 'Empty',
     actionLayoutConfig = {},
+    itemsField = 'items',
   } = config;
   const childrenProps = useBaseChildren({
     namespace,
     modelPath: 'formData',
+    itemsPath: itemsField,
   }, config);
 
   const { data, handle, modelStatus } = childrenProps;
