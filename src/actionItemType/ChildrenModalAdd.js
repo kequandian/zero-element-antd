@@ -4,7 +4,10 @@ import ZEle from 'zero-element';
 
 export default (props) => {
   const { title, options, namespace, onCreate, onCreateList } = props;
-  const { modalTitle, modalWidth, ...rest } = options;
+  const {
+    modalTitle, modalWidth,
+    childAppendField,
+    ...rest } = options;
   const [visible, setViseble] = useState(false);
 
   function handleOpen() {
@@ -15,8 +18,8 @@ export default (props) => {
   }
 
   function handleSubmit(data) {
-    if (Array.isArray(data.items)) {
-      onCreateList(data.items)
+    if (childAppendField) {
+      onCreateList(data[items]);
     } else {
       onCreate(data);
     }

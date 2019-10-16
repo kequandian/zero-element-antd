@@ -11,10 +11,16 @@ import { getModel } from 'zero-element/lib/Model';
 
 const toTypeMap = {
   'html': function (value) {
-    return value.toHTML();
+    if (value && typeof value.toHTML === 'function') {
+      return value.toHTML();
+    }
+    return value;
   },
   'raw': function (value) {
-    return value.toRAW();
+    if (value && typeof value.toHTML === 'function') {
+      return value.toRAW();
+    }
+    return value;
   },
 };
 

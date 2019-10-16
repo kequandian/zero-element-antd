@@ -62,5 +62,5 @@ function format(value) {
       url: item.url,
     }
   });
-  return rst;
+  return Array.isArray(rst) ? rst : [];
 }
