@@ -3,8 +3,10 @@ import { Tooltip } from 'antd';
 import { Render } from 'zero-element-global/lib/formItemType';
 import './index.css';
 
-export default function FormItemWrapped({ label, type, input, meta, options, ...rest }) {
-  const { required } = options;
+export default function FormItemWrapped({
+  label, type, input, meta, options, required,
+  ...rest
+}) {
   const visibleError = Boolean(meta.error && meta.touched);
   if (type === 'hidden') {
     return <></>;

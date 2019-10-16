@@ -39,6 +39,7 @@ export function getFormItem(field, modelStatus, { namespace, values, handle }) {
       defaultValue={value}
       namespace={namespace}
       handle={handle}
+      required={rules.findIndex(r => r === 'required') > -1}
       {...rest}
     />}
   </Field>
