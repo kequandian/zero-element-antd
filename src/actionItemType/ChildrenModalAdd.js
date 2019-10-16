@@ -19,7 +19,7 @@ export default (props) => {
 
   function handleSubmit(data) {
     if (childAppendField) {
-      onCreateList(data[items]);
+      onCreateList(data[childAppendField]);
     } else {
       onCreate(data);
     }
