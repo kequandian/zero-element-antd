@@ -12,7 +12,7 @@ export default function BaseSearch(props) {
   const { layout = 'Grid', fields,
     layoutConfig = {}
   } = config;
-  const { layoutType = 'horizontal' } = layoutConfig;
+  const { layoutType = 'horizontal', value = [6, 6, 6, 6] } = layoutConfig;
   const searchProps = useBaseSearch({
     namespace,
     modelPath: 'searchData',
@@ -59,7 +59,7 @@ export default function BaseSearch(props) {
           className={`ZEleA-Form-${layoutType}`}
           onSubmit={handleSubmit}
         >
-          <Render n={layout} value={[6, 6, 6, 6]} {...layoutConfig}>
+          <Render n={layout} value={value} {...layoutConfig}>
             {fields.map(field => getFormItem(field, modelStatus, {
               namespace,
               values,

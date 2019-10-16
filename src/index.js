@@ -61,6 +61,7 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
+  'table-select': Load('formItemType/TableSelect'),
   'upload-image': Load('formItemType/UploadImage'),
   'upload-file': Load('formItemType/UploadFile'),
   'checkbox-fetch': Load('formItemType/CheckboxFetch'),

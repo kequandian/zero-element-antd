@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 
 export default (props) => {
-  const { title, options, namespace, onCreate } = props;
+  const { title, options, namespace, onCreate, onCreateList } = props;
   const { modalTitle, modalWidth, ...rest } = options;
   const [visible, setViseble] = useState(false);
 
@@ -12,6 +12,14 @@ export default (props) => {
   }
   function handleClose() {
     setViseble(false);
+  }
+
+  function handleSubmit(data) {
+    if (Array.isArray(data.items)) {
+      onCreateList(data.items)
+    } else {
+      onCreate(data);
+    }
   }
 
   return <div>
@@ -37,7 +45,7 @@ export default (props) => {
           ...rest,
         }}
         onClose={handleClose}
-        onSubmit={onCreate}
+        onSubmit={handleSubmit}
       />
     </Modal>
   </div>

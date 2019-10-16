@@ -1,5 +1,6 @@
 import React from 'react';
 import useBaseChildren from 'zero-element/lib/helper/form/useBaseChildren';
+import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
@@ -22,7 +23,7 @@ export default function ChildrenList(props) {
   }, config);
 
   const { data, handle, modelStatus } = childrenProps;
-  const { onCreate, onEdit } = handle;
+  const { onCreate, onCreateList, onEdit } = handle;
   const columns = formatTableFields(fields, operation, handle);
 
   return <Render n={layout} {...layoutConfig}>
@@ -31,6 +32,7 @@ export default function ChildrenList(props) {
         key: i,
         ...action,
         onCreate,
+        onCreateList,
         onEdit,
       }, modelStatus, namespace))}
     </Render>

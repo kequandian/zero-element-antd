@@ -10,7 +10,11 @@ export default function ChildrenForm(props) {
   const formRef = useRef({});
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, index, onClose, onSubmit } = props;
-  const { API = {}, layout = 'Empty', fields, layoutConfig = {} } = config;
+  const {
+    API = {},
+    layout = 'Empty', layoutConfig = {},
+    fields,
+  } = config;
   const { layoutType = 'vertical' } = layoutConfig;
   const formProps = useBaseForm({
     namespace,
@@ -18,7 +22,7 @@ export default function ChildrenForm(props) {
   }, config);
 
   const { loading, data, modelStatus, handle } = formProps;
-  const initData = useRef(props.data || {});
+  const initData = useRef(props.data || data || {});
   const { onGetOne } = handle;
 
   useDidMount(_ => {
