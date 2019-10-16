@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Form } from 'react-final-form';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -12,7 +12,11 @@ export default function BaseSearch(props) {
   const { layout = 'Grid', fields,
     layoutConfig = {}
   } = config;
-  const { layoutType = 'horizontal', value = [6, 6, 6, 6] } = layoutConfig;
+  const {
+    layoutType = 'horizontal',
+    value = [6, 6, 6, 6],
+    collapse = 3,
+  } = layoutConfig;
   const searchProps = useBaseSearch({
     namespace,
     modelPath: 'searchData',
@@ -22,7 +26,19 @@ export default function BaseSearch(props) {
   const { loading, data, modelStatus, handle } = searchProps;
   const { onSearch, onClearSearch } = handle;
 
+  const [expand, setExpand] = useState(fields.length > collapse ? false : null);
+  const [canFields, setCanFields] = useState(fields.slice(0, 3));
+
   useWillUnmount(onClearSearch);
+
+  function handleExpand() {
+    setExpand(true);
+    setCanFields(fields);
+  }
+  function handleCollapse() {
+    setExpand(false);
+    setCanFields(fields.slice(0, collapse));
+  }
 
   function handleSubmitForm() {
     onSearch({
@@ -42,6 +58,11 @@ export default function BaseSearch(props) {
         <Button onClick={handleReset} type="link" icon="rollback"></Button>
       </Tooltip>
       <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
+      <ExpandButton
+        expand={expand}
+        onExpand={handleExpand}
+        onCollapse={handleCollapse}
+      />
     </div>
   }
 
@@ -60,7 +81,7 @@ export default function BaseSearch(props) {
           onSubmit={handleSubmit}
         >
           <Render n={layout} value={value} {...layoutConfig}>
-            {fields.map(field => getFormItem(field, modelStatus, {
+            {canFields.map(field => getFormItem(field, modelStatus, {
               namespace,
               values,
             }))}
@@ -70,4 +91,13 @@ export default function BaseSearch(props) {
       }}
     />
   </Spin>
+}
+
+function ExpandButton({ expand, onExpand, onCollapse }) {
+  if (expand === null) return null;
+  if (expand) {
+    return <Button type="link" onClick={onCollapse}>收起</Button>;
+  } else {
+    return <Button type="link" onClick={onExpand}>展开</Button>;
+  }
 }
