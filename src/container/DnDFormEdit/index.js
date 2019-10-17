@@ -11,8 +11,6 @@ import { Flex } from 'layout-flex';
 
 import global from 'zero-element-global/lib/global';
 
-import { unique } from '@/utils/tool';
-
 import ComponentPanel from './ComponentPanel';
 import Fields from './Fields';
 import EchoPanel from './EchoPanel';
@@ -121,7 +119,12 @@ function DndFormEdit(props) {
       fields: {
         title: state.name,
         config: data,
-        fields: unique([fields, otherFields]),
+        fields: uniqueFields(fields.map(f => ({
+          field: f,
+          label: f,
+        })),
+          otherFields
+        ),
         originConfig: {
           ...state.config,
           title: state.name,
@@ -190,4 +193,21 @@ function DndFormEdit(props) {
   </DnDContext.Provider>
 }
 
+/**
+ * 合并成唯一的字段列表
+ *
+ * @param {array} lowList
+ * @param {array} highList
+ * @returns
+ */
+function uniqueFields(lowList, highList) {
+  const records = {};
+  lowList.forEach(f => {
+    records[f.field] = f;
+  });
+  highList.forEach(f => {
+    records[f.field] = f;
+  })
+  return Object.values(records);
+}
 export default DragDropContext(HTML5Backend)(DndFormEdit);

@@ -18,7 +18,7 @@ export default function handleState(state, { type, payload = {} }) {
         ...state,
         config: payload.originConfig,
         name: payload.title,
-        fields: payload.fields,
+        fields: payload.fields.map(f => f.field || f),
       }
     },
     addLayout() {

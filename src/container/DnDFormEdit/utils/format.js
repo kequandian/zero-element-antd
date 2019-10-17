@@ -152,5 +152,8 @@ function formatToRules(rules) {
  * @returns
  */
 function pureFields(fields) {
-  return fields.filter(i => i).map(item => item.options.field.value);
+  return fields.filter(i => i).map(item => ({
+    lable: item.options.base.label.value,
+    field: item.options.field.value,
+  }));
 }
