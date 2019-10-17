@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tree } from 'antd';
+import { Tree, Icon } from 'antd';
 
 const { TreeNode } = Tree;
 /**
@@ -13,11 +13,23 @@ function read(item) {
     return item.map(i => read(i));
   }
   if (item.children) {
-    return <TreeNode key={item.id} id={item.id} title={item.title}>
+    return <TreeNode key={item.id} id={item.id}
+      icon={renderIcon}
+      iconName={item.icon}
+      title={item.title}
+    >
       {read(item.children)}
     </TreeNode>;
   }
-  return <TreeNode key={item.id} id={item.id} title={item.title} />;
+  return <TreeNode key={item.id} id={item.id}
+    icon={renderIcon}
+    iconName={item.icon}
+    title={item.title}
+  />;
+}
+
+function renderIcon({ iconName }) {
+  return <Icon type={iconName} />;
 }
 
 export default read;

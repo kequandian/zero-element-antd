@@ -6,6 +6,11 @@ export default [
         label: {
           label: '字段名',
         },
+        path: {
+          label: '跳转的页面',
+          type: 'input',
+          value: '',
+        }
       },
       advanced: {
         sql: {
@@ -19,10 +24,10 @@ export default [
           value: '',
         },
         field: {
-          label: '绑定的字段',
+          label: '绑定的字段(用于 xml 文件)',
           type: 'selectTableField',
           value: '',
-        }
+        },
       },
       table: [
         // { label: '名称', value: 'name' },

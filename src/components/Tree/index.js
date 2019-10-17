@@ -154,7 +154,7 @@ export default (props) => {
       onChange={handleLocalSearch}
       onSearch={handleRemoteSearch}
     />
-    {treeData &&　treeData.length ? (
+    {treeData && treeData.length ? (
       <Tree
         showLine
         autoExpandParent={autoExpandParent}

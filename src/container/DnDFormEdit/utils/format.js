@@ -2,8 +2,11 @@
 const unusualType = {
   OneMany: function (field, config) {
     const { options } = field;
+
     const { base, advanced, table } = options;
-    config.items.push({
+    const { path } = base;
+
+    const oneManyObj = {
       layout: 'Empty',
       component: 'ChildrenList',
       config: {
@@ -16,9 +19,35 @@ const unusualType = {
         fields: table.map(f => ({
           label: f.label,
           field: f.value,
-        }))
+        })),
+        operation: []
       },
-    });
+    }
+
+    if (path.value) {
+      oneManyObj.config.actions.push({
+        title: '新增', type: 'path',
+        options: {
+          path: path.value,
+          icon: 'plus',
+          query: {
+            id: 'id',
+          }
+        },
+      });
+      oneManyObj.config.operation.push({
+        title: '编辑', action: 'path',
+        options: {
+          outside: true,
+          path: path.value,
+          query: {
+            id: 'id',
+          }
+        },
+      });
+    }
+
+    config.items.push(oneManyObj);
   },
 };
 
