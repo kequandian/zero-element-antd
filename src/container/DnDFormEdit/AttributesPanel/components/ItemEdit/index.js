@@ -29,6 +29,6 @@ export default ({ label, value, index, onChange, onRemove }) => {
     <span>文本: </span>
     <Input value={label} onChange={onChange.bind(null, index, 'label')} />
     <span>值: </span>
-    <Input value={value} onChange={onChange.bind(null, index, 'label')} />
+    <Input value={value} onChange={onChange.bind(null, index, 'value')} />
   </Card>
 }
