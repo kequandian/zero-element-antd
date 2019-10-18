@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { query } from 'zero-element/lib/utils/request';
 import { Select } from 'antd';
+import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
 
 const { Option } = Select;
@@ -42,7 +43,7 @@ export default function SelectSQL(props) {
   return <>
     <div>{label}</div>
     <Select
-      style={{ minWidth: 120 }}
+      style={{ width: 190 }}
       value={value}
       onChange={onAdvancedChange.bind(null, field)}
       loading={loading}

@@ -9,19 +9,12 @@ import RequiredCheckbox from './components/RequiredCheckbox';
 
 const { Option } = Select;
 
-function renderItemsOptions(items, handle, onRemove) {
-  return items.map((item, i) => {
-    return <div key={i}>
-      <ItemEdit
-        label={item.label}
-        value={item.value}
-        index={i}
-        onChange={handle}
-        onRemove={onRemove}
-      />
-      <br />
-    </div>
-  })
+function renderItemsOptions(items, handle, otherProps = {}) {
+  return <ItemEdit
+    items={items}
+    {...handle}
+    {...otherProps}
+  />
 }
 
 function renderFieldsSelect(list, value, handleChange) {
@@ -98,15 +91,25 @@ export default ({ current, dispatch, fields }) => {
     onSave();
   }
 
-  function handleTableChange(i, type, e) {
-    table[i][type] = e.target.value;
-    onSave();
-  }
   function handleTableAdd() {
     table.push({
       label: `字段${table.length + 1}`,
       value: table.length + 1,
+      options: {
+        type: 'plain',
+        echoAdd: true,
+        echoEdit: true,
+        onlyRead: false,
+      }
     });
+    onSave();
+  }
+  function handleTableChange(i, type, e) {
+    table[i][type] = e.target.value;
+    onSave();
+  }
+  function handleTableOptionsChange(i, type, value) {
+    table[i].options[type] = value;
     onSave();
   }
   function handleTableDel(i) {
@@ -139,7 +142,10 @@ export default ({ current, dispatch, fields }) => {
           添加子项
         </Button>
         <br /><br />
-        {renderItemsOptions(items, handleItemsChange, handleItemDel)}
+        {renderItemsOptions(items, {
+          onChange: handleItemsChange,
+          onRemove: handleItemDel
+        })}
       </>
     ) : null}
     {advanced ? (
@@ -155,7 +161,16 @@ export default ({ current, dispatch, fields }) => {
           添加字段
         </Button>
         <br /><br />
-        {renderItemsOptions(table, handleTableChange, handleTableDel)}
+        {renderItemsOptions(table,
+          {
+            onChange: handleTableChange,
+            onRemove: handleTableDel,
+            onOptionsChange: handleTableOptionsChange
+          },
+          {
+            disabled: Boolean(base.path.value),
+          }
+        )}
       </>
     ) : null}
     {style ? (

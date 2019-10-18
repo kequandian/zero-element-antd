@@ -30,7 +30,15 @@ export default [
         },
       },
       table: [
-        // { label: '名称', value: 'name' },
+        {
+          label: '名称', value: 'name',
+          options: {
+            type: 'plain', // plain input number date ...
+            echoAdd: true,
+            echoEdit: true,
+            onlyRead: false,
+          }
+        },
         // { label: '性别', value: 'sex' },
       ],
     }

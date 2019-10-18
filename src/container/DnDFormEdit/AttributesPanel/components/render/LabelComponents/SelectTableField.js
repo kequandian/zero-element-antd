@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { query } from 'zero-element/lib/utils/request';
 import { Select } from 'antd';
+import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
 
 const { Option } = Select;
@@ -49,13 +50,13 @@ export default function SelectTableField(props) {
     query(fAPI).then((response) => {
       const { status, data } = response;
       if (status === 200 && data.code === 200) {
-          setData(data.data.map(field => {
-            return {
-              id: field.field,
-              title: field.comment || field.field,
-              value: field.field,
-            }
-          }));
+        setData(data.data.map(field => {
+          return {
+            id: field.field,
+            title: field.comment || field.field,
+            value: field.field,
+          }
+        }));
       }
     }).finally(_ => {
       setLoading(false);
@@ -82,7 +83,7 @@ export default function SelectTableField(props) {
   return <>
     <div>{label}</div>
     <Select
-      style={{ minWidth: 120 }}
+      style={{ width: 190 }}
       value={value}
       onChange={handleChange}
       loading={loading}

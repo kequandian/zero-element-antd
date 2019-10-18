@@ -25,6 +25,7 @@ const unusualType = {
     }
 
     if (path.value) {
+      // 跳转页面型 一对多
       oneManyObj.config.actions.push({
         title: '新增', type: 'path',
         options: {
@@ -44,6 +45,32 @@ const unusualType = {
             id: 'id',
           }
         },
+      });
+    } else {
+      // 模态框型 一对多
+      const addModalFields = [];
+      const editModalFields = [];
+
+      table.forEach(f => {
+        const { options = {} } = f;
+        const { type, echoAdd, echoEdit, onlyRead } = options;
+      })
+
+      oneManyObj.config.actions.push({
+        title: '添加数据', type: 'children-modal-add', options: {
+          modalTitle: '添加数据',
+          items: [
+            {
+              layout: 'Empty',
+              component: 'ChildrenForm',
+              config: {
+                fields: [
+                  { field: 'name', label: '名称', type: 'input' },
+                ],
+              },
+            }
+          ],
+        }
       });
     }
 
@@ -153,7 +180,7 @@ function formatToRules(rules) {
  */
 function pureFields(fields) {
   return fields.filter(i => i).map(item => ({
-    lable: item.options.base.label.value,
+    label: item.options.base.label.value,
     field: item.options.field.value,
   }));
 }
