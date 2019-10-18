@@ -29,7 +29,7 @@ const unusualType = {
       oneManyObj.config.actions.push({
         title: '新增', type: 'path',
         options: {
-          path: path.value,
+          path: `${path.value}-add`,
           icon: 'plus',
           query: {
             id: 'id',
@@ -40,7 +40,7 @@ const unusualType = {
         title: '编辑', action: 'path',
         options: {
           outside: true,
-          path: path.value,
+          path: `${path.value}-edit`,
           query: {
             id: 'id',
           }
@@ -53,22 +53,57 @@ const unusualType = {
 
       table.forEach(f => {
         const { options = {} } = f;
-        const { type, echoAdd, echoEdit, onlyRead } = options;
+        const { type, echoAdd, echoEdit } = options;
+
+        if (type) {
+          if (echoAdd) {
+            addModalFields.push({
+              label: f.label,
+              field: f.value,
+              type: type,
+            });
+          }
+          if (echoEdit) {
+            editModalFields.push({
+              label: f.label,
+              field: f.value,
+              type: type,
+            });
+          }
+        }
       })
 
       oneManyObj.config.actions.push({
         title: '添加数据', type: 'children-modal-add', options: {
           modalTitle: '添加数据',
+          modalWidth: 580,
           items: [
             {
               layout: 'Empty',
               component: 'ChildrenForm',
               config: {
-                fields: [
-                  { field: 'name', label: '名称', type: 'input' },
-                ],
+                fields: addModalFields,
               },
             }
+          ],
+        }
+      });
+
+      oneManyObj.config.operation.push({
+        title: '编辑数据', action: 'childEditModal',
+        options: {
+          outside: true,
+          modalTitle: '编辑数据',
+          modalWidth: 580,
+          layout: 'Content',
+          items: [
+            {
+              layout: 'Empty',
+              component: 'ChildrenForm',
+              config: {
+                fields: editModalFields,
+              },
+            },
           ],
         }
       });

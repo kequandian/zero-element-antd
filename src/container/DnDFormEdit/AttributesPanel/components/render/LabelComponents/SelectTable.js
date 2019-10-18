@@ -79,7 +79,6 @@ export default function SelectTable(props) {
           type: 'plain',
           echoAdd: true,
           echoEdit: true,
-          onlyRead: false,
         }
       })));
       onSave();

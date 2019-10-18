@@ -94,12 +94,11 @@ export default ({ current, dispatch, fields }) => {
   function handleTableAdd() {
     table.push({
       label: `字段${table.length + 1}`,
-      value: table.length + 1,
+      value: `f_${table.length + 1}`,
       options: {
         type: 'plain',
         echoAdd: true,
         echoEdit: true,
-        onlyRead: false,
       }
     });
     onSave();

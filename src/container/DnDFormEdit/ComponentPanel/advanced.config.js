@@ -36,7 +36,6 @@ export default [
             type: 'plain', // plain input number date ...
             echoAdd: true,
             echoEdit: true,
-            onlyRead: false,
           }
         },
         // { label: '性别', value: 'sex' },

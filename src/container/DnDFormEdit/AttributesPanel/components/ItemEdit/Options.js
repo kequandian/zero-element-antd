@@ -25,13 +25,6 @@ export default function Options({ index, data, disabled, onChange }) {
       disabled={disabled}
       onChange={handleChange}
     />
-    <CheckboxWrapped
-      title="只读"
-      field="onlyRead"
-      value={data.onlyRead}
-      disabled={disabled}
-      onChange={handleChange}
-    />
     <SelectWrapped
       title="字段类型"
       field="type"
