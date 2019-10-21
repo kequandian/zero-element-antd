@@ -15,13 +15,13 @@ export default (props) => {
   const {
     API, searchField = 'search',
     namespace,
-    initData = false,
+    initData = {},
     onChange,
     ...rest
   } = props;
 
   const [treeData, setTreeData] = useState(initData);
-  const [expandedKeys, setExpandedKeys] = useState(undefined);
+  const [expandedKeys, setExpandedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
   const [treeLoading, setTreeLoading] = useState(false);
 
@@ -139,9 +139,9 @@ export default (props) => {
     onSelect: handleSelect,
     ...rest,
   };
-  if (treeProps.expandedKeys === true) {
-    treeData.expandedKeys = expandedKeys;
-    treeData.onExpand = handleExpand;
+  if (treeProps.expandedKeys || expandedKeys.length) {
+    treeProps.expandedKeys = treeProps.expandedKeys || expandedKeys;
+    treeProps.onExpand = treeProps.onExpand || handleExpand;
   }
 
   return <Spin spinning={treeLoading}>
@@ -154,7 +154,7 @@ export default (props) => {
       onChange={handleLocalSearch}
       onSearch={handleRemoteSearch}
     />
-    {treeData && treeData.length ? (
+    {treeData && (treeData.length || Object.keys(treeData).length) ? (
       <Tree
         showLine
         autoExpandParent={autoExpandParent}

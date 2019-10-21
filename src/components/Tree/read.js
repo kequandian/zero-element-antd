@@ -13,7 +13,7 @@ function read(item) {
     return item.map(i => read(i));
   }
   if (item.children) {
-    return <TreeNode key={item.id} id={item.id}
+    return <TreeNode key={item.id} id={String(item.id)}
       icon={renderIcon}
       iconName={item.icon}
       title={item.title}
@@ -21,7 +21,7 @@ function read(item) {
       {read(item.children)}
     </TreeNode>;
   }
-  return <TreeNode key={item.id} id={item.id}
+  return <TreeNode key={item.id} id={String(item.id)}
     icon={renderIcon}
     iconName={item.icon}
     title={item.title}
