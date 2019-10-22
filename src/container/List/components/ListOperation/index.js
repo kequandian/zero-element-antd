@@ -177,7 +177,7 @@ function renderMemu(menuItemList) {
 export default function ListOperationWrapped(props) {
   const context = useContext(PageContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { index, handle = {} } = props;
+  const { index, handle = {}, extraData = {} } = props;
 
   function onModal(cfg) {
     const { options } = cfg;
@@ -250,6 +250,7 @@ export default function ListOperationWrapped(props) {
         onClose={handleClose}
         onSubmit={state.onSubmit}
         data={state.data}
+        extraData={extraData}
       />
     </Modal>
   </>

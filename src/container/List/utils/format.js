@@ -9,7 +9,7 @@ import { Render } from 'zero-element-global/lib/valueType';
  * @param {array} fields 标准化的 fields
  * @param {array} operation 对该行的操作
  * @param {object} handle 传递给 ListOperation
- * @param {object} props 传递给 valueType
+ * @param {object} props 传递给 valueType 与 ListOperation
  * @returns antd Table columns
  */
 export function formatTableFields(fields = [], operation = [], handle, props = {}) {
@@ -43,6 +43,7 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
       // title: ListFieldsEdit,
       render: (text, record, index) => {
         return <ListOperation
+          {...props}
           text={text}
           record={record}
           index={index}

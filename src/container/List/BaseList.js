@@ -29,6 +29,7 @@ export default function BaseList(props) {
 
   const columns = formatTableFields(fields, operation, handle, {
     namespace,
+    extraData,
   });
 
   useDidMount(_ => {

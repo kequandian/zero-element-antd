@@ -38,7 +38,10 @@ export default function TreeList(props) {
   const { loading, data, handle, modelStatus } = listProps;
   const { onGetList, onClearList } = handle;
 
-  const columns = formatTableFields(fields, operation, handle);
+  const columns = formatTableFields(fields, operation, handle, {
+    namespace,
+    extraData,
+  });
 
   useDidMount(_ => {
     if (API.listAPI) {
