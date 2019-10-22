@@ -45,7 +45,7 @@ export function getFormItem(field, modelStatus, { namespace, values, handle }) {
   </Field>
 }
 
-export function getActionItem(action, modelStatus, namespace, handle) {
+export function getActionItem(action, modelStatus, handle, props) {
   const { options = {} } = action;
   const listData = modelStatus[options.expectedPath || 'listData'];
 
@@ -53,7 +53,7 @@ export function getActionItem(action, modelStatus, namespace, handle) {
     return null;
   }
   return <ActionItem
-    namespace={namespace}
+    {...props}
     {...action}
     handle={handle}
   />

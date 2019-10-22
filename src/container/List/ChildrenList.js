@@ -1,6 +1,5 @@
 import React from 'react';
 import useBaseChildren from 'zero-element/lib/helper/form/useBaseChildren';
-import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
@@ -34,7 +33,9 @@ export default function ChildrenList(props) {
         onCreate,
         onCreateList,
         onEdit,
-      }, modelStatus, namespace))}
+      }, modelStatus, {}, {
+        namespace,
+      }))}
     </Render>
     <Table
       rowKey={row => String(row._id || row.id)}

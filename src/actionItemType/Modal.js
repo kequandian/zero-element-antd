@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 
 export default (props) => {
-  const { title, options, namespace, handle } = props;
+  const { title, options, namespace, handle, ...restProps } = props;
   const { icon, modalTitle, modalWidth, ...rest } = options;
   const [visible, setViseble] = useState(false);
 
@@ -42,6 +42,7 @@ export default (props) => {
           layout: 'Empty',
           ...rest,
         }}
+        {...restProps}
         onClose={handleCloseAndQuery}
       />
     </Modal>

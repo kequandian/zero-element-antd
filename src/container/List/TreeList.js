@@ -64,7 +64,10 @@ export default function TreeList(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, modelStatus, namespace, handle))}
+      }, modelStatus, handle, {
+        namespace,
+        extraData,
+      }))}
     </Render>
     <Flex align="flex-start">
       {treeAPI ? (<FlexItem>

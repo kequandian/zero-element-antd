@@ -53,7 +53,10 @@ export default function BaseList(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, modelStatus, namespace, handle))}
+      }, modelStatus, handle, {
+        namespace,
+        extraData,
+      }))}
     </Render>
     <Table
       rowKey="id"
