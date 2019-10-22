@@ -7,9 +7,20 @@ import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 const Option = Select.Option;
 
 export default function SelectFetch(props) {
-  const { className, value, onChange, options, namespace, ...rest } = props;
-  const { API, dataField = 'records',
-    label: optLabel = 'label', value: optValue = 'value'
+  const {
+    className,
+    value,
+    options,
+    namespace,
+    onChange,
+    // handle,
+    ...rest
+  } = props;
+  // const { onSaveOtherValue } = handle;
+  const {
+    API, dataField = 'records',
+    label: optLabel = 'label', value: optValue = 'value',
+    // saveData,
   } = options;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
@@ -44,7 +55,7 @@ export default function SelectFetch(props) {
       target: {
         value,
       }
-    })
+    });
   }
 
   return <Spin className={className} spinning={loading}>

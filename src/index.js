@@ -67,6 +67,7 @@ FITSet({
   'upload-file': Load('formItemType/UploadFile'),
   'checkbox-fetch': Load('formItemType/CheckboxFetch'),
   'select-fetch': Load('formItemType/SelectFetch'),
+  'text-area': Load('formItemType/TextArea'),
   'rich-text': Load('formItemType/RichText'),
 });
 
