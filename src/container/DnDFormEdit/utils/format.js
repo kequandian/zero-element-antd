@@ -132,7 +132,7 @@ export default function formatToConfig(cfg, formName, opt) {
   });
 
   const config = {
-    layout: 'Content',
+    layout: 'EmptyTitle',
     title: formName || '表单',
     items: [],
   }
