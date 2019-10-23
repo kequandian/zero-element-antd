@@ -74,6 +74,7 @@ FITSet({
 AITSet({
   modal: Load('actionItemType/Modal'),
   'children-modal-add': Load('actionItemType/ChildrenModalAdd'),
+  'import-excel': Load('actionItemType/ImportExcel'),
 });
 
 VTSet({

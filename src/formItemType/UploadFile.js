@@ -6,7 +6,11 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 
 export default function UploadFile(props) {
   const { value, options, namespace, handle, ...rest } = props;
-  const { API = '/api/upload/files', max = 9 } = options;
+  const {
+    API = '/api/upload/files',
+    max = 9,
+    fileNameField = 'fileName'
+  } = options;
   const { onSaveOtherValue } = handle;
   const [fileList, setFileList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -42,7 +46,7 @@ export default function UploadFile(props) {
       }));
       props.onChange(saveFileList);
       if (max === 1) {
-        onSaveOtherValue('fileName', saveFileList[0].name);
+        onSaveOtherValue(fileNameField, saveFileList[0].name);
       }
     }
   }
