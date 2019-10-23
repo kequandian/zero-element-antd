@@ -1,7 +1,9 @@
 .ZEleA-Layout-Content {
-  padding   : 16px;
-  background: #fff;
-  min-height: 100%;
+  background   : #fff;
+  box-shadow   : 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding      : 16px;
+  min-height   : 100%;
+  margin-bottom: 16px;
 }
 
 .ZEleA-Layout-Alone {
@@ -15,4 +17,13 @@
 
 .ZEleA-Layout-Items>* {
   margin: 4px 8px;
+}
+
+.ZEleA-Layout-EmptyTitle {
+  color      : rgba(0, 0, 0, 0.85);
+  background : white;
+  box-shadow : 0 2px 8px rgba(0, 0, 0, 0.15);
+  padding    : 0.5em;
+  font-weight: 500;
+  font-size  : 1.5em;
 }

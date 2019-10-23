@@ -27,6 +27,7 @@ APIConfig({
 
 LayoutSet({
   Empty: Load('layout/Empty'),
+  EmptyTitle: Load('layout/EmptyTitle'),
   Loading: Load('layout/Loading'),
   Alone: Load('layout/Alone'),
   Grid: Load('layout/Grid'),
