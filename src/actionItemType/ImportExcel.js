@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
+import './index.css';
 
 export default function ImportExcel(props) {
-  const { title, options, namespace, handle, ...restProps } = props;
+  const { title = '导入', options, namespace, handle, ...restProps } = props;
   const {
     icon = 'upload', modalTitle = 'Excel 导入', modalWidth,
     url,
@@ -53,7 +54,11 @@ export default function ImportExcel(props) {
   };
 
   return <>
-    <Button onClick={handleOpen} type="primary" icon={icon}>
+    <Button
+      className="ZEle-action-button"
+      onClick={handleOpen}
+      icon={icon}
+    >
       {title}
     </Button>
     <Modal
