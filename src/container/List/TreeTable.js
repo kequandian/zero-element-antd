@@ -56,13 +56,14 @@ export default function TreeTable(props) {
       .finally(_ => setLoading(false));
   }
   function handleExpand(expanded, record) {
-    if (expanded) {
+    if (expanded && API.appendAPI) {
       handleAppend(record.id);
     }
   }
   function handleAppend(id) {
+    const api = API.appendAPI.replace(/(\<\w+\>)/, id);
     setLoading(true);
-    query(`/api/sys/org/${id}/kids`).then(response => {
+    query(api).then(response => {
       const { status, data } = response;
       const { code, data: rspData } = data;
 
