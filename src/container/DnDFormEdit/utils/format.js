@@ -162,12 +162,13 @@ export default function formatToConfig(cfg, formName, opt) {
           label: field.options.base.label.value || '',
           field: field.options.field.value,
           value: formatToValue(field.options.base),
-          type: field.type.toLowerCase(),
+          type: formatToType(field.type),
           props: {
             style: formatToStyle(field.options.style),
             placeholder: formatToPlaceholder(field.options.base),
           },
           rules: formatToRules(field.options.rules),
+          options: formatToOptions(field.options.config),
         };
         if (field.options.items) {
           rst.options = field.options.items;
@@ -184,6 +185,10 @@ export default function formatToConfig(cfg, formName, opt) {
   return [config, pureFields(fields)];
 }
 
+function formatToType(type) {
+  return type.replace(/([a-z])([A-Z])/, '$1-$2')
+    .toLowerCase();
+}
 function formatToStyle(style) {
   if (!style) return undefined;
   const rst = {};
@@ -205,6 +210,14 @@ function formatToRules(rules) {
   return Object.values(rules).map(item => {
     return item.value;
   }).filter(i => i)
+}
+function formatToOptions(options) {
+  if (!options || !Object.keys(options).length) return undefined;
+  const rst = {};
+  Object.keys(options).map(key => {
+    rst[key] = options[key].value;
+  })
+  return rst;
 }
 
 /**

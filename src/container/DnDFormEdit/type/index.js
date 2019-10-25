@@ -24,5 +24,6 @@ const typeMap = {
   Date,
 
   OneMany,
+  'SelectField': Select,
 };
 export default typeMap;

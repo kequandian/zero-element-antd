@@ -32,7 +32,7 @@ export default ({ current, dispatch, fields }) => {
   const { options = {} } = current;
   const {
     field = {}, base = {}, rules = {}, style,
-    items, advanced, table
+    items, advanced, config, table
   } = options;
 
   function onSave() {
@@ -120,6 +120,17 @@ export default ({ current, dispatch, fields }) => {
     onSave();
   }
 
+  /**
+   * 实际上是修改了 config 的 options
+   *
+   * @param {string} key
+   * @param {event} e
+   */
+  function handleConfigChange(key, e) {
+    config[key].value = e.target.value;
+    onSave();
+  }
+
   return <Drawer
     visible={Boolean(current.id)}
     mask={false}
@@ -172,6 +183,11 @@ export default ({ current, dispatch, fields }) => {
         )}
       </>
     ) : null}
+    {config ?
+      <>
+        <div className="ZEleA-DnDFormEdit-title">配置</div>
+        {renderBaseOptions(config, handleConfigChange)}
+      </> : null}
     {style ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">样式</div>

@@ -42,4 +42,25 @@ export default [
       ],
     }
   },
+  {
+    title: '下拉框-数字字典', type: 'SelectField', options: {
+      field: {},
+      base: {
+        label: {
+          label: '字段名',
+        },
+      },
+      config: {
+        field: {
+          label: '数字字典字段',
+        }
+      },
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
+    }
+  },
 ];
