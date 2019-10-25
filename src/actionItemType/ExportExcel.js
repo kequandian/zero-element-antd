@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
+import { query, post } from '@/utils/request';
 import './index.css';
-import { query, post } from 'zero-element/lib/utils/request';
 
 export default function ExportExcel(props) {
   const { title = '导出', options, namespace, handle, ...restProps } = props;
@@ -18,11 +18,8 @@ export default function ExportExcel(props) {
 
   function handleClick() {
     query(url)
-      .then(response => {
-        const { status, data } = response;
-        if (status === 200) {
-          post(API, data)
-        }
+      .then(data => {
+        post(API, data);
       })
   }
 

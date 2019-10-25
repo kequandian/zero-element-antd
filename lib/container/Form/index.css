@@ -39,7 +39,7 @@
 
 .ZEleA-Form-horizontal .ZEleA-Form-item-label {
   text-align: right;
-  min-width: 90px;
+  min-width : 90px;
 }
 
 .ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
@@ -49,4 +49,8 @@
 .ZEleA-Form-horizontal .ZEleA-Form-item-element {
   width: 0;
   flex : 1;
+}
+
+.ZEleA-Form-item-element input {
+  width: 160px;
 }

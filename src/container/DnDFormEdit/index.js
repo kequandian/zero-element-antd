@@ -1,5 +1,5 @@
 import React, { useReducer, useContext } from 'react';
-import { Button, Spin, Input, Card } from 'antd';
+import { Button, Spin, Input, Card, message } from 'antd';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 
@@ -134,6 +134,7 @@ function DndFormEdit(props) {
       },
     })
       .then(_ => {
+        message.success('保存成功');
         if (path && router) {
           const fPath = formatAPI(path, {
             namespace,

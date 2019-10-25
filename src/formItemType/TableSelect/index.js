@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import { formatTableFields } from '@/container/List/utils/format';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 
 export default function TableSelect(props) {
   const {
@@ -37,19 +37,16 @@ export default function TableSelect(props) {
       namespace,
     });
     query(fAPI)
-      .then((response) => {
-        const { code, data } = response.data || {};
-        if (response.status === 200 && code === 200) {
-          let list = [];
-          if (Array.isArray(data)) {
-            list = data;
-          } else if (Array.isArray(data.records)) {
-            list = data.records;
-          } else {
-            console.warn(`api 返回的数据并非预期的列表结构 ${data}`);
-          }
-          setData(list);
+      .then(data => {
+        let list = [];
+        if (Array.isArray(data)) {
+          list = data;
+        } else if (Array.isArray(data.records)) {
+          list = data.records;
+        } else {
+          console.warn(`api 返回的数据并非预期的列表结构 ${data}`);
         }
+        setData(list);
       })
   }
 

@@ -6,7 +6,7 @@ import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 import { formatAPI } from 'zero-element/lib/utils/format';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 
 export default function TreeTable(props) {
   const { namespace, config, extraData } = props;
@@ -43,17 +43,10 @@ export default function TreeTable(props) {
     const api = formatAPI(API.listAPI, { namespace });
 
     setLoading(true);
-    query(api).then(response => {
-      const { status, data } = response;
-      const { code, data: rspData } = data;
-
-      if (status === 200 && code === 200) {
-        setTreeData([formatTree(rspData)]);
-      } else {
-        throw new Error('服务器返回了非预期的数据格式');
-      }
-    }).catch(err => console.warn('数据初始化失败', err))
-      .finally(_ => setLoading(false));
+    query(api)
+      .then(data => setTreeData([formatTree(data)]))
+      .catch(err => console.warn('数据初始化失败', err))
+      .finally(_ => setLoading(false))
   }
   function handleExpand(expanded, record) {
     if (expanded && API.appendAPI) {
@@ -63,20 +56,15 @@ export default function TreeTable(props) {
   function handleAppend(id) {
     const api = API.appendAPI.replace(/(\<\w+\>)/, id);
     setLoading(true);
-    query(api).then(response => {
-      const { status, data } = response;
-      const { code, data: rspData } = data;
-
-      if (status === 200 && code === 200) {
+    query(api)
+      .then(data =>
         setTreeData([
           formatTree(
-            appendNode(id, treeData, rspData.children)[0]
+            appendNode(id, treeData, data.children)[0]
           )
-        ]);
-      } else {
-        throw new Error('服务器返回了非预期的数据格式');
-      }
-    }).catch(err => console.warn('数据初始化失败', err))
+        ])
+      )
+      .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setLoading(false));
   }
 

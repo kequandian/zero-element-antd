@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Spin, Input, Tree, Empty } from 'antd';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatAPI } from 'zero-element/lib/utils/format';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 
 import read from './read';
 import findNode from './findNode';
@@ -40,16 +40,9 @@ export default (props) => {
     const api = formatAPI(API.initAPI, { namespace });
 
     setTreeLoading(true);
-    query(api).then(response => {
-      const { status, data } = response;
-      const { code, data: rspData } = data;
-
-      if (status === 200 && code === 200) {
-        setTreeData(rspData);
-      } else {
-        throw new Error('服务器返回了非预期的数据格式');
-      }
-    }).catch(err => console.warn('数据初始化失败', err))
+    query(api)
+      .then(data => setTreeData(data))
+      .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setTreeLoading(false));
   }
   function handleLoadData(treeNode) {
@@ -65,17 +58,14 @@ export default (props) => {
     });
 
     setTreeLoading(true);
-    return query(api).then(response => {
-      const { status, data } = response;
-      const { code, data: rspData } = data;
-      if (status === 200 && code === 200) {
-
+    return query(api)
+      .then(data => {
         const find = findNode(id, treeData);
         find.children = find.children || [];
-        find.children.push(...checkData(rspData));
+        find.children.push(...checkData(data));
         setTreeData({ ...treeData });
-      }
-    }).catch(err => console.warn('子项获取失败', err))
+      })
+      .catch(err => console.warn('子项获取失败', err))
       .finally(_ => setTreeLoading(false));
   }
   function handleExpand(expandedKeys) {
@@ -113,12 +103,9 @@ export default (props) => {
     setTreeLoading(true);
     return query(api, {
       [searchField]: value,
-    }).then(response => {
-      const { status, data } = response;
-      const { code, data: rspData } = data;
-
-      if (status === 200 && code === 200) {
-        const rst = checkData(rspData);
+    })
+      .then(data => {
+        const rst = checkData(data);
         if (rst) {
           rst.forEach(item => {
             const find = findNode(item.pid, treeData);
@@ -129,8 +116,8 @@ export default (props) => {
         setTreeData({ ...treeData });
         // 构造一个对象，而不使用 react 的合成事件
         handleLocalSearch({ target: { value } });
-      }
-    }).catch(err => console.warn('搜索失败', err))
+      })
+      .catch(err => console.warn('搜索失败', err))
       .finally(_ => setTreeLoading(false));
   }
 

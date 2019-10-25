@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Spin } from 'antd';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
@@ -33,8 +33,8 @@ export default function SelectFetch(props) {
         namespace,
       });
       setLoading(true);
-      query(fAPI).then(({ data: { code, data } }) => {
-        if (code === 200) {
+      query(fAPI)
+        .then(data => {
           const list = Array.isArray(data) ?
             data
             : data[dataField];
@@ -44,10 +44,10 @@ export default function SelectFetch(props) {
           } else {
             console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
           }
-        }
-      }).finally(_ => {
-        setLoading(false);
-      })
+        })
+        .finally(_ => {
+          setLoading(false);
+        })
     }
   }
   function handleChange(value) {

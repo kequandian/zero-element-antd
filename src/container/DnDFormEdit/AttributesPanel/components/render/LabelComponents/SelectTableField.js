@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 import { Select } from 'antd';
 import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
@@ -47,20 +47,19 @@ export default function SelectTableField(props) {
 
     const fAPI = `/api/generate/sql/${qsObj.uuid}/${sql}/table/${tableName}`;
 
-    query(fAPI).then((response) => {
-      const { status, data } = response;
-      if (status === 200 && data.code === 200) {
-        setData(data.data.map(field => {
+    query(fAPI)
+      .then((data) => {
+        setData(data.map(field => {
           return {
             id: field.field,
             title: field.comment || field.field,
             value: field.field,
           }
         }));
-      }
-    }).finally(_ => {
-      setLoading(false);
-    });
+      })
+      .finally(_ => {
+        setLoading(false);
+      });
   }
   function handleChange(value) {
     if (value) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 import { Select } from 'antd';
 import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
@@ -46,10 +46,9 @@ export default function SelectTable(props) {
     const qsObj = qs.parse(getSearch(location));
 
     const fAPI = `/api/generate/sql/${qsObj.uuid}/${sql.value}`;
-    query(fAPI).then((response) => {
-      const { status, data } = response;
-      if (status === 200 && data.code === 200) {
-        setData(data.data.items.map(table => {
+    query(fAPI)
+      .then((data) => {
+        setData(data.items.map(table => {
           return {
             id: table.id,
             title: table.tableName,
@@ -57,10 +56,10 @@ export default function SelectTable(props) {
             children: table.children,
           }
         }));
-      }
-    }).finally(_ => {
-      setLoading(false);
-    });
+      })
+      .finally(_ => {
+        setLoading(false);
+      });
   }
   function handleChange(value) {
     if (value) {

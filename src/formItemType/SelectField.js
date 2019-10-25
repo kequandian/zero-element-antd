@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Select, Spin } from 'antd';
-import { query } from 'zero-element/lib/utils/request';
-import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { query } from '@/utils/request';
 
 const Option = Select.Option;
 
@@ -36,17 +35,15 @@ export default function SelectField(props) {
   function getData() {
     if (API && field) {
       setLoading(true);
-      query(`${API}/${field}`).then(({ data: { code, data } }) => {
-        if (code === 200) {
-          const list = Array.isArray(data) ?
-            data
-            : data[dataField];
+      query(`${API}/${field}`).then((data) => {
+        const list = Array.isArray(data) ?
+          data
+          : data[dataField];
 
-          if (Array.isArray(list)) {
-            setOptionList(list);
-          } else {
-            console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
-          }
+        if (Array.isArray(list)) {
+          setOptionList(list);
+        } else {
+          console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
         }
       }).finally(_ => {
         setLoading(false);

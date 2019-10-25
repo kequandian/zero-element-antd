@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
-import { query } from 'zero-element/lib/utils/request';
+import { query } from '@/utils/request';
 import { Select } from 'antd';
 import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
@@ -30,14 +30,13 @@ export default function SelectSQL(props) {
     const qsObj = qs.parse(getSearch(location));
 
     const fAPI = `/api/generate/sql/${qsObj.uuid}`;
-    query(fAPI).then((response) => {
-      const { status, data } = response;
-      if (status === 200 && data.code === 200) {
-        setData(data.data);
-      }
-    }).finally(_ => {
-      setLoading(false);
-    });
+    query(fAPI)
+      .then((data) => {
+        setData(data);
+      })
+      .finally(_ => {
+        setLoading(false);
+      });
   }
 
   return <>
