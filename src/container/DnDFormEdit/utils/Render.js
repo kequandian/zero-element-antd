@@ -32,9 +32,11 @@ export default function Render(props) {
     base.label.value ? 'ZEleA-Form-item-label-colon' : '',
   ];
   return <>
-    <label className={labelClassNames.join(' ')}>
-      {base.label.value}
-    </label>
+    {base.label.value ? (
+      <label className={labelClassNames.join(' ')}>
+        {base.label.value}
+      </label>
+    ) : null}
     <div className="ZEleA-Form-item-element">
       <Component {...props} />
     </div>

@@ -23,7 +23,7 @@ export default function FormItemWrapped({
     <Tooltip
       visible={visibleError}
       title={meta.error}
-      arrowPointAtCenter={true}
+      placement="topLeft"
       overlayClassName="ZEleA-Form-ruleTips"
     >
       <div className="ZEleA-Form-item-element">

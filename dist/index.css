@@ -224,7 +224,8 @@
   min-height: 60px;
   padding   : 8px 16px;
 }
-.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner {
+.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner,
+.ZEleA-Form-ruleTips .ant-tooltip-arrow::before {
   background: #ff4d4f;
 }
 
