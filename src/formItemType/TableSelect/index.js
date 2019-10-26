@@ -12,14 +12,19 @@ export default function TableSelect(props) {
     onChange, handle,
     ...rest
   } = props;
-  const { API, fields, type = 'checkbox' } = options;
+  const {
+    API, fields,
+    type = 'checkbox',
+    value: optValue = 'id'
+  } = options;
   const [data, setData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   useEffect(_ => {
     if (Array.isArray(value)) {
-      setSelectedRowKeys(value.map(item => item.id));
+      setSelectedRowKeys(value.map(item => item[optValue]));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
   const columns = formatTableFields(fields, [], {}, {

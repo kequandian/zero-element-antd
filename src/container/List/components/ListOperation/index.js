@@ -246,7 +246,10 @@ export default function ListOperationWrapped(props) {
         MODAL={true}
         index={index}
         namespace={context.namespace}
-        config={state.modalConfig}
+        config={{
+          layout: 'Empty',
+          ...state.modalConfig,
+        }}
         onClose={handleClose}
         onSubmit={state.onSubmit}
         data={state.data}

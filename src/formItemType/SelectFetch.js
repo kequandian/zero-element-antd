@@ -13,14 +13,11 @@ export default function SelectFetch(props) {
     options,
     namespace,
     onChange,
-    // handle,
     ...rest
   } = props;
-  // const { onSaveOtherValue } = handle;
   const {
     API, dataField = 'records',
     label: optLabel = 'label', value: optValue = 'value',
-    // saveData,
   } = options;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
@@ -61,7 +58,9 @@ export default function SelectFetch(props) {
   return <Spin className={className} spinning={loading}>
     <Select onChange={handleChange} value={value} {...rest}>
       {optionList.map(opt => (
-        <Option key={opt[optValue]} value={opt[optValue]}>{opt[optLabel]}</Option>
+        <Option key={opt[optValue]} value={opt[optValue]}>
+          {opt[optLabel]}
+        </Option>
       ))}
     </Select>
   </Spin>

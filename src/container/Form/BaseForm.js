@@ -22,6 +22,12 @@ const toTypeMap = {
     }
     return value;
   },
+  'toValue': function (value) {
+    if (typeof value === 'object' && value.hasOwnProperty('_toValue')) {
+      return value._toValue;
+    }
+    return value;
+  },
 };
 
 export default function BaseForm(props) {
@@ -73,6 +79,10 @@ export default function BaseForm(props) {
     // 保存需要 format 的 字段与 format 的方式
     formatValueRef.current[field] = toType;
   }
+  function handleGetFormData() {
+    return model.getState().formData;
+  }
+
   function handleSubmitForm() {
     const extraSubmit = {};
     fields.forEach(field => {
@@ -165,6 +175,7 @@ export default function BaseForm(props) {
                 handle: {
                   onFormatValue: formatValue,
                   onSaveOtherValue: handleSaveOtherValue,
+                  onGetFormData: handleGetFormData,
                 }
               }))}
             </Render>
