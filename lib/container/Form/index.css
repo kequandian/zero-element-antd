@@ -51,6 +51,7 @@
   flex : 1;
 }
 
-.ZEleA-Form-item-element input {
+.ZEleA-Form-item-element input,
+.ZEleA-Form-item-element .ant-select {
   width: 160px;
 }

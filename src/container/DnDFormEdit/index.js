@@ -1,4 +1,4 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer, useContext, useRef } from 'react';
 import { Button, Spin, Input, Card, message } from 'antd';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
@@ -47,7 +47,11 @@ function DndFormEdit(props) {
     initState,
     () => JSON.parse(JSON.stringify(initState))
   );
-  const { fields, config, copyList, layoutType, spinning, spinningTip } = state;
+  const {
+    fields,
+    config, copyList, layoutType,
+    spinning, spinningTip
+  } = state;
   const { API, path } = props.config;
   const context = useContext(PageContext);
   const { namespace } = context;
@@ -56,6 +60,7 @@ function DndFormEdit(props) {
     modelPath: 'formData',
   }, props.config);
   const { router } = global;
+  const originFields = useRef([]);
 
   useDidMount(_ => {
     if (API.getAPI) {
@@ -71,6 +76,7 @@ function DndFormEdit(props) {
         .then(({ code, data }) => {
           const { originConfig = {} } = data;
           if (code === 200) {
+            originFields.current = data.fields;
             dispatch({
               type: 'initConfig',
               payload: data,
@@ -119,10 +125,12 @@ function DndFormEdit(props) {
       fields: {
         title: state.name,
         config: data,
-        fields: uniqueFields(fields.map(f => ({
-          field: f,
-          label: f,
-        })),
+        fields: uniqueFields(
+          fields.map(f => ({
+            field: f,
+            label: f,
+          })),
+          originFields.current,
           otherFields
         ),
         originConfig: {
@@ -198,14 +206,21 @@ function DndFormEdit(props) {
  * 合并成唯一的字段列表
  *
  * @param {array} lowList
+ * @param {array} midList
  * @param {array} highList
  * @returns
  */
-function uniqueFields(lowList, highList) {
+function uniqueFields(lowList, midList, highList) {
   const records = {};
   lowList.forEach(f => {
     records[f.field] = f;
   });
+  midList.forEach(f => {
+    const target = records[f.field];
+    if (target && target.label === target.field) {
+      records[f.field] = f;
+    }
+  })
   highList.forEach(f => {
     records[f.field] = f;
   })
