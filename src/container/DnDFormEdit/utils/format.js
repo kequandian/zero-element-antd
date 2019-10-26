@@ -7,7 +7,7 @@ const unusualType = {
     const { path } = base;
 
     const oneManyObj = {
-      layout: 'Empty',
+      layout: 'Content',
       component: 'ChildrenList',
       config: {
         itemsField: options.field.value,
@@ -138,7 +138,7 @@ export default function formatToConfig(cfg, formName, opt) {
   }
   let count = 0;
   config.items.push({
-    layout: 'Empty',
+    layout: 'Content',
     component: 'BaseForm',
     config: {
       layout: 'Grid',

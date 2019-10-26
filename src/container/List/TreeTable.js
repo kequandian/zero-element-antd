@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
@@ -27,8 +27,12 @@ export default function TreeTable(props) {
   const { handle, modelStatus } = listProps;
   const [treeData, setTreeData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const finalId = useRef(null);
 
-  const columns = formatTableFields(fields, operation, handle, {
+  const columns = formatTableFields(fields, operation, {
+    ...handle,
+    onRefresh: handleRefresh,
+  }, {
     namespace,
     extraData,
   });
@@ -54,6 +58,7 @@ export default function TreeTable(props) {
     }
   }
   function handleAppend(id) {
+    finalId.current = id;
     const api = API.appendAPI.replace(/(\<\w+\>)/, id);
     setLoading(true);
     query(api)
@@ -66,6 +71,11 @@ export default function TreeTable(props) {
       )
       .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setLoading(false));
+  }
+  function handleRefresh() {
+    if (finalId.current) {
+      handleAppend(finalId.current);
+    }
   }
 
   return <Render n={layout} {...layoutConfig}
