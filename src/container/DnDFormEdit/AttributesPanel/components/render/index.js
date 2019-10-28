@@ -4,6 +4,7 @@ import LabelRadio from './LabelComponents/LabelRadio';
 import SelectSQL from './LabelComponents/SelectSQL';
 import SelectTable from './LabelComponents/SelectTable';
 import SelectTableField from './LabelComponents/SelectTableField';
+import TableField from './LabelComponents/TableField';
 
 
 const labelSet = {
@@ -12,6 +13,7 @@ const labelSet = {
   'selectSQL': SelectSQL,
   'selectTable': SelectTable,
   'selectTableField': SelectTableField,
+  'tableField': TableField,
   'undefined': LabelInput,
 };
 

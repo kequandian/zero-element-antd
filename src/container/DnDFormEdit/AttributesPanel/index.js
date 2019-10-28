@@ -158,6 +158,11 @@ export default ({ current, dispatch, fields }) => {
         })}
       </>
     ) : null}
+    {config ?
+      <>
+        <div className="ZEleA-DnDFormEdit-title">配置</div>
+        {renderBaseOptions(config, handleConfigChange)}
+      </> : null}
     {advanced ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">高级</div>
@@ -178,16 +183,11 @@ export default ({ current, dispatch, fields }) => {
             onOptionsChange: handleTableOptionsChange
           },
           {
-            disabled: Boolean(base.path.value),
+            disabled: Boolean(base.path && base.path.value),
           }
         )}
       </>
     ) : null}
-    {config ?
-      <>
-        <div className="ZEleA-DnDFormEdit-title">配置</div>
-        {renderBaseOptions(config, handleConfigChange)}
-      </> : null}
     {style ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">样式</div>

@@ -4,6 +4,7 @@ import Grid from './Grid';
 import LTB from './LTB';
 
 import Plain from './Plain';
+import Button from './Button';
 import Input from './Input';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
@@ -25,5 +26,6 @@ const typeMap = {
 
   OneMany,
   'SelectField': Select,
+  'ModalRadio': Button,
 };
 export default typeMap;

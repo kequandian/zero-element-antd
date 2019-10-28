@@ -63,4 +63,46 @@ export default [
       },
     }
   },
+  {
+    title: '模态框-列表单选', type: 'ModalRadio', options: {
+      field: {},
+      base: {
+        label: {
+          label: '字段名',
+        },
+      },
+      config: {
+        title: {
+          label: '引导文本',
+          value: '选择数据',
+        },
+        label: {
+          label: '展示文本',
+        },
+        editLabel: {
+          label: '编辑时展示文本',
+        },
+        value: {
+          label: '提交的字段',
+        },
+        API: {
+          label: 'API',
+        },
+        fields: {
+          label: '弹出模态框中列表字段',
+          type: 'tableField',
+          value: [
+            { label: '名称', value: 'name' },
+            { label: '性别', value: 'sex' },
+          ]
+        },
+      },
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
+    }
+  },
 ];
