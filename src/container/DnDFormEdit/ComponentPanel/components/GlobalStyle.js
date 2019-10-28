@@ -27,6 +27,7 @@ export default function GlobalStyle({ layoutType, dispatch }) {
       destroyOnClose
       visible={visible}
       onOk={handleSave}
+      onCancel={handleVisible}
     >
       <Radio.Group defaultValue={layoutType} onChange={handleChange}>
         <Radio value="horizontal">horizontal</Radio>

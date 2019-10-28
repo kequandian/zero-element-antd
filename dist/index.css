@@ -60,64 +60,6 @@
   overflow  : hidden;
   transition: all .2s;
 }
-.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner,
-.ZEleA-Form-ruleTips .ant-tooltip-arrow::before {
-  background: #ff4d4f;
-}
-
-.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
-  border-right-color : #ff4d4f;
-  border-top-color   : #ff4d4f;
-  border-bottom-color: #ff4d4f;
-}
-
-.ZEleA-Form-ruleTips-error.ant-tooltip-open,
-.ZEleA-Form-ruleTips-error.ant-tooltip-open:hover,
-.ZEleA-Form-ruleTips-error.ant-tooltip-open:focus {
-  border-color: #ff4d4f;
-  box-shadow  : 0 0 0 2px #ff4d4f33;
-}
-
-.ZEleA-Form-vertical>.ant-row,
-.ZEleA-Form-horizontal>.ant-row {
-  margin-bottom: 8px;
-}
-
-.ZEleA-Form-item-label {
-  margin-right: 8px;
-}
-
-.ZEleA-Form-item-label-colon::after {
-  content : ':';
-  position: relative;
-  top     : -0.5px;
-  margin  : 0 8px 0 2px;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item {
-  display      : flex;
-  align-items  : center;
-  margin-bottom: 8px;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-label {
-  text-align: right;
-  min-width : 90px;
-}
-
-.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
-  width: 6em;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-element {
-  width: 0;
-  flex : 1;
-}
-
-.ZEleA-Form-item-element input,
-.ZEleA-Form-item-element .ant-select {
-  width: 160px;
-}
 .ZEleA-DnDFormEdit-tips {
   text-align: center;
   color     : #cbc5c5;
@@ -281,6 +223,64 @@
 .ZEleA-DnDFormEdit-EchoPanel {
   min-height: 60px;
   padding   : 8px 16px;
+}
+.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-inner,
+.ZEleA-Form-ruleTips .ant-tooltip-arrow::before {
+  background: #ff4d4f;
+}
+
+.ZEleA-Form-ruleTips .ant-tooltip-content .ant-tooltip-arrow {
+  border-right-color : #ff4d4f;
+  border-top-color   : #ff4d4f;
+  border-bottom-color: #ff4d4f;
+}
+
+.ZEleA-Form-ruleTips-error.ant-tooltip-open,
+.ZEleA-Form-ruleTips-error.ant-tooltip-open:hover,
+.ZEleA-Form-ruleTips-error.ant-tooltip-open:focus {
+  border-color: #ff4d4f;
+  box-shadow  : 0 0 0 2px #ff4d4f33;
+}
+
+.ZEleA-Form-vertical>.ant-row,
+.ZEleA-Form-horizontal>.ant-row {
+  margin-bottom: 8px;
+}
+
+.ZEleA-Form-item-label {
+  margin-right: 8px;
+}
+
+.ZEleA-Form-item-label-colon::after {
+  content : ':';
+  position: relative;
+  top     : -0.5px;
+  margin  : 0 8px 0 2px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item {
+  display      : flex;
+  align-items  : center;
+  margin-bottom: 8px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-label {
+  text-align: right;
+  min-width : 90px;
+}
+
+.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
+  width: 6em;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-element {
+  width: 0;
+  flex : 1;
+}
+
+.ZEleA-Form-item-element input,
+.ZEleA-Form-item-element .ant-select {
+  width: 160px;
 }
 .ZEleA-table-operation{
   height: 40px;
