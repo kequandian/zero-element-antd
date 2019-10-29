@@ -11,7 +11,7 @@ export default function SelectTable(props) {
 
     value.push({
       label: '新字段',
-      value: countId.current,
+      field: countId.current,
     });
 
     handle(field, {
@@ -46,6 +46,7 @@ export default function SelectTable(props) {
     <br /><br />
     <ItemEdit
       items={value}
+      valueField="field"
       onChange={onChange}
       onRemove={onRemove}
     />

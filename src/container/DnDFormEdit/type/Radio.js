@@ -6,5 +6,5 @@ export default function SRadio({ config }) {
   const { base = {}, style = {}, items = [] } = options;
   const { value = {} } = base;
 
-  return <Radio.Group options={items} value={[value]} />
+  return <Radio.Group options={items} value={[value]} />;
 }

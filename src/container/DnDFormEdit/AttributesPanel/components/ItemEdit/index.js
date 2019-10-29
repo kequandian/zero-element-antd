@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import Item from './Item';
 
-export default ({ items, disabled, onChange, onRemove, onOptionsChange }) => {
+export default ({
+  items, valueField,
+  disabled,
+  onChange, onRemove, onOptionsChange
+}) => {
   const [editIndex, setEditIndex] = useState(-1);
 
   function handleClick(i) {
@@ -15,6 +19,7 @@ export default ({ items, disabled, onChange, onRemove, onOptionsChange }) => {
     return <div key={i}>
       <Item
         {...item}
+        valueField={valueField}
         editId={editIndex}
         index={i}
         disabled={disabled}

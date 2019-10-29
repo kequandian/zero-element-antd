@@ -92,8 +92,8 @@ export default [
           label: '弹出模态框中列表字段',
           type: 'tableField',
           value: [
-            { label: '名称', value: 'name' },
-            { label: '性别', value: 'sex' },
+            { label: '名称', field: 'name' },
+            { label: '性别', field: 'sex' },
           ]
         },
       },

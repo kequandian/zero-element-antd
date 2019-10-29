@@ -3,12 +3,14 @@ import { Card, Input, Icon } from 'antd';
 import Options from './Options';
 import './index.css';
 
-export default ({
-  label, value, index, options,
-  disabled, // 禁用 options 的编辑
-  editId, onClick,
-  onChange, onRemove, onOptionsChange
-}) => {
+export default function ItemEdit(props) {
+  const {
+    label, index, options,
+    valueField = 'value',
+    disabled, // 禁用 options 的编辑
+    editId, onClick,
+    onChange, onRemove, onOptionsChange
+  } = props;
   const edit = editId === index;
 
   function handleClick() {
@@ -41,7 +43,10 @@ export default ({
     <span>文本: </span>
     <Input value={label} onChange={onChange.bind(null, index, 'label')} />
     <span>值: </span>
-    <Input value={value} onChange={onChange.bind(null, index, 'value')} />
+    <Input
+      value={props[valueField]}
+      onChange={onChange.bind(null, index, valueField)}
+    />
     <Options
       index={index}
       data={options}

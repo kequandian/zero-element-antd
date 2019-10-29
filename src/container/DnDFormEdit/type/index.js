@@ -10,6 +10,7 @@ import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Select from './Select';
 import Date from './Date';
+import TextArea from './TextArea';
 
 import OneMany from './OneMany';
 
@@ -23,6 +24,7 @@ const typeMap = {
   Checkbox,
   Select,
   Date,
+  TextArea,
 
   OneMany,
   'SelectField': Select,

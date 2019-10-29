@@ -1,6 +1,6 @@
 import React from 'react';
 import { Drawer, Button, Select } from 'antd';
-
+import { toNumber } from '@/utils/tool';
 import ItemEdit from './components/ItemEdit';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
 
@@ -62,7 +62,7 @@ export default ({ current, dispatch, fields }) => {
     onSave();
   }
   function handleBaseChange(key, e) {
-    base[key].value = e.target.value;
+    base[key].value = toNumber(e.target.value);
     onSave();
   }
   function handleStyleChange(key, e) {
@@ -76,7 +76,7 @@ export default ({ current, dispatch, fields }) => {
     onSave();
   }
   function handleItemsChange(i, type, e) {
-    items[i][type] = e.target.value;
+    items[i][type] = toNumber(e.target.value);
     onSave();
   }
   function handleItemAdd() {

@@ -105,8 +105,8 @@ export default [
         // }
       },
       items: [
-        { label: '选项1', value: '1' },
-        { label: '选项2', value: '2' }
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 }
       ],
       rules: {
         required: {
@@ -129,8 +129,8 @@ export default [
         // }
       },
       items: [
-        { label: '选项1', value: '1' },
-        { label: '选项2', value: '2' }
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 }
       ],
       rules: {
         required: {
@@ -149,9 +149,36 @@ export default [
         },
       },
       items: [
-        { label: '选项1', value: '1' },
-        { label: '选项2', value: '2' },
+        { label: '选项1', value: 1 },
+        { label: '选项2', value: 2 },
       ],
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
+    }
+  },
+  {
+    title: '文本域', type: 'TextArea', options: {
+      field: {},
+      base: {
+        label: {
+          label: '字段名',
+        },
+        placeholder: {
+          label: '占位符',
+          value: '请输入……',
+        },
+        minRows: {
+          label: '最小行数',
+          value: 2,
+        },
+        maxRows: {
+          label: '最大行数',
+        },
+      },
       rules: {
         required: {
           label: '必填',

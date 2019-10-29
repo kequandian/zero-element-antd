@@ -5,7 +5,9 @@ const { TextArea } = Input;
 
 export default ({ props, ...rest }) => {
   return <TextArea
-    autosize
+    autosize={{
+      minRows: 2,
+    }}
     {...rest}
     {...props}
   />
