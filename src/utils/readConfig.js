@@ -62,6 +62,13 @@ export function getActionItem(action, modelStatus, handle, props) {
 function handleRule(rule) {
   if (typeof rule === 'string') {
     return defaultRule[rule] || defaultRule['undefined'];
+  } else if (typeof rule === 'object') {
+    const { type, message } = rule;
+    if (type) {
+      return ruleWrapped(defaultRule[type], message);
+    } else {
+      return defaultRule['undefined'];
+    }
   }
   return defaultRule['error'];
 }
@@ -70,7 +77,21 @@ const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
 const defaultRule = {
-  required: value => (value ? undefined : '必填'),
+  required: (value, msg = '必填') => {
+    return (Boolean(value) || value === 0) ? undefined : msg;
+  },
+  mail: (value, msg = '请输入正确的电子邮箱格式') => {
+    if (value === '') return undefined;
+    return /\w+@\w+.\w+/.test(value) ? undefined : msg;
+  },
+  phone: (value, msg = '请输入正确的手机号码格式') => {
+    if (value === '') return undefined;
+    return /^1[3456789]\d{9}$/.test(value) ? undefined : msg;
+  },
   error: value => (console.warn(`非法的 rules 子项: ${value}`) && undefined),
   undefined: value => (console.warn(`值: ${value} 使用了未知的校验规则`) && undefined),
 };
+
+function ruleWrapped(func, msg) {
+  return func.bind(null, msg);
+}

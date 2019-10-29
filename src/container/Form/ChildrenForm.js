@@ -22,7 +22,7 @@ export default function ChildrenForm(props) {
   }, config);
 
   const { loading, data, modelStatus, handle } = formProps;
-  const initData = useRef(props.data || data || {});
+  const initData = useRef(props.data || {});
   const { onGetOne } = handle;
 
   useDidMount(_ => {
