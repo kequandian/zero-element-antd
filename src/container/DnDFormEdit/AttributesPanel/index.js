@@ -5,7 +5,7 @@ import ItemEdit from './components/ItemEdit';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
 
 import '../index.css';
-import RequiredCheckbox from './components/RequiredCheckbox';
+import Checkbox from './components/Checkbox';
 
 const { Option } = Select;
 
@@ -34,6 +34,7 @@ export default ({ current, dispatch, fields }) => {
     field = {}, base = {}, rules = {}, style,
     items, advanced, config, table
   } = options;
+  const { required, ...restRules } = rules;
 
   function onSave() {
     dispatch({
@@ -119,6 +120,10 @@ export default ({ current, dispatch, fields }) => {
     rules[key].value = value;
     onSave();
   }
+  function handleRulesMsgChange(key, value) {
+    rules[key].message = value;
+    onSave();
+  }
 
   /**
    * 实际上是修改了 config 的 options
@@ -137,13 +142,28 @@ export default ({ current, dispatch, fields }) => {
     onClose={handleClose}
   >
     <div className="ZEleA-DnDFormEdit-title">基本属性</div>
-    <RequiredCheckbox
-      data={rules}
+    <Checkbox
+      field="required"
+      data={required}
       onChange={handleRulesChange}
     />
     <div className="ZEleA-DnDFormEdit-title">字段值</div>
     {renderFieldsSelect(fields, field.value, handleFieldChange)}
     {renderBaseOptions(base, handleBaseChange)}
+    {Object.keys(restRules).length ? (
+      <>
+        <div className="ZEleA-DnDFormEdit-title">数据校验</div>
+        {Object.keys(restRules).map(key => {
+          return <Checkbox
+            key={key}
+            field={key}
+            data={restRules[key]}
+            onChange={handleRulesChange}
+            onMsgChange={handleRulesMsgChange}
+          />
+        })}
+      </>
+    ) : null}
     {items ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">子项</div>

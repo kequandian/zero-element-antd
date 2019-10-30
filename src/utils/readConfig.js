@@ -61,7 +61,7 @@ export function getActionItem(action, modelStatus, handle, props) {
 
 function handleRule(rule) {
   if (typeof rule === 'string') {
-    return defaultRule[rule] || defaultRule['undefined'];
+    return ruleWrapped(defaultRule[rule]) || defaultRule['undefined'];
   } else if (typeof rule === 'object') {
     const { type, message } = rule;
     if (type) {
@@ -77,14 +77,14 @@ const composeValidators = (...validators) => value =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
 const defaultRule = {
-  required: (value, msg = '必填') => {
+  required: (msg = '必填', value) => {
     return (Boolean(value) || value === 0) ? undefined : msg;
   },
-  mail: (value, msg = '请输入正确的电子邮箱格式') => {
+  mail: (msg = '请输入正确的电子邮箱格式', value) => {
     if (value === '') return undefined;
     return /\w+@\w+.\w+/.test(value) ? undefined : msg;
   },
-  phone: (value, msg = '请输入正确的手机号码格式') => {
+  phone: (msg = '请输入正确的手机号码格式', value) => {
     if (value === '') return undefined;
     return /^1[3456789]\d{9}$/.test(value) ? undefined : msg;
   },
