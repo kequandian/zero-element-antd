@@ -16,7 +16,7 @@ function read(item) {
     return <TreeNode key={item.id} id={String(item.id)}
       icon={renderIcon}
       iconName={item.icon}
-      title={item.title}
+      title={item.title || item.name}
     >
       {read(item.children)}
     </TreeNode>;
@@ -24,7 +24,7 @@ function read(item) {
   return <TreeNode key={item.id} id={String(item.id)}
     icon={renderIcon}
     iconName={item.icon}
-    title={item.title}
+    title={item.title || item.name}
   />;
 }
 

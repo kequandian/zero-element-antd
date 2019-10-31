@@ -168,7 +168,8 @@ export default function BaseForm(props) {
             values,
             onSubmit: handleSubmit,
           };
-          model.setState('formData', values);
+          // 用于配合 checkExpected 功能的
+          // model.setState('formData', values);
           return <form
             className={`ZEleA-Form-${layoutType}`}
             onSubmit={handleSubmit}

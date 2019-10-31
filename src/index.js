@@ -73,6 +73,7 @@ FITSet({
   'select-field': Load('formItemType/SelectField'),
   'text-area': Load('formItemType/TextArea'),
   'rich-text': Load('formItemType/RichText'),
+  'one-mary': Load('formItemType/OneMary'),
 });
 
 AITSet({

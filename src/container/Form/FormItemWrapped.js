@@ -17,9 +17,11 @@ export default function FormItemWrapped({
     label ? 'ZEleA-Form-item-label-colon' : '',
   ];
   return <div className="ZEleA-Form-item">
-    <label className={labelClassNames.join(' ')}>
-      {label}
-    </label>
+    {label ? (
+      <label className={labelClassNames.join(' ')}>
+        {label}
+      </label>
+    ) : null}
     <Tooltip
       visible={visibleError}
       title={meta.error}
