@@ -281,7 +281,8 @@
 .ZEleA-Form-item-element input,
 .ZEleA-Form-item-element .ant-input-number,
 .ZEleA-Form-item-element .ant-select {
-  width: 160px;
+  width    : 240px;
+  max-width: 100%;
 }
 .ZEleA-table-operation{
   height: 40px;

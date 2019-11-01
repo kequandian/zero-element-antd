@@ -48,7 +48,7 @@ export default function TreeTable(props) {
 
     setLoading(true);
     query(api)
-      .then(data => setTreeData([formatTree(data)]))
+      .then(data => setTreeData(formatTree(data)))
       .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setLoading(false))
   }
@@ -63,11 +63,11 @@ export default function TreeTable(props) {
     setLoading(true);
     query(api)
       .then(data =>
-        setTreeData([
+        setTreeData(
           formatTree(
-            appendNode(id, treeData, data.children)[0]
+            appendNode(id, treeData, data)
           )
-        ])
+        )
       )
       .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setLoading(false));
@@ -105,8 +105,13 @@ export default function TreeTable(props) {
 }
 
 function formatTree(data) {
-  const stack = [data];
-  const rst = data;
+  const stack = [];
+
+  if (Array.isArray(data)) {
+    stack.push(...data);
+  } else {
+    stack.push(data);
+  }
 
   while (stack.length) {
     const item = stack.shift();
@@ -118,7 +123,7 @@ function formatTree(data) {
     }
   }
 
-  return rst;
+  return [...data];
 }
 function appendNode(id, tree, data) {
   const stack = [...tree];

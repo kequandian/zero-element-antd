@@ -87,4 +87,5 @@ VTSet({
   'status': Load('valueType/status'),
   'image': Load('valueType/image'),
   'tag': Load('valueType/tag'),
+  'currency': Load('valueType/currency'),
 });

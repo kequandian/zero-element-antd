@@ -34,7 +34,10 @@ export default function BaseForm(props) {
   const formRef = useRef({});
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
   const [, forceUpdate] = useReducer(x => x + 1, 0);
-  const { MODAL, namespace, config, extraData = {}, onClose, onSubmit } = props;
+  const {
+    MODAL, namespace, config, extraData = {},
+    onClose, onSubmit, onSetExtraElement
+  } = props;
   const { API = {}, layout = 'Empty', fields, path, layoutConfig = {} } = config;
   const { layoutType = 'horizontal' } = layoutConfig; // vertical horizontal
   const formProps = useBaseForm({
@@ -58,6 +61,9 @@ export default function BaseForm(props) {
           forceUpdate();
         }
       });
+    }
+    if (onSetExtraElement && goBack) {
+      onSetExtraElement(<Button onClick={goBack}>返回</Button>);
     }
   });
   useWillUnmount(onClearForm);
