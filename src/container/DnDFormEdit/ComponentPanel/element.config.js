@@ -187,4 +187,15 @@ export default [
       },
     }
   },
+  {
+    title: '隐藏域', type: 'Hidden', options: {
+      field: {},
+      base: {
+        value: {
+          label: '提交的数据',
+          value: '',
+        },
+      },
+    }
+  },
 ];

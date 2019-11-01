@@ -4,6 +4,7 @@ import Grid from './Grid';
 import LTB from './LTB';
 
 import Plain from './Plain';
+import Hidden from './Hidden';
 import Button from './Button';
 import Input from './Input';
 import Radio from './Radio';
@@ -19,6 +20,7 @@ const typeMap = {
   Grid,
   LTB,
   Plain,
+  Hidden,
   Input,
   Radio,
   Checkbox,

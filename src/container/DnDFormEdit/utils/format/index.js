@@ -46,14 +46,17 @@ export default function formatToConfig(cfg, formName, opt) {
             type: 'empty',
           }
         }
+        const { options = {} } = field;
+        const { base = {} } = options;
+
         const rst = {
-          label: field.options.base.label.value || '',
+          label: base.label && base.label.value || '',
           field: field.options.field.value,
-          value: formatToValue(field.options.base),
+          value: formatToValue(base),
           type: formatToType(field.type),
           props: {
             style: formatToStyle(field.options.style),
-            placeholder: formatToPlaceholder(field.options.base),
+            placeholder: formatToPlaceholder(base),
           },
           rules: formatToRules(field.options.rules),
           options: formatToOptions(field.options.config),
@@ -97,7 +100,7 @@ function formatToRules(rules) {
   if (!rules || !Object.keys(rules).length) return undefined;
   return Object.values(rules).map(item => {
     const { value, message } = item;
-    if(value && message) {
+    if (value && message) {
       return {
         type: value,
         message,
@@ -123,7 +126,7 @@ function formatToOptions(options) {
  */
 function pureFields(fields) {
   return fields.filter(i => i).map(item => ({
-    label: item.options.base.label.value,
+    label: item.options.base.label && item.options.base.label.value || '',
     field: item.options.field.value,
   }));
 }

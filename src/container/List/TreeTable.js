@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
@@ -24,7 +24,7 @@ export default function TreeTable(props) {
     extraData,
   }, config);
 
-  const { handle, modelStatus } = listProps;
+  const { handle, data, modelStatus } = listProps;
   const [treeData, setTreeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const finalId = useRef(null);
@@ -42,6 +42,11 @@ export default function TreeTable(props) {
       handleInitData({});
     }
   });
+  useEffect(_ => {
+    if (data.length) {
+      setTreeData(formatTree(data));
+    }
+  }, [data]);
 
   function handleInitData() {
     const api = formatAPI(API.listAPI, { namespace });
@@ -116,10 +121,12 @@ function formatTree(data) {
   while (stack.length) {
     const item = stack.shift();
 
-    if (item.children) {
-      stack.push(...item.children);
-    } else {
-      item.children = [];
+    if (item) {
+      if (item.children) {
+        stack.push(...item.children);
+      } else {
+        item.children = [];
+      }
     }
   }
 
