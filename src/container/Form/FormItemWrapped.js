@@ -23,7 +23,23 @@ export default function FormItemWrapped({
         {label}
       </label>
     ) : null}
-    <Tooltip
+    <div className="ZEleA-Form-item-element">
+      <Render n={type}
+        className={visibleError ? 'ZEleA-Form-ruleTips-error' : ''}
+        options={options} {...input} {...rest}
+      />
+    </div>
+    <div
+      className="ZEleA-Form-ruleTips"
+      className={visibleError ?
+        'ZEleA-Form-ruleTips error' : 'ZEleA-Form-ruleTips'
+      }
+    >
+      {visibleError ? (
+        meta.error
+      ) : null}
+    </div>
+    {/* <Tooltip
       visible={visibleError}
       title={meta.error}
       placement="topLeft"
@@ -35,6 +51,6 @@ export default function FormItemWrapped({
           options={options} {...input} {...rest}
         />
       </div>
-    </Tooltip>
+    </Tooltip> */}
   </div>
 }

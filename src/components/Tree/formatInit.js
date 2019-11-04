@@ -6,6 +6,9 @@ function formatInit(rspData) {
   } else if (rspData.children) {
     return rspData.children;
   }
+  if (Array.isArray(rspData)) {
+    return rspData;
+  }
 
   return [];
 }

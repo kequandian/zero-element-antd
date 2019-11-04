@@ -81,11 +81,11 @@ const defaultRule = {
     return (Boolean(value) || value === 0) ? undefined : msg;
   },
   mail: (msg = '请输入正确的电子邮箱格式', value) => {
-    if (value === '') return undefined;
+    if (!value && value !== 0) return undefined;
     return /\w+@\w+.\w+/.test(value) ? undefined : msg;
   },
   phone: (msg = '请输入正确的手机号码格式', value) => {
-    if (value === '') return undefined;
+    if (!value && value !== 0) return undefined;
     return /^1[3456789]\d{9}$/.test(value) ? undefined : msg;
   },
   error: value => (console.warn(`非法的 rules 子项: ${value}`) && undefined),
