@@ -7,6 +7,7 @@ import { query } from '@/utils/request';
 import read from './read';
 import findNode from './findNode';
 import findNodes from './findNodes';
+import formatInit from './formatInit';
 import checkData from './checkData';
 
 const { Search } = Input;
@@ -41,7 +42,7 @@ export default (props) => {
 
     setTreeLoading(true);
     query(api)
-      .then(data => setTreeData(data))
+      .then(data => setTreeData(formatInit(data)))
       .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setTreeLoading(false));
   }
