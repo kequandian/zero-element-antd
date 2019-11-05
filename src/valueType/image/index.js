@@ -55,6 +55,9 @@ function format(value) {
       rst = value;
     }
   } catch (e) {
+    rst.push({
+      url: value,
+    });
   }
   rst.length > 0 && rst.map((item, index) => {
     rst[index] = {
