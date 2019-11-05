@@ -5,6 +5,7 @@ import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
+import useOperation from './utils/useOperation';
 
 export default function BaseList(props) {
   const { namespace, config, extraData } = props;
@@ -21,13 +22,17 @@ export default function BaseList(props) {
     modelPath: 'listData',
     extraData,
   }, config);
+  const [oData, onClickOperation] = useOperation();
 
   const { loading, data, handle, modelStatus } = listProps;
   const { onGetList, onClearList } = handle;
   const { listData } = modelStatus;
   const { records, ...pagination } = listData;
 
-  const columns = formatTableFields(fields, operation, handle, {
+  const columns = formatTableFields(fields, operation, {
+    ...handle,
+    onClickOperation,
+  }, {
     namespace,
     extraData,
   });
@@ -44,6 +49,11 @@ export default function BaseList(props) {
       current,
       pageSize,
     });
+  }
+  function handleRowClassName(record) {
+    if (oData.id === record.id) {
+      return 'ZEleA-table-selected';
+    }
   }
 
   return <Render n={layout} {...layoutConfig}
@@ -65,6 +75,7 @@ export default function BaseList(props) {
       dataSource={props.data || data}
       columns={columns}
       loading={loading}
+      rowClassName={handleRowClassName}
       pagination={{
         ...pagination,
         onChange: handlePageChange,

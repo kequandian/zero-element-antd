@@ -12,7 +12,8 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "global-require": [1]
+    "global-require": [1],
+    "no-undef": 2,
   },
   "parserOptions": {
     "ecmaFeatures": {

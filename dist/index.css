@@ -272,72 +272,88 @@
   width    : 240px;
   max-width: 100%;
 }
-.ZEleA-table-operation{
-  height: 40px;
+.ZEleA-table-operation {
+  height     : 40px;
   line-height: 40px;
 }
 
-.ZEleA-table-action{
+.ZEleA-table-selected {
+  background: #e6f7ff;
+}
+
+.ZEleA-table-action {
   display: flex;
 }
-.ZEleA-table-action-Outside{
-  flex: 1;
+
+.ZEleA-table-action-Outside {
+  flex      : 1;
   text-align: right;
 }
-.ZEleA-table-action-Outside>span{
+
+.ZEleA-table-action-Outside>span {
   margin-right: 12px;
 }
+
 .ZEleA-table-action-empty {
   color: #e8e8e8;
 }
-.ZEleA-table-action-Outside-normal{
+
+.ZEleA-table-action-Outside-normal {
   vertical-align: middle;
-  cursor: pointer;
-  color: #1890ff;
+  cursor        : pointer;
+  color         : #1890ff;
 }
-.ZEleA-table-action .anticon-ellipsis{
+
+.ZEleA-table-action .anticon-ellipsis {
   cursor: pointer;
 }
-.ZEleA-table-action-menuItem{
+
+.ZEleA-table-action-menuItem {
   min-width: 100px;
 }
-.ZEleA-table-action-menuItem i{
+
+.ZEleA-table-action-menuItem i {
   margin-right: 8px;
 }
 
-.ZEleA-ListFieldsEdit-divider{
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  border-top: 1px solid #e8e8e8;
-  padding: 10px 16px;
-  text-align: right;
-  left: 0;
-  background: #fff;
+.ZEleA-ListFieldsEdit-divider {
+  position     : absolute;
+  bottom       : 0;
+  width        : 100%;
+  border-top   : 1px solid #e8e8e8;
+  padding      : 10px 16px;
+  text-align   : right;
+  left         : 0;
+  background   : #fff;
   border-radius: 0 0 4px 4px;
 }
-.ZEleA-ListFieldsEdit-FieldItem{
+
+.ZEleA-ListFieldsEdit-FieldItem {
   margin-bottom: .5em;
-  padding: 8px;
-  transition: all .2s;
+  padding      : 8px;
+  transition   : all .2s;
 }
-.ZEleA-ListFieldsEdit-FieldItem:hover{
+
+.ZEleA-ListFieldsEdit-FieldItem:hover {
   background: #188fff2f;
 }
-.ZEleA-ListFieldsEdit-FieldItem-label{
-  cursor: pointer;
+
+.ZEleA-ListFieldsEdit-FieldItem-label {
+  cursor     : pointer;
   margin-left: .5em;
 }
-.ZEleA-ListFieldsEdit-FieldItem-icon{
+
+.ZEleA-ListFieldsEdit-FieldItem-icon {
   margin: 0 .5em;
 }
 
-.ZEleA-table-action-Sort{
+.ZEleA-table-action-Sort {
   text-align: right;
 }
-.ZEleA-table-action-Sort>i{
+
+.ZEleA-table-action-Sort>i {
   margin-right: 8px;
-  cursor: pointer;
+  cursor      : pointer;
 }
 .ZEleA-Panel {
   background   : #fff;
