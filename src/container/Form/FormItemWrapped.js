@@ -39,18 +39,5 @@ export default function FormItemWrapped({
         meta.error
       ) : null}
     </div>
-    {/* <Tooltip
-      visible={visibleError}
-      title={meta.error}
-      placement="topLeft"
-      overlayClassName="ZEleA-Form-ruleTips"
-    >
-      <div className="ZEleA-Form-item-element">
-        <Render n={type}
-          className={visibleError ? 'ZEleA-Form-ruleTips-error' : ''}
-          options={options} {...input} {...rest}
-        />
-      </div>
-    </Tooltip> */}
   </div>
 }

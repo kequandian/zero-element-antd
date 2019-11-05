@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
@@ -53,6 +53,7 @@ export default function BaseForm(props) {
   const initData = useRef(data);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
 
+  useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
     if (API.getAPI) {
       onGetOne({}).then(({ code, data }) => {
@@ -68,6 +69,14 @@ export default function BaseForm(props) {
   });
   useWillUnmount(onClearForm);
 
+  function recordDefaultValue() {
+    fields.forEach(item => {
+      const { field, value } = item;
+      if (value !== undefined && initData.current[field] === undefined) {
+        initData.current[field] = value;
+      }
+    });
+  }
   function handleSaveOtherValue(field, value) {
     const values = formRef.current.values;
 

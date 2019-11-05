@@ -28,14 +28,15 @@ export default function Grid(props) {
   if (value && Array.isArray(value)) {
     const rowSize = value.length;
     const rst = [];
-    React.Children.forEach(children, (child, i) => {
+    // 使用 toArray 会自动 filter null
+    React.Children.toArray(children).forEach((child, i) => {
       if (i % rowSize === 0) {
         rst.push({
           items: [],
         });
       }
       rst[rst.length - 1].items.push(child);
-    });
+    })
     return rst.map((row, i) => {
       return <Row key={i} gutter={{
         xs: 1,

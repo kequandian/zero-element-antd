@@ -9,11 +9,11 @@
 
 .ZEleA-Form-ruleTips.error {
   opacity      : 1;
-  padding-top  : 2px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error {
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
   border-color: #ff4d4f;
 }
 
@@ -43,6 +43,16 @@
 .ZEleA-Form-horizontal .ZEleA-Form-item-label {
   text-align: right;
   min-width : 90px;
+}
+
+@media (min-width: 768px) {
+  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
+    min-width: 106px;
+  }
+
+  .ZEleA-Form-ruleTips {
+    margin-left: 114px;
+  }
 }
 
 .ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
