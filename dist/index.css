@@ -36,6 +36,16 @@
   font-weight: 500;
   font-size  : 1.5em;
 }
+.ZEleA-ImageView-container {
+  border-radius: 50%;
+  overflow     : hidden;
+  cursor       : pointer;
+}
+
+.ZEleA-ImageView-container img {
+  width : 100%;
+  height: 100%;
+}
 .ZEleA-Panel {
   background   : #fff;
   margin-bottom: 8px;
