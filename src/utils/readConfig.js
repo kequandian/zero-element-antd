@@ -12,13 +12,14 @@ export function getFormItem(field, modelStatus, { namespace, values, handle }) {
     rules = [],
     type,
     options = {},
+    expected,
     ...rest } = field;
   const formData = modelStatus[options.expectedPath || 'formData'];
 
   if (!checkExpected({
     ...formData,
     ...values,
-  }, options)) {
+  }, expected || options)) {
     return null;
   }
 
