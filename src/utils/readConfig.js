@@ -6,7 +6,9 @@ import ActionItem from '@/container/List/ActionItemWrapped';
 import checkExpected from './checkExpected';
 
 
-export function getFormItem(field, modelStatus, { namespace, values, handle }) {
+export function getFormItem(field, modelStatus,
+  { namespace, values, handle, bindOnChange }
+) {
   const {
     field: fieldName, label, value, extra = '', span,
     rules = [],
@@ -15,6 +17,10 @@ export function getFormItem(field, modelStatus, { namespace, values, handle }) {
     expected,
     ...rest } = field;
   const formData = modelStatus[options.expectedPath || 'formData'];
+
+  if (options.expectedField) {
+    console.warn('options 的 expectedField 即将弃用，请改为放在 expected 内');
+  }
 
   if (!checkExpected({
     ...formData,
@@ -31,18 +37,24 @@ export function getFormItem(field, modelStatus, { namespace, values, handle }) {
     {...rest}
     validate={composeValidators(...rules.map(handleRule))}
   >
-    {({ input, meta }) => <FormIten
-      label={label}
-      type={type}
-      options={options}
-      input={input}
-      meta={meta}
-      defaultValue={value}
-      namespace={namespace}
-      handle={handle}
-      required={rules.findIndex(r => r === 'required') > -1}
-      {...rest}
-    />}
+    {({ input, meta }) => {
+      if (bindOnChange) {
+        bindOnChange(input.name, input.onChange);
+      }
+      return <FormIten
+        label={label}
+        type={type}
+        options={options}
+        input={input}
+        meta={meta}
+        defaultValue={value}
+        namespace={namespace}
+        handle={handle}
+        required={rules.findIndex(r => r === 'required') > -1}
+        {...rest}
+      />
+    }
+    }
   </Field>
 }
 

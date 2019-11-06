@@ -43,7 +43,7 @@ export default function SelectField(props) {
         if (Array.isArray(list)) {
           setOptionList(list);
         } else {
-          console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
+          console.warn(`API ${API} 返回的 data 预期应该为 Array, 实际: `, list);
         }
       }).finally(_ => {
         setLoading(false);

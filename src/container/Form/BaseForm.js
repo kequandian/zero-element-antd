@@ -1,5 +1,5 @@
 import React, { useReducer, useRef, useMemo } from 'react';
-import { Form } from 'react-final-form';
+import { Form, FormSpy } from 'react-final-form';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -8,6 +8,7 @@ import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
 import global from 'zero-element-global/lib/global';
 import { getModel } from 'zero-element/lib/Model';
+import Sub from './utils/Subscription';
 
 const toTypeMap = {
   'html': function (value) {
@@ -33,6 +34,7 @@ const toTypeMap = {
 export default function BaseForm(props) {
   const formRef = useRef({});
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
+  const sub = useRef(new Sub());
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const {
     MODAL, namespace, config, extraData = {},
@@ -77,19 +79,19 @@ export default function BaseForm(props) {
       }
     });
   }
-  function handleSaveOtherValue(field, value) {
-    const values = formRef.current.values;
+  // function handleSaveOtherValue(field, value) {
+  //   const values = formRef.current.values;
 
-    values[field] = value;
-    formRef.current.values = values;
+  //   values[field] = value;
+  //   formRef.current.values = values;
 
-    model.dispatch({
-      type: 'save',
-      payload: {
-        formData: values,
-      }
-    });
-  }
+  //   model.dispatch({
+  //     type: 'save',
+  //     payload: {
+  //       formData: values,
+  //     }
+  //   });
+  // }
   function formatValue(field, toType) {
     // 保存需要 format 的 字段与 format 的方式
     formatValueRef.current[field] = toType;
@@ -195,11 +197,16 @@ export default function BaseForm(props) {
                 values,
                 handle: {
                   onFormatValue: formatValue,
-                  onSaveOtherValue: handleSaveOtherValue,
+                  onSaveOtherValue: sub.current.changeValue.bind(sub.current),
                   onGetFormData: handleGetFormData,
-                }
+                },
+                bindOnChange: sub.current.recordOnChange.bind(sub.current),
               }))}
             </Render>
+            <FormSpy
+              subscription={{ values }}
+              onChange={sub.current.subscriptionChange.bind(sub.current)}
+            />
           </form>
         }}
       />
