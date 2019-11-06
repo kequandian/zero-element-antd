@@ -1,7 +1,10 @@
 .ZEleA-ImageView-container {
+  overflow: hidden;
+  cursor  : pointer;
+}
+
+.ZEleA-ImageView-container.circle {
   border-radius: 50%;
-  overflow     : hidden;
-  cursor       : pointer;
 }
 
 .ZEleA-ImageView-container img {

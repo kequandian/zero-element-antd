@@ -8,6 +8,7 @@ export default function ImageView(props) {
     max = 9,
     width = 60,
     height = 60,
+    circle
   } = props;
   const [visible, setVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -21,12 +22,16 @@ export default function ImageView(props) {
     setPreviewImage(url);
     setVisible(true);
   }
+  const className = [
+    'ZEleA-ImageView-container',
+    circle ? 'circle' : '',
+  ].join(' ');
 
   return <>
     {
       list.map((item, i) => {
         return <div
-          className="ZEleA-ImageView-container"
+          className={className}
           key={i}
           style={{
             width,
