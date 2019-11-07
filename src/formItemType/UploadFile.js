@@ -7,6 +7,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 export default function UploadFile(props) {
   const { value, options, namespace, handle, ...rest } = props;
   const {
+    title = '点击上传',
     API = '/api/upload/files',
     max = 9,
     fileNameField = 'fileName'
@@ -24,7 +25,7 @@ export default function UploadFile(props) {
 
   const uploadButton = (
     <Button>
-      <Icon type={loading ? 'loading' : 'plus'} /> 点击上传
+      <Icon type={loading ? 'loading' : 'plus'} /> {title}
     </Button>
   );
 

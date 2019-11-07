@@ -31,5 +31,6 @@ const typeMap = {
   OneMany,
   'SelectField': Select,
   'ModalRadio': Button,
+  'UploadFile': Button,
 };
 export default typeMap;

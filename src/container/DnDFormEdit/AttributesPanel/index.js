@@ -156,7 +156,7 @@ export default ({ current, dispatch, fields }) => {
       data={required}
       onChange={handleRulesChange}
     />
-    <div className="ZEleA-DnDFormEdit-title">字段值</div>
+    <div className="ZEleA-DnDFormEdit-title">字段值(后端字段)</div>
     {renderFieldsSelect(fields, field.value, handleFieldChange)}
     {renderBaseOptions(base, handleBaseChange)}
     {Object.keys(restRules).length ? (

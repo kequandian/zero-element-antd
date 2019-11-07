@@ -134,4 +134,39 @@ export default [
       expect: {},
     }
   },
+  {
+    title: '上传文件', type: 'UploadFile', options: {
+      field: {},
+      base: {
+        label: {
+          label: '字段名',
+        },
+      },
+      config: {
+        title: {
+          label: '引导文本',
+          value: '点击上传',
+        },
+        API: {
+          label: '上传 API',
+          value: '/api/upload/files',
+        },
+        max: {
+          label: '最大上传数量',
+          value: 9,
+        },
+        fileNameField: {
+          label: '上传后返回的文件名字段(用于上传单文件时)',
+          value: 'fileName',
+        },
+      },
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
+      expect: {},
+    }
+  },
 ];

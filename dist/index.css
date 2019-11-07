@@ -36,6 +36,115 @@
   font-weight: 500;
   font-size  : 1.5em;
 }
+.ZEleA-ImageView-container {
+  overflow: hidden;
+  cursor  : pointer;
+}
+
+.ZEleA-ImageView-container.circle {
+  border-radius: 50%;
+}
+
+.ZEleA-ImageView-container img {
+  width : 100%;
+  height: 100%;
+}
+.ZEleA-Panel {
+  background   : #fff;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.ZEleA-Panel-title {
+  font-size    : 18px;
+  font-weight  : 600;
+  border-bottom: 1px solid #d9d9d9;
+  padding      : 4px;
+  cursor       : pointer;
+  user-select  : none;
+}
+
+.ZEleA-Panel-icon {
+  transition: all .2s;
+}
+
+.ZEleA-Panel-content {
+  padding   : 8px;
+  overflow  : hidden;
+  transition: all .2s;
+}
+.ZEleA-Form-ruleTips {
+  color      : #ff4d4f;
+  flex-basis : 100%;
+  margin-left: 98px;
+  height     : 0;
+  opacity    : 0;
+  transition : all .2s;
+}
+
+.ZEleA-Form-ruleTips.error {
+  opacity      : 1;
+  margin-bottom: 18px;
+}
+
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
+  border-color: #ff4d4f;
+}
+
+.ZEleA-Form-vertical>.ant-row,
+.ZEleA-Form-horizontal>.ant-row {
+  margin-bottom: 8px;
+}
+
+.ZEleA-Form-item-label {
+  margin-right: 8px;
+}
+
+.ZEleA-Form-item-label-colon::after {
+  content : ':';
+  position: relative;
+  top     : -0.5px;
+  margin  : 0 8px 0 2px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item {
+  display      : flex;
+  align-items  : center;
+  margin-bottom: 8px;
+  flex-wrap    : wrap;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-label {
+  text-align: right;
+  min-width : 90px;
+}
+
+@media (min-width: 768px) {
+  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
+    min-width: 106px;
+  }
+
+  .ZEleA-Form-ruleTips {
+    margin-left: 114px;
+  }
+}
+
+.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
+  width: 6em;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-element {
+  width: 0;
+  flex : 1;
+}
+
+.ZEleA-Form-item-element input,
+.ZEleA-Form-item-element .ant-input-number,
+.ZEleA-Form-item-element .ant-select {
+  width    : 240px;
+  max-width: 100%;
+}
 .ZEleA-DnDFormEdit-tips {
   text-align: center;
   color     : #cbc5c5;
@@ -200,78 +309,6 @@
   min-height: 60px;
   padding   : 8px 16px;
 }
-.ZEleA-Form-ruleTips {
-  color      : #ff4d4f;
-  flex-basis : 100%;
-  margin-left: 98px;
-  height     : 0;
-  opacity    : 0;
-  transition : all .2s;
-}
-
-.ZEleA-Form-ruleTips.error {
-  opacity      : 1;
-  margin-bottom: 18px;
-}
-
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
-  border-color: #ff4d4f;
-}
-
-.ZEleA-Form-vertical>.ant-row,
-.ZEleA-Form-horizontal>.ant-row {
-  margin-bottom: 8px;
-}
-
-.ZEleA-Form-item-label {
-  margin-right: 8px;
-}
-
-.ZEleA-Form-item-label-colon::after {
-  content : ':';
-  position: relative;
-  top     : -0.5px;
-  margin  : 0 8px 0 2px;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item {
-  display      : flex;
-  align-items  : center;
-  margin-bottom: 8px;
-  flex-wrap    : wrap;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-label {
-  text-align: right;
-  min-width : 90px;
-}
-
-@media (min-width: 768px) {
-  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
-    min-width: 106px;
-  }
-
-  .ZEleA-Form-ruleTips {
-    margin-left: 114px;
-  }
-}
-
-.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
-  width: 6em;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-element {
-  width: 0;
-  flex : 1;
-}
-
-.ZEleA-Form-item-element input,
-.ZEleA-Form-item-element .ant-input-number,
-.ZEleA-Form-item-element .ant-select {
-  width    : 240px;
-  max-width: 100%;
-}
 .ZEleA-table-operation {
   height     : 40px;
   line-height: 40px;
@@ -354,43 +391,6 @@
 .ZEleA-table-action-Sort>i {
   margin-right: 8px;
   cursor      : pointer;
-}
-.ZEleA-ImageView-container {
-  overflow: hidden;
-  cursor  : pointer;
-}
-
-.ZEleA-ImageView-container.circle {
-  border-radius: 50%;
-}
-
-.ZEleA-ImageView-container img {
-  width : 100%;
-  height: 100%;
-}
-.ZEleA-Panel {
-  background   : #fff;
-  margin-bottom: 8px;
-  border-radius: 4px;
-}
-
-.ZEleA-Panel-title {
-  font-size    : 18px;
-  font-weight  : 600;
-  border-bottom: 1px solid #d9d9d9;
-  padding      : 4px;
-  cursor       : pointer;
-  user-select  : none;
-}
-
-.ZEleA-Panel-icon {
-  transition: all .2s;
-}
-
-.ZEleA-Panel-content {
-  padding   : 8px;
-  overflow  : hidden;
-  transition: all .2s;
 }
 .ZEleA-Layout-table {
   display: table;
