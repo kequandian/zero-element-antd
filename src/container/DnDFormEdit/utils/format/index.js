@@ -60,6 +60,7 @@ export default function formatToConfig(cfg, formName, opt) {
           },
           rules: formatToRules(field.options.rules),
           options: formatToOptions(field.options.config),
+          expect: formatToExpect(field.options.expect),
         };
         if (field.options.items) {
           rst.options = field.options.items;
@@ -116,6 +117,15 @@ function formatToOptions(options) {
     rst[key] = options[key].value;
   })
   return rst;
+}
+function formatToExpect(expect) {
+  if (expect && expect.expectedField) {
+    return {
+      expectedField: expect.expectedField.value,
+      expectedValue: expect.expectedValue.value,
+    }
+  }
+  return undefined;
 }
 
 /**

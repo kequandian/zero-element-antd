@@ -6,6 +6,7 @@ import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './
 
 import '../index.css';
 import Checkbox from './components/Checkbox';
+import Expect from './components/Expect';
 
 const { Option } = Select;
 
@@ -32,7 +33,8 @@ export default ({ current, dispatch, fields }) => {
   const { options = {} } = current;
   const {
     field = {}, base = {}, rules = {}, style,
-    items, advanced, config, table
+    items, advanced, config, table,
+    expect,
   } = options;
   const { required, ...restRules } = rules;
 
@@ -124,6 +126,13 @@ export default ({ current, dispatch, fields }) => {
     rules[key].message = value;
     onSave();
   }
+  function handleExpectChange(key, value) {
+    if (!expect[key]) {
+      expect[key] = {};
+    }
+    expect[key].value = toNumber(value);
+    onSave();
+  }
 
   /**
    * 实际上是修改了 config 的 options
@@ -183,6 +192,15 @@ export default ({ current, dispatch, fields }) => {
         <div className="ZEleA-DnDFormEdit-title">配置</div>
         {renderBaseOptions(config, handleConfigChange)}
       </> : null}
+    {expect ?
+      <>
+        <div className="ZEleA-DnDFormEdit-title">预期</div>
+        <Expect
+          data={expect}
+          onChange={handleExpectChange}
+        />
+      </>
+      : null}
     {advanced ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">高级</div>

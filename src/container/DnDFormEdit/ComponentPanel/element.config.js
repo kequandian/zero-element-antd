@@ -46,6 +46,7 @@ export default [
           value: '0px 0px 0px 0px',
         },
       },
+      expect: {},
     }
   },
   {
@@ -70,6 +71,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -106,6 +108,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -130,6 +133,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -154,6 +158,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -174,6 +179,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -201,6 +207,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -212,6 +219,7 @@ export default [
           value: '',
         },
       },
+      expect: {},
     }
   },
 ];

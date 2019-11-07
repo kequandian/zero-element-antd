@@ -61,6 +61,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -103,6 +104,7 @@ export default [
           value: undefined,
         },
       },
+      expect: {},
     }
   },
   {
@@ -129,6 +131,7 @@ export default [
           message: '请输入正确的手机号码格式',
         },
       },
+      expect: {},
     }
   },
 ];
