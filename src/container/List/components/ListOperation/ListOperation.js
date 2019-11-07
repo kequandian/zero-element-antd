@@ -43,7 +43,11 @@ export default function ListOperation(props) {
   const dropdownList = [];
   operation.forEach((item, i) => {
     item.options = item.options || {};
-    if (checkExpected(record, item.options)) {
+
+    if (item.expectedField) {
+      console.warn('options 的 expectedField 即将弃用，请改为放在 expect 内');
+    }
+    if (checkExpected(record, item.expect || item.options)) {
       if (item.options.outside) {
         outsideList.push(operationMap['outside'](item, i, { index, record, records }, onAction));
       } else {
