@@ -84,6 +84,22 @@ export default [
           value: '请选择日期',
         },
       },
+      config: {
+        nowTime: {
+          label: '自动填入当前时间',
+          value: true,
+          type: 'radio',
+          options: [
+            { label: '是', value: true },
+            { label: '否', value: false },
+          ],
+          value: false,
+        },
+        format: {
+          label: '格式化',
+          value: 'YYYY-MM-DD hh:mm:ss',
+        },
+      },
       rules: {
         required: {
           label: '必填',
