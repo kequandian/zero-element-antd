@@ -95,8 +95,11 @@ export default function TreeTable(props) {
       .finally(_ => setLoading(false));
   }
   function handleRefresh() {
-    if (oData.id) {
-      handleAppend(oData.id);
+    if (expandedRowKeys.includes(oData.pid)) {
+      handleAppend(oData.pid);
+    } else {
+      handleInitData();
+      setExpandedRowKeys([]);
     }
   }
 
