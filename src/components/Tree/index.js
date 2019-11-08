@@ -23,6 +23,7 @@ export default (props) => {
 
   const [treeData, setTreeData] = useState(initData);
   const [expandedKeys, setExpandedKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
   const [treeLoading, setTreeLoading] = useState(false);
 
@@ -31,7 +32,6 @@ export default (props) => {
       handleLoadInitData();
     }
   });
-
 
   function handleLoadInitData() {
     if (API.initAPI === undefined) {
@@ -42,7 +42,15 @@ export default (props) => {
 
     setTreeLoading(true);
     query(api)
-      .then(data => setTreeData(formatInit(data)))
+      .then(data => {
+        const rst = formatInit(data);
+        setTreeData(rst);
+        if (rst.length === 1) {
+          const keys = [String(rst[0].id)];
+          handleSelect(keys, rst[0]);
+          setExpandedKeys(keys);
+        }
+      })
       .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setTreeLoading(false));
   }
@@ -73,14 +81,21 @@ export default (props) => {
     setExpandedKeys(expandedKeys);
     setAutoExpandParent(false);
   }
-  function handleSelect(selectedKeys) {
-    const id = selectedKeys[0];
-    const find = findNode(id, treeData);
+  function handleSelect(selectedKeys, data) {
+    setSelectedKeys(selectedKeys);
 
-    onChange({
-      id,
-      ...find,
-    });
+    if (data) {
+      onChange(data);
+
+    } else {
+      const id = selectedKeys[0];
+      const find = findNode(id, treeData);
+
+      onChange({
+        id,
+        ...find,
+      });
+    }
   }
   function handleLocalSearch(e) {
     const { value } = e.target;
@@ -124,6 +139,7 @@ export default (props) => {
 
   const treeProps = {
     loadData: handleLoadData,
+    selectedKeys,
     onSelect: handleSelect,
     ...rest,
   };
