@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
@@ -7,6 +7,7 @@ import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from '@/utils/request';
+import useOperation from './utils/useOperation';
 
 export default function TreeTable(props) {
   const { namespace, config, extraData } = props;
@@ -27,11 +28,13 @@ export default function TreeTable(props) {
   const { handle, data, modelStatus } = listProps;
   const [treeData, setTreeData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const finalId = useRef(null);
+  const [expandedRowKeys, setExpandedRowKeys] = useState([]);
+  const [oData, onClickOperation] = useOperation();
 
   const columns = formatTableFields(fields, operation, {
     ...handle,
     onRefresh: handleRefresh,
+    onClickOperation,
   }, {
     namespace,
     extraData,
@@ -45,8 +48,20 @@ export default function TreeTable(props) {
   useEffect(_ => {
     if (data.length) {
       setTreeData(formatTree(data));
+      setExpandedRowKeys([]);
     }
   }, [data]);
+  useEffect(_ => {
+    const { children = [] } = treeData[0] || {};
+    if (
+      treeData.length === 1 &&
+      (expandedRowKeys.length === 0 && children.length === 0)
+    ) {
+      handleAppend(treeData[0].id);
+      setExpandedRowKeys([treeData[0].id]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [treeData, expandedRowKeys]);
 
   function handleInitData() {
     const api = formatAPI(API.listAPI, { namespace });
@@ -62,8 +77,10 @@ export default function TreeTable(props) {
       handleAppend(record.id);
     }
   }
+  function handleExpandedChange(keys) {
+    setExpandedRowKeys(keys);
+  }
   function handleAppend(id) {
-    finalId.current = id;
     const api = API.appendAPI.replace(/(\<\w+\>)/, id);
     setLoading(true);
     query(api)
@@ -78,8 +95,8 @@ export default function TreeTable(props) {
       .finally(_ => setLoading(false));
   }
   function handleRefresh() {
-    if (finalId.current) {
-      handleAppend(finalId.current);
+    if (oData.id) {
+      handleAppend(oData.id);
     }
   }
 
@@ -104,7 +121,9 @@ export default function TreeTable(props) {
       loading={loading}
       pagination={false}
       {...propsCfg}
+      expandedRowKeys={expandedRowKeys}
       onExpand={handleExpand}
+      onExpandedRowsChange={handleExpandedChange}
     />
   </Render>
 }

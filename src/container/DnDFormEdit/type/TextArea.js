@@ -13,7 +13,7 @@ export default ({ config }) => {
   return <TextArea
     value={value.value}
     placeholder={placeholder.value}
-    autosize={{
+    autoSize={{
       minRows: minRows.value,
       maxRows: maxRows.value,
     }}
