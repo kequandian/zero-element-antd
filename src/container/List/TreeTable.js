@@ -46,7 +46,7 @@ export default function TreeTable(props) {
     }
   });
   useEffect(_ => {
-    if (data.length) {
+    if (data) {
       setTreeData(formatTree(data));
       setExpandedRowKeys([]);
     }
