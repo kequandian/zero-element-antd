@@ -67,6 +67,7 @@ FITSet({
   range: Load('formItemType/Date/range'),
   'table-select': Load('formItemType/TableSelect'),
   'modal-radio': Load('formItemType/ModalRadio'),
+  'modal-checkbox': Load('formItemType/ModalCheckbox'),
   'upload-image': Load('formItemType/UploadImage'),
   'upload-file': Load('formItemType/UploadFile'),
   'checkbox-fetch': Load('formItemType/CheckboxFetch'),

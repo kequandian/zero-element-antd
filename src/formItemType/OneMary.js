@@ -23,7 +23,7 @@ export default function ChildrenList(props) {
     onChange([...value]);
   }
   function handleEdit(index, data) {
-    itemsData[index] = data;
+    value[index] = data;
     onChange([...value]);
   }
   function handleRemove({ record, options = {} }) {

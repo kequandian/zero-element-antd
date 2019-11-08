@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function () {
-  return null;
+  return <div style={{ width: 1, height: 21 }}></div>;
 }
