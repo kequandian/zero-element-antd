@@ -27,7 +27,7 @@ export default function BaseSearch(props) {
   const { onSearch, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(fields.length > collapse ? false : null);
-  const [canFields, setCanFields] = useState(fields.slice(0, 3));
+  const [canFields, setCanFields] = useState(fields.slice(0, collapse));
 
   useWillUnmount(onClearSearch);
 
