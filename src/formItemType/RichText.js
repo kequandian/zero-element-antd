@@ -4,7 +4,7 @@ import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 import 'braft-editor/dist/index.css';
 
-export default (props) => {
+export default function RichText(props) {
   const { name, value, handle, onChange, props: p, ...rest } = props;
   const [editorState, setEditorState] = useState();
 
@@ -13,20 +13,26 @@ export default (props) => {
   });
 
   useEffect(_ => {
-    setEditorState(BraftEditor.createEditorState(value));
+    if (value && typeof value === 'string') {
+      setEditorState(BraftEditor.createEditorState(value));
+    }
   }, [value]);
 
-  function handleChange(editorState) {
-    setEditorState(editorState);
-    onChange(editorState);
+  if (editorState) {
+    return <BraftEditor
+      name={name}
+      {...rest}
+      {...p}
+      defaultValue={editorState}
+      onBlur={onChange}
+      placeholder="请输入内容"
+    />
   }
-
   return <BraftEditor
     name={name}
     {...rest}
     {...p}
-    value={editorState}
-    onChange={handleChange}
+    onBlur={onChange}
     placeholder="请输入内容"
   />
 }
