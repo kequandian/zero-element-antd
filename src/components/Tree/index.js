@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Spin, Input, Tree, Empty } from 'antd';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatAPI } from 'zero-element/lib/utils/format';
@@ -18,6 +18,7 @@ export default (props) => {
     namespace,
     initData = {},
     onChange,
+    defaultAelectedKeys,
     ...rest
   } = props;
 
@@ -32,6 +33,10 @@ export default (props) => {
       handleLoadInitData();
     }
   });
+  useEffect(_ => {
+    handleSelectChange();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedKeys]);
 
   function handleLoadInitData() {
     if (API.initAPI === undefined) {
@@ -45,9 +50,11 @@ export default (props) => {
       .then(data => {
         const rst = formatInit(data);
         setTreeData(rst);
-        if (rst.length === 1) {
+        if (defaultAelectedKeys) {
+          handleSelect(defaultAelectedKeys);
+        } else if (rst.length === 1) {
           const keys = [String(rst[0].id)];
-          handleSelect(keys, rst[0]);
+          handleSelect(keys);
           setExpandedKeys(keys);
         }
       })
@@ -81,21 +88,17 @@ export default (props) => {
     setExpandedKeys(expandedKeys);
     setAutoExpandParent(false);
   }
-  function handleSelect(selectedKeys, data) {
+  function handleSelect(selectedKeys) {
     setSelectedKeys(selectedKeys);
+  }
+  function handleSelectChange() {
+    const id = selectedKeys[0];
+    const find = findNode(id, treeData);
 
-    if (data) {
-      onChange(data);
-
-    } else {
-      const id = selectedKeys[0];
-      const find = findNode(id, treeData);
-
-      onChange({
-        id,
-        ...find,
-      });
-    }
+    onChange({
+      id,
+      ...find,
+    });
   }
   function handleLocalSearch(e) {
     const { value } = e.target;
