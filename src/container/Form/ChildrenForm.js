@@ -1,10 +1,11 @@
 import React, { useReducer, useRef } from 'react';
-import { Form } from 'react-final-form';
+import { Form, FormSpy } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
+import useFormHandle from './utils/useFormHandle';
 
 export default function ChildrenForm(props) {
   const formRef = useRef({});
@@ -20,6 +21,14 @@ export default function ChildrenForm(props) {
     namespace,
     modelPath: 'formData',
   }, config);
+
+  const [, {
+    onFormatValue,
+    onSaveOtherValue,
+    onGetFormData,
+    bindOnChange,
+    onSpyChange,
+  }] = useFormHandle(namespace);
 
   const { loading, data, modelStatus, handle } = formProps;
   const initData = useRef(props.data || {});
@@ -85,8 +94,18 @@ export default function ChildrenForm(props) {
               {fields.map(field => getFormItem(field, modelStatus, {
                 namespace,
                 values,
+                handle: {
+                  onFormatValue,
+                  onSaveOtherValue,
+                  onGetFormData,
+                },
+                bindOnChange,
               }))}
             </Render>
+            <FormSpy
+              subscription={{ values }}
+              onChange={onSpyChange}
+            />
           </form>
         }}
       />
