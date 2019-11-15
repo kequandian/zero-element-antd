@@ -4,7 +4,7 @@ import { Render } from 'zero-element-global/lib/formItemType';
 import './index.css';
 
 export default function FormItemWrapped({
-  label, type, input, meta, options, required,
+  label, type, input, meta, options, required, style,
   ...rest
 }) {
   const visibleError = Boolean(meta.error && meta.touched);
@@ -17,7 +17,7 @@ export default function FormItemWrapped({
     label ? 'ZEleA-Form-item-label-colon' : '',
   ];
 
-  return <div className="ZEleA-Form-item">
+  return <div style={style} className="ZEleA-Form-item">
     {label ? (
       <label className={labelClassNames.join(' ')}>
         {label}

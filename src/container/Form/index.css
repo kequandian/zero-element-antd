@@ -71,6 +71,21 @@
   max-width: 100%;
 }
 
+.ZEleA-Form-item-element .ant-calendar-picker {
+  display  : flex;
+  width    : 240px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker[tabindex="0"] {
+  width: 360px;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker>div {
+  width: 0;
+  flex : 1;
+}
+
 .ZEleA-Form-item-element .ant-calendar-picker-input input {
   width: 140px;
 }

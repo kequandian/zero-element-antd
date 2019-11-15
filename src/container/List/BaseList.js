@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
@@ -8,7 +8,7 @@ import { Render } from 'zero-element-global/lib/layout';
 import useOperation from './utils/useOperation';
 
 export default function BaseList(props) {
-  const { namespace, config, extraData } = props;
+  const { namespace, config, extraData, forceInitList } = props;
   const {
     layout = 'Empty', layoutConfig = {},
     API = {},
@@ -43,6 +43,12 @@ export default function BaseList(props) {
     }
   });
   useWillUnmount(onClearList);
+  useEffect(_ => {
+    if (forceInitList !== undefined && API.listAPI) {
+      onGetList({});
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [forceInitList])
 
   function handlePageChange(current, pageSize) {
     onGetList({
