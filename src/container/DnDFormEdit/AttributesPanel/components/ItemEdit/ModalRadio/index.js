@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Input from './Input';
 import TableField from '../../render/LabelComponents/TableField';
+import SaveData from '../../render/LabelComponents/SaveData';
 
 export default function ModalRadioOptions({
   data = {},
@@ -46,10 +47,19 @@ export default function ModalRadioOptions({
       onChange={handleChange}
       value={data.API}
     />
+    <br /><br />
     <TableField
       field="fields"
       label="列表字段"
       value={data.fields || []}
+      handle={handleChange}
+    />
+    <SaveData
+      field="saveData"
+      label="添加额外保存数据"
+      tLabel="把选择的数据的字段"
+      tValue="保存为以下字段"
+      value={data.saveData || {}}
       handle={handleChange}
     />
   </div>
