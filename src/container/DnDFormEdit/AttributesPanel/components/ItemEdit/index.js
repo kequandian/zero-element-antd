@@ -4,6 +4,7 @@ import Item from './Item';
 export default ({
   items, valueField,
   disabled,
+  text = {},
   onChange, onRemove, onOptionsChange
 }) => {
   const [editIndex, setEditIndex] = useState(-1);
@@ -19,6 +20,7 @@ export default ({
     return <div key={i}>
       <Item
         {...item}
+        text={text}
         valueField={valueField}
         editId={editIndex}
         index={i}

@@ -97,6 +97,12 @@ export default [
             { label: '性别', field: 'sex' },
           ]
         },
+        saveData: {
+          label: '额外保存选中的数据',
+          type: 'saveData',
+          tLabel: '把选择的数据的字段',
+          tValue: '保存为以下字段',
+        },
       },
       rules: {
         required: {

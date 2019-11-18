@@ -7,7 +7,7 @@ export default function ModalRadioOptions({
   onChange,
 }) {
 
-  function handleChangeAPI(field, e) {
+  function handleChange(field, e) {
     const value = e.target.value;
     onChange({
       ...data,
@@ -19,38 +19,38 @@ export default function ModalRadioOptions({
     <Input
       label="引导文本"
       field="title"
-      onChange={handleChangeAPI}
+      onChange={handleChange}
       value={data.title}
     />
     <Input
       label="展示文本"
       field="label"
-      onChange={handleChangeAPI}
+      onChange={handleChange}
       value={data.label}
     />
     <Input
       label="编辑时展示文本"
       field="editLabel"
-      onChange={handleChangeAPI}
+      onChange={handleChange}
       value={data.editLabel}
     />
     <Input
       label="提交的字段"
       field="value"
-      onChange={handleChangeAPI}
+      onChange={handleChange}
       value={data.value}
     />
     <Input
       label="API"
       field="API"
-      onChange={handleChangeAPI}
+      onChange={handleChange}
       value={data.API}
     />
     <TableField
       field="fields"
       label="列表字段"
       value={data.fields || []}
-      handle={handleChangeAPI}
+      handle={handleChange}
     />
   </div>
 }

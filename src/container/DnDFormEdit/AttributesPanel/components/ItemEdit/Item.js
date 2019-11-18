@@ -7,7 +7,11 @@ export default function ItemEdit(props) {
   const {
     label, index, options,
     valueField = 'value',
-    disabled, // 禁用 options 的编辑
+    disabled, // 禁用 options 的编辑,
+    text: {
+      label: tLabel = '文本',
+      value: tValue = '值',
+    },
     editId, onClick,
     onChange, onRemove, onOptionsChange
   } = props;
@@ -40,9 +44,9 @@ export default function ItemEdit(props) {
       display: edit ? 'block' : 'none',
     }}
   >
-    <span>文本: </span>
+    <span>{tLabel}: </span>
     <Input value={label} onChange={onChange.bind(null, index, 'label')} />
-    <span>值: </span>
+    <span>{tValue}: </span>
     <Input
       value={props[valueField]}
       onChange={onChange.bind(null, index, valueField)}

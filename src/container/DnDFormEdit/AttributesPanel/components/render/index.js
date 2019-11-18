@@ -5,6 +5,7 @@ import SelectSQL from './LabelComponents/SelectSQL';
 import SelectTable from './LabelComponents/SelectTable';
 import SelectTableField from './LabelComponents/SelectTableField';
 import TableField from './LabelComponents/TableField';
+import SaveData from './LabelComponents/SaveData';
 
 
 const labelSet = {
@@ -14,6 +15,7 @@ const labelSet = {
   'selectTable': SelectTable,
   'selectTableField': SelectTableField,
   'tableField': TableField,
+  'saveData': SaveData,
   'undefined': LabelInput,
 };
 
