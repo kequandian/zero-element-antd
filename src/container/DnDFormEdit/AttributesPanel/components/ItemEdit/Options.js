@@ -1,13 +1,30 @@
-import React from 'react';
-import { Checkbox, Select } from 'antd';
+import React, { useState } from 'react';
+import { Checkbox, Select, Modal, Button } from 'antd';
+import ModalRadio from './ModalRadio';
 
 const Option = Select.Option;
 
 export default function Options({ index, data, disabled, onChange }) {
+  const [visible, setVisible] = useState(false);
+  const [optionsData, setOptionsData] = useState({});
 
   function handleChange(field, value) {
     onChange(index, field, value);
   }
+  function handleOptionsChange(value) {
+    setOptionsData(value);
+  }
+  function handleVisible() {
+    if (!visible) {
+      setOptionsData(data.options);
+    }
+    setVisible(!visible);
+  }
+  function handleOptionsSave() {
+    handleVisible();
+    onChange(index, 'options', optionsData);
+  }
+
   if (!data) return null;
 
   return <div>
@@ -32,6 +49,28 @@ export default function Options({ index, data, disabled, onChange }) {
       disabled={disabled}
       onChange={handleChange}
     />
+    {data.type === 'modal-radio' ?
+      (
+        <div>
+          <br />
+          <Button
+            onClick={handleVisible}
+          >
+            编辑配置
+          </Button>
+          <Modal
+            title="编辑 模态框-列表单选 配置"
+            visible={visible}
+            onCancel={handleVisible}
+            onOk={handleOptionsSave}
+          >
+            <ModalRadio
+              data={optionsData}
+              onChange={handleOptionsChange}
+            />
+          </Modal>
+        </div>
+      ) : null}
   </div>
 }
 
@@ -72,6 +111,7 @@ function SelectWrapped({ title, field, value, disabled, onChange }) {
       <Option value="input">输入框</Option>
       <Option value="number">数值输入框</Option>
       <Option value="date">时间</Option>
+      <Option value="modal-radio">模态框-列表单选</Option>
     </Select>
   </div>
 }

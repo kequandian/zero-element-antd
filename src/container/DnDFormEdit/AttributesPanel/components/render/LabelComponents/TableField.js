@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import ItemEdit from '../../ItemEdit';
 import { Button } from 'antd';
 
-export default function SelectTable(props) {
+export default function TableField(props) {
   const { field, label, value, handle } = props;
   const countId = useRef(0);
 

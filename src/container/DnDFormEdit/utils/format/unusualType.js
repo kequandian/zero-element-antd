@@ -52,7 +52,7 @@ export default {
 
       table.forEach(f => {
         const { options = {} } = f;
-        const { type, echoAdd, echoEdit } = options;
+        const { type, echoAdd, echoEdit, options: opt } = options;
 
         if (type) {
           if (echoAdd) {
@@ -60,6 +60,7 @@ export default {
               label: f.label,
               field: f.value,
               type: type,
+              options: opt,
             });
           }
           if (echoEdit) {
@@ -67,6 +68,7 @@ export default {
               label: f.label,
               field: f.value,
               type: type,
+              options: opt,
             });
           }
         }
