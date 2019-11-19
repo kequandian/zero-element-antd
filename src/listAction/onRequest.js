@@ -23,7 +23,7 @@ export default function onRequest({ options, record }) {
           msg.success(message);
         }
       })
-      .catch(_ => msg.error(JSON.stringify(_)));
+    // .catch(_ => msg.error(JSON.stringify(_)));
   }
 
   return match(API, data)
@@ -32,5 +32,5 @@ export default function onRequest({ options, record }) {
         msg.success(message);
       }
     })
-    .catch(_ => msg.error(JSON.stringify(_)));
+  // .catch(_ => msg.error(JSON.stringify(_)));
 }

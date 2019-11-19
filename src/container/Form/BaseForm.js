@@ -37,7 +37,13 @@ export default function BaseForm(props) {
     MODAL, namespace, config, extraData = {},
     onClose, onSubmit, onSetExtraElement
   } = props;
-  const { API = {}, layout = 'Empty', fields, path, layoutConfig = {} } = config;
+  const {
+    API = {},
+    layout = 'Empty', layoutConfig = {},
+    fields,
+    path,
+    goBack: gobackOpt = true,
+  } = config;
   const { layoutType = 'horizontal' } = layoutConfig; // vertical horizontal
   const formProps = useBaseForm({
     namespace,
@@ -133,7 +139,7 @@ export default function BaseForm(props) {
           router(fPath);
         }
       }
-      if (!MODAL && goBack) {
+      if (!MODAL && gobackOpt && goBack) {
         goBack();
       }
     } else {
