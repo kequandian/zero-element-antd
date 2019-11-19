@@ -90,24 +90,34 @@ export default {
         }
       });
 
-      oneManyObj.config.operation.push({
-        title: '编辑数据', action: 'childEditModal',
-        options: {
-          outside: true,
-          modalTitle: '编辑数据',
-          modalWidth: 580,
-          layout: 'Content',
-          items: [
-            {
-              layout: 'Empty',
-              component: 'ChildrenForm',
-              config: {
-                fields: editModalFields,
+      oneManyObj.config.operation.push(
+        {
+          title: '编辑', action: 'childEditModal',
+          options: {
+            outside: true,
+            modalTitle: '编辑数据',
+            modalWidth: 580,
+            layout: 'Content',
+            items: [
+              {
+                layout: 'Empty',
+                component: 'ChildrenForm',
+                config: {
+                  fields: editModalFields,
+                },
               },
-            },
-          ],
+            ],
+          }
+        },
+        {
+          title: '移除',
+          action: 'removeChild',
+          options: {
+            icon: 'delete',
+            color: '#f5222d',
+          },
         }
-      });
+      );
     }
 
     config.items.push(oneManyObj);

@@ -42,7 +42,7 @@ export default function ModalRadio(props) {
 
     if (saveData) {
       Object.keys(saveData).forEach(key => {
-        onSaveOtherValue(key, selectedData.current[key]);
+        onSaveOtherValue(key, selectedData.current[saveData[key]]);
       })
     }
   }
