@@ -16,6 +16,14 @@ export default function Grid(props) {
         items: fields.splice(0, rowLayout.length)
       })
     });
+    if (fields.length) {
+      rst.push({
+        key: 'overage',
+        layout: 'Grid',
+        value: value || [12, 12],
+        items: fields,
+      });
+    }
 
     return rst.map(row => {
       const { layout, items, ...rest } = row;

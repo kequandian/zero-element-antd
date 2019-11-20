@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useMemo } from 'react';
+import React, { useReducer, useRef, useMemo, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
@@ -8,6 +8,7 @@ import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
 import global from 'zero-element-global/lib/global';
 import useFormHandle from './utils/useFormHandle';
+import extraFieldType from './utils/extraFieldType';
 
 const toTypeMap = {
   'html': function (value) {
@@ -17,7 +18,7 @@ const toTypeMap = {
     return value;
   },
   'raw': function (value) {
-    if (value && typeof value.toHTML === 'function') {
+    if (value && typeof value.toRAW === 'function') {
       return value.toRAW();
     }
     return value;
@@ -40,7 +41,7 @@ export default function BaseForm(props) {
   const {
     API = {},
     layout = 'Empty', layoutConfig = {},
-    fields,
+    fields: fieldsCfg,
     path,
     goBack: gobackOpt = true,
   } = config;
@@ -65,6 +66,8 @@ export default function BaseForm(props) {
 
   const { loading, data, modelStatus, handle } = formProps;
   const initData = useRef(data);
+  const extraFields = useRef([]);
+  const [fields, setFields] = useState(fieldsCfg);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
 
   useMemo(recordDefaultValue, [fields]);
@@ -73,7 +76,12 @@ export default function BaseForm(props) {
       onGetOne({}).then(({ code, data }) => {
         if (code === 200) {
           initData.current = data;
-          forceUpdate();
+          const { extra } = data;
+          if (extra && Array.isArray(extra.items)) {
+            setExtraFields(extra.items);
+          } else {
+            forceUpdate();
+          }
         }
       });
     }
@@ -82,6 +90,21 @@ export default function BaseForm(props) {
     }
   });
   useWillUnmount(onClearForm);
+
+  function setExtraFields(items) {
+    setFields([
+      ...fields,
+      ...items.map(item => {
+        extraFields.current.push(item.attr);
+        return {
+          label: item.fieldName,
+          field: item.attr,
+          type: extraFieldType[item.fieldType] || 'input',
+          value: item.value,
+        }
+      }),
+    ]);
+  }
 
   function recordDefaultValue() {
     fields.forEach(item => {
@@ -109,6 +132,16 @@ export default function BaseForm(props) {
       const type = formatValueRef.current[field];
       const value = submitData[field];
       submitData[field] = toTypeMap[type](value);
+    });
+
+
+    // 修改并提交 extra 里面的数据
+    extraFields.current.forEach(field => {
+      const find = submitData.extra.items.find(item => item.attr === field);
+      if (find) {
+        find.value = submitData[field];
+        delete submitData[field];
+      }
     });
 
     if (onSubmit) {
