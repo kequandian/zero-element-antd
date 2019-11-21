@@ -37,6 +37,7 @@ LayoutSet({
 
 CSet({
   BaseList: Load('container/List/BaseList'),
+  ReportList: Load('container/List/ReportList'),
   TreeTable: Load('container/List/TreeTable'),
   ChildrenList: Load('container/List/ChildrenList'),
   TreeList: Load('container/List/TreeList'),
