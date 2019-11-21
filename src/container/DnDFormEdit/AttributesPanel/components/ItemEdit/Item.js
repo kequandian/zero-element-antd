@@ -26,7 +26,7 @@ export default function ItemEdit(props) {
     onIndexChange('up', index);
   }
   function handleMoveDown() {
-    onIndexChange('dowm', index);
+    onIndexChange('down', index);
   }
 
   return <Card

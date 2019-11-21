@@ -40,7 +40,7 @@ export function toNumber(value) {
  * @param {number} index
  */
 export function arrayItemMove(arr, type, index) {
-  if (arr < 2) return false;
+  if (!Array.isArray(arr) || arr.length < 2) return false;
 
   if (type === 'up' && index > 0) {
     arr.splice(
@@ -48,7 +48,7 @@ export function arrayItemMove(arr, type, index) {
       1,
       ...arr.splice(index, 1, arr[index - 1]),
     );
-  } else if (type === 'dowm' && index < arr.length - 1) {
+  } else if (type === 'down' && index < arr.length - 1) {
     arr.splice(
       index + 1,
       1,
