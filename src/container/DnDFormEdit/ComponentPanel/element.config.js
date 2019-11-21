@@ -222,4 +222,16 @@ export default [
       expect: {},
     }
   },
+  {
+    title: '分组', type: 'Group', options: {
+      field: {},
+      base: {
+        value: {
+          label: '分组名',
+          value: '分组',
+        },
+      },
+      expect: {},
+    }
+  },
 ];
