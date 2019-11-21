@@ -5,7 +5,8 @@ export default ({
   items, valueField,
   disabled,
   text = {},
-  onChange, onRemove, onOptionsChange
+  onChange, onRemove, onOptionsChange,
+  onIndexChange,
 }) => {
   const [editIndex, setEditIndex] = useState(-1);
 
@@ -29,6 +30,7 @@ export default ({
         onChange={onChange}
         onRemove={onRemove}
         onOptionsChange={onOptionsChange}
+        onIndexChange={onIndexChange}
       />
       <br />
     </div>

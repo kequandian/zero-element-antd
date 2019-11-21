@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import ItemEdit from '../../ItemEdit';
+import { arrayItemMove } from '@/utils/tool';
 import { Button } from 'antd';
 
 export default function TableField(props) {
@@ -14,25 +15,25 @@ export default function TableField(props) {
       field: countId.current,
     });
 
-    handle(field, {
-      target: {
-        value,
-      }
-    });
+    saveData();
   }
   function onChange(index, type, e) {
     const v = e.target.value;
     value[index][type] = v;
 
-    handle(field, {
-      target: {
-        value,
-      }
-    });
+    saveData();
+  }
+  function handleItemIndexChange(type, index) {
+    arrayItemMove(value, type, index);
+
+    saveData();
   }
   function onRemove(index) {
     value.splice(index, 1);
 
+    saveData();
+  }
+  function saveData() {
     handle(field, {
       target: {
         value,
@@ -49,6 +50,7 @@ export default function TableField(props) {
       valueField="field"
       onChange={onChange}
       onRemove={onRemove}
+      onIndexChange={handleItemIndexChange}
     />
   </>
 }

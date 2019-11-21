@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import ItemEdit from '../../ItemEdit';
+import { arrayItemMove } from '@/utils/tool';
 import { Button } from 'antd';
 
 export default function SaveData(props) {
@@ -41,6 +42,11 @@ export default function SaveData(props) {
 
     saveData();
   }
+  function handleItemIndexChange(type, index) {
+    arrayItemMove(listData, type, index);
+
+    saveData();
+  }
   function onRemove(index) {
     listData.splice(index, 1);
 
@@ -71,6 +77,7 @@ export default function SaveData(props) {
       items={listData}
       onChange={onChange}
       onRemove={onRemove}
+      onIndexChange={handleItemIndexChange}
     />
   </>
 }

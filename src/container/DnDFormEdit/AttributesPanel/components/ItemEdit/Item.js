@@ -12,13 +12,21 @@ export default function ItemEdit(props) {
       label: tLabel = '文本',
       value: tValue = '值',
     },
-    editId, onClick,
-    onChange, onRemove, onOptionsChange
+    editId,
+    onClick,
+    onChange, onRemove, onOptionsChange,
+    onIndexChange,
   } = props;
   const edit = editId === index;
 
   function handleClick() {
     onClick(index);
+  }
+  function handleMoveUp() {
+    onIndexChange('up', index);
+  }
+  function handleMoveDown() {
+    onIndexChange('dowm', index);
   }
 
   return <Card
@@ -29,6 +37,16 @@ export default function ItemEdit(props) {
       {label}
     </div>}
     extra={<div>
+      <Icon
+        type="arrow-up"
+        className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
+        onClick={handleMoveUp}
+      />
+      <Icon
+        type="arrow-down"
+        className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
+        onClick={handleMoveDown}
+      />
       <Icon
         type="delete"
         className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-delete"

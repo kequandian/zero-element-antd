@@ -2,6 +2,7 @@ import React from 'react';
 import { Drawer, Button, Select } from 'antd';
 import { toNumber } from '@/utils/tool';
 import ItemEdit from './components/ItemEdit';
+import { arrayItemMove } from '@/utils/tool';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
 
 import '../index.css';
@@ -78,7 +79,7 @@ export default ({ current, dispatch, fields }) => {
     options.advanced = { ...advanced };
     onSave();
   }
-  function handleItemsChange(i, type, e) {
+  function handleItemChange(i, type, e) {
     items[i][type] = toNumber(e.target.value);
     onSave();
   }
@@ -87,6 +88,10 @@ export default ({ current, dispatch, fields }) => {
       label: `选项${items.length + 1}`,
       value: items.length + 1,
     });
+    onSave();
+  }
+  function handleItemIndexChange(type, index) {
+    arrayItemMove(items, type, index);
     onSave();
   }
   function handleItemDel(i) {
@@ -108,6 +113,10 @@ export default ({ current, dispatch, fields }) => {
   }
   function handleTableChange(i, type, e) {
     table[i][type] = e.target.value;
+    onSave();
+  }
+  function handleTableIndexChange(type, index) {
+    arrayItemMove(table, type, index);
     onSave();
   }
   function handleTableOptionsChange(i, type, value) {
@@ -182,8 +191,9 @@ export default ({ current, dispatch, fields }) => {
         </Button>
         <br /><br />
         {renderItemsOptions(items, {
-          onChange: handleItemsChange,
-          onRemove: handleItemDel
+          onChange: handleItemChange,
+          onRemove: handleItemDel,
+          onIndexChange: handleItemIndexChange,
         })}
       </>
     ) : null}
@@ -218,7 +228,9 @@ export default ({ current, dispatch, fields }) => {
           {
             onChange: handleTableChange,
             onRemove: handleTableDel,
-            onOptionsChange: handleTableOptionsChange
+            onOptionsChange: handleTableOptionsChange,
+            onOptionsChange: handleTableOptionsChange,
+            onIndexChange: handleTableIndexChange,
           },
           {
             disabled: Boolean(base.path && base.path.value),
