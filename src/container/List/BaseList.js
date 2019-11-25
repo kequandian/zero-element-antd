@@ -10,10 +10,7 @@ export default function BaseList(props) {
     props: propsCfg = {},
     actionLayout = 'Empty',
     actionLayoutConfig = {},
-    share,
   } = config;
-
-  console.log(333, share);
 
   const [
     tableProps, tableData, handle, actionsItems,

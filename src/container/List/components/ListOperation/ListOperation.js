@@ -2,11 +2,14 @@ import React from 'react';
 import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
 import handleAction from './handleAction';
 import checkExpected from '@/utils/checkExpected';
+import { getModel } from 'zero-element/lib/Model';
 import operationMap from './type';
 
 export default function ListOperation(props) {
   const { state, dispatch, index, record, operation, context, handle } = props;
-  const { records = [] } = context;
+  const { namespace } = context;
+  const { listData } = getModel(namespace).state;
+  const { records } = listData;
 
   if (record.operation === false) {
     return null;

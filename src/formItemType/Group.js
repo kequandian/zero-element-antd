@@ -8,7 +8,7 @@ export default ({ props, value, defaultValue, ...rest }) => {
   }}>
     <div
       style={{
-        width: 4,
+        width: 2,
         height: 26,
         backgroundColor: '#0198ff',
         marginRight: 2,
