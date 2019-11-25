@@ -5,12 +5,14 @@ import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
+import { setShare, destroyShare } from '@/utils/share';
 
 export default function BaseSearch(props) {
   const formRef = useRef({});
   const { namespace, config, extraData } = props;
   const { layout = 'Grid', fields,
-    layoutConfig = {}
+    layoutConfig = {},
+    share
   } = config;
   const {
     layoutType = 'horizontal',
@@ -29,7 +31,10 @@ export default function BaseSearch(props) {
   const [expand, setExpand] = useState(fields.length > collapse ? false : null);
   const [canFields, setCanFields] = useState(fields.slice(0, collapse));
 
-  useWillUnmount(onClearSearch);
+  useWillUnmount(_ => {
+    onClearSearch();
+    destroyShare();
+  });
 
   function handleExpand() {
     setExpand(true);
@@ -76,6 +81,7 @@ export default function BaseSearch(props) {
           values,
           onSubmit: handleSubmit,
         };
+        setShare(share, values);
         return <form
           className={`ZEleA-Form-${layoutType}`}
           onSubmit={handleSubmit}
