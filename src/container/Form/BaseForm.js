@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useMemo, useState } from 'react';
+import React, { useReducer, useRef, useMemo, useState, useContext } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
@@ -65,7 +65,10 @@ export default function BaseForm(props) {
   }] = useFormHandle(namespace);
 
   const { loading, data, modelStatus, handle } = formProps;
-  const initData = useRef(data);
+  const initData = useRef({
+    ...extraData,
+    data,
+  });
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
