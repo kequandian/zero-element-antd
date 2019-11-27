@@ -20,6 +20,7 @@ export default function ModalCheckbox(props) {
     API,
     fields = [],
     saveData,
+    requireValid,
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -72,6 +73,7 @@ export default function ModalCheckbox(props) {
           fields,
           type: 'checkbox',
           value: optValue,
+          requireValid,
         }}
       />
     </Modal>

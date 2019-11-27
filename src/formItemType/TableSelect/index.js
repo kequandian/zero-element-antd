@@ -15,7 +15,8 @@ export default function TableSelect(props) {
   const {
     API, fields,
     type = 'checkbox',
-    value: optValue = 'id'
+    value: optValue = 'id',
+    requireValid,
   } = options;
   const [data, setData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -59,6 +60,12 @@ export default function TableSelect(props) {
     setSelectedRowKeys(selectedRowKeys);
     onChange(selectedRows);
   }
+  function handleDisabled(record) {
+    const valid = record && record[optValue] !== 0 && Boolean(record[optValue]);
+    return {
+      disabled: !valid,
+    }
+  }
 
   return <div>
     <Table
@@ -72,6 +79,7 @@ export default function TableSelect(props) {
         type: type,
         selectedRowKeys,
         onChange: handleChange,
+        getCheckboxProps: requireValid ? handleDisabled : undefined,
       }}
     />
   </div>

@@ -19,6 +19,7 @@ export default function ModalRadio(props) {
     API,
     fields = [],
     saveData,
+    requireValid,
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -67,6 +68,7 @@ export default function ModalRadio(props) {
           fields,
           type: 'radio',
           value: optValue,
+          requireValid,
         }}
       />
     </Modal>
