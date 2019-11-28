@@ -63,6 +63,7 @@ FITSet({
   switch: Load('formItemType/Switch'),
   checkbox: Load('formItemType/Checkbox'),
   map: Load('formItemType/Map'),
+  pcd: Load('formItemType/PCD'),
   date: Load('formItemType/Date/date'),
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),

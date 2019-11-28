@@ -4,7 +4,7 @@ import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 
-export default function ChildrenList(props) {
+export default function OneMary(props) {
   const { namespace, value, options = {}, onChange } = props;
   const {
     layout = 'Empty',
@@ -16,11 +16,12 @@ export default function ChildrenList(props) {
   const idRef = useRef(0);
 
   function handleCreate(data) {
-    value.push({
+    const rst = Array.isArray(value) ? value : [];
+    rst.push({
       ...data,
       '_id': idRef.current++,
     })
-    onChange([...value]);
+    onChange([...rst]);
   }
   function handleEdit(index, data) {
     value[index] = data;
