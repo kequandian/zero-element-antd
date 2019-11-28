@@ -21,13 +21,18 @@ function date(componentName) {
   const Match = componentMap[componentName];
   return function DateConstructor(props) {
     const { value, options = {}, onChange,
+      props: propsOpt,
       // ...restProps
     } = props;
-    const { nowTime = false, format = formatMap[componentName] } = options;
+    const {
+      nowTime = false,
+      format = formatMap[componentName],
+    } = options;
 
     const dateProps = {
       showToday: true,
       allowClear: false,
+      ...propsOpt,
       // ...restProps,
       value: formatDate(value, format),
       format,
