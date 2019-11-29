@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
@@ -21,6 +21,7 @@ export default function useListHandle({
     extraData,
   }, config);
   const [oData, onClickOperation] = useOperation();
+  const firstGetList = useRef(true);
 
   const {
     API = {},
@@ -46,13 +47,21 @@ export default function useListHandle({
     if (API.listAPI) {
       onGetList({
         pageSize: pageSize,
+        queryData: getShareData(share),
       });
     }
   });
   useWillUnmount(onClearList);
   useEffect(_ => {
-    if (forceInitList !== undefined && API.listAPI) {
-      onGetList({});
+    if (firstGetList.current) {
+      firstGetList.current = false;
+    } else {
+      if (forceInitList !== undefined && API.listAPI) {
+        onGetList({
+          pageSize: pageSize,
+          queryData: getShareData(share),
+        });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceInitList])

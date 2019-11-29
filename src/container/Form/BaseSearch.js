@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -26,11 +26,13 @@ export default function BaseSearch(props) {
   }, config);
 
   const { loading, data, modelStatus, handle } = searchProps;
+  const initData = useRef(data);
   const { onSearch, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(fields.length > collapse ? false : null);
   const [canFields, setCanFields] = useState(fields.slice(0, collapse));
 
+  useMemo(recordDefaultValue, [fields]);
   useWillUnmount(_ => {
     onClearSearch();
     destroyShare();
@@ -43,6 +45,15 @@ export default function BaseSearch(props) {
   function handleCollapse() {
     setExpand(false);
     setCanFields(fields.slice(0, collapse));
+  }
+
+  function recordDefaultValue() {
+    fields.forEach(item => {
+      const { field, value } = item;
+      if (value !== undefined && initData.current[field] === undefined) {
+        initData.current[field] = value;
+      }
+    });
   }
 
   function handleSubmitForm() {
@@ -73,7 +84,7 @@ export default function BaseSearch(props) {
 
   return <Spin spinning={false}>
     <Form
-      initialValues={data}
+      initialValues={initData.current}
       onSubmit={handleSubmitForm}
       render={({ handleSubmit, form, submitting, pristine, values }) => {
         formRef.current = {

@@ -3,15 +3,16 @@ import React from 'react';
 export default ({ props, value, defaultValue, ...rest }) => {
   return <div style={{
     fontSize: 18,
-    color: '#0189ff',
+    color: '#2a5e90',
     display: 'flex',
+    alignItems: 'center',
   }}>
     <div
       style={{
-        width: 2,
-        height: 26,
-        backgroundColor: '#0198ff',
-        marginRight: 2,
+        width: 4,
+        height: 20,
+        backgroundColor: '#2a5e90',
+        marginRight: 6,
       }}
     ></div>
     <div>

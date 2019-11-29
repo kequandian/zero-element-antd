@@ -47,12 +47,14 @@ export default function PCD(props) {
   useEffect(_ => {
     if (province.key) {
       queryCityData(province.key);
+      setCity({ key: -1, label: '' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [province]);
   useEffect(_ => {
     if (city.key) {
       queryDistrictData(city.key);
+      setDistrict({ key: -1, label: '' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [city]);
