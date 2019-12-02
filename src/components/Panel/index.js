@@ -7,9 +7,11 @@ const { FlexItem } = Flex;
 
 export default function Panel({
   title,
+  defaultCollapse = false,
+  delayed = false,
   children,
 }) {
-  const [collapse, setCollapse] = useState(false);
+  const [collapse, setCollapse] = useState(defaultCollapse);
   const [count, forcedUpdate] = useReducer(x => x + 1, 0);
   const domContent = useRef(null);
   const height = useRef(undefined);
@@ -25,7 +27,7 @@ export default function Panel({
       { height: height.current, padding: undefined },
       { transform: undefined },
     ];
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [collapse, count]);
 
   useEffect(_ => {
@@ -59,7 +61,9 @@ export default function Panel({
       ref={domContent}
       style={contentStyle}
     >
-      {children}
+      {delayed ? (
+        !collapse && children
+      ) : children}
     </div>
   </div>
 }
