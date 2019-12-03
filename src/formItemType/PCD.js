@@ -48,6 +48,7 @@ export default function PCD(props) {
     if (province.key) {
       queryCityData(province.key);
       setCity({ key: -1, label: '' });
+      setDistrict({ key: -1, label: '' });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [province]);

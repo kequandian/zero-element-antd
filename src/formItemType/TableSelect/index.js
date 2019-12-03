@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { Spin, Input, Table } from 'antd';
 import { formatTableFields } from '@/container/List/utils/format';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { query } from '@/utils/request';
+
+const { Search } = Input;
 
 export default function TableSelect(props) {
   const {
@@ -18,6 +20,7 @@ export default function TableSelect(props) {
     value: optValue = 'id',
     requireValid,
   } = options;
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
@@ -38,11 +41,12 @@ export default function TableSelect(props) {
     }
   });
 
-  function handleQueryData() {
+  function handleQueryData(queryData) {
     const fAPI = formatAPI(API, {
       namespace,
     });
-    query(fAPI)
+    setLoading(true);
+    query(fAPI, queryData)
       .then(data => {
         let list = [];
         if (Array.isArray(data)) {
@@ -53,6 +57,9 @@ export default function TableSelect(props) {
           console.warn(`api 返回的数据并非预期的列表结构 ${data}`);
         }
         setData(list);
+      })
+      .finally(_ => {
+        setLoading(false);
       })
   }
 
@@ -66,8 +73,19 @@ export default function TableSelect(props) {
       disabled: !valid,
     }
   }
+  function handleSearch(value) {
+    handleQueryData({
+      search: value,
+    });
+  }
 
-  return <div>
+  return <Spin spinning={loading}>
+    <Search
+      placeholder="搜索..."
+      onSearch={handleSearch}
+      style={{ width: 200 }}
+    />
+    <br /><br />
     <Table
       columns={columns}
       dataSource={data}
@@ -82,5 +100,5 @@ export default function TableSelect(props) {
         getCheckboxProps: requireValid ? handleDisabled : undefined,
       }}
     />
-  </div>
+  </Spin>
 }

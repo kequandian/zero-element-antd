@@ -3,6 +3,16 @@
   cursor  : pointer;
 }
 
+.ZEleA-ImageView-container.border {
+  border    : 1px solid transparent;
+  margin    : 2px;
+  transition: all .2s;
+}
+
+.ZEleA-ImageView-container.border:hover {
+  border-color: #2a5e90;
+}
+
 .ZEleA-ImageView-container.circle {
   border-radius: 50%;
 }

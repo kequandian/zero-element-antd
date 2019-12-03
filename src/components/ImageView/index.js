@@ -8,7 +8,8 @@ export default function ImageView(props) {
     max = 9,
     width = 60,
     height = 60,
-    circle
+    circle,
+    border,
   } = props;
   const [visible, setVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -25,6 +26,7 @@ export default function ImageView(props) {
   const className = [
     'ZEleA-ImageView-container',
     circle ? 'circle' : '',
+    border ? 'border' : '',
   ].join(' ');
 
   return <>
