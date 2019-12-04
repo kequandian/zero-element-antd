@@ -90,6 +90,7 @@ AITSet({
 });
 
 VTSet({
+  'plain': Load('valueType/plain'),
   'status': Load('valueType/status'),
   'image': Load('valueType/image'),
   'tag': Load('valueType/tag'),

@@ -26,7 +26,6 @@ export default function useListHandle({
     API = {},
     pageSize,
     fields, operation, actions = [],
-    share,
   } = config;
 
   const { loading, data, handle, modelStatus } = listProps;
