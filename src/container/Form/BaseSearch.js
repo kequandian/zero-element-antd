@@ -16,6 +16,7 @@ export default function BaseSearch(props) {
     layoutType = 'horizontal',
     value = [6, 6, 6, 6],
     collapse = 3,
+    buttonSpan,
   } = layoutConfig;
   const searchProps = useBaseSearch({
     namespace,
@@ -64,7 +65,7 @@ export default function BaseSearch(props) {
   }
 
   function renderFooter() {
-    return <div style={{ marginLeft: '8px' }}>
+    return <div span={buttonSpan} style={{ marginLeft: '8px' }}>
       <Tooltip title="重置">
         <Button onClick={handleReset} type="link" icon="rollback"></Button>
       </Tooltip>
