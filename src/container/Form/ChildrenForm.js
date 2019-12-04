@@ -1,4 +1,4 @@
-import React, { useReducer, useRef } from 'react';
+import React, { useReducer, useRef, useMemo } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -34,6 +34,7 @@ export default function ChildrenForm(props) {
   const initData = useRef(props.data || {});
   const { onGetOne } = handle;
 
+  useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
     if (API.getAPI) {
       onGetOne({}).then(({ code, data }) => {
@@ -45,6 +46,14 @@ export default function ChildrenForm(props) {
     }
   });
 
+  function recordDefaultValue() {
+    fields.forEach(item => {
+      const { field, value } = item;
+      if (value !== undefined && initData.current[field] === undefined) {
+        initData.current[field] = value;
+      }
+    });
+  }
   function handleSubmitForm() {
     if (onSubmit) {
       if (index !== undefined) {

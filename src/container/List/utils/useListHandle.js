@@ -5,7 +5,6 @@ import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCy
 import useOperation from './useOperation';
 import { formatTableFields } from './format';
 import { getActionItem } from '@/utils/readConfig';
-import { getShareData } from '@/utils/share';
 
 
 export default function useListHandle({
@@ -47,7 +46,6 @@ export default function useListHandle({
     if (API.listAPI) {
       onGetList({
         pageSize: pageSize,
-        queryData: getShareData(share),
       });
     }
   });
@@ -59,7 +57,6 @@ export default function useListHandle({
       if (forceInitList !== undefined && API.listAPI) {
         onGetList({
           pageSize: pageSize,
-          queryData: getShareData(share),
         });
       }
     }
@@ -71,7 +68,6 @@ export default function useListHandle({
     onGetList({
       current,
       pageSize,
-      queryData: getShareData(share),
     });
   }
 
