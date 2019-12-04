@@ -37,8 +37,8 @@ export function uniqueObjList(list, newList) {
  * @returns
  */
 export function toNumber(value) {
-  let v = value;
-  if (v) {
+  let v = 0;
+  if (value) {
     v = Number(v);
     if (isNaN(v)) {
       v = value;

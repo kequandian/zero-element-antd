@@ -1,13 +1,21 @@
 import React from 'react';
+import { toNumber } from '@/utils/tool';
 
 export default function valueTypeCurrency(props) {
   const { options = {}, data: { text = '' } } = props;
-  const { symbol = '￥', color } = options;
-  let v = Number(text);
-  if (isNaN(v)) {
-    v = text;
+  const { symbol = '￥', color, nullPlaceholder } = options;
+
+  let v;
+  let s = symbol;
+  if (text === null) {
+    v = nullPlaceholder;
+    s = '';
   }
+  if (v === undefined) {
+    v = toNumber(text);
+  }
+
   return <div style={{ color }}>
-    {`${symbol} ${v.toLocaleString('en-US')}`}
+    {`${s} ${v.toLocaleString('en-US')}`}
   </div>
 }
