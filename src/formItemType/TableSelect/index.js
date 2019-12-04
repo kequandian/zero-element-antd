@@ -19,6 +19,7 @@ export default function TableSelect(props) {
     type = 'checkbox',
     value: optValue = 'id',
     requireValid,
+    pagination = false,
   } = options;
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -91,7 +92,13 @@ export default function TableSelect(props) {
       dataSource={data}
       size="small"
       rowKey="id"
-      pagination={false}
+      pagination={
+        pagination ?
+          {
+            size: 'small',
+          }
+          : false
+      }
       bordered={false}
       rowSelection={{
         type: type,

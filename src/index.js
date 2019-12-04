@@ -79,6 +79,7 @@ FITSet({
   'text-area': Load('formItemType/TextArea'),
   'rich-text': Load('formItemType/RichText'),
   'one-mary': Load('formItemType/OneMary'),
+  'pcdm': Load('formItemType/PCDM'),
 });
 
 AITSet({

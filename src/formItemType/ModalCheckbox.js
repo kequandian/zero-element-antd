@@ -21,6 +21,7 @@ export default function ModalCheckbox(props) {
     fields = [],
     saveData,
     requireValid,
+    pagination,
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -74,6 +75,7 @@ export default function ModalCheckbox(props) {
           type: 'checkbox',
           value: optValue,
           requireValid,
+          pagination,
         }}
       />
     </Modal>

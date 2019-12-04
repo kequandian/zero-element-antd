@@ -20,6 +20,7 @@ export default function ModalRadio(props) {
     fields = [],
     saveData,
     requireValid,
+    pagination,
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -69,6 +70,7 @@ export default function ModalRadio(props) {
           type: 'radio',
           value: optValue,
           requireValid,
+          pagination,
         }}
       />
     </Modal>
