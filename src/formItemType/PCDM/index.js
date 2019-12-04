@@ -5,8 +5,15 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Flex } from 'layout-flex';
 import PCDMContainer from './Container';
+import { uniqueObjList } from '@/utils/tool';
 
 const { FlexItem } = Flex;
+
+const defaultDisable = {
+  province: false,
+  city: false,
+  district: false,
+};
 
 export default function PCDMultiple(props) {
   const {
@@ -21,6 +28,7 @@ export default function PCDMultiple(props) {
   const {
     API = '/api/pcd/list', dataField = 'data',
     label: optLabel = 'name', value: optValue = 'id',
+    disable = defaultDisable,
   } = options;
   const [loading, setLoading] = useState(false);
   const [provinceList, setProvinceList] = useState([]);
@@ -32,7 +40,7 @@ export default function PCDMultiple(props) {
 
   useDidMount(queryProvinceData);
   useEffect(_ => {
-    if (province.length) {
+    if (province.length && !disable.city) {
       queryCityData(province[province.length - 1]);
       setCity([]);
       setDistrict([]);
@@ -40,15 +48,15 @@ export default function PCDMultiple(props) {
       setDistrictList([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [province]);
+  }, [province, disable]);
   useEffect(_ => {
-    if (city.length) {
+    if (city.length && !disable.district) {
       queryDistrictData(city[city.length - 1]);
       setDistrict([]);
       setDistrictList([]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city]);
+  }, [city, disable]);
 
   function getData(queryData) {
     if (API) {
@@ -112,15 +120,37 @@ export default function PCDMultiple(props) {
   }
 
   function handleAppendToValue(data) {
+    const formatList = data.map(item => {
+      return {
+        ...item,
+        name: formatName(item),
+      };
+    });
+
     if (Array.isArray(value)) {
-      onChange([...new Set([...value, ...data])]);
+      onChange(uniqueObjList(value, formatList));
     } else {
-      onChange(data);
+      onChange(formatList);
     }
   }
   function handleRemoteValue(data) {
     const vSet = new Set(data.map(i => i.id));
     onChange(value.filter(i => !vSet.has(i.id)));
+  }
+
+  function formatName(item) {
+    if (item.pid) {
+      if (item.type === 'c') {
+        const find = provinceList.find(i => i.id === item.pid);
+
+        return `${find.name}-${item.name}`;
+      }
+      if (item.type === 'd') {
+        const find = cityList.find(i => i.id === item.pid);
+        return `${formatName(find)}-${item.name}`;
+      }
+    }
+    return item.name;
   }
 
   return <Spin className={className} spinning={loading}>
@@ -137,39 +167,45 @@ export default function PCDMultiple(props) {
           optValue={optValue}
         />
       </FlexItem>
-      <FlexItem flex={1}>
-        <PCDMContainer
-          title="省"
-          operationName="添加选中省"
-          onClick={handleSelectProvince}
-          onSelect={handleAppendToValue}
-          listData={provinceList}
-          optLabel={optLabel}
-          optValue={optValue}
-        />
-      </FlexItem>
-      <FlexItem flex={1}>
-        <PCDMContainer
-          title="市"
-          operationName="添加选中市"
-          onClick={handleSelectCity}
-          onSelect={handleAppendToValue}
-          listData={cityList}
-          optLabel={optLabel}
-          optValue={optValue}
-        />
-      </FlexItem>
-      <FlexItem flex={1}>
-        <PCDMContainer
-          title="区"
-          operationName="添加选中区"
-          onClick={handleSelectDistrict}
-          onSelect={handleAppendToValue}
-          listData={districtList}
-          optLabel={optLabel}
-          optValue={optValue}
-        />
-      </FlexItem>
+      {disable.province ? null : (
+        <FlexItem flex={1}>
+          <PCDMContainer
+            title="省"
+            operationName="添加选中省"
+            onClick={handleSelectProvince}
+            onSelect={handleAppendToValue}
+            listData={provinceList}
+            optLabel={optLabel}
+            optValue={optValue}
+          />
+        </FlexItem>
+      )}
+      {disable.city ? null : (
+        <FlexItem flex={1}>
+          <PCDMContainer
+            title="市"
+            operationName="添加选中市"
+            onClick={handleSelectCity}
+            onSelect={handleAppendToValue}
+            listData={cityList}
+            optLabel={optLabel}
+            optValue={optValue}
+          />
+        </FlexItem>
+      )}
+      {disable.district ? null : (
+        <FlexItem flex={1}>
+          <PCDMContainer
+            title="区"
+            operationName="添加选中区"
+            onClick={handleSelectDistrict}
+            onSelect={handleAppendToValue}
+            listData={districtList}
+            optLabel={optLabel}
+            optValue={optValue}
+          />
+        </FlexItem>
+      )}
     </Flex>
   </Spin>
 }

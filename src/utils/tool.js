@@ -14,6 +14,22 @@ export function unique(argus) {
 }
 
 /**
+ * 对象列表去重, 需要含有 key id
+ *
+ * @export
+ * @param {array} list
+ * @param {array} newList
+ */
+export function uniqueObjList(list, newList) {
+  const idSet = new Set(newList.map(i => i.id));
+
+  return [
+    ...list.filter(i => !idSet.has(i.id)),
+    ...newList
+  ]
+}
+
+/**
  * 尝试把数据转换为 Number 类型，若失败则返回原数据
  *
  * @export
