@@ -54,6 +54,15 @@
   border    : 1px solid #eee;
   border-top: unset;
 }
+
+.ZEleA-Form-item .ZEleA-Form-item-element .ZEleA-NumberRange input,
+.ZEleA-Form-item .ZEleA-Form-item-element .ZEleA-NumberRange .ant-input-number {
+  width: 100%;
+}
+
+.ZEleA-NumberRange>span {
+  padding: 0 4px;
+}
 .ZEleA-Layout-Content {
   background   : #fff;
   box-shadow   : 0 2px 8px rgba(0, 0, 0, 0.15);

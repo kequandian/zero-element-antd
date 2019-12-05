@@ -45,3 +45,12 @@
   border    : 1px solid #eee;
   border-top: unset;
 }
+
+.ZEleA-Form-item .ZEleA-Form-item-element .ZEleA-NumberRange input,
+.ZEleA-Form-item .ZEleA-Form-item-element .ZEleA-NumberRange .ant-input-number {
+  width: 100%;
+}
+
+.ZEleA-NumberRange>span {
+  padding: 0 4px;
+}
