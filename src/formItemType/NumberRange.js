@@ -11,17 +11,16 @@ export default function NumberRange({
   ...rest
 }) {
   const { min = [], max = [], } = options;
-  const v = value || [null, null];
+  const v = useRef(value || [null, null]);
 
   function handleChange(index, data) {
-    v[index] = toNumber(data);
-    onChange(v);
+    v.current[index] = toNumber(data);
+    onChange(v.current);
   }
 
   return <Flex className="ZEleA-NumberRange">
     <FlexItem flex={1}>
       <InputNumber
-        value={v[0]}
         min={min[0]}
         max={max[0]}
         {...rest}
@@ -32,7 +31,6 @@ export default function NumberRange({
     <span>~</span>
     <FlexItem flex={1}>
       <InputNumber
-        value={v[1]}
         min={min[1]}
         max={max[1]}
         {...rest}
