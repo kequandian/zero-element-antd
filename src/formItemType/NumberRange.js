@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { InputNumber } from 'antd';
 import { Flex } from 'layout-flex';
 import { toNumber } from '@/utils/tool';
@@ -11,20 +11,28 @@ export default function NumberRange({
   ...rest
 }) {
   const { min = [], max = [], } = options;
-  const v = useRef(value || [null, null]);
+  const [v, setV] = useState(value || [null, null]);
+
+  useEffect(_ => {
+    if (value === '') {
+      setV([null, null]);
+    }
+  }, [value]);
 
   function handleChange(index, data) {
     if (data === null) {
-      v.current[index] = data;
+      v[index] = data;
     } else {
-      v.current[index] = toNumber(data);
+      v[index] = toNumber(data);
     }
-    onChange(v.current);
+    setV([...v]);
+    onChange(v);
   }
 
   return <Flex className="ZEleA-NumberRange">
     <FlexItem flex={1}>
       <InputNumber
+        value={v[0]}
         min={min[0]}
         max={max[0]}
         {...rest}
@@ -35,6 +43,7 @@ export default function NumberRange({
     <span>~</span>
     <FlexItem flex={1}>
       <InputNumber
+        value={v[1]}
         min={min[1]}
         max={max[1]}
         {...rest}
