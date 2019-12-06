@@ -14,7 +14,11 @@ export default function NumberRange({
   const v = useRef(value || [null, null]);
 
   function handleChange(index, data) {
-    v.current[index] = toNumber(data);
+    if (data === null) {
+      v.current[index] = data;
+    } else {
+      v.current[index] = toNumber(data);
+    }
     onChange(v.current);
   }
 
