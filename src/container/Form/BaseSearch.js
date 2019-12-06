@@ -65,7 +65,7 @@ export default function BaseSearch(props) {
   }
 
   function renderFooter() {
-    return <div span={buttonSpan} style={{ marginLeft: '8px' }}>
+    return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
       <Tooltip title="重置">
         <Button onClick={handleReset} type="link" icon="rollback"></Button>
       </Tooltip>
@@ -88,16 +88,18 @@ export default function BaseSearch(props) {
           values,
           onSubmit: handleSubmit,
         };
+        const renderFieldsAndButton = canFields.map(field => getFormItem(field, modelStatus, {
+          namespace,
+          values,
+        }));
+        renderFieldsAndButton.splice(collapse, 0, renderFooter());
+
         return <form
           className={`ZEleA-Form-${layoutType}`}
           onSubmit={handleSubmit}
         >
           <Render n={layout} value={value} {...layoutConfig}>
-            {canFields.map(field => getFormItem(field, modelStatus, {
-              namespace,
-              values,
-            }))}
-            {renderFooter()}
+            {renderFieldsAndButton}
           </Render>
         </form>
       }}
