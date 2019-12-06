@@ -32,16 +32,16 @@ export default function PCDMultiple(props) {
   } = options;
   const [loading, setLoading] = useState(false);
   const [provinceList, setProvinceList] = useState([]);
-  const [province, setProvince] = useState([]); // 当前勾选的 省 列表
+  const [province, setProvince] = useState(null); // 当前点击的 省
   const [cityList, setCityList] = useState([]);
-  const [city, setCity] = useState([]); // 当前勾选的 市 列表
+  const [city, setCity] = useState(null); // 当前点击的 市
   const [districtList, setDistrictList] = useState([]);
-  const [district, setDistrict] = useState([]); // 当前勾选的 区 列表
+  const [district, setDistrict] = useState(null); // 当前点击的 区
 
   useDidMount(queryProvinceData);
   useEffect(_ => {
-    if (province.length && !disable.city) {
-      queryCityData(province[province.length - 1]);
+    if (province && !disable.city) {
+      queryCityData(province);
       setCity([]);
       setDistrict([]);
       setCityList([]);
@@ -50,8 +50,8 @@ export default function PCDMultiple(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [province, disable]);
   useEffect(_ => {
-    if (city.length && !disable.district) {
-      queryDistrictData(city[city.length - 1]);
+    if (city && !disable.district) {
+      queryDistrictData(city);
       setDistrict([]);
       setDistrictList([]);
     }

@@ -30,6 +30,11 @@
   flex: 1;
 }
 
+.ZEleA-PCDM-title .search {
+  width       : 112px;
+  margin-right: 4px;
+}
+
 .ZEleA-PCDM-title span {
   color    : #888;
   font-size: 12px;
