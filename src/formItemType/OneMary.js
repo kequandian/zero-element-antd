@@ -41,6 +41,7 @@ export default function OneMary(props) {
 
   const columns = formatTableFields(fields, operation, {
     onRemoveChild: handleRemove,
+    onEdit: handleEdit,
   });
 
 

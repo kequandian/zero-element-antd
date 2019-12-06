@@ -22,6 +22,7 @@ export default function reducer(state, { type, payload }) {
         modalConfig: payload.modalConfig,
         onSubmit: payload.onSubmit,
         data: payload.data,
+        index: payload.index,
         modal: true,
       };
     },

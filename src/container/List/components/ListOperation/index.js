@@ -12,6 +12,7 @@ const initialState = {
   modal: false,
   modalTitle: '',
   modalConfig: {},
+  index: -1,
 };
 
 export default function ListOperationWrapped(props) {
@@ -84,7 +85,7 @@ export default function ListOperationWrapped(props) {
     >
       <ZEle
         MODAL={true}
-        index={index}
+        index={index || state.index}
         namespace={context.namespace}
         config={{
           layout: 'Empty',
