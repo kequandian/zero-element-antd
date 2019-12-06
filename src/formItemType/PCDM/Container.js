@@ -15,7 +15,7 @@ export default function PCDMContainer({
   const [selectedList, setSelectedList] = useState([]);
 
   const options = useMemo(_ => {
-    if (!listData) return [];
+    if (!Array.isArray(listData)) return [];
     return listData.map(i => ({
       label: i[optLabel],
       value: i[optValue],

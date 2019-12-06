@@ -41,6 +41,7 @@ CSet({
   TreeTable: Load('container/List/TreeTable'),
   ChildrenList: Load('container/List/ChildrenList'),
   TreeList: Load('container/List/TreeList'),
+  TableSelect: Load('container/List/TableSelect'),
   BaseSearch: Load('container/Form/BaseSearch'),
   BaseForm: Load('container/Form/BaseForm'),
   ChildrenForm: Load('container/Form/ChildrenForm'),

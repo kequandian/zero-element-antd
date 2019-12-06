@@ -60,6 +60,7 @@ export default function ModalRadio(props) {
       title={title}
       onCancel={switchVisible}
       onOk={handleSave}
+      destroyOnClose
     >
       <TableSelect
         value={typeof value === 'object' ? [value] : [{ [optValue]: value }]}
