@@ -30,6 +30,24 @@ export function uniqueObjList(list, newList) {
 }
 
 /**
+ * 对象列表排序, 需要含有 key id
+ *
+ * @export
+ * @param {array} list
+ * @param {boolean} type 是否升序, 默认 true
+ * @returns
+ */
+export function sortObjList(list, type = true) {
+
+  return list.sort((a, b) => {
+    if (type) {
+      return a.id - b.id;
+    }
+    return b.id - a.id;
+  })
+}
+
+/**
  * 尝试把数据转换为 Number 类型，若失败则返回原数据
  *
  * @export

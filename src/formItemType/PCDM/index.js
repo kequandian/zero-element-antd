@@ -5,7 +5,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Flex } from 'layout-flex';
 import PCDMContainer from './Container';
-import { uniqueObjList } from '@/utils/tool';
+import { uniqueObjList, sortObjList } from '@/utils/tool';
 
 const { FlexItem } = Flex;
 
@@ -128,7 +128,11 @@ export default function PCDMultiple(props) {
     });
 
     if (Array.isArray(value)) {
-      onChange(uniqueObjList(value, formatList));
+      onChange(
+        sortObjList(
+          uniqueObjList(value, formatList)
+        )
+      );
     } else {
       onChange(formatList);
     }
