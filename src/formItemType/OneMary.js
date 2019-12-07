@@ -3,11 +3,16 @@ import { formatTableFields } from '@/container/List/utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
+import { query } from '@/utils/request';
+import { formatAPI } from 'zero-element/lib/utils/format';
+import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 export default function OneMary(props) {
   const { namespace, value, options = {}, onChange } = props;
   const {
+    API,
     layout = 'Empty',
+    dataField = 'records',
     fields, operation, actions = [],
     props: propsCfg = {}, layoutConfig = {},
     actionLayout = 'Empty',
@@ -15,6 +20,28 @@ export default function OneMary(props) {
   } = options;
   const idRef = useRef(0);
 
+  useWillMount(_ => {
+    if (API) {
+      queryData();
+    }
+  });
+
+  function queryData() {
+    const fAPI = formatAPI(API, {
+      namespace,
+    });
+    query(fAPI).then(data => {
+      const list = Array.isArray(data) ?
+        data
+        : data[dataField];
+
+      if (Array.isArray(list)) {
+        onChange(list);
+      } else {
+        console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
+      }
+    })
+  }
   function handleCreate(data) {
     const rst = Array.isArray(value) ? value : [];
     rst.push({
@@ -46,7 +73,6 @@ export default function OneMary(props) {
 
 
   return <Render n={layout} {...layoutConfig}>
-    <br />
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actions.map((action, i) => getActionItem({
         key: i,

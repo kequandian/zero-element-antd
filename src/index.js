@@ -97,4 +97,5 @@ VTSet({
   'image': Load('valueType/image'),
   'tag': Load('valueType/tag'),
   'currency': Load('valueType/currency'),
+  'input-number': Load('valueType/inputNumber'),
 });

@@ -17,7 +17,7 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
   const rst = fields.map((fieldCfg, i) => {
     const { field, label,
       valueType,
-      render = valueTypeRender(valueType, fieldCfg, props),
+      render = valueTypeRender(valueType, fieldCfg, props, handle),
       ...rest
     } = fieldCfg;
 
@@ -55,7 +55,7 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
   }
   return rst;
 }
-function valueTypeRender(type, config, props) {
+function valueTypeRender(type, config, props, handle) {
   if (!type) return undefined;
   return (text, record, index) => <Render
     n={type}
@@ -67,5 +67,6 @@ function valueTypeRender(type, config, props) {
       index,
       type,
     }}
+    handle={handle}
   />;
 }
