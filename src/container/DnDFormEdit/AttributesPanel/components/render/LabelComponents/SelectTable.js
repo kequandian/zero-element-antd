@@ -3,6 +3,7 @@ import { query } from '@/utils/request';
 import { Select } from 'antd';
 import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
+import { formatAPI } from 'zero-element/lib/utils/format';
 
 const { Option } = Select;
 
@@ -15,7 +16,7 @@ function getSearch(location) {
 }
 
 export default function SelectTable(props) {
-  const { field, label, value, handle, config, options } = props;
+  const { field, label, value, handle, config, options, API } = props;
   const { sql } = config;
   const { table } = options;
   const { onAdvancedChange, onSave } = handle;
@@ -31,8 +32,8 @@ export default function SelectTable(props) {
       prevSqlValue.current = sql.value;
       clearValue();
     }
-    if (sql.value) {
-      queryTableData(sql.value);
+    if (sql.value && API.tableAPI) {
+      queryTableData(API.tableAPI);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sql.value]);
@@ -40,12 +41,19 @@ export default function SelectTable(props) {
   function clearValue() {
     onAdvancedChange(field, '');
   }
-  function queryTableData() {
+  function queryTableData(api) {
     setLoading(true);
     const { location = {} } = window;
     const qsObj = qs.parse(getSearch(location));
 
-    const fAPI = `/api/generate/sql/${qsObj.uuid}/${sql.value}`;
+    const fAPI = formatAPI(api, {
+      namespace: '_DndForm',
+      data: {
+        uuid: qsObj.uuid,
+        sql: sql.value,
+      },
+    });
+
     query(fAPI)
       .then((data) => {
         setData(data.items.map(table => {

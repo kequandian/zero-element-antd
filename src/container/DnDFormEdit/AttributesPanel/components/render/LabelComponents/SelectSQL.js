@@ -4,6 +4,7 @@ import { query } from '@/utils/request';
 import { Select } from 'antd';
 import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
+import { formatAPI } from 'zero-element/lib/utils/format';
 
 const { Option } = Select;
 
@@ -16,20 +17,29 @@ function getSearch(location) {
 }
 
 export default function SelectSQL(props) {
-  const { field, label, value, handle } = props;
+  const { field, label, value, handle, API } = props;
   const { onAdvancedChange } = handle;
 
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
-  useDidMount(querySQLData);
+  useDidMount(_ => {
+    if (API.sqlAPI) {
+      querySQLData(API.sqlAPI);
+    }
+  });
 
-  function querySQLData() {
+  function querySQLData(api) {
     setLoading(true);
     const { location = {} } = window;
     const qsObj = qs.parse(getSearch(location));
 
-    const fAPI = `/api/generate/sql/${qsObj.uuid}`;
+    const fAPI = formatAPI(api, {
+      namespace: '_DndForm',
+      data: {
+        uuid: qsObj.uuid,
+      },
+    });
     query(fAPI)
       .then((data) => {
         setData(data);

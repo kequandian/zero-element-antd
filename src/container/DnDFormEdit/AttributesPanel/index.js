@@ -30,7 +30,7 @@ function renderFieldsSelect(list, value, handleChange) {
   </Select>
 }
 
-export default ({ current, dispatch, fields }) => {
+export default ({ current, dispatch, fields, API }) => {
   const { options = {} } = current;
   const {
     field = {}, base = {}, rules = {}, style,
@@ -217,7 +217,10 @@ export default ({ current, dispatch, fields }) => {
         {renderAdvancedOptions(advanced, options, {
           onAdvancedChange: handleAdvancedChange,
           onSave,
-        })}
+        }, {
+          API,
+        }
+        )}
         <div className="ZEleA-DnDFormEdit-title">显示字段</div>
         <Button type="dashed" icon="plus"
           onClick={handleTableAdd}>

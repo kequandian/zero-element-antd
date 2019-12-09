@@ -196,6 +196,7 @@ function DndFormEdit(props) {
           current={state.current}
           dispatch={dispatch}
           fields={fields}
+          API={API}
         />
       </FlexItem>
     </Flex>

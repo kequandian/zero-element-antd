@@ -35,13 +35,14 @@ export function renderBaseOptions(opt, handle) {
   });
 }
 
-export function renderAdvancedOptions(opt, options, handle) {
+export function renderAdvancedOptions(opt, options, handle, props) {
   return Object.keys(opt).map(key => {
     const { type } = opt[key];
     const Match = labelSet[type];
     return <Match key={key} field={key} handle={handle} {...opt[key]}
       options={options}
       config={opt}
+      {...props}
     />;
   });
 }

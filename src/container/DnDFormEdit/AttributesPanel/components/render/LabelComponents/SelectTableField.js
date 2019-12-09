@@ -3,6 +3,7 @@ import { query } from '@/utils/request';
 import { Select } from 'antd';
 import window from 'zero-element/lib/utils/window';
 import qs from 'qs';
+import { formatAPI } from 'zero-element/lib/utils/format';
 
 const { Option } = Select;
 
@@ -15,7 +16,7 @@ function getSearch(location) {
 }
 
 export default function SelectTableField(props) {
-  const { field, label, value, handle, config, options } = props;
+  const { field, label, value, handle, config, options, API } = props;
   const { sql, tableName } = config;
   const { table } = options;
   const { onAdvancedChange, onSave } = handle;
@@ -31,8 +32,8 @@ export default function SelectTableField(props) {
       prevSqlValue.current = sql.value;
       clearValue();
     }
-    if (sql.value && tableName.value) {
-      queryTableData(sql.value, tableName.value);
+    if (sql.value && tableName.value && API.fieldAPI) {
+      queryTableData(sql.value, tableName.value, API.fieldAPI);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sql.value, tableName.value]);
@@ -40,12 +41,19 @@ export default function SelectTableField(props) {
   function clearValue() {
     onAdvancedChange(field, '');
   }
-  function queryTableData(sql, tableName) {
+  function queryTableData(sql, tableName, api) {
     setLoading(true);
     const { location = {} } = window;
     const qsObj = qs.parse(getSearch(location));
 
-    const fAPI = `/api/generate/sql/${qsObj.uuid}/${sql}/table/${tableName}`;
+    const fAPI = formatAPI(api, {
+      namespace: '_DndForm',
+      data: {
+        uuid: qsObj.uuid,
+        sql: sql,
+        tableName: tableName,
+      },
+    });
 
     query(fAPI)
       .then((data) => {
