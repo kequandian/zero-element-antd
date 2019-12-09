@@ -26,7 +26,7 @@ export default function BaseSearch(props) {
 
   const { loading, data, modelStatus, handle } = searchProps;
   const initData = useRef(data);
-  const { onSearch, onClearSearch } = handle;
+  const { onSearch, onSetSearchData, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(fields.length > collapse ? false : null);
   const [canFields, setCanFields] = useState(fields.slice(0, collapse));
@@ -52,6 +52,7 @@ export default function BaseSearch(props) {
         initData.current[field] = value;
       }
     });
+    onSetSearchData(initData.current);
   }
 
   function handleSubmitForm() {
