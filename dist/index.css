@@ -377,7 +377,8 @@
 
 .ZEleA-Form-item-element input,
 .ZEleA-Form-item-element .ant-input-number,
-.ZEleA-Form-item-element .ant-select {
+.ZEleA-Form-item-element .ant-select,
+.ZEleA-Form-item-element .ant-input-password {
   width    : 240px;
   max-width: 100%;
 }

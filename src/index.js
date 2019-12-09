@@ -58,6 +58,7 @@ FITSet({
   hidden: Load('formItemType/Empty'),
   group: Load('formItemType/Group'),
   input: Load('formItemType/Input'),
+  password: Load('formItemType/Password'),
   number: Load('formItemType/Number'),
   radio: Load('formItemType/Radio'),
   select: Load('formItemType/Select'),
