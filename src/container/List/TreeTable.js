@@ -9,6 +9,12 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from '@/utils/request';
 import useOperation from './utils/useOperation';
 
+/**
+ * 在原有 Table 的基础上，可通过点击 '＋' 来加载子项
+ * 接收 扁平列表数据
+ * 渲染之前, 会自动根据 pid 格式化为 树状
+ *
+ */
 export default function TreeTable(props) {
   const { namespace, config, extraData } = props;
   const {
@@ -81,6 +87,8 @@ export default function TreeTable(props) {
     setExpandedRowKeys(keys);
   }
   function handleAppend(id) {
+    if (!API.appendAPI) return false;
+
     const api = API.appendAPI.replace(/(\<\w+\>)/, id);
     setLoading(true);
     query(api)
@@ -131,6 +139,11 @@ export default function TreeTable(props) {
   </Render>
 }
 
+/**
+ * 为数据加上 children = [] 属性
+ * 格式化数据为 树状
+ * @param {} data 
+ */
 function formatTree(data) {
   const stack = [];
 
@@ -139,20 +152,27 @@ function formatTree(data) {
   } else {
     stack.push(data);
   }
+  const record = {};
+  const rst = [];
 
   while (stack.length) {
     const item = stack.shift();
 
-    if (item) {
+    if (item && item.id) {
+      record[item.id] = item;
       if (item.children) {
         stack.push(...item.children);
       } else {
         item.children = [];
       }
+      if (item.pid && record[item.pid]) {
+        record[item.pid].children.push(item);
+      } else {
+        rst.push(item);
+      }
     }
   }
-
-  return [...data];
+  return [...rst];
 }
 function appendNode(id, tree, data) {
   const stack = [...tree];

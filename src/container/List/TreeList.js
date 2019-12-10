@@ -12,6 +12,9 @@ import Tree from '@/components/Tree';
 
 const { FlexItem } = Flex;
 
+/**
+ * 左边是一个树状选择，右边是 Table
+ */
 export default function TreeList(props) {
   const { namespace, config } = props;
   const {
