@@ -18,6 +18,9 @@ export function getFormItem(field, modelStatus,
     ...rest } = field;
   const formData = modelStatus[options.expectedPath || 'formData'];
 
+  if (type === 'empty') {
+    return null;
+  }
   if (options.expectedField) {
     console.warn('options 的 expectedField 即将弃用，请改为放在 expect 内');
   }
