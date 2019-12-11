@@ -36,7 +36,8 @@ export default function BaseForm(props) {
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const {
     MODAL, namespace, config, extraData = {},
-    onClose, onSubmit, onSetExtraElement
+    onClose, onSubmit, onSetExtraElement,
+    forceInitForm,
   } = props;
   const {
     API = {},
@@ -62,7 +63,11 @@ export default function BaseForm(props) {
     onGetFormData,
     bindOnChange,
     onSpyChange,
-  }] = useFormHandle(namespace);
+  }] = useFormHandle(namespace, {
+    config,
+    forceInitForm,
+    formProps,
+  });
 
   const { loading, data, modelStatus, handle } = formProps;
   const initData = useRef({

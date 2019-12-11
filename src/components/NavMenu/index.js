@@ -53,6 +53,7 @@ export default function NavMenu({
     {pagination && onPagination ? (
       <Pagination
         simple
+        {...pagination}
         onChange={onPagination}
       />
     ) : null}

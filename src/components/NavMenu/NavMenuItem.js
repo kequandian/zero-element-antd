@@ -24,14 +24,17 @@ export default function NavMenuItem({
 
   function handleSave() {
     onEdit(data.id, v);
+    setEdit(false);
   }
   function handleRemote() {
     onRemote(data.id);
+    setEdit(false);
   }
 
   return <div>
     {edit ? (
       <Tooltip
+        defaultVisible
         title={(
           <>
             {onEdit ? (
