@@ -54,6 +54,11 @@ export default function BaseForm(props) {
   }, config);
   const { router, goBack } = global;
 
+  const { loading, data, modelStatus, handle } = formProps;
+  const initData = useRef({
+    ...extraData,
+    data,
+  });
   const [{
     model,
     formatValueRef,
@@ -66,32 +71,17 @@ export default function BaseForm(props) {
   }] = useFormHandle(namespace, {
     config,
     forceInitForm,
-    formProps,
-  });
-
-  const { loading, data, modelStatus, handle } = formProps;
-  const initData = useRef({
-    ...extraData,
-    data,
+    onGetOne: handleGetData,
   });
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
+  const [destroy, setDestroy] = useState(false);
 
   useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
     if (API.getAPI) {
-      onGetOne({}).then(({ code, data }) => {
-        if (code === 200) {
-          initData.current = data;
-          const { extra } = data;
-          if (extra && Array.isArray(extra.items)) {
-            setExtraFields(extra.items);
-          } else {
-            forceUpdate();
-          }
-        }
-      });
+      handleGetData();
     }
     if (onSetExtraElement && goBack) {
       onSetExtraElement(<Button onClick={goBack}>返回</Button>);
@@ -99,6 +89,23 @@ export default function BaseForm(props) {
   });
   useWillUnmount(onClearForm);
 
+  function handleGetData() {
+    setDestroy(true);
+    onGetOne({}).then(({ code, data }) => {
+      if (code === 200) {
+        initData.current = data;
+        const { extra } = data;
+        if (extra && Array.isArray(extra.items)) {
+          setExtraFields(extra.items);
+        } else {
+          forceUpdate();
+        }
+      }
+    })
+      .finally(_ => {
+        setDestroy(false);
+      })
+  }
   function setExtraFields(items) {
     setFields([
       ...fields,
@@ -209,40 +216,42 @@ export default function BaseForm(props) {
 
   return <Spin spinning={loading}>
     <div className={fields.length ? 'ant-modal-body' : undefined}>
-      <Form
-        initialValues={initData.current}
-        onSubmit={handleSubmitForm}
-        render={({ handleSubmit, form, submitting, pristine, values }) => {
-          formRef.current = {
-            form,
-            values,
-            onSubmit: handleSubmit,
-          };
-          // 用于配合 checkExpected 功能的
-          // model.setState('formData', values);
-          return <form
-            className={`ZEleA-Form-${layoutType}`}
-            onSubmit={handleSubmit}
-          >
-            <Render n={layout} {...layoutConfig}>
-              {fields.map(field => getFormItem(field, modelStatus, {
-                namespace,
-                values,
-                handle: {
-                  onFormatValue,
-                  onSaveOtherValue,
-                  onGetFormData,
-                },
-                bindOnChange,
-              }))}
-            </Render>
-            <FormSpy
-              subscription={{ values }}
-              onChange={onSpyChange}
-            />
-          </form>
-        }}
-      />
+      {destroy ? null : (
+        <Form
+          initialValues={initData.current}
+          onSubmit={handleSubmitForm}
+          render={({ handleSubmit, form, submitting, pristine, values }) => {
+            formRef.current = {
+              form,
+              values,
+              onSubmit: handleSubmit,
+            };
+            // 用于配合 checkExpected 功能的
+            // model.setState('formData', values);
+            return <form
+              className={`ZEleA-Form-${layoutType}`}
+              onSubmit={handleSubmit}
+            >
+              <Render n={layout} {...layoutConfig}>
+                {fields.map(field => getFormItem(field, modelStatus, {
+                  namespace,
+                  values,
+                  handle: {
+                    onFormatValue,
+                    onSaveOtherValue,
+                    onGetFormData,
+                  },
+                  bindOnChange,
+                }))}
+              </Render>
+              <FormSpy
+                subscription={{ values }}
+                onChange={onSpyChange}
+              />
+            </form>
+          }}
+        />
+      )}
     </div>
     {renderFooter()}
   </Spin>

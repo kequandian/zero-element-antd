@@ -6,14 +6,13 @@ export default function useFormHandle(namespace, {
   config,
   formProps,
   forceInitForm,
+  onGetOne,
 }) {
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
   const sub = useRef(new Sub());
   const model = getModel(namespace);
   const firstGetForm = useRef(true);
   const { API } = config;
-  const { handle } = formProps;
-  const { onGetOne } = handle;
 
   useEffect(_ => {
     if (firstGetForm.current) {
