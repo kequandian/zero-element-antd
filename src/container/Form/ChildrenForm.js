@@ -24,6 +24,7 @@ export default function ChildrenForm(props) {
 
   const [, {
     onFormatValue,
+    handleFormatValue,
     onSaveOtherValue,
     onGetFormData,
     bindOnChange,
@@ -57,13 +58,19 @@ export default function ChildrenForm(props) {
     });
   }
   function handleSubmitForm() {
+    const submitData = {
+      ...formRef.current.values,
+    };
+
+    handleFormatValue(submitData);
+
     if (onSubmit) {
       if (index !== undefined) {
         // 一对多的编辑
-        onSubmit(index, formRef.current.values);
+        onSubmit(index, submitData);
       } else {
         // 一对多的新增
-        onSubmit(formRef.current.values);
+        onSubmit(submitData);
       }
       if (onClose) {
         formRef.current.onSubmit();

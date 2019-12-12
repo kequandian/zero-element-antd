@@ -10,27 +10,6 @@ import global from 'zero-element-global/lib/global';
 import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 
-const toTypeMap = {
-  'html': function (value) {
-    if (value && typeof value.toHTML === 'function') {
-      return value.toHTML();
-    }
-    return value;
-  },
-  'raw': function (value) {
-    if (value && typeof value.toRAW === 'function') {
-      return value.toRAW();
-    }
-    return value;
-  },
-  'toValue': function (value) {
-    if (typeof value === 'object' && value.hasOwnProperty('_toValue')) {
-      return value._toValue;
-    }
-    return value;
-  },
-};
-
 export default function BaseForm(props) {
   const formRef = useRef({});
   const [, forceUpdate] = useReducer(x => x + 1, 0);
@@ -61,9 +40,9 @@ export default function BaseForm(props) {
   });
   const [{
     model,
-    formatValueRef,
   }, {
     onFormatValue,
+    handleFormatValue,
     onSaveOtherValue,
     onGetFormData,
     bindOnChange,
@@ -142,12 +121,7 @@ export default function BaseForm(props) {
       ...formRef.current.values,
     };
 
-    // 提交数据之前，格式化 value
-    Object.keys(formatValueRef.current).forEach(field => {
-      const type = formatValueRef.current[field];
-      const value = submitData[field];
-      submitData[field] = toTypeMap[type](value);
-    });
+    handleFormatValue(submitData);
 
 
     // 修改并提交 extra 里面的数据
