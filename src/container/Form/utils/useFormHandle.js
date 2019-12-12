@@ -4,7 +4,6 @@ import Sub from './Subscription';
 
 export default function useFormHandle(namespace, {
   config,
-  formProps,
   forceInitForm,
   onGetOne,
 }) {
@@ -19,7 +18,7 @@ export default function useFormHandle(namespace, {
       firstGetForm.current = false;
     } else {
       if (forceInitForm !== undefined && API.getAPI) {
-        onGetOne({});
+        onGetOne && onGetOne({});
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -28,7 +28,9 @@ export default function ChildrenForm(props) {
     onGetFormData,
     bindOnChange,
     onSpyChange,
-  }] = useFormHandle(namespace);
+  }] = useFormHandle(namespace, {
+    config,
+  });
 
   const { loading, data, modelStatus, handle } = formProps;
   const initData = useRef(props.data || {});
