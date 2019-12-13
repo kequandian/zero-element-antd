@@ -10,15 +10,14 @@ export default function valueTypeInputText(props) {
   } = props;
   const { onEdit } = handle;
 
-  const v = toNumber(text);
-
-  function handleChange(value) {
+  function handleChange(e) {
+    const value = e.target.value;
     record[field] = value;
     onEdit(index, record);
   }
 
   return <Input
-    value={v}
+    value={text}
     onChange={handleChange}
   />
 }
