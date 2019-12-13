@@ -1,8 +1,8 @@
 import React from 'react';
 import { toNumber } from '@/utils/tool';
-import { InputNumber } from 'antd';
+import { Input } from 'antd';
 
-export default function valueTypeInputNumber(props) {
+export default function valueTypeInputText(props) {
   const {
     field,
     handle,
@@ -13,11 +13,11 @@ export default function valueTypeInputNumber(props) {
   const v = toNumber(text);
 
   function handleChange(value) {
-    record[field] = toNumber(value);
+    record[field] = value;
     onEdit(index, record);
   }
 
-  return <InputNumber
+  return <Input
     value={v}
     onChange={handleChange}
   />

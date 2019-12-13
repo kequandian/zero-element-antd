@@ -100,5 +100,5 @@ VTSet({
   'tag': Load('valueType/tag'),
   'currency': Load('valueType/currency'),
   'input-number': Load('valueType/inputNumber'),
-  'input-text': Load('valueType/http://localhost:9000/'),
+  'input-text': Load('valueType/inputText'),
 });
