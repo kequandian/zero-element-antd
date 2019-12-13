@@ -8,6 +8,7 @@ import { Render } from 'zero-element-global/lib/layout';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from '@/utils/request';
 import useOperation from './utils/useOperation';
+import { mapObjList } from '@/utils/tool';
 
 /**
  * 在原有 Table 的基础上，可通过点击 '＋' 来加载子项
@@ -166,7 +167,14 @@ function formatTree(data) {
         item.children = [];
       }
       if (item.pid && record[item.pid]) {
-        record[item.pid].children.push(item);
+        const list = record[item.pid].children;
+        if (list.findIndex(i => i.id === item.id) === -1) {
+          record[item.pid].children.push(item);
+        }
+        // record[item.pid].children = uniqueObjList(
+        //   record[item.pid].children,
+        //   [item]
+        // );
       } else {
         rst.push(item);
       }
@@ -191,7 +199,7 @@ function appendNode(id, tree, data) {
   }
 
   if (target) {
-    target.children = data;
+    target.children = mapObjList(target.children, data, ['children']);
   }
 
   return [...tree];

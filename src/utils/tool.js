@@ -48,6 +48,33 @@ export function sortObjList(list, type = true) {
 }
 
 /**
+ * 根据 key id 来合并对象
+ *
+ * @export
+ * @param {array} list 把另一个数组的 同id对象 合并到这里
+ * @param {array} newList
+ * @param {array} exclude 不需要合并的 key
+ * @return {array} rstList 返回合并并去重后的数组
+ */
+export function mapObjList(list, newList, exclude = []) {
+  let rst = [];
+  list.forEach(i => {
+    const find = newList.find(p => p.id === i.id);
+    if (find) {
+      const obj = { ...find };
+      exclude.forEach(key => {
+        delete obj[key];
+      })
+      rst.push(Object.assign(i, obj));
+    } else {
+      rst.push(i);
+    }
+  });
+
+  return uniqueObjList(newList, rst);
+}
+
+/**
  * 尝试把数据转换为 Number 类型，若失败则返回原数据
  *
  * @export
