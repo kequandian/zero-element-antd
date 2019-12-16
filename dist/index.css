@@ -82,7 +82,8 @@
 }
 
 .ZEleA-Layout-Items {
-  display: flex;
+  display  : flex;
+  flex-wrap: wrap;
 }
 
 .ZEleA-Layout-Items>* {
