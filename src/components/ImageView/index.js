@@ -41,10 +41,12 @@ export default function ImageView(props) {
           }}
           onClick={handlePreview.bind(null, item.url)}
         >
-          <img
-            alt={item.name}
-            src={item.url}
-          />
+          <div
+            className="img"
+            style={{
+              backgroundImage: `url(${item.url})`,
+            }}
+          ></div>
         </div>
       })
     }
