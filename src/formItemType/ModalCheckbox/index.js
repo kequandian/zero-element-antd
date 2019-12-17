@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Modal, Button } from 'antd';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
-import TableSelect from './TableSelect';
+import TableCheckbox from './TableCheckbox';
 
 export default function ModalCheckbox(props) {
   const {
@@ -62,21 +62,17 @@ export default function ModalCheckbox(props) {
       onCancel={switchVisible}
       onOk={handleSave}
     >
-      <TableSelect
-        value={getSelectedKeys(value, onGetFormData, {
-          field,
-          vField: optValue,
-        })}
-        // value={typeof value === 'object' ? [value] : [{ [optValue]: value }]}
+      <TableCheckbox
+        value={value}
+        field={field}
+        optValue={optValue}
         onChange={hanldeChange}
-        options={{
-          API,
-          fields,
-          type: 'checkbox',
-          value: optValue,
-          requireValid,
-          pagination,
-        }}
+        onGetFormData={onGetFormData}
+
+        API={API}
+        fields={fields}
+        pagination={pagination}
+        requireValid={requireValid}
       />
     </Modal>
   </>
@@ -109,24 +105,6 @@ function echoName(value, getFormData, {
     if (typeof formData === 'object') {
       if (Array.isArray(formData[field])) {
         return formData[field].map(item => item[editLabel]).join(', ');
-      }
-    }
-  }
-  return undefined;
-}
-
-function getSelectedKeys(data, getFormData, { field, vField }) {
-  if (data) {
-    if (Array.isArray(data.value)) {
-      return data.value;
-    }
-  }
-  const formData = getFormData();
-
-  if (formData) {
-    if (typeof formData === 'object') {
-      if (Array.isArray(formData[field])) {
-        return formData[field];
       }
     }
   }

@@ -8,7 +8,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 export default function OneMary(props) {
-  const { namespace, value, options = {}, onChange } = props;
+  const { name, namespace, value, options = {}, handle, onChange } = props;
   const {
     API,
     layout = 'Empty',
@@ -17,12 +17,17 @@ export default function OneMary(props) {
     props: propsCfg = {}, layoutConfig = {},
     actionLayout = 'Empty',
     actionLayoutConfig = {},
+    map,
   } = options;
-  const idRef = useRef(0);
+  const { onFormatValue, onGetFormData } = handle;
+  const idRef = useRef(1);
 
   useWillMount(_ => {
     if (API) {
       queryData();
+    }
+    if (map) {
+      onFormatValue(name, 'map', map);
     }
   });
 
@@ -48,6 +53,16 @@ export default function OneMary(props) {
       ...data,
       '_id': idRef.current++,
     })
+    onChange([...rst]);
+  }
+  function handleCreateList(data) {
+    if (!Array.isArray(data)) return false;
+
+    const rst = Array.isArray(value) ? value : [];
+    rst.push(...data.map(item => ({
+      ...item,
+      '_id': idRef.current++,
+    })));
     onChange([...rst]);
   }
   function handleEdit(index, data) {
@@ -77,9 +92,11 @@ export default function OneMary(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
+        value,
         onCreate: handleCreate,
-        // onCreateList,
+        onCreateList: handleCreateList,
         onEdit: handleEdit,
+        onGetFormData: onGetFormData,
       }, {}, {}, {
         namespace,
       }))}

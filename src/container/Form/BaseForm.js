@@ -36,7 +36,7 @@ export default function BaseForm(props) {
   const { loading, data, modelStatus, handle } = formProps;
   const initData = useRef({
     ...extraData,
-    data,
+    ...data,
   });
   const [{
     model,
