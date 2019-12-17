@@ -10,6 +10,7 @@ export default function ImageView(props) {
     height = 60,
     circle,
     border,
+    background,
   } = props;
   const [visible, setVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -41,12 +42,16 @@ export default function ImageView(props) {
           }}
           onClick={handlePreview.bind(null, item.url)}
         >
-          <div
-            className="img"
-            style={{
-              backgroundImage: `url(${item.url})`,
-            }}
-          ></div>
+          {background ? (
+            <div
+              className="bgConter"
+              style={{
+                backgroundImage: `url(${item.url})`,
+              }}
+            ></div>
+          ) : (
+              <img src={item.url} />
+            )}
         </div>
       })
     }
