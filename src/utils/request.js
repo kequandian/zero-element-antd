@@ -2,7 +2,9 @@ import { query, post, update, remove } from 'zero-element/lib/utils/request';
 import { error } from 'zero-element/lib/utils/request/axios';
 import { message } from 'antd';
 
-function requestWrapped(method, api, payload) {
+function requestWrapped(method, api, payload, {
+  message: optMsg = '操作成功'
+}) {
 
   const mh = {
     get: query,
@@ -15,8 +17,8 @@ function requestWrapped(method, api, payload) {
     .then(response => {
       const { status, data } = response;
       if (status === 200 && data.code === 200) {
-        if (method !== 'get') {
-          message.success('操作成功');
+        if (method !== 'get' && optMsg) {
+          message.success(optMsg);
         }
         return Promise.resolve(data.data);
       }
