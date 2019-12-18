@@ -4,10 +4,11 @@ import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
 
+const initFileList = [];
 export default function UploadImage(props) {
   const { value, options, namespace, ...rest } = props;
   const { API = '/api/upload/files', max = 9 } = options;
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
   const [loading, setLoading] = useState(false);
@@ -16,8 +17,10 @@ export default function UploadImage(props) {
   });
 
   useEffect(_ => {
-    setFileList(format(value));
-  }, [value]);
+    if (fileList === initFileList) {
+      setFileList(format(value));
+    }
+  }, [fileList, value]);
 
   function handlePreview(file) {
     setPreviewImage(file.url || file.thumbUrl);

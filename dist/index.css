@@ -133,6 +133,31 @@
   background-position: center;
   background-repeat  : no-repeat;
 }
+.ZEleA-Panel {
+  background   : #fff;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.ZEleA-Panel-title {
+  min-width    : 130px;
+  font-size    : 18px;
+  font-weight  : 600;
+  border-bottom: 1px solid #d9d9d9;
+  padding      : 4px;
+  cursor       : pointer;
+  user-select  : none;
+}
+
+.ZEleA-Panel-icon {
+  transition: all .2s;
+}
+
+.ZEleA-Panel-content {
+  padding   : 8px;
+  overflow  : hidden;
+  transition: all .2s;
+}
 .ZEleA-DnDFormEdit-tips {
   text-align: center;
   color     : #cbc5c5;
@@ -394,31 +419,6 @@
 .ZEleA-Form-item-element .ant-calendar-picker-input input {
   flex : 1;
   width: 100%;
-}
-.ZEleA-Panel {
-  background   : #fff;
-  margin-bottom: 8px;
-  border-radius: 4px;
-}
-
-.ZEleA-Panel-title {
-  min-width    : 130px;
-  font-size    : 18px;
-  font-weight  : 600;
-  border-bottom: 1px solid #d9d9d9;
-  padding      : 4px;
-  cursor       : pointer;
-  user-select  : none;
-}
-
-.ZEleA-Panel-icon {
-  transition: all .2s;
-}
-
-.ZEleA-Panel-content {
-  padding   : 8px;
-  overflow  : hidden;
-  transition: all .2s;
 }
 .ZEleA-table-operation {
   height     : 40px;

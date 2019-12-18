@@ -4,6 +4,7 @@ import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
 
+const initFileList = [];
 export default function UploadFile(props) {
   const { value, options, namespace, handle, ...rest } = props;
   const {
@@ -13,15 +14,17 @@ export default function UploadFile(props) {
     fileNameField = 'fileName'
   } = options;
   const { onSaveOtherValue } = handle;
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState(initFileList);
   const [loading, setLoading] = useState(false);
   const fAPI = formatAPI(API, {
     namespace,
   });
 
   useEffect(_ => {
-    setFileList(format(value));
-  }, [value]);
+    if (fileList === initFileList) {
+      setFileList(format(value));
+    }
+  }, [fileList, value]);
 
   const uploadButton = (
     <Button>
