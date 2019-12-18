@@ -34,15 +34,26 @@ export default function Grid(props) {
   }
 
   if (value && Array.isArray(value)) {
-    const rowSize = value.length;
     const rst = [];
     // 使用 toArray 会自动 filter null
-    React.Children.toArray(children).forEach((child, i) => {
-      if (i % rowSize === 0) {
+    React.Children.toArray(children).forEach(child => {
+      const preRow = rst[rst.length - 1];
+      if (preRow && preRow.items && preRow.items.length !== 0) {
+        const count = preRow.items.reduce((pre, v, i) =>
+          pre + (v.props.span || value[i])
+          , 0);
+
+        if (count >= 24) {
+          rst.push({
+            items: [],
+          });
+        }
+      } else {
         rst.push({
           items: [],
         });
       }
+
       rst[rst.length - 1].items.push(child);
     })
     return rst.map((row, i) => {
