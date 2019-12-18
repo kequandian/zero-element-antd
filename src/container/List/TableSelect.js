@@ -81,6 +81,7 @@ export default function TableSelect(props) {
       pagination={
         pagination ?
           {
+            ...tableProps.pagination,
             size: 'small',
           }
           : false

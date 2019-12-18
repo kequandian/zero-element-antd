@@ -2,9 +2,10 @@ import { query, post, update, remove } from 'zero-element/lib/utils/request';
 import { error } from 'zero-element/lib/utils/request/axios';
 import { message } from 'antd';
 
-function requestWrapped(method, api, payload, {
-  message: optMsg = '操作成功'
-}) {
+function requestWrapped(method, api, payload, options = {}) {
+  const {
+    message: optMsg = '操作成功'
+  } = options;
 
   const mh = {
     get: query,

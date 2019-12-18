@@ -43,7 +43,7 @@ export default function Grid(props) {
           pre + (v.props.span || value[i])
           , 0);
 
-        if (count >= 24) {
+        if (count >= 24 || isNaN(count)) {
           rst.push({
             items: [],
           });
