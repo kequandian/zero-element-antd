@@ -23,7 +23,7 @@ export default function ChildrenList(props) {
 
   const { data, handle, modelStatus } = childrenProps;
   const { onCreate, onCreateList, onEdit } = handle;
-  const columns = formatTableFields(fields, operation, handle);
+  const { columns } = formatTableFields(fields, operation, handle);
 
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>

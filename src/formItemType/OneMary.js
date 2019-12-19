@@ -81,7 +81,7 @@ export default function OneMary(props) {
     onChange([...temp]);
   }
 
-  const columns = formatTableFields(fields, operation, {
+  const { columns } = formatTableFields(fields, operation, {
     onRemoveChild: handleRemove,
     onEdit: handleEdit,
   });

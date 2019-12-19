@@ -38,7 +38,7 @@ export default function TreeTable(props) {
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
   const [oData, onClickOperation] = useOperation();
 
-  const columns = formatTableFields(fields, operation, {
+  const { columns } = formatTableFields(fields, operation, {
     ...handle,
     onRefresh: handleRefresh,
     onClickOperation,

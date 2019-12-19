@@ -33,7 +33,7 @@ export default function useListHandle({
   const { listData } = modelStatus;
   const { records, ...pagination } = listData;
 
-  const columns = formatTableFields(fields, operation, {
+  const { columns, width } = formatTableFields(fields, operation, {
     ...handle,
     onClickOperation,
   }, {
@@ -78,6 +78,11 @@ export default function useListHandle({
       onChange: handlePageChange,
     }
   };
+  if (width > 0) {
+    tableProps.scroll = {
+      x: width,
+    }
+  }
   const actionsItems = actions.map((action, i) => getActionItem({
     key: i,
     ...action,

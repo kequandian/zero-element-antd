@@ -10,10 +10,12 @@ import { Render } from 'zero-element-global/lib/valueType';
  * @param {array} operation 对该行的操作
  * @param {object} handle 传递给 ListOperation
  * @param {object} props 传递给 valueType 与 ListOperation
- * @returns antd Table columns
+ * @returns antd Table columns 和 sum width
  */
 export function formatTableFields(fields = [], operation = [], handle, props = {}) {
   let operationCfg = {};
+  let width = 0;
+
   const rst = fields.map((fieldCfg, i) => {
     const { field, label,
       valueType,
@@ -25,6 +27,9 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
       operationCfg = fieldCfg;
       return {};
     }
+    if (typeof rest.width === 'number') {
+      width += rest.width;
+    }
 
     return {
       dataIndex: field,
@@ -35,9 +40,13 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
   }).filter(fieldCfg => fieldCfg.dataIndex);
 
   if (operation.length > 0) {
-    rst.push({
+    const operationObj = {
       dataIndex: 'operation',
       align: 'right',
+      ...(width > 0 ? {
+        fixed: 'right',
+        width: 100,
+      } : {}),
       ...operationCfg, // fixed  width
       title: '操作',
       // title: ListFieldsEdit,
@@ -51,9 +60,13 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
           handle={handle}
         />;
       },
-    });
+    };
+    rst.push(operationObj);
   }
-  return rst;
+  return {
+    columns: rst,
+    width,
+  };
 }
 function valueTypeRender(type, config, props, handle) {
   if (!type) return undefined;
