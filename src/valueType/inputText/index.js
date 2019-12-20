@@ -1,5 +1,4 @@
 import React from 'react';
-import { toNumber } from '@/utils/tool';
 import { Input } from 'antd';
 
 export default function valueTypeInputText(props) {
