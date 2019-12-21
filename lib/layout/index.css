@@ -12,8 +12,9 @@
 }
 
 .ZEleA-Layout-Items {
-  display  : flex;
-  flex-wrap: wrap;
+  display      : flex;
+  flex-wrap    : wrap;
+  margin-bottom: 8px;
 }
 
 .ZEleA-Layout-Items>* {
@@ -27,4 +28,19 @@
   padding    : 0.5em;
   font-weight: 500;
   font-size  : 1.5em;
+}
+
+.ZEleA-Layout-Row {
+  margin-bottom: 8px;
+}
+
+.ZEleA-Layout-SearchLayout {
+  margin        : 8px 0;
+  padding       : 8px 0;
+  padding-bottom: 0;
+  background    : #ebecec;
+}
+
+.ZEleA-Layout-SearchLayout .ZEleA-Form-horizontal>.ant-row {
+  margin-bottom: 0;
 }

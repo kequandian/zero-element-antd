@@ -30,6 +30,8 @@ LayoutSet({
   EmptyTitle: Load('layout/EmptyTitle'),
   Loading: Load('layout/Loading'),
   Alone: Load('layout/Alone'),
+  Row: Load('layout/Row'),
+  SearchLayout: Load('layout/SearchLayout'),
   Grid: Load('layout/Grid'),
   Content: Load('layout/Content'),
   Items: Load('layout/Items'),

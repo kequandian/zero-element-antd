@@ -80,31 +80,33 @@ export default function BaseSearch(props) {
   }
 
   return <Spin spinning={false}>
-    <Form
-      initialValues={initData.current}
-      onSubmit={handleSubmitForm}
-      render={({ handleSubmit, form, submitting, pristine, values }) => {
-        formRef.current = {
-          form,
-          values,
-          onSubmit: handleSubmit,
-        };
-        const renderFieldsAndButton = canFields.map(field => getFormItem(field, modelStatus, {
-          namespace,
-          values,
-        }));
-        renderFieldsAndButton.splice(collapse, 0, renderFooter());
+    <Render n="SearchLayout" >
+      <Form
+        initialValues={initData.current}
+        onSubmit={handleSubmitForm}
+        render={({ handleSubmit, form, submitting, pristine, values }) => {
+          formRef.current = {
+            form,
+            values,
+            onSubmit: handleSubmit,
+          };
+          const renderFieldsAndButton = canFields.map(field => getFormItem(field, modelStatus, {
+            namespace,
+            values,
+          }));
+          renderFieldsAndButton.splice(collapse, 0, renderFooter());
 
-        return <form
-          className={`ZEleA-Form-${layoutType}`}
-          onSubmit={handleSubmit}
-        >
-          <Render n={layout} value={value} {...layoutConfig}>
-            {renderFieldsAndButton}
-          </Render>
-        </form>
-      }}
-    />
+          return <form
+            className={`ZEleA-Form-${layoutType}`}
+            onSubmit={handleSubmit}
+          >
+            <Render n={layout} value={value} {...layoutConfig}>
+              {renderFieldsAndButton}
+            </Render>
+          </form>
+        }}
+      />
+    </Render>
   </Spin>
 }
 

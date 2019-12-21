@@ -13,12 +13,11 @@ const typeMap = {
 };
 
 export default function Captcha(props) {
-  const { options, handle, onChange, formdata, props: propsOtp = {} } = props;
+  const { options, onChange, formdata, props: propsOtp = {} } = props;
   const {
     API = '/api/pub/validateCodes/send',
     label = '获取', type = 'emali', field,
   } = options;
-  const { onGetFormData } = handle;
   const [cd, setCd] = useState(false);
   const [count, setCount] = useState(0);
   const value = formdata[field];
