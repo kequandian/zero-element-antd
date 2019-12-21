@@ -54,6 +54,7 @@ export function getFormItem(field, modelStatus,
         namespace={namespace}
         handle={handle}
         required={rules.findIndex(r => r === 'required') > -1}
+        formdata={values}
         {...rest}
       />
     }

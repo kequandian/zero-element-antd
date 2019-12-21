@@ -105,7 +105,7 @@ export default function useFormHandle(namespace, {
       onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
       handleFormatValue, // format 全部已标记字段
       onSaveOtherValue: sub.current.changeValue.bind(sub.current),
-      onGetFormData: handleGetFormData,
+      onGetFormData: handleGetFormData, // 获取 model 里面的 form data
       bindOnChange: sub.current.recordOnChange.bind(sub.current),
       onSpyChange: sub.current.subscriptionChange.bind(sub.current),
     }

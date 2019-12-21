@@ -67,6 +67,7 @@ FITSet({
   checkbox: Load('formItemType/Checkbox'),
   map: Load('formItemType/Map'),
   pcd: Load('formItemType/PCD'),
+  captcha: Load('formItemType/Captcha'),
   date: Load('formItemType/Date/date'),
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
