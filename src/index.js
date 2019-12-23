@@ -58,7 +58,7 @@ LASet({
 FITSet({
   plain: Load('formItemType/Plain'),
   empty: Load('formItemType/Empty'),
-  hidden: Load('formItemType/Empty'),
+  hidden: Load('formItemType/Hidden'),
   group: Load('formItemType/Group'),
   input: Load('formItemType/Input'),
   password: Load('formItemType/Password'),

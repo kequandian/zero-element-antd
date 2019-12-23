@@ -8,9 +8,6 @@ export default function FormItemWrapped({
   ...rest
 }) {
   const visibleError = Boolean(meta.error && meta.touched);
-  if (type === 'hidden') {
-    return <></>;
-  }
   const labelClassNames = [
     'ZEleA-Form-item-label',
     required ? 'ant-form-item-required' : '',
