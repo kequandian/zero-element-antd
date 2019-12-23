@@ -11,7 +11,7 @@ export default function ChildrenList(props) {
     layout = 'Empty',
     fields, operation, actions = [],
     props: propsCfg = {}, layoutConfig = {},
-    actionLayout = 'Empty',
+    actionLayout = 'Row',
     actionLayoutConfig = {},
     itemsField = 'items',
   } = config;

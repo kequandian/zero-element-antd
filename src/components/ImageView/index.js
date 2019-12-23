@@ -78,7 +78,7 @@ function format(value) {
       url: value,
     });
   }
-  rst.length > 0 && rst.map((item, index) => {
+  rst.length > 0 && rst.forEach((item, index) => {
     rst[index] = {
       id: index,
       url: item.url,

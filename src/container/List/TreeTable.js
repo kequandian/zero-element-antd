@@ -23,7 +23,7 @@ export default function TreeTable(props) {
     API = {},
     fields, operation, actions = [],
     props: propsCfg = {},
-    actionLayout = 'Empty',
+    actionLayout = 'Row',
     actionLayoutConfig = {},
   } = config;
   const listProps = useBaseList({

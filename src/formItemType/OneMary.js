@@ -15,7 +15,7 @@ export default function OneMary(props) {
     dataField = 'records',
     fields, operation, actions = [],
     props: propsCfg = {}, layoutConfig = {},
-    actionLayout = 'Empty',
+    actionLayout = 'Row',
     actionLayoutConfig = {},
     map,
   } = options;

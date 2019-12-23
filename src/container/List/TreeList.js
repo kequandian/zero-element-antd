@@ -22,7 +22,7 @@ export default function TreeList(props) {
     API = {},
     fields, operation, actions = [],
     props: propsCfg = {},
-    actionLayout = 'Empty',
+    actionLayout = 'Row',
     actionLayoutConfig = {},
     field = 'children',
     tree = {},

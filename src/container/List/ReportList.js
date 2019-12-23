@@ -8,7 +8,7 @@ export default function ReportList(props) {
   const {
     layout = 'Empty', layoutConfig = {},
     props: propsCfg = {},
-    actionLayout = 'Empty',
+    actionLayout = 'Row',
     actionLayoutConfig = {},
   } = config;
 
