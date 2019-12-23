@@ -6,11 +6,18 @@ export default [
         label: {
           label: '字段名',
         },
-        path: {
-          label: '跳转的页面',
+        // path: {
+        //   label: '跳转的页面',
+        //   type: 'input',
+        //   value: '',
+        // }
+      },
+      config: {
+        API: {
+          label: '一对多的 CRUD API',
           type: 'input',
-          value: '',
-        }
+          value: '/api/crud/demo',
+        },
       },
       advanced: {
         sql: {
