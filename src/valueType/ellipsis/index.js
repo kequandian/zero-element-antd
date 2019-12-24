@@ -7,12 +7,12 @@ export default function valueTypeEllipsis(props) {
     options = {},
     data: { index, text = '', record },
   } = props;
-  const { max = 30 } = options;
+  const { max = 16 } = options;
   const t = String(text);
 
   return t.length < max ? t : (
     <Tooltip title={t}>
-      {t.slice(max)}...
+      {t.slice(0, max)}...
     </Tooltip>
   )
 }
