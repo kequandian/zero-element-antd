@@ -9,7 +9,7 @@ export default ({ options }, i, { index, record, records }, onAction) => {
     handleRequest(api);
   }
   function handleUp() {
-    const api = `/api/meta/patch/entity/${entity}/action/movedown/row/${record.id}/row/${records[index - 1].id}`;
+    const api = `/api/meta/patch/entity/${entity}/action/moveup/row/${record.id}/row/${records[index - 1].id}`;
     handleRequest(api);
   }
 
