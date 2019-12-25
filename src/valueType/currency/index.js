@@ -12,10 +12,25 @@ export default function valueTypeCurrency(props) {
     s = '';
   }
   if (v === undefined) {
-    v = toNumber(text);
+    v = returnFloat(toNumber(text));
   }
 
   return <div style={{ color }}>
-    {`${s} ${v.toLocaleString('en-US')}`}
+    {`${s} ${v}`}
   </div>
+}
+
+function returnFloat(value) {
+  var value = Math.round(parseFloat(value) * 100) / 100;
+  var s = value.toString().split(".");
+  if (s.length == 1) {
+    value = value.toString() + ".00";
+    return value;
+  }
+  if (s.length > 1) {
+    if (s[1].length < 2) {
+      value = value.toString() + "0";
+    }
+    return value;
+  }
 }
