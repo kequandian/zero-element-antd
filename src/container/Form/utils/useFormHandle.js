@@ -4,14 +4,18 @@ import Sub from './Subscription';
 
 const toTypeMap = {
   'html': function (value) {
-    if (value && typeof value.toHTML === 'function') {
-      return value.toHTML();
+    if (value && typeof value === 'object') {
+      const { current } = value;
+      if (typeof current.toHTML === 'function')
+        return current.toHTML();
     }
     return value;
   },
   'raw': function (value) {
-    if (value && typeof value.toRAW === 'function') {
-      return value.toRAW();
+    if (value && typeof value === 'object') {
+      const { current } = value;
+      if (typeof current.toRAW === 'function')
+        return current.toRAW();
     }
     return value;
   },
