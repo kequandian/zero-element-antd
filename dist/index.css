@@ -114,66 +114,6 @@
 .ZEleA-Layout-SearchLayout .ZEleA-Form-horizontal>.ant-row {
   margin-bottom: 0;
 }
-.ZEleA-ImageView-container {
-  overflow: hidden;
-  cursor  : pointer;
-}
-
-.ZEleA-ImageView-container.border {
-  border    : 1px solid transparent;
-  margin    : 2px;
-  transition: all .2s;
-}
-
-.ZEleA-ImageView-container.border:hover {
-  border-color: #2a5e90;
-}
-
-.ZEleA-ImageView-container.circle {
-  border-radius: 50%;
-}
-
-.ZEleA-ImageView-container img {
-  max-height: 100%;
-  transform : scale(1);
-  transition: all .2s;
-}
-
-.ZEleA-ImageView-container:hover img {
-  transform: scale(1.2);
-}
-
-.ZEleA-ImageView-container .bgConter {
-  width              : 100%;
-  height             : 100%;
-  background-position: center;
-  background-repeat  : no-repeat;
-}
-.ZEleA-Panel {
-  background   : #fff;
-  margin-bottom: 8px;
-  border-radius: 4px;
-}
-
-.ZEleA-Panel-title {
-  min-width    : 130px;
-  font-size    : 18px;
-  font-weight  : 600;
-  border-bottom: 1px solid #d9d9d9;
-  padding      : 4px;
-  cursor       : pointer;
-  user-select  : none;
-}
-
-.ZEleA-Panel-icon {
-  transition: all .2s;
-}
-
-.ZEleA-Panel-content {
-  padding   : 8px;
-  overflow  : hidden;
-  transition: all .2s;
-}
 .ZEleA-DnDFormEdit-tips {
   text-align: center;
   color     : #cbc5c5;
@@ -366,6 +306,16 @@
   margin-right: 8px;
 }
 
+.ZEleA-Form-item-required::before {
+  display     : inline-block;
+  margin-right: 4px;
+  color       : #f5222d;
+  font-size   : 14px;
+  font-family : SimSun, sans-serif;
+  line-height : 1;
+  content     : '*';
+}
+
 .ZEleA-Form-item-label-colon::after {
   content : ':';
   position: relative;
@@ -539,6 +489,66 @@
 .ZEleA-table-action-Sort>i {
   margin-right: 8px;
   cursor      : pointer;
+}
+.ZEleA-ImageView-container {
+  overflow: hidden;
+  cursor  : pointer;
+}
+
+.ZEleA-ImageView-container.border {
+  border    : 1px solid transparent;
+  margin    : 2px;
+  transition: all .2s;
+}
+
+.ZEleA-ImageView-container.border:hover {
+  border-color: #2a5e90;
+}
+
+.ZEleA-ImageView-container.circle {
+  border-radius: 50%;
+}
+
+.ZEleA-ImageView-container img {
+  max-height: 100%;
+  transform : scale(1);
+  transition: all .2s;
+}
+
+.ZEleA-ImageView-container:hover img {
+  transform: scale(1.2);
+}
+
+.ZEleA-ImageView-container .bgConter {
+  width              : 100%;
+  height             : 100%;
+  background-position: center;
+  background-repeat  : no-repeat;
+}
+.ZEleA-Panel {
+  background   : #fff;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.ZEleA-Panel-title {
+  min-width    : 130px;
+  font-size    : 18px;
+  font-weight  : 600;
+  border-bottom: 1px solid #d9d9d9;
+  padding      : 4px;
+  cursor       : pointer;
+  user-select  : none;
+}
+
+.ZEleA-Panel-icon {
+  transition: all .2s;
+}
+
+.ZEleA-Panel-content {
+  padding   : 8px;
+  overflow  : hidden;
+  transition: all .2s;
 }
 .ZEleA-Layout-table {
   display: table;

@@ -10,7 +10,7 @@ export default function FormItemWrapped({
   const visibleError = Boolean(meta.error && meta.touched);
   const labelClassNames = [
     'ZEleA-Form-item-label',
-    required ? 'ant-form-item-required' : '',
+    required ? 'ZEleA-Form-item-required' : '',
     label ? 'ZEleA-Form-item-label-colon' : '',
   ];
 
