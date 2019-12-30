@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useMemo, useState, useContext } from 'react';
+import React, { useReducer, useRef, useMemo, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
@@ -17,6 +17,9 @@ export default function BaseForm(props) {
     MODAL, namespace, config, extraData = {},
     onClose, onSubmit, onSetExtraElement,
     forceInitForm,
+    footer,
+    onGetFormRef,
+    keepData,
   } = props;
   const {
     API = {},
@@ -65,8 +68,16 @@ export default function BaseForm(props) {
     if (onSetExtraElement && goBack) {
       onSetExtraElement(<Button onClick={goBack}>返回</Button>);
     }
+    if (typeof onGetFormRef === 'function') {
+      onGetFormRef(formRef);
+    }
   });
-  useWillUnmount(onClearForm);
+
+  useWillUnmount(_ => {
+    if (!keepData) {
+      onClearForm();
+    }
+  });
 
   function handleGetData() {
     setDestroy(true);
@@ -182,6 +193,11 @@ export default function BaseForm(props) {
     function onSubmit() {
       formRef.current.onSubmit();
     }
+
+    if (footer !== undefined) {
+      return footer;
+    }
+
     return <div className="ant-modal-footer">
       <Button onClick={handleReset}>重置</Button>
       <Button type="primary" htmlType="submit" onClick={onSubmit}>保存</Button>
@@ -200,8 +216,11 @@ export default function BaseForm(props) {
               values,
               onSubmit: handleSubmit,
             };
-            // 用于配合 checkExpected 功能的
-            // model.setState('formData', values);
+
+            if (keepData) {
+              model.setState('formData', values);
+            }
+
             return <form
               className={`ZEleA-Form-${layoutType}`}
               onSubmit={handleSubmit}
