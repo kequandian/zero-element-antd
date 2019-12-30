@@ -3,11 +3,11 @@
   color     : #cbc5c5;
 }
 
-.ZEleA-DnDFormEdit-primary {
+.ZEleA-DnDFormEdit-itemTool .ZEleA-DnDFormEdit-primary {
   color: #1890ff;
 }
 
-.ZEleA-DnDFormEdit-danger {
+.ZEleA-DnDFormEdit-itemTool .ZEleA-DnDFormEdit-danger {
   color: #f5222d;
 }
 

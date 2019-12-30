@@ -42,6 +42,9 @@ const initState = {
 };
 
 function DndFormEdit(props) {
+  const { onSubmit, onGetFormRef, initData } = props;
+  const formRef = useRef({});
+
   const [state, dispatch] = useReducer(
     handleState,
     initState,
@@ -63,6 +66,14 @@ function DndFormEdit(props) {
   const originFields = useRef([]);
 
   useDidMount(_ => {
+    if (typeof initData === 'object') {
+      const { originConfig = {} } = initData;
+      dispatch({
+        type: 'initConfig',
+        payload: initData,
+      });
+      setInitId(originConfig.finalId, originConfig.fieldCount);
+    }
     if (API.getAPI) {
       dispatch({
         type: 'save',
@@ -94,6 +105,9 @@ function DndFormEdit(props) {
           });
         })
     }
+    if (typeof onGetFormRef === 'function') {
+      onGetFormRef(formRef);
+    }
   });
 
   function handleName(e) {
@@ -106,6 +120,37 @@ function DndFormEdit(props) {
     });
   }
   function handleSave() {
+    const [data, otherFields] = formatToConfig(config, state.name, {
+      layoutType,
+    });
+    const method = API.updateAPI ?
+      formProps.handle.onUpdateForm
+      : formProps.handle.onCreateForm;
+
+    const submitData = {
+      title: state.name,
+      config: data,
+      fields: uniqueFields(
+        fields.map(f => ({
+          field: f,
+          label: f,
+        })),
+        originFields.current,
+        otherFields
+      ),
+      originConfig: {
+        ...state.config,
+        title: state.name,
+        finalId: assigned,
+        fieldCount: fieldCount,
+      },
+    };
+
+    if (onSubmit) {
+      onSubmit(submitData);
+      return false;
+    }
+
     dispatch({
       type: 'save',
       payload: {
@@ -114,32 +159,8 @@ function DndFormEdit(props) {
       }
     });
 
-    const [data, otherFields] = formatToConfig(config, state.name, {
-      layoutType,
-    });
-    const method = API.updateAPI ?
-      formProps.handle.onUpdateForm
-      : formProps.handle.onCreateForm;
-
     method({
-      fields: {
-        title: state.name,
-        config: data,
-        fields: uniqueFields(
-          fields.map(f => ({
-            field: f,
-            label: f,
-          })),
-          originFields.current,
-          otherFields
-        ),
-        originConfig: {
-          ...state.config,
-          title: state.name,
-          finalId: assigned,
-          fieldCount: fieldCount,
-        },
-      },
+      fields: submitData,
     })
       .then(_ => {
         message.success('保存成功');
@@ -161,6 +182,20 @@ function DndFormEdit(props) {
       });
   }
 
+  function renderSubmitButton() {
+    if (typeof onSubmit === 'function') {
+      return null;
+    }
+    return <>
+      <br />
+      <Button type="primary" onClick={handleSave}>保存</Button>
+    </>
+  }
+
+  formRef.current = {
+    onSubmit: handleSave,
+  };
+
   return <DnDContext.Provider value={state}>
     <Flex>
       <FlexItem flex={1}>
@@ -170,8 +205,7 @@ function DndFormEdit(props) {
               <h3>表单名称：</h3>
               <Input value={state.name} onChange={handleName} />
             </div>
-            <br />
-            <Button type="primary" onClick={handleSave}>保存</Button>
+            {renderSubmitButton()}
           </Card>
           <br />
           <Panel title="表单字段">

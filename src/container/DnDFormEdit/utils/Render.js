@@ -29,7 +29,7 @@ export default function Render(props) {
   const { label = {} } = base;
   const labelClassNames = [
     'ZEleA-Form-item-label',
-    rules.required && rules.required.value ? 'ant-form-item-required' : '',
+    rules.required && rules.required.value ? 'ZEleA-Form-item-required' : '',
     label.value ? 'ZEleA-Form-item-label-colon' : '',
   ];
   return <>
