@@ -5,10 +5,11 @@ import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element-global/lib/layout';
+import { getModel } from 'zero-element/lib/Model';
 
 export default function BaseSearch(props) {
   const formRef = useRef({});
-  const { namespace, config, extraData } = props;
+  const { namespace, config, extraData, keepData } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {},
   } = config;
@@ -26,14 +27,18 @@ export default function BaseSearch(props) {
 
   const { loading, data, modelStatus, handle } = searchProps;
   const initData = useRef(data);
+  const model = getModel(namespace);
   const { onSearch, onSetSearchData, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(fields.length > collapse ? false : null);
   const [canFields, setCanFields] = useState(fields.slice(0, collapse));
 
   useMemo(recordDefaultValue, [fields]);
+
   useWillUnmount(_ => {
-    onClearSearch();
+    if (!keepData) {
+      onClearSearch();
+    }
   });
 
   function handleExpand() {
@@ -95,6 +100,10 @@ export default function BaseSearch(props) {
             values,
           }));
           renderFieldsAndButton.splice(collapse, 0, renderFooter());
+
+          if (keepData) {
+            model.setState('searchData', values);
+          }
 
           return <form
             className={`ZEleA-Form-${layoutType}`}

@@ -57,7 +57,7 @@ export default function BaseForm(props) {
   });
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);
-  const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
+  const { onGetOne, onCreateForm, onUpdateForm, onClearForm, onCanRecyclable } = handle;
   const [destroy, setDestroy] = useState(false);
 
   useMemo(recordDefaultValue, [fields]);
@@ -74,7 +74,9 @@ export default function BaseForm(props) {
   });
 
   useWillUnmount(_ => {
-    if (!keepData) {
+    if (keepData) {
+      onCanRecyclable();
+    } else {
       onClearForm();
     }
   });

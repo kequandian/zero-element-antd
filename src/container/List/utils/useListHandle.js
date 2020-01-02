@@ -14,6 +14,7 @@ export default function useListHandle({
   config,
 
   forceInitList,
+  keepData,
   batchOperation,
 }) {
   const listProps = useBaseList({
@@ -31,7 +32,7 @@ export default function useListHandle({
   } = config;
 
   const { loading, data, handle, modelStatus } = listProps;
-  const { onGetList, onClearList } = handle;
+  const { onGetList, onClearList, onCanRecyclable } = handle;
   const [rowSelection, onSetSelection] = useRowSelection(handle);
 
   const { listData } = modelStatus;
@@ -49,6 +50,7 @@ export default function useListHandle({
     if (API.listAPI) {
       onGetList({
         pageSize: pageSize,
+        ...pagination,
       });
     }
   });
@@ -60,6 +62,7 @@ export default function useListHandle({
       if (forceInitList !== undefined && API.listAPI) {
         onGetList({
           pageSize: pageSize,
+          ...pagination,
         });
       }
     }
@@ -72,7 +75,13 @@ export default function useListHandle({
     }
   }, [batchOperation]);
 
-  useWillUnmount(onClearList);
+  useWillUnmount(_ => {
+    if (keepData) {
+      onCanRecyclable();
+    } else {
+      onClearList();
+    }
+  });
 
   function handlePageChange(current, pageSize) {
 

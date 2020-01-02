@@ -10,6 +10,8 @@ export default function valueTypeEllipsis(props) {
   const { max = 16 } = options;
   const t = String(text);
 
+  if (!text) return null;
+
   return t.length < max ? t : (
     <Tooltip title={t}>
       {t.slice(0, max)}...
