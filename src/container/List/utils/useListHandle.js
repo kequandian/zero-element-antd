@@ -3,6 +3,7 @@ import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 import useOperation from './useOperation';
+import useRowSelection from './useRowSelection';
 import { formatTableFields } from './format';
 import { getActionItem } from '@/utils/readConfig';
 
@@ -13,6 +14,7 @@ export default function useListHandle({
   config,
 
   forceInitList,
+  batchOperation,
 }) {
   const listProps = useBaseList({
     namespace,
@@ -30,6 +32,8 @@ export default function useListHandle({
 
   const { loading, data, handle, modelStatus } = listProps;
   const { onGetList, onClearList } = handle;
+  const [rowSelection, onSetSelection] = useRowSelection(handle);
+
   const { listData } = modelStatus;
   const { records, ...pagination } = listData;
 
@@ -48,7 +52,7 @@ export default function useListHandle({
       });
     }
   });
-  useWillUnmount(onClearList);
+
   useEffect(_ => {
     if (firstGetList.current) {
       firstGetList.current = false;
@@ -60,7 +64,15 @@ export default function useListHandle({
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [forceInitList])
+  }, [forceInitList]);
+
+  useEffect(_ => {
+    if (batchOperation !== undefined) {
+      onSetSelection(batchOperation);
+    }
+  }, [batchOperation]);
+
+  useWillUnmount(onClearList);
 
   function handlePageChange(current, pageSize) {
 
@@ -73,10 +85,13 @@ export default function useListHandle({
   const tableProps = {
     columns,
     loading,
+    rowSelection: batchOperation ? rowSelection : undefined,
     pagination: {
+      showSizeChanger: true,
       ...pagination,
       onChange: handlePageChange,
-    }
+      onShowSizeChange: handlePageChange,
+    },
   };
   if (width > 0) {
     tableProps.scroll = {
