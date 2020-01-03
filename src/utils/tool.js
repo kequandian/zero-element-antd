@@ -93,6 +93,25 @@ export function toNumber(value) {
 }
 
 /**
+ * 保留两位小数, 不足补零
+ * @param {number} value 
+ */
+export function returnFloat(value) {
+  var value = Math.round(parseFloat(value) * 100) / 100;
+  var s = value.toString().split(".");
+  if (s.length == 1) {
+    value = value.toString() + ".00";
+    return value;
+  }
+  if (s.length > 1) {
+    if (s[1].length < 2) {
+      value = value.toString() + "0";
+    }
+    return value;
+  }
+}
+
+/**
  * 上移或下移数组内的某一项，直接改变原数组
  *
  * @export
