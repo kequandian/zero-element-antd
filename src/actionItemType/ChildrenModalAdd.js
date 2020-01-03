@@ -8,13 +8,13 @@ export default (props) => {
     modalTitle, modalWidth,
     childAppendField,
     ...rest } = options;
-  const [visible, setViseble] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   function handleOpen() {
-    setViseble(true);
+    setVisible(true);
   }
   function handleClose() {
-    setViseble(false);
+    setVisible(false);
   }
 
   function handleSubmit(data) {

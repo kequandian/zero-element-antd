@@ -3,6 +3,7 @@ import ZEle from 'zero-element';
 import { get as LAGet } from 'zero-element-global/lib/listAction';
 import { Modal } from 'antd';
 import PageContext from 'zero-element/lib/context/PageContext';
+import { formatAPI } from 'zero-element/lib/utils/format';
 import ListOperation from './ListOperation';
 import reducer from './reducer';
 import '../../index.css';
@@ -18,15 +19,19 @@ const initialState = {
 export default function ListOperationWrapped(props) {
   const context = useContext(PageContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { index, handle = {}, extraData = {} } = props;
+  const { index, namespace, handle = {}, extraData = {} } = props;
 
   function onModal(cfg) {
     const { options } = cfg;
     const { modalTitle, modalWidth, ...rest } = options;
+    const fTitle = formatAPI(modalTitle, {
+      namespace,
+    });
+
     dispatch({
       type: 'openModal',
       payload: {
-        modalTitle,
+        modalTitle: fTitle,
         modalWidth,
         modalConfig: rest,
       }
@@ -46,10 +51,14 @@ export default function ListOperationWrapped(props) {
   function onChildEditModal(cfg) {
     const { options } = cfg;
     const { modalTitle, modalWidth, ...rest } = options;
+    const fTitle = formatAPI(modalTitle, {
+      namespace,
+    });
+
     dispatch({
       type: 'openModal',
       payload: {
-        modalTitle,
+        modalTitle: fTitle,
         modalWidth,
         modalConfig: rest,
         onSubmit: handle.onEdit,

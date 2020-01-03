@@ -114,174 +114,6 @@
 .ZEleA-Layout-SearchLayout .ZEleA-Form-horizontal>.ant-row {
   margin-bottom: 0;
 }
-.ZEleA-ImageView-container {
-  overflow: hidden;
-  cursor  : pointer;
-}
-
-.ZEleA-ImageView-container.border {
-  border    : 1px solid transparent;
-  margin    : 2px;
-  transition: all .2s;
-}
-
-.ZEleA-ImageView-container.border:hover {
-  border-color: #2a5e90;
-}
-
-.ZEleA-ImageView-container.circle {
-  border-radius: 50%;
-}
-
-.ZEleA-ImageView-container img {
-  max-height: 100%;
-  transform : scale(1);
-  transition: all .2s;
-}
-
-.ZEleA-ImageView-container:hover img {
-  transform: scale(1.2);
-}
-
-.ZEleA-ImageView-container .bgConter {
-  width              : 100%;
-  height             : 100%;
-  background-position: center;
-  background-repeat  : no-repeat;
-}
-.ZEleA-Panel {
-  background   : #fff;
-  margin-bottom: 8px;
-  border-radius: 4px;
-}
-
-.ZEleA-Panel-title {
-  min-width    : 130px;
-  font-size    : 18px;
-  font-weight  : 600;
-  border-bottom: 1px solid #d9d9d9;
-  padding      : 4px;
-  cursor       : pointer;
-  user-select  : none;
-}
-
-.ZEleA-Panel-icon {
-  transition: all .2s;
-}
-
-.ZEleA-Panel-content {
-  padding   : 8px;
-  overflow  : hidden;
-  transition: all .2s;
-}
-.ZEleA-Form-ruleTips {
-  color      : #ff4d4f;
-  flex-basis : 100%;
-  margin-left: 98px;
-  height     : 0;
-  opacity    : 0;
-  transition : all .2s;
-}
-
-.ZEleA-Form-ruleTips.error {
-  opacity      : 1;
-  margin-bottom: 18px;
-}
-
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
-  border-color: #ff4d4f;
-}
-
-.ZEleA-Form-vertical>.ant-row,
-.ZEleA-Form-horizontal>.ant-row {
-  margin-bottom: 8px;
-}
-
-.ZEleA-Form-item-label {
-  margin-right: 8px;
-}
-
-.ZEleA-Form-item-required::before {
-  display     : inline-block;
-  margin-right: 4px;
-  color       : #f5222d;
-  font-size   : 14px;
-  font-family : SimSun, sans-serif;
-  line-height : 1;
-  content     : '*';
-}
-
-.ZEleA-Form-item-label-colon::after {
-  content : ':';
-  position: relative;
-  top     : -0.5px;
-  margin  : 0 8px 0 2px;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item {
-  display      : flex;
-  align-items  : center;
-  margin-bottom: 8px;
-  flex-wrap    : wrap;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-label {
-  text-align: right;
-  min-width : 90px;
-}
-
-@media (min-width: 768px) {
-  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
-    min-width: 106px;
-  }
-
-  .ZEleA-Form-ruleTips {
-    margin-left: 114px;
-  }
-}
-
-.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
-  width: 6em;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-element {
-  width: 0;
-  flex : 1;
-}
-
-.ZEleA-Form-item-element input,
-.ZEleA-Form-item-element .ant-input-number,
-.ZEleA-Form-item-element .ant-select,
-.ZEleA-Form-item-element .ant-input-password {
-  width    : 240px;
-  max-width: 100%;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker {
-  display  : flex;
-  width    : 240px;
-  max-width: 100%;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker[tabindex="0"] {
-  width    : 320px;
-  max-width: 100%;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker>div {
-  width: 0;
-  flex : 1;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker-input {
-  display: flex;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker-input input {
-  flex : 1;
-  width: 100%;
-}
 .ZEleA-DnDFormEdit-tips {
   text-align: center;
   color     : #cbc5c5;
@@ -446,6 +278,121 @@
   min-height: 60px;
   padding   : 8px 16px;
 }
+.ZEleA-Form-ruleTips {
+  color      : #ff4d4f;
+  flex-basis : 100%;
+  margin-left: 98px;
+  height     : 0;
+  opacity    : 0;
+  transition : all .2s;
+}
+
+.ZEleA-Form-ruleTips.error {
+  opacity      : 1;
+  margin-bottom: 18px;
+}
+
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
+  border-color: #ff4d4f;
+}
+
+.ZEleA-Form-vertical>.ant-row,
+.ZEleA-Form-horizontal>.ant-row {
+  margin-bottom: 8px;
+}
+
+.ZEleA-Form-item-label {
+  margin-right: 8px;
+}
+
+.ZEleA-Form-item-required::before {
+  display     : inline-block;
+  margin-right: 4px;
+  color       : #f5222d;
+  font-size   : 14px;
+  font-family : SimSun, sans-serif;
+  line-height : 1;
+  content     : '*';
+}
+
+.ZEleA-Form-item-label-colon::after {
+  content : ':';
+  position: relative;
+  top     : -0.5px;
+  margin  : 0 8px 0 2px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item {
+  display      : flex;
+  align-items  : center;
+  margin-bottom: 8px;
+  flex-wrap    : wrap;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-label {
+  text-align: right;
+  min-width : 90px;
+}
+
+@media (min-width: 768px) {
+  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
+    min-width: 106px;
+  }
+
+  .ZEleA-Form-ruleTips {
+    margin-left: 114px;
+  }
+}
+
+.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
+  width: 6em;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-element {
+  width     : 0;
+  flex      : 1;
+  min-height: 32px;
+}
+
+.ZEleA-Form-item-element input,
+.ZEleA-Form-item-element .ant-input-number,
+.ZEleA-Form-item-element .ant-select,
+.ZEleA-Form-item-element .ant-input-password {
+  width    : 240px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-radio-group,
+.ZEleA-Form-item-element .ant-checkbox-group {
+  vertical-align: sub;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker {
+  display  : flex;
+  width    : 240px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker[tabindex="0"] {
+  width    : 320px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker>div {
+  width: 0;
+  flex : 1;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker-input {
+  display: flex;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker-input input {
+  flex : 1;
+  width: 100%;
+}
 .ZEleA-table-operation {
   height     : 40px;
   line-height: 40px;
@@ -549,6 +496,66 @@
 .ZEleA-table-action-Sort>i {
   margin-right: 8px;
   cursor      : pointer;
+}
+.ZEleA-ImageView-container {
+  overflow: hidden;
+  cursor  : pointer;
+}
+
+.ZEleA-ImageView-container.border {
+  border    : 1px solid transparent;
+  margin    : 2px;
+  transition: all .2s;
+}
+
+.ZEleA-ImageView-container.border:hover {
+  border-color: #2a5e90;
+}
+
+.ZEleA-ImageView-container.circle {
+  border-radius: 50%;
+}
+
+.ZEleA-ImageView-container img {
+  max-height: 100%;
+  transform : scale(1);
+  transition: all .2s;
+}
+
+.ZEleA-ImageView-container:hover img {
+  transform: scale(1.2);
+}
+
+.ZEleA-ImageView-container .bgConter {
+  width              : 100%;
+  height             : 100%;
+  background-position: center;
+  background-repeat  : no-repeat;
+}
+.ZEleA-Panel {
+  background   : #fff;
+  margin-bottom: 8px;
+  border-radius: 4px;
+}
+
+.ZEleA-Panel-title {
+  min-width    : 130px;
+  font-size    : 18px;
+  font-weight  : 600;
+  border-bottom: 1px solid #d9d9d9;
+  padding      : 4px;
+  cursor       : pointer;
+  user-select  : none;
+}
+
+.ZEleA-Panel-icon {
+  transition: all .2s;
+}
+
+.ZEleA-Panel-content {
+  padding   : 8px;
+  overflow  : hidden;
+  transition: all .2s;
 }
 .ZEleA-Layout-table {
   display: table;

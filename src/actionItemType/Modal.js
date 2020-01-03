@@ -5,16 +5,16 @@ import ZEle from 'zero-element';
 export default (props) => {
   const { title, options, namespace, handle, ...restProps } = props;
   const { icon, modalTitle, modalWidth, ...rest } = options;
-  const [visible, setViseble] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   function handleOpen() {
-    setViseble(true);
+    setVisible(true);
   }
   function handleClose() {
-    setViseble(false);
+    setVisible(false);
   }
   function handleCloseAndQuery() {
-    setViseble(false);
+    setVisible(false);
     if (typeof handle.onRefresh === 'function') {
       handle.onRefresh();
     }
