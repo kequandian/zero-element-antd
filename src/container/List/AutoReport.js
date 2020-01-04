@@ -75,6 +75,12 @@ export default function AutoReport(props) {
     });
   }
 
+  function handleRowClassName(record, index) {
+    if (index % 2 === 1) {
+      return 'ZEleA-table-odd';
+    }
+  }
+
   return <Render n={layout} {...layoutConfig}
     handle={handle}
     namespace={namespace}
@@ -86,6 +92,7 @@ export default function AutoReport(props) {
       rowKey="id"
       size="middle"
       className="ZEleA-ReportList"
+      rowClassName={handleRowClassName}
       columns={tColumns}
       dataSource={records}
       loading={loading}

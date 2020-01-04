@@ -31,7 +31,6 @@ export default function BaseSearch(props) {
   const { onSearch, onSetSearchData, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(fields.length > collapse ? false : null);
-  const [canFields, setCanFields] = useState(fields.slice(0, collapse));
 
   useMemo(recordDefaultValue, [fields]);
 
@@ -43,11 +42,9 @@ export default function BaseSearch(props) {
 
   function handleExpand() {
     setExpand(true);
-    setCanFields(fields);
   }
   function handleCollapse() {
     setExpand(false);
-    setCanFields(fields.slice(0, collapse));
   }
 
   function recordDefaultValue() {
@@ -95,10 +92,16 @@ export default function BaseSearch(props) {
             values,
             onSubmit: handleSubmit,
           };
-          const renderFieldsAndButton = canFields.map(field => getFormItem(field, modelStatus, {
+          const renderFieldsAndButton = fields.map(field => getFormItem(field, modelStatus, {
             namespace,
             values,
-          }));
+          }))
+            .filter(field => field);
+
+          if (expand === false) {
+            renderFieldsAndButton.splice(collapse);
+          }
+
           renderFieldsAndButton.splice(collapse, 0, renderFooter());
 
           if (keepData) {

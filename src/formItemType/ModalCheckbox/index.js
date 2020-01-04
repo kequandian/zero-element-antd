@@ -57,6 +57,7 @@ export default function ModalCheckbox(props) {
       {echoName(value, onGetFormData, { field, label, editLabel }) || title}
     </Button>
     <Modal
+      destroyOnClose
       visible={visible}
       title={title}
       onCancel={switchVisible}

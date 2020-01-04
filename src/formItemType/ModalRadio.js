@@ -56,11 +56,11 @@ export default function ModalRadio(props) {
       {echoName(value, onGetFormData, { label, editLabel }) || title}
     </Button>
     <Modal
+      destroyOnClose
       visible={visible}
       title={title}
       onCancel={switchVisible}
       onOk={handleSave}
-      destroyOnClose
     >
       <TableSelect
         value={typeof value === 'object' ? [value] : [{ [optValue]: value }]}
