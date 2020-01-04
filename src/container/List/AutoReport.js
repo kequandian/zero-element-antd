@@ -128,11 +128,17 @@ const typeMap = {
   'D': { // 金钱
     valueType: 'currency',
     align: 'right',
+    options: {
+      nullPlaceholder: '-',
+    },
   },
   'T': {},// 时间
   'P': { // 百分比
     valueType: 'percentage',
     align: 'right',
+    options: {
+      nullPlaceholder: '-',
+    },
   },
   'C': { // 数量
     align: 'right',

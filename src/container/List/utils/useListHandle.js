@@ -13,9 +13,7 @@ export default function useListHandle({
   extraData,
   config,
 
-  forceInitList,
-  keepData,
-  batchOperation,
+  props,
 }) {
   const listProps = useBaseList({
     namespace,
@@ -24,6 +22,7 @@ export default function useListHandle({
   }, config);
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
+  const { forceInitList, keepData, batchOperation, pagination: propsPagination = true } = props;
 
   const {
     API = {},
@@ -95,12 +94,13 @@ export default function useListHandle({
     columns,
     loading,
     rowSelection: batchOperation ? rowSelection : undefined,
-    pagination: {
+    pagination: propsPagination ? {
       showSizeChanger: true,
       ...pagination,
       onChange: handlePageChange,
       onShowSizeChange: handlePageChange,
-    },
+    }
+      : false,
   };
   if (width > 0) {
     tableProps.scroll = {

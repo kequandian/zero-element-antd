@@ -29,7 +29,7 @@ export default function ModalRadio(props) {
   useDidMount(_ => {
     onFormatValue(name, 'toValue');
   });
-  function hanldeChange(value) {
+  function handleChange(value) {
     selectedData.current = {
       ...value[0],
       _toValue: value[0][optValue],
@@ -64,7 +64,7 @@ export default function ModalRadio(props) {
     >
       <TableSelect
         value={typeof value === 'object' ? [value] : [{ [optValue]: value }]}
-        onChange={hanldeChange}
+        onChange={handleChange}
         options={{
           API,
           fields,

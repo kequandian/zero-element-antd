@@ -24,7 +24,7 @@ export default (props) => {
     setViseble(false);
   }
 
-  function hanldeChange(data) {
+  function handleChange(data) {
     selectedData.current.push(...data);
   }
   function handleSave() {
@@ -54,7 +54,7 @@ export default (props) => {
         value={value}
         field={field}
         optValue={optValue}
-        onChange={hanldeChange}
+        onChange={handleChange}
         onGetFormData={onGetFormData}
 
         API={API}

@@ -4,7 +4,7 @@ import { Render } from 'zero-element-global/lib/layout';
 import useListHandle from './utils/useListHandle';
 
 export default function ReportList(props) {
-  const { namespace, config, extraData, forceInitList } = props;
+  const { namespace, config, extraData } = props;
   const {
     layout = 'Empty', layoutConfig = {},
     props: propsCfg = {},
@@ -17,7 +17,7 @@ export default function ReportList(props) {
     extraData,
     config,
 
-    forceInitList,
+    props,
   });
 
   function handleRowClassName(record, index) {

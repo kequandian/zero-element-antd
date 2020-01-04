@@ -4,12 +4,12 @@ import { Select } from 'antd';
 export default function SelectWrapped(props) {
   const { value, options = [], onChange, props: p, ...rest } = props;
 
-  function hanldeChange(value) {
+  function handleChange(value) {
     onChange(value);
   }
 
   return <Select
-    onChange={hanldeChange}
+    onChange={handleChange}
     value={value}
     style={{ minWidth: 120 }}
     {...rest}

@@ -5,7 +5,7 @@ import { Pagination } from 'antd';
 
 export default function ItemList(props) {
   const {
-    namespace, config, extraData, forceInitList,
+    namespace, config, extraData,
     Item,
   } = props;
   const {
@@ -25,7 +25,7 @@ export default function ItemList(props) {
     extraData,
     config,
 
-    forceInitList,
+    props,
   });
 
   if (typeof Item !== 'function') {

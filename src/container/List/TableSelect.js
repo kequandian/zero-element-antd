@@ -6,7 +6,7 @@ import useListHandle from './utils/useListHandle';
 export default function TableSelect(props) {
   const {
     namespace, config,
-    extraData, forceInitList,
+    extraData,
     options, value, onChange,
   } = props;
   const {
@@ -33,7 +33,7 @@ export default function TableSelect(props) {
     extraData,
     config,
 
-    forceInitList,
+    props,
   });
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);

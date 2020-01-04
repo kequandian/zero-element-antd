@@ -30,7 +30,7 @@ export default function ModalCheckbox(props) {
   useDidMount(_ => {
     onFormatValue(name, 'toValue');
   });
-  function hanldeChange(value) {
+  function handleChange(value) {
     selectedData.current = {
       value,
       _toValue: value.map(item => item[optValue]),
@@ -67,7 +67,7 @@ export default function ModalCheckbox(props) {
         value={value}
         field={field}
         optValue={optValue}
-        onChange={hanldeChange}
+        onChange={handleChange}
         onGetFormData={onGetFormData}
 
         API={API}

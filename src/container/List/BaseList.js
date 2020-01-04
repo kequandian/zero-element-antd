@@ -4,7 +4,7 @@ import { Render } from 'zero-element-global/lib/layout';
 import useListHandle from './utils/useListHandle';
 
 export default function BaseList(props) {
-  const { namespace, config, extraData, forceInitList, keepData, batchOperation } = props;
+  const { namespace, config, extraData } = props;
   const {
     layout = 'Empty', layoutConfig = {},
     props: propsCfg = {},
@@ -22,9 +22,7 @@ export default function BaseList(props) {
     extraData,
     config,
 
-    forceInitList,
-    keepData,
-    batchOperation,
+    props,
   });
 
   function handleRowClassName(record) {

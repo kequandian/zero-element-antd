@@ -47,6 +47,7 @@ CSet({
   TableSelect: Load('container/List/TableSelect'),
   ItemList: Load('container/List/ItemList'),
   BaseSearch: Load('container/Form/BaseSearch'),
+  AutoReportSearch: Load('container/Form/AutoReportSearch'),
   BaseForm: Load('container/Form/BaseForm'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
   DnDFormEdit: Load('container/DnDFormEdit'),
@@ -109,4 +110,5 @@ VTSet({
   'ellipsis': Load('valueType/ellipsis'),
   'input-number': Load('valueType/inputNumber'),
   'input-text': Load('valueType/inputText'),
+  'input-select': Load('valueType/inputSelect'),
 });
