@@ -53,6 +53,7 @@ export default function BaseForm(props) {
   }] = useFormHandle(namespace, {
     config,
     forceInitForm,
+    keepData,
     onGetOne: handleGetData,
   });
   const extraFields = useRef([]);

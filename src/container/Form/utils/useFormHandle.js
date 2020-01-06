@@ -51,6 +51,7 @@ function mapObject(obj, map) {
 export default function useFormHandle(namespace, {
   config,
   forceInitForm,
+  keepData,
   onGetOne,
 }) {
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
@@ -100,6 +101,23 @@ export default function useFormHandle(namespace, {
 
   }
 
+  function handleSaveData(key, value) {
+    if (keepData) {
+      const formData = model.getState().formData;
+      formData[key] = value;
+
+      model.dispatch({
+        type: 'save',
+        payload: {
+          formData: {
+            ...formData,
+          },
+        }
+      });
+    }
+    sub.current.changeValue.bind(sub.current)(key, value);
+  }
+
   return [
     {
       sub,
@@ -108,7 +126,7 @@ export default function useFormHandle(namespace, {
     {
       onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
       handleFormatValue, // format 全部已标记字段
-      onSaveOtherValue: sub.current.changeValue.bind(sub.current),
+      onSaveOtherValue: handleSaveData,
       onGetFormData: handleGetFormData, // 获取 model 里面的 form data
       bindOnChange: sub.current.recordOnChange.bind(sub.current),
       onSpyChange: sub.current.subscriptionChange.bind(sub.current),
