@@ -21,6 +21,9 @@ export default function ModalRadio(props) {
     saveData,
     requireValid,
     pagination,
+    modalWidth,
+    searchFields,
+    mountFetch,
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -59,6 +62,7 @@ export default function ModalRadio(props) {
       destroyOnClose
       visible={visible}
       title={title}
+      width={modalWidth}
       onCancel={switchVisible}
       onOk={handleSave}
     >
@@ -72,6 +76,8 @@ export default function ModalRadio(props) {
           value: optValue,
           requireValid,
           pagination,
+          searchFields,
+          mountFetch,
         }}
       />
     </Modal>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { toNumber, returnFloat } from '@/utils/tool';
+import { toNumber, returnFloatOne } from '@/utils/tool';
 
 export default function valueTypePercentage(props) {
   const { options = {}, data: { text = '' } } = props;
@@ -10,7 +10,7 @@ export default function valueTypePercentage(props) {
     v = nullPlaceholder;
   }
   if (v === undefined) {
-    v = returnFloat(toNumber(text));
+    v = returnFloatOne(toNumber(text));
   }
 
   return <div style={{ color }}>

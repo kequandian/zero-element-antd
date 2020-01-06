@@ -10,9 +10,18 @@ export default function TableSelectWrapped(props) {
 
   const {
     API, fields,
+    searchFields,
+    mountFetch,
   } = options;
 
   config.items[0].config.share = `${namespace}_tableSelect`;
+  if (searchFields) {
+    config.items[0].config.fields = searchFields;
+    config.items[0].config.layoutConfig = {
+      value: [8, 8, 8],
+      collapse: 2,
+    };
+  }
   config.items[1].config.share = `${namespace}_tableSelect`;
   config.items[1].config.API = { listAPI: API };
   config.items[1].config.fields = fields;
@@ -24,6 +33,7 @@ export default function TableSelectWrapped(props) {
     onChange={onChange}
     value={value}
     config={config}
+    mountFetch={mountFetch}
   />
 }
 

@@ -22,7 +22,11 @@ export default function useListHandle({
   }, config);
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
-  const { forceInitList, keepData, batchOperation, pagination: propsPagination = true } = props;
+  const {
+    forceInitList, keepData, batchOperation,
+    pagination: propsPagination = true,
+    mountFetch = true,
+  } = props;
 
   const {
     API = {},
@@ -46,7 +50,7 @@ export default function useListHandle({
   });
 
   useDidMount(_ => {
-    if (API.listAPI) {
+    if (mountFetch && API.listAPI) {
       onGetList({
         pageSize: pageSize,
         ...pagination,

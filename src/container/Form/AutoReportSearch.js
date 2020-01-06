@@ -64,6 +64,7 @@ export default function AutoReportSearch(props) {
       ...data,
       ...formRef.current.values,
     });
+    model.setState('searchData', formRef.current.values);
   }
   function handleReset() {
     formRef.current.form.reset();

@@ -70,7 +70,7 @@ export default function TableSelect(props) {
       {actionsItems}
     </Render>
     <Table
-      rowKey="id"
+      rowKey={optValue}
       size="small"
       bordered={false}
       rowClassName={handleRowClassName}

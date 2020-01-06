@@ -112,6 +112,20 @@ export function returnFloat(value) {
 }
 
 /**
+ * 保留一位小数, 不足补零
+ * @param {number} value 
+ */
+export function returnFloatOne(value) {
+  var value = Math.round(parseFloat(value) * 10) / 10;
+  var s = value.toString().split(".");
+  if (s.length == 1) {
+    value = value.toString() + ".0";
+    return value;
+  }
+  return value;
+}
+
+/**
  * 上移或下移数组内的某一项，直接改变原数组
  *
  * @export

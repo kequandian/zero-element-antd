@@ -388,6 +388,7 @@
   align-items  : center;
   margin-bottom: 8px;
   flex-wrap    : wrap;
+  min-height   : 32px;
 }
 
 .ZEleA-Form-horizontal .ZEleA-Form-item-label {
@@ -410,9 +411,8 @@
 }
 
 .ZEleA-Form-horizontal .ZEleA-Form-item-element {
-  width     : 0;
-  flex      : 1;
-  min-height: 32px;
+  width: 0;
+  flex : 1;
 }
 
 .ZEleA-Form-item-element input,
