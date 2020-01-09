@@ -34,7 +34,11 @@ export default function BaseSearch(props) {
 
   useMemo(recordDefaultValue, [fields]);
 
-  useWillUnmount(onClearSearch);
+  useWillUnmount(_ => {
+    if (!keepData) {
+      onClearSearch();
+    }
+  });
 
   function handleExpand() {
     setExpand(true);

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { Modal, Button } from 'antd';
+import _ from 'lodash';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import TableSelect from './TableSelect';
 
@@ -108,7 +109,7 @@ function echoName(value, getFormData, {
   const formData = getFormData();
   if (formData) {
     if (typeof formData === 'object') {
-      return formData[editLabel];
+      return _.get(formData, editLabel);
     }
   }
   return undefined;

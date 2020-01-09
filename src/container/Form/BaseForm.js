@@ -55,6 +55,7 @@ export default function BaseForm(props) {
     forceInitForm,
     keepData,
     onGetOne: handleGetData,
+    formRef,
   });
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);

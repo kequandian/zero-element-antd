@@ -10,5 +10,5 @@ export default (props) => {
     v = formatAPI(format, { namespace, placeholder });
   }
 
-  return <div {...rest}{...propsOtp}>{v}</div>;
+  return <div {...rest}{...propsOtp}>{String(v || placeholder)}</div>;
 }

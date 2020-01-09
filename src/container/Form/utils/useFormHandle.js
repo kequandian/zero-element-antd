@@ -53,6 +53,7 @@ export default function useFormHandle(namespace, {
   forceInitForm,
   keepData,
   onGetOne,
+  formRef,
 }) {
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
   const sub = useRef(new Sub());
@@ -83,7 +84,8 @@ export default function useFormHandle(namespace, {
     }
   }
   function handleGetFormData() {
-    return model.getState().formData;
+    return formRef.current.values;
+    // return model.getState().formData;
   }
   /**
    * 提交数据之前，格式化 value
