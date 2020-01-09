@@ -43,6 +43,7 @@ export default function SelectFetch(props) {
     if (API) {
       const fAPI = formatAPI(API, {
         namespace,
+        data: formData,
       });
       setLoading(true);
       query(fAPI)

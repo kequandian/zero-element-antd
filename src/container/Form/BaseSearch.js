@@ -62,10 +62,15 @@ export default function BaseSearch(props) {
       ...data,
       ...formRef.current.values,
     });
-    model.setState('searchData', formRef.current.values);
+    if (keepData) {
+      model.setState('searchData', formRef.current.values);
+    }
   }
   function handleReset() {
     formRef.current.form.reset();
+    if (keepData) {
+      onClearSearch();
+    }
   }
 
   function renderFooter() {

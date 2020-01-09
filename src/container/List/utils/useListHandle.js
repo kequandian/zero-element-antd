@@ -94,10 +94,20 @@ export default function useListHandle({
     });
   }
 
+  function handleFilterSorter(pagination, filters, sorter, extra) {
+    const { current, pageSize } = pagination;
+    onGetList({
+      current,
+      pageSize,
+      sorter,
+    });
+  }
+
   const tableProps = {
     columns,
     loading,
     rowSelection: batchOperation ? rowSelection : undefined,
+    onChange: handleFilterSorter,
     pagination: propsPagination ? {
       showSizeChanger: true,
       ...pagination,

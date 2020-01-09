@@ -16,6 +16,7 @@ export default function BaseForm(props) {
   const {
     MODAL, namespace, config, extraData = {},
     onClose, onSubmit, onSetExtraElement,
+    loading: propsLoading,
     forceInitForm,
     footer,
     onGetFormRef,
@@ -208,7 +209,7 @@ export default function BaseForm(props) {
     </div>
   }
 
-  return <Spin spinning={loading}>
+  return <Spin spinning={propsLoading || loading}>
     <div className={fields.length ? 'ant-modal-body' : undefined}>
       {destroy ? null : (
         <Form

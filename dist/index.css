@@ -104,6 +104,10 @@
   margin-bottom: 8px;
 }
 
+.ZEleA-Layout-Row>button {
+  margin-right: 4px;
+}
+
 .ZEleA-Layout-SearchLayout {
   margin        : 8px 0;
   padding       : 8px 0;

@@ -17,6 +17,8 @@ APIConfig({
 
   'REQUEST_FIELD_current': 'pageNumber',
   'REQUEST_FIELD_pageSize': 'pageSize',
+  'REQUEST_FIELD_field': 'field',
+  'REQUEST_FIELD_order': 'order',
 
   'RESPONSE_FIELD_current': 'current',
   'RESPONSE_FIELD_pageSize': 'size',
