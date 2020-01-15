@@ -33,7 +33,13 @@ const toTypeMap = {
         return mapObject(value, map);
       }
     }
+    return value;
   },
+  'JSONString': function (value) {
+    if (typeof value === 'object') {
+      return JSON.stringify(value);
+    }
+  }
 };
 
 function mapObject(obj, map) {
@@ -84,8 +90,10 @@ export default function useFormHandle(namespace, {
     }
   }
   function handleGetFormData() {
-    return formRef.current.values;
-    // return model.getState().formData;
+    if (formRef) {
+      return formRef.current.values;
+    }
+    return model.getState().formData;
   }
   /**
    * 提交数据之前，格式化 value

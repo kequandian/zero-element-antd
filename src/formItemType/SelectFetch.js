@@ -13,7 +13,7 @@ export default function SelectFetch(props) {
     options,
     namespace,
     onChange,
-    handle,
+    handle = {},
     ...rest
   } = props;
   const {
@@ -24,7 +24,7 @@ export default function SelectFetch(props) {
   const { onGetFormData } = handle;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
-  const formData = onGetFormData();
+  const formData = onGetFormData && onGetFormData() || {};
   const effectFieldValue = formData[effectField];
 
   useWillMount(_ => {

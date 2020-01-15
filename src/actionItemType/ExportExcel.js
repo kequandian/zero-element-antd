@@ -5,6 +5,7 @@ import { get as getEndpoint } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import './index.css';
 import { useModel } from 'zero-element/lib/Model';
+import qs from 'qs';
 
 export default function ExportExcel(props) {
   const { title = '导出', options, namespace, handle, ...restProps } = props;
@@ -39,6 +40,9 @@ async function download(api, params) {
     url: api,
     method: 'get',
     baseURL: canEndPoint(api),
+    paramsSerializer: function (params) {
+      return qs.stringify(params, { arrayFormat: 'repeat' });
+    },
     responseType: 'blob',
     headers: {
       'Authorization': "Bearer " + getToken(),

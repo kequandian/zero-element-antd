@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { formatTableFields } from '@/container/List/utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
@@ -17,10 +17,17 @@ export default function OneMary(props) {
     props: propsCfg = {}, layoutConfig = {},
     actionLayout = 'Row',
     actionLayoutConfig = {},
+    JSONString,
     map,
   } = options;
   const { onFormatValue, onGetFormData } = handle;
   const idRef = useRef(1);
+  const v = useMemo(_ => {
+    if (JSONString && typeof value === 'string' && value.length) {
+      return JSON.parse(value);
+    }
+    return value;
+  }, [value])
 
   useWillMount(_ => {
     if (API) {
@@ -28,6 +35,9 @@ export default function OneMary(props) {
     }
     if (map) {
       onFormatValue(name, 'map', map);
+    }
+    if (JSONString) {
+      onFormatValue(name, 'JSONString');
     }
   });
 
@@ -48,7 +58,7 @@ export default function OneMary(props) {
     })
   }
   function handleCreate(data) {
-    const rst = Array.isArray(value) ? value : [];
+    const rst = Array.isArray(v) ? v : [];
     rst.push({
       ...data,
       '_id': idRef.current++,
@@ -58,7 +68,7 @@ export default function OneMary(props) {
   function handleCreateList(data) {
     if (!Array.isArray(data)) return false;
 
-    const rst = Array.isArray(value) ? value : [];
+    const rst = Array.isArray(v) ? v : [];
     rst.push(...data.map(item => ({
       ...item,
       '_id': idRef.current++,
@@ -66,12 +76,12 @@ export default function OneMary(props) {
     onChange([...rst]);
   }
   function handleEdit(index, data) {
-    value[index] = data;
-    onChange([...value]);
+    v[index] = data;
+    onChange([...v]);
   }
   function handleRemove({ record, options = {} }) {
 
-    const temp = value.filter(item => {
+    const temp = v.filter(item => {
       if (item._id !== undefined) {
         return item._id !== record._id;
       }
@@ -92,7 +102,7 @@ export default function OneMary(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-        value,
+        value: v,
         onCreate: handleCreate,
         onCreateList: handleCreateList,
         onEdit: handleEdit,
@@ -103,7 +113,7 @@ export default function OneMary(props) {
     </Render>
     <Table
       rowKey={row => String(row._id || row.id)}
-      dataSource={value || []}
+      dataSource={v || []}
       columns={columns}
       pagination={false}
       {...propsCfg}
