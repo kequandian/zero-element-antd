@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Modal, Button } from 'antd';
 import _ from 'lodash';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -28,19 +28,31 @@ export default function ModalRadio(props) {
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
+  const [disabled, setDisable] = useState(null);
   const selectedData = useRef({});
+  const [v, setV] = useState([{ [optValue]: value }]);
 
   useDidMount(_ => {
     onFormatValue(name, 'toValue');
   });
+  useEffect(_ => {
+    const selectedValue = typeof value === 'object' ? [value] : [{ [optValue]: value }];
+
+    setV(selectedValue);
+  }, [value])
+
   function handleChange(value) {
+    setDisable(value);
     selectedData.current = {
       ...value[0],
       _toValue: value[0][optValue],
     };
   }
-  function switchVisible() {
-    setVisible(!visible);
+  function onOpen() {
+    setVisible(true);
+  }
+  function onClose() {
+    setVisible(false);
   }
   function handleSave() {
     onChange(selectedData.current);
@@ -55,7 +67,7 @@ export default function ModalRadio(props) {
 
   return <>
     <Button
-      onClick={switchVisible}
+      onClick={onOpen}
     >
       {echoName(value, onGetFormData, { label, editLabel }) || title}
     </Button>
@@ -64,11 +76,14 @@ export default function ModalRadio(props) {
       visible={visible}
       title={title}
       width={modalWidth}
-      onCancel={switchVisible}
+      onCancel={onClose}
       onOk={handleSave}
+      okButtonProps={{
+        disabled: !Boolean(disabled),
+      }}
     >
       <TableSelect
-        value={typeof value === 'object' ? [value] : [{ [optValue]: value }]}
+        value={v}
         onChange={handleChange}
         options={{
           API,
@@ -109,8 +124,8 @@ function echoName(value, getFormData, {
   const formData = getFormData();
   if (formData) {
     if (typeof formData === 'object') {
-      return _.get(formData, editLabel);
+      return _.get(formData, editLabel) || value;
     }
   }
-  return undefined;
+  return value;
 }
