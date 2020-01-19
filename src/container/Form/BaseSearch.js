@@ -17,6 +17,7 @@ export default function BaseSearch(props) {
     layoutType = 'horizontal',
     value = [6, 6, 6, 6],
     collapse = 3,
+    defaultExpand = fields.length > collapse ? false : null,
     buttonSpan,
   } = layoutConfig;
   const searchProps = useBaseSearch({
@@ -30,7 +31,7 @@ export default function BaseSearch(props) {
   const model = getModel(namespace);
   const { onSearch, onSetSearchData, onClearSearch } = handle;
 
-  const [expand, setExpand] = useState(fields.length > collapse ? false : null);
+  const [expand, setExpand] = useState(defaultExpand);
 
   useMemo(recordDefaultValue, [fields]);
 

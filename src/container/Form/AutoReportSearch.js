@@ -41,6 +41,14 @@ export default function AutoReportSearch(props) {
       });
 
       setFields(searchColumns.map(field => {
+        const [name, type] = field.split('-');
+        if (type) {
+          return {
+            field: name,
+            label: name,
+            ...typeOptionsMap[type],
+          };
+        }
         return {
           field,
           label: field,

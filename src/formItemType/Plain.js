@@ -2,10 +2,10 @@ import React from 'react';
 import { formatAPI } from 'zero-element/lib/utils/format';
 
 export default (props) => {
-  const { namespace, props: propsOtp, value, defaultValue, options, ...rest } = props;
+  const { name, namespace, props: propsOtp, defaultValue, value = defaultValue, options, ...rest } = props;
   const { format, placeholder = '-', map } = options;
 
-  let v = value || defaultValue;
+  let v = value;
   if (format) {
     v = formatAPI(format, { namespace, placeholder });
   }
@@ -13,5 +13,5 @@ export default (props) => {
     v = map[v];
   }
 
-  return <div {...rest}{...propsOtp}>{String(v || placeholder)}</div>;
+  return <div {...rest}{...propsOtp}>{String(v === undefined ? placeholder : v)}</div>;
 }

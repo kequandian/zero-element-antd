@@ -25,6 +25,7 @@ export default function ModalRadio(props) {
     modalWidth,
     searchFields,
     mountFetch,
+    defaultExpand,
   } = options;
   const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -94,6 +95,7 @@ export default function ModalRadio(props) {
           pagination,
           searchFields,
           mountFetch,
+          defaultExpand,
         }}
       />
     </Modal>

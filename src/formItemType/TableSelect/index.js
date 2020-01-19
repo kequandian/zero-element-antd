@@ -12,6 +12,7 @@ export default function TableSelectWrapped(props) {
     API, fields,
     searchFields,
     mountFetch,
+    defaultExpand,
   } = options;
 
   config.items[0].config.share = `${namespace}_tableSelect`;
@@ -20,6 +21,7 @@ export default function TableSelectWrapped(props) {
     config.items[0].config.layoutConfig = {
       value: [8, 8, 8],
       collapse: 2,
+      defaultExpand,
     };
   }
   config.items[1].config.share = `${namespace}_tableSelect`;

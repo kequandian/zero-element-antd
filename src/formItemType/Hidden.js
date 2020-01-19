@@ -2,12 +2,12 @@ import React from 'react';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 export default function (props) {
-  const { name, options = {}, handle } = props;
+  const { name, options = {}, handle = {} } = props;
   const { map } = options;
   const { onFormatValue } = handle;
 
   useWillMount(_ => {
-    if (map) {
+    if (map && onFormatValue) {
       onFormatValue(name, 'map', map);
     }
   });
