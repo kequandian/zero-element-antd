@@ -13,6 +13,7 @@ export default function ModalRadio(props) {
     handle,
     ...rest
   } = props;
+
   const {
     title = '选择数据',
     label = 'name', editLabel = label,
@@ -86,6 +87,7 @@ export default function ModalRadio(props) {
       <TableSelect
         value={v}
         onChange={handleChange}
+        namespace={`${namespace}_ModalRadio`}
         options={{
           API,
           fields,

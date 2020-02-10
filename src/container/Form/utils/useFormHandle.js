@@ -116,14 +116,17 @@ export default function useFormHandle(namespace, {
       const formData = model.getState().formData;
       formData[key] = value;
 
-      model.dispatch({
-        type: 'save',
-        payload: {
-          formData: {
-            ...formData,
-          },
-        }
+      model.setState('formData', {
+        ...formData,
       });
+      // model.dispatch({
+      //   type: 'save',
+      //   payload: {
+      //     formData: {
+      //       ...formData,
+      //     },
+      //   }
+      // });
     }
     sub.current.changeValue.bind(sub.current)(key, value);
   }

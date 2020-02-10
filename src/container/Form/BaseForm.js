@@ -1,4 +1,4 @@
-import React, { useReducer, useRef, useMemo, useState } from 'react';
+import React, { useReducer, useRef, useMemo, useState, useEffect } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
@@ -38,6 +38,7 @@ export default function BaseForm(props) {
   const { router, goBack } = global;
 
   const { loading, data, modelStatus, handle } = formProps;
+
   const initData = useRef({
     ...extraData,
     ...data,
@@ -62,6 +63,7 @@ export default function BaseForm(props) {
   const [fields, setFields] = useState(fieldsCfg);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm, onCanRecyclable } = handle;
   const [destroy, setDestroy] = useState(false);
+  const init = useRef(true);
 
   useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
@@ -75,6 +77,12 @@ export default function BaseForm(props) {
       onGetFormRef(formRef);
     }
   });
+  useEffect(_ => {
+    if (!init.current && Object.keys(data).length !== 0) {
+      formRef.current.form.reset(data);
+    }
+    init.current = false;
+  }, [data]);
 
   useWillUnmount(_ => {
     if (keepData) {
