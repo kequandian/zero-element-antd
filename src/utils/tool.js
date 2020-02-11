@@ -82,7 +82,7 @@ export function mapObjList(list, newList, exclude = []) {
  * @returns
  */
 export function toNumber(value) {
-  let v = 0;
+  let v = value;
   if (value) {
     v = Number(value);
     if (isNaN(v)) {
