@@ -14,7 +14,7 @@ import global from 'zero-element-global/lib/global';
 import ComponentPanel from './ComponentPanel';
 import Fields from './Fields';
 import EchoPanel from './EchoPanel';
-import AttributesPanel from './AttributesPanel';
+import AttributesPanel from '../DnDFormEdit/AttributesPanel';
 
 import DnDContext from './utils/context';
 import handleState from './utils/dispatchState';

@@ -10,7 +10,7 @@ export default ({ layoutId, index, onPaste }) => {
     <ContextMenuTrigger id={`layout_${layoutId}_${index}`}>
       <div className="ZEleA-DnDFormEdit-Container">
         <ElementContainer layoutId={layoutId} index={index}>
-          <span className="ZEleA-DnDFormEdit-empty">暂无Elem内容</span>
+          <span className="ZEleA-DnDFormEdit-empty">暂无内容</span>
         </ElementContainer>
       </div>
     </ContextMenuTrigger>

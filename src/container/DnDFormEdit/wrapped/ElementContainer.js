@@ -1,7 +1,6 @@
 import React from 'react';
 import { DropTarget } from 'react-dnd';
 import classNames from 'classnames';
-import { Icon } from 'antd';
 
 const containerSquareTarget = {
   canDrop(props, monitor) {

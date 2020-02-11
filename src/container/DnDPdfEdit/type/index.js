@@ -1,12 +1,12 @@
 import React from 'react';
-import Canvas from './Canvas';
+import Canvas from '../../DnDFormEdit/type/Canvas';
 import Grid from './Grid';
-import LTB from './LTB';
+import LTB from '../../DnDFormEdit/type/LTB';
 
-import Plain from './Plain';
-import Group from './Group';
+import Plain from '../../DnDFormEdit/type/Plain';
+import Group from '../../DnDFormEdit/type/Group';
 import InputUnderline from './InputUnderline';
-import Checkbox from './Checkbox';
+import Checkbox from '../../DnDFormEdit/type/Checkbox';
 
 const typeMap = {
   Canvas,
