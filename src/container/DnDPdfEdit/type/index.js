@@ -8,6 +8,8 @@ import Group from '../../DnDFormEdit/type/Group';
 import Checkbox from '../../DnDFormEdit/type/Checkbox';
 import InputUnderline from './InputUnderline';
 import Image from './Image';
+import Qrcode from './Qrcode';
+import Barcode from './Barcode';
 
 const typeMap = {
   Canvas,
@@ -18,5 +20,7 @@ const typeMap = {
   Checkbox,
   InputUnderline,
   Image,
+  Qrcode,
+  Barcode,
 };
 export default typeMap;

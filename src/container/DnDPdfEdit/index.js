@@ -1,3 +1,9 @@
+/**
+ * 依赖
+ * qrcode.react
+ * jsbarcode
+ */
+
 import React, { useReducer, useContext, useRef } from 'react';
 import { Button, Spin, Input, Card, message } from 'antd';
 import { DragDropContext } from 'react-dnd';

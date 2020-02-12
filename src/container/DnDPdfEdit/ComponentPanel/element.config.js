@@ -108,24 +108,24 @@ export default [
     }
   },
   {
-    title: '二维码', type: 'Group', options: {
+    title: '二维码', type: 'Qrcode', options: {
       field: {},
       base: {
         value: {
           label: '二维码',
-          value: '二维码',
+          value: '二维码值',
         },
       },
       expect: {},
     }
   },
   {
-    title: '条形码', type: 'Group', options: {
+    title: '条形码', type: 'Barcode', options: {
       field: {},
       base: {
         value: {
           label: '条形码',
-          value: '条形码',
+          value: '条形码值',
         },
       },
       expect: {},

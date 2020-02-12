@@ -1,6 +1,6 @@
 {
   "name": "zero-element-antd",
-  "version": "0.2.65",
+  "version": "0.2.66",
   "description": "在 zero-element 里面注入封装过的 antd 相关组件",
   "main": "lib/index.js",
   "scripts": {
@@ -12,8 +12,10 @@
     "antd": "^3.19.1",
     "braft-editor": "^2.3.7",
     "final-form": "^4.13.1",
+    "jsbarcode": "^3.11.0",
     "layout-flex": "github:kequandian/layout-flex",
     "lodash": "^4.17.15",
+    "qrcode.react": "^1.0.0",
     "react": "^16.8.6",
     "react-contextmenu": "^2.11.0",
     "react-dnd": "^7.4.5",
