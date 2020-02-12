@@ -19,9 +19,6 @@ const containerSquareTarget = {
     const { config = {} } = props;
     const { parentId = 0, id } = config;
 
-    console.log(787878, props);
-    
-
     const item = monitor.getItem();
     const { dispatch, ...rest } = item;
 

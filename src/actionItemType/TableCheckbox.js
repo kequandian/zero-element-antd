@@ -32,9 +32,6 @@ export default (props) => {
     handleClose();
   }
 
-  // const value = onGetFormData()[field];
-  // console.log(123, value);
-
   return <div>
     <Button onClick={handleOpen} type="primary">
       {title}

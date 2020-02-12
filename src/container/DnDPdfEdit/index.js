@@ -65,9 +65,6 @@ function DndFormEdit(props) {
   const { router } = global;
   const originFields = useRef([]);
 
-  console.log(1111, config);
-  
-
   useDidMount(_ => {
     if (typeof initData === 'object') {
       const { originConfig = {} } = initData;

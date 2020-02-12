@@ -132,11 +132,11 @@ export default [
     }
   },
   {
-    title: '图片', type: 'Group', options: {
+    title: '图片', type: 'Image', options: {
       field: {},
       base: {
         value: {
-          label: '图片',
+          label: '图片URL',
           value: '图片',
         },
       },

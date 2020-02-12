@@ -5,8 +5,9 @@ import LTB from '../../DnDFormEdit/type/LTB';
 
 import Plain from '../../DnDFormEdit/type/Plain';
 import Group from '../../DnDFormEdit/type/Group';
-import InputUnderline from './InputUnderline';
 import Checkbox from '../../DnDFormEdit/type/Checkbox';
+import InputUnderline from './InputUnderline';
+import Image from './Image';
 
 const typeMap = {
   Canvas,
@@ -14,7 +15,8 @@ const typeMap = {
   LTB,
   Plain,
   Group,
-  InputUnderline,
   Checkbox,
+  InputUnderline,
+  Image,
 };
 export default typeMap;
