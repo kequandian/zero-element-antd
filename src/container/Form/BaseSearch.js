@@ -74,17 +74,19 @@ export default function BaseSearch(props) {
     }
   }
 
-  function renderFooter() {
+  function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
       <Tooltip title="重置">
         <Button onClick={handleReset} type="link" icon="rollback"></Button>
       </Tooltip>
       <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
-      <ExpandButton
-        expand={expand}
-        onExpand={handleExpand}
-        onCollapse={handleCollapse}
-      />
+      {validLength > collapse ? (
+        <ExpandButton
+          expand={expand}
+          onExpand={handleExpand}
+          onCollapse={handleCollapse}
+        />
+      ) : null}
     </div>
   }
 
@@ -104,12 +106,13 @@ export default function BaseSearch(props) {
             values,
           }))
             .filter(field => field);
+          const validLength = renderFieldsAndButton.length;
 
           if (expand === false) {
             renderFieldsAndButton.splice(collapse);
           }
 
-          renderFieldsAndButton.splice(collapse, 0, renderFooter());
+          renderFieldsAndButton.splice(collapse, 0, renderFooter(validLength));
 
           if (keepData) {
             model.setState('searchData', values);
