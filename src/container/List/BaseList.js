@@ -2,6 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { Render } from 'zero-element-global/lib/layout';
 import useListHandle from './utils/useListHandle';
+import TableFooter from './components/TableFooter';
 
 export default function BaseList(props) {
   const { namespace, config, extraData } = props;
@@ -31,6 +32,7 @@ export default function BaseList(props) {
     }
   }
 
+  console.log(11, tableProps, config)
   return <Render n={layout} {...layoutConfig}
     handle={handle}
     namespace={namespace}
@@ -45,6 +47,12 @@ export default function BaseList(props) {
       dataSource={props.data || tableData}
       {...tableProps}
       {...propsCfg}
+      footer={() => {
+        return <TableFooter
+          dataSource={props.data || tableData}
+          columns={tableProps.columns}
+        />
+      }}
     />
   </Render>
 }

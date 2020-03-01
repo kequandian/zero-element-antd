@@ -32,6 +32,7 @@ export default function useListHandle({
     API = {},
     pageSize,
     fields, operation, actions = [],
+    scroll = {},
   } = config;
 
   const { loading, data, handle, modelStatus } = listProps;
@@ -119,6 +120,7 @@ export default function useListHandle({
   if (width > 0) {
     tableProps.scroll = {
       x: width,
+      y: scroll.y,
     }
   }
   const actionsItems = actions.map((action, i) => getActionItem({

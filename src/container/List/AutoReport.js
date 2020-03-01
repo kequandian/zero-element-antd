@@ -65,6 +65,7 @@ export default function AutoReport(props) {
   }, modelStatus, handle, {
     namespace,
     extraData,
+    config,
   }));
 
   function handlePageChange(current, pageSize) {
