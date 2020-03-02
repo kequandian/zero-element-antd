@@ -126,7 +126,7 @@ function DndFormEdit(props) {
     });
   }
   function handleSave() {
-    const [data, otherFields] = formatToConfig(config, state.name, {
+    const [data, fields] = formatToConfig(config, state.name, {
       layoutType,
     });
     const method = API.updateAPI ?
@@ -134,23 +134,9 @@ function DndFormEdit(props) {
       : formProps.handle.onCreateForm;
 
     const submitData = {
-      title: state.name,
-      config: data,
-      fields: uniqueFields(
-        fields.map(f => ({
-          field: f,
-          label: f,
-        })),
-        originFields.current,
-        otherFields
-      ),
-      originConfig: {
-        ...state.config,
-        title: state.name,
-        finalId: assigned,
-        fieldCount: fieldCount,
-      },
+      ...data,
     };
+
 
     if (onSubmit) {
       onSubmit(submitData);

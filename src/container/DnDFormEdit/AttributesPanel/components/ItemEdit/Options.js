@@ -45,7 +45,7 @@ export default function Options({ index, data, disabled, onChange }) {
     <SelectWrapped
       title="字段类型"
       field="type"
-      value={data.type}
+      value={data.echoType}
       disabled={disabled}
       onChange={handleChange}
     />

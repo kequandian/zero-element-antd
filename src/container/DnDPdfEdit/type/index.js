@@ -10,6 +10,7 @@ import InputUnderline from './InputUnderline';
 import Image from './Image';
 import Qrcode from './Qrcode';
 import Barcode from './Barcode';
+import Table from './Table';
 
 const typeMap = {
   Canvas,
@@ -22,5 +23,6 @@ const typeMap = {
   Image,
   Qrcode,
   Barcode,
+  Table,
 };
 export default typeMap;

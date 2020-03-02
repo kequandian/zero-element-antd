@@ -36,6 +36,7 @@ export default ({ current, dispatch, fields, API }) => {
     field = {}, base = {}, rules = {}, style,
     items, advanced, config, table,
     expect,
+    pdf,
   } = options;
   const { required, ...restRules } = rules;
 
@@ -99,14 +100,17 @@ export default ({ current, dispatch, fields, API }) => {
     onSave();
   }
 
-  function handleTableAdd() {
+  function handleTableAdd(pdf) {
     table.push({
       label: `字段${table.length + 1}`,
       value: `f_${table.length + 1}`,
       options: {
         type: 'plain',
-        echoAdd: true,
-        echoEdit: true,
+        ...(pdf ? {} : {
+          echoAdd: true,
+          echoEdit: true,
+          echoType: true,
+        }),
       }
     });
     onSave();
@@ -221,9 +225,13 @@ export default ({ current, dispatch, fields, API }) => {
           API,
         }
         )}
+      </>
+    ) : null}
+    {table ? (
+      <>
         <div className="ZEleA-DnDFormEdit-title">显示字段</div>
         <Button type="dashed" icon="plus"
-          onClick={handleTableAdd}>
+          onClick={handleTableAdd.bind(null, pdf)}>
           添加字段
         </Button>
         <br /><br />

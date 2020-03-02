@@ -143,4 +143,21 @@ export default [
       expect: {},
     }
   },
+  {
+    title: '表格', type: 'Table', options: {
+      field: {},
+      base: {
+      },
+      expect: {},
+      pdf: true,
+      table: [
+        {
+          label: '名称', value: 'name',
+          options: {
+            type: 'plain', // plain input number date ...
+          }
+        },
+      ],
+    }
+  },
 ];
