@@ -56,6 +56,15 @@ export default function ModalRadio(props) {
   function onClose() {
     setVisible(false);
   }
+  function onClear() {
+    setDisable(null);
+    selectedData.current = {
+      _toValue: null,
+    };
+    setV([]);
+    onChange(selectedData.current);
+    setVisible(false);
+  }
   function handleSave() {
     onChange(selectedData.current);
     setVisible(false);
@@ -82,6 +91,10 @@ export default function ModalRadio(props) {
       onOk={handleSave}
       okButtonProps={{
         disabled: !Boolean(disabled),
+      }}
+      cancelText="清空选择"
+      cancelButtonProps={{
+        onClick: onClear,
       }}
     >
       <TableSelect

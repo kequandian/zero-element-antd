@@ -32,7 +32,6 @@ export default function BaseList(props) {
     }
   }
 
-  console.log(11, tableProps, config)
   return <Render n={layout} {...layoutConfig}
     handle={handle}
     namespace={namespace}
