@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Tooltip } from 'antd';
 
 export default function valueTypeEllipsis(props) {
@@ -7,10 +7,25 @@ export default function valueTypeEllipsis(props) {
     options = {},
     data: { index, text = '', record },
   } = props;
-  const { max = 16 } = options;
-  const t = String(text);
+  const { max = 16, textTemp, textTempFields, textTempNull = '' } = options;
+  const [t, setT] = useState(text);
 
-  if (!text) return null;
+  useEffect(_ => {
+    if (textTemp && Array.isArray(textTempFields)) {
+      let rst = textTemp;
+      textTempFields.forEach(key => {
+        const v = record[key];
+        const toValue = (v || v === 0) ? v : textTempNull;
+        rst = rst.replace(`{${key}}`, toValue)
+      });
+      setT(rst);
+
+    } else {
+      setT(String(text));
+    }
+  }, [text, textTemp]);
+
+  if (!t || t === 'null') return null;
 
   return t.length < max ? t : (
     <Tooltip title={t}>

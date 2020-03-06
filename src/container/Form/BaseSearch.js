@@ -9,7 +9,7 @@ import { getModel } from 'zero-element/lib/Model';
 
 export default function BaseSearch(props) {
   const formRef = useRef({});
-  const { namespace, config, extraData, keepData } = props;
+  const { namespace, config, extraData, keepData = true } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {},
   } = config;
@@ -36,12 +36,9 @@ export default function BaseSearch(props) {
   useMemo(recordDefaultValue, [fields]);
 
   useWillUnmount(_ => {
-    // if (!keepData) {
-    //   onClearSearch();
-    // }
-
-    // 确保 导出或打印功能可取到数据
-    onClearSearch();
+    if (!keepData) {
+      onClearSearch();
+    }
   });
 
   function handleExpand() {
@@ -66,12 +63,9 @@ export default function BaseSearch(props) {
       ...data,
       ...formRef.current.values,
     });
-    // if (keepData) {
-    //   model.setState('searchData', formRef.current.values);
-    // }
-
-    // 确保 导出或打印功能可取到数据
-    model.setState('searchData', formRef.current.values);
+    if (keepData) {
+      model.setState('searchData', formRef.current.values);
+    }
 
   }
   function handleReset() {

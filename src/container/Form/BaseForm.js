@@ -20,7 +20,8 @@ export default function BaseForm(props) {
     forceInitForm,
     footer,
     onGetFormRef,
-    keepData,
+    keepData = true,
+    hooks,
   } = props;
   const {
     API = {},
@@ -248,6 +249,7 @@ export default function BaseForm(props) {
                     onGetFormData,
                   },
                   bindOnChange,
+                  hooks,
                 }))}
               </Render>
               <FormSpy

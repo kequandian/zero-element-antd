@@ -9,7 +9,7 @@ import { getModel } from 'zero-element/lib/Model';
 
 export default function AutoReportSearch(props) {
   const formRef = useRef({});
-  const { namespace, config, extraData, keepData } = props;
+  const { namespace, config, extraData, keepData = true } = props;
   const { layout = 'Grid',
     layoutConfig = {},
   } = config;

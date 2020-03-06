@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ZEle from 'zero-element';
 
 export default function TableSelectWrapped(props) {
@@ -8,6 +8,10 @@ export default function TableSelectWrapped(props) {
     onChange,
   } = props;
 
+  const config = useRef(
+    JSON.parse(JSON.stringify(configTemplate))
+  );
+
   const {
     API, fields,
     searchFields,
@@ -15,18 +19,18 @@ export default function TableSelectWrapped(props) {
     defaultExpand,
   } = options;
 
-  config.items[0].config.share = `${namespace}_tableSelect`;
+  config.current.items[0].config.share = `${namespace}_tableSelect`;
   if (searchFields) {
-    config.items[0].config.fields = searchFields;
-    config.items[0].config.layoutConfig = {
+    config.current.items[0].config.fields = searchFields;
+    config.current.items[0].config.layoutConfig = {
       value: [8, 8, 8],
       collapse: 2,
       defaultExpand,
     };
   }
-  config.items[1].config.share = `${namespace}_tableSelect`;
-  config.items[1].config.API = { listAPI: API };
-  config.items[1].config.fields = fields;
+  config.current.items[1].config.share = `${namespace}_tableSelect`;
+  config.current.items[1].config.API = { listAPI: API };
+  config.current.items[1].config.fields = fields;
 
   return <ZEle
     MODAL={true}
@@ -34,12 +38,12 @@ export default function TableSelectWrapped(props) {
     options={options}
     onChange={onChange}
     value={value}
-    config={config}
+    config={config.current}
     mountFetch={mountFetch}
   />
 }
 
-const config = {
+const configTemplate = {
   layout: 'Empty',
   items: [
     {

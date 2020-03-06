@@ -8,7 +8,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 export default function OneMary(props) {
-  const { name, namespace, value, options = {}, handle, onChange } = props;
+  const { name, namespace, value, options = {}, handle, onChange, hooks = {} } = props;
   const {
     API,
     layout = 'Empty',
@@ -21,6 +21,8 @@ export default function OneMary(props) {
     map,
   } = options;
   const { onFormatValue, onGetFormData } = handle;
+  const { removeChildAfter } = hooks;
+
   const idRef = useRef(1);
   const v = useMemo(_ => {
     if (JSONString && typeof value === 'string' && value.length) {
@@ -89,6 +91,10 @@ export default function OneMary(props) {
     });
 
     onChange([...temp]);
+
+    if (typeof removeChildAfter === 'function') {
+      removeChildAfter(record, props);
+    }
   }
 
   const { columns } = formatTableFields(fields, operation, {

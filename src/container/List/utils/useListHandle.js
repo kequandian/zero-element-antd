@@ -23,7 +23,7 @@ export default function useListHandle({
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
   const {
-    forceInitList, keepData, batchOperation,
+    forceInitList, keepData = true, batchOperation,
     pagination: propsPagination = true,
     mountFetch = true,
   } = props;

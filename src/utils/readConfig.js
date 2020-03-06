@@ -7,7 +7,7 @@ import checkExpected from './checkExpected';
 
 
 export function getFormItem(field, modelStatus,
-  { namespace, values, handle, bindOnChange }
+  { namespace, values, handle, bindOnChange, hooks }
 ) {
   const {
     field: fieldName, label, value, extra = '', span,
@@ -55,6 +55,7 @@ export function getFormItem(field, modelStatus,
         handle={handle}
         required={rules.findIndex(r => r === 'required') > -1}
         formdata={values}
+        hooks={hooks}
         {...rest}
       />
     }
