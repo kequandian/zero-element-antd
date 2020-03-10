@@ -114,4 +114,5 @@ VTSet({
   'input-number': Load('valueType/inputNumber'),
   'input-text': Load('valueType/inputText'),
   'input-select': Load('valueType/inputSelect'),
+  'input-select-fetch': Load('valueType/inputSelectFetch'),
 });

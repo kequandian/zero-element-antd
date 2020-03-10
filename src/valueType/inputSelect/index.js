@@ -9,7 +9,7 @@ export default function valueTypeInputSelect(props) {
     data: { index, text = '', record },
   } = props;
   const { onEdit } = handle;
-  const{ width = 120, options: opts = [] } = options;
+  const { width = 120, options: opts = [] } = options;
 
   function handleChange(value) {
     record[field] = value;
