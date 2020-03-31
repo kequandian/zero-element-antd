@@ -9,14 +9,15 @@ const methodMap = {
   'download': download,
 };
 
-export default function onRequest({ options, record }) {
-  const { API, method = 'get', message = '操作成功', data = {} } = options;
+export default function onRequest(props) {
+  const { options, record } = props;
+  const { API, method = 'get', message = '操作成功', fileNameField, data = {} } = options;
   const match = methodMap[method];
 
   if (method === 'download') {
     return download(API, {
       method: options.downloadMethod,
-      fileName: options.fileName,
+      fileName: record[fileNameField] || options.fileName,
     })
       .then(_ => {
         if (message) {

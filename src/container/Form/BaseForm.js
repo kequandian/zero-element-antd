@@ -29,6 +29,8 @@ export default function BaseForm(props) {
     fields: fieldsCfg,
     path,
     goBack: gobackOpt = true,
+    footer: footerOpt,
+    requestOptions,
   } = config;
   const { layoutType = 'horizontal' } = layoutConfig; // vertical horizontal
   const formProps = useBaseForm({
@@ -165,10 +167,12 @@ export default function BaseForm(props) {
     if (API.updateAPI) {
       onUpdateForm({
         fields: submitData,
+        options: requestOptions,
       }).then(handleResponse);
     } else {
       onCreateForm({
         fields: submitData,
+        options: requestOptions,
       }).then(handleResponse);
     }
   }
@@ -208,7 +212,7 @@ export default function BaseForm(props) {
       formRef.current.onSubmit();
     }
 
-    if (footer !== undefined) {
+    if (footer !== undefined || footerOpt !== undefined) {
       return footer;
     }
 

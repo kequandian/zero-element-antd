@@ -89,6 +89,7 @@ function format(value) {
   rst.length > 0 && rst.map((item, index) => {
     rst[index] = {
       ...item,
+      name: item.name || item.url,
       uid: index,
       status: 'done',
     }

@@ -45,6 +45,9 @@ export default function Request(props) {
           if (message) {
             msg.success(message);
           }
+          if (typeof handle.onRefresh === 'function') {
+            handle.onRefresh();
+          }
         })
     } else {
       match(API, data)
@@ -52,6 +55,9 @@ export default function Request(props) {
           setLoading(false);
           if (message) {
             msg.success(message);
+          }
+          if (typeof handle.onRefresh === 'function') {
+            handle.onRefresh();
           }
         })
     }
