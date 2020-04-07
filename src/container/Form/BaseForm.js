@@ -88,7 +88,7 @@ export default function BaseForm(props) {
   }, [data]);
 
   useWillUnmount(_ => {
-    if (keepData) {
+    if (keepData && !MODAL) {
       onCanRecyclable();
     } else {
       onClearForm();

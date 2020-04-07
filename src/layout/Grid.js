@@ -63,11 +63,15 @@ export default function Grid(props) {
         md: 4,
       }}>
         {row.items.map((child, i) => {
-          const { props = {} } = child;
-          const { span } = props;
-          return <Col key={i} sm={span || value[i]}>
-            {child}
-          </Col>
+          if (child) {
+            const { props = {} } = child;
+            const { span } = props;
+            return <Col key={i} sm={span || value[i]}>
+              {child}
+            </Col>
+          }
+
+          return null;
         })}
       </Row>
     })
@@ -79,11 +83,15 @@ export default function Grid(props) {
     md: 4,
   }}>
     {React.Children.map(children, (child) => {
-      const { props = {} } = child;
-      const { span = 24, md = span, sm = (md * 2 > 24 ? 24 : md * 2) } = props;
-      return <Col sm={sm} md={md}>
-        {child}
-      </Col>
+      if (child) {
+        const { props = {} } = child;
+        const { span = 24, md = span, sm = (md * 2 > 24 ? 24 : md * 2) } = props;
+        return <Col sm={sm} md={md}>
+          {child}
+        </Col>
+      }
+
+      return null;
     })}
   </Row>
 }

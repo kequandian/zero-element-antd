@@ -1,7 +1,7 @@
 import React from 'react';
 import { Drawer } from 'antd';
 import RightClick from './components/RightClick';
-import GlobalStyle from './components/GlobalStyle';
+// import GlobalStyle from './components/GlobalStyle';
 import LayoutType from '../compoments/LayoutType';
 import ElementType from '../compoments/ElementType';
 
@@ -32,10 +32,10 @@ export default ({ layoutType, dispatch, copyList }) => {
     mask={false}
     closable={false}
   >
-    <GlobalStyle
+    {/* <GlobalStyle
       layoutType={layoutType}
       dispatch={dispatch}
-    />
+    /> */}
     <div className="ZEleA-DnDFormEdit-title">布局组件</div>
     {layoutList.map((cfg, i) => {
       return <Render

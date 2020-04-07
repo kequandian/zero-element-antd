@@ -91,12 +91,20 @@ function DndFormEdit(props) {
 
       formProps.handle.onGetOne({})
         .then(({ code, data }) => {
-          const { originConfig = {} } = data;
+          const { originConfig, headerField, templateContent } = data;
           if (code === 200) {
             originFields.current = data.fields;
+            if (originConfig) {
+              dispatch({
+                type: 'initConfig',
+                payload: data,
+              });
+            }
             dispatch({
-              type: 'initConfig',
-              payload: data,
+              type: 'save',
+              payload: {
+                fields: headerField.split(','),
+              },
             });
             setInitId(originConfig.finalId, originConfig.fieldCount);
           }
@@ -116,15 +124,6 @@ function DndFormEdit(props) {
     }
   });
 
-  function handleName(e) {
-    const name = e.target.value;
-    dispatch({
-      type: 'save',
-      payload: {
-        name,
-      }
-    });
-  }
   function handleSave() {
     const [data, fields] = formatToConfig(config, state.name, {
       layoutType,
@@ -134,7 +133,8 @@ function DndFormEdit(props) {
       : formProps.handle.onCreateForm;
 
     const submitData = {
-      ...data,
+      templateContent: JSON.stringify(data),
+      originConfig: config,
     };
 
 
@@ -179,7 +179,6 @@ function DndFormEdit(props) {
       return null;
     }
     return <>
-      <br />
       <Button type="primary" onClick={handleSave}>保存</Button>
     </>
   }
@@ -192,17 +191,7 @@ function DndFormEdit(props) {
     <Flex>
       <FlexItem flex={1}>
         <Spin spinning={spinning} tip={spinningTip}>
-          <Card size="small">
-            <div>
-              <h3>Pdf 名称：</h3>
-              <Input value={state.name} onChange={handleName} />
-            </div>
-            {renderSubmitButton()}
-          </Card>
-          <br />
-          <Panel title="Pdf 字段">
-            <Fields data={fields} dispatch={dispatch} />
-          </Panel>
+          {renderSubmitButton()}
           <Panel title="Pdf 画布">
             <EchoPanel
               layoutType={layoutType}
