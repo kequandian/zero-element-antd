@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
@@ -35,6 +35,9 @@ export default function useListHandle({
     scroll = {},
   } = config;
 
+  const [order, setOrder] = useState(null);
+  const [orderFields, setOrderFields] = useState(fields);
+
   const { loading, data, handle, modelStatus } = listProps;
   const { onGetList, onClearList, onCanRecyclable } = handle;
   const [rowSelection, onSetSelection] = useRowSelection(handle);
@@ -42,12 +45,14 @@ export default function useListHandle({
   const { listData } = modelStatus;
   const { records, ...pagination } = listData;
 
-  const { columns, width } = formatTableFields(fields, operation, {
+  const { columns, width } = formatTableFields(orderFields, operation, {
     ...handle,
     onClickOperation,
+    onFieldsOrder,
   }, {
     namespace,
     extraData,
+    fields,
   });
 
   useDidMount(_ => {
@@ -79,6 +84,14 @@ export default function useListHandle({
     }
   }, [batchOperation]);
 
+  useEffect(_ => {
+    if (order) {
+      setOrderFields(
+        filterFields(fields, order)
+      );
+    }
+  }, [order])
+
   useWillUnmount(_ => {
     if (keepData) {
       onCanRecyclable();
@@ -102,6 +115,10 @@ export default function useListHandle({
       pageSize,
       sorter,
     });
+  }
+
+  function onFieldsOrder(order) {
+    setOrder(order);
   }
 
   const tableProps = {
@@ -135,4 +152,15 @@ export default function useListHandle({
   return [tableProps, data, handle, actionsItems, {
     operationData: oData,
   }];
+}
+
+function filterFields(fields, order) {
+  const rst = [];
+  order.forEach(key => {
+    const find = fields.find(i => i.field === key);
+    if (find) {
+      rst.push(find);
+    }
+  })
+  return rst;
 }

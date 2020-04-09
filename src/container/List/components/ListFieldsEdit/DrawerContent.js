@@ -5,12 +5,14 @@ import '../../index.css';
 
 export default ({
   visible, onSwitchVisibel, onSaveFields,
-  advancedConfig = [],
-  checkedList, onSwitchChecked,
+  fields = [],
+  checkedList,
+  onSwitchChecked, onMoveField,
 }) => {
   const fieldItemProps = {
     checkedList,
     onSwitchChecked,
+    onMoveField,
   };
   return <Drawer
     title="列表字段编辑"
@@ -19,7 +21,7 @@ export default ({
     onClose={onSwitchVisibel}
     visible={visible}
   >
-    {advancedConfig && advancedConfig.map(item => {
+    {fields && fields.map(item => {
       return <FieldItem data={item} key={item.field} {...fieldItemProps} />
     })}
     <div className="ZEleA-ListFieldsEdit-divider">

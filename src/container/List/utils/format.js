@@ -1,5 +1,6 @@
 import React from 'react';
 import ListOperation from '../components/ListOperation';
+import ListFieldsEdit from '../components/ListFieldsEdit';
 import { Render } from 'zero-element-global/lib/valueType';
 
 /**
@@ -15,6 +16,7 @@ import { Render } from 'zero-element-global/lib/valueType';
 export function formatTableFields(fields = [], operation = [], handle, props = {}) {
   let operationCfg = {};
   let width = 0;
+  let operationObj;
 
   const rst = fields.map((fieldCfg, i) => {
     const { field, label,
@@ -40,7 +42,7 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
   }).filter(fieldCfg => fieldCfg.dataIndex);
 
   if (operation.length > 0) {
-    const operationObj = {
+    operationObj = {
       dataIndex: 'operation',
       align: 'right',
       ...(width > 0 ? {
@@ -48,8 +50,12 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
         width: 100,
       } : {}),
       ...operationCfg, // fixed  width
-      title: '操作',
-      // title: ListFieldsEdit,
+      title: handle.onFieldsOrder ?
+        () => <ListFieldsEdit
+          fields={props.fields}
+          handle={handle}
+        />
+        : '操作',
       render: (text, record, index) => {
         return <ListOperation
           {...props}
@@ -61,10 +67,10 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
         />;
       },
     };
-    rst.push(operationObj);
+    // rst.push(operationObj);
   }
   return {
-    columns: rst,
+    columns: [...rst, operationObj],
     width,
   };
 }
