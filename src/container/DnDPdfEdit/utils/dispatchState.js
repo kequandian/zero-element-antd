@@ -14,11 +14,12 @@ export default function handleState(state, { type, payload = {} }) {
       }
     },
     initConfig() {
+      const { name, originConfig, fields = [] } = payload;
       return {
         ...state,
-        config: payload.originConfig,
-        name: payload.title,
-        fields: payload.fields.map(f => f.field || f),
+        name: name,
+        config: JSON.parse(originConfig),
+        fields: fields.map(f => f.field || f),
       }
     },
     addLayout() {

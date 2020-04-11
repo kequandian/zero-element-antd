@@ -70,7 +70,7 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
     // rst.push(operationObj);
   }
   return {
-    columns: [...rst, operationObj],
+    columns: operationObj ? [...rst, operationObj] : [...rst],
     width,
   };
 }

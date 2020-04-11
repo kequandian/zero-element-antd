@@ -134,7 +134,7 @@ function DndFormEdit(props) {
 
     const submitData = {
       templateContent: JSON.stringify(data),
-      originConfig: config,
+      originConfig: JSON.stringify(config),
     };
 
 
