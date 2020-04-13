@@ -53,7 +53,6 @@ CSet({
   BaseForm: Load('container/Form/BaseForm'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
   DnDFormEdit: Load('container/DnDFormEdit'),
-  DnDPdfEdit: Load('container/DnDPdfEdit'),
 });
 
 LASet({
