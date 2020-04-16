@@ -123,6 +123,7 @@ export default function TreeTable(props) {
       }, modelStatus, handle, {
         namespace,
         extraData,
+        config,
       }))}
     </Render>
     <Table

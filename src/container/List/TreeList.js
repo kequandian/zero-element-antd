@@ -73,6 +73,7 @@ export default function TreeList(props) {
       }, modelStatus, handle, {
         namespace,
         extraData,
+        config,
       }))}
     </Render>
     <Flex align="flex-start">

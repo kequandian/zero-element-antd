@@ -6,7 +6,7 @@ import { get } from 'zero-element/lib/utils/request/endpoint';
 import './index.css';
 
 export default function ExportExcel(props) {
-  const { title = '导出', options, namespace, handle, listConfig, ...restProps } = props;
+  const { title = '导出', options, namespace, handle, config, ...restProps } = props;
   const {
     icon = 'download',
     API,
@@ -15,7 +15,7 @@ export default function ExportExcel(props) {
     fileName,
     ...rest
   } = options;
-  const { API: lAPI = {} } = listConfig;
+  const { API: lAPI = {} } = config;
   const { listAPI } = lAPI;
   const [state] = useModel({ namespace });
   const { searchData, listData } = state;

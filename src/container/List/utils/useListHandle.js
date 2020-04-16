@@ -146,7 +146,7 @@ export default function useListHandle({
   }, modelStatus, handle, {
     namespace,
     extraData,
-    listConfig: config,
+    config,
   }));
 
   return [tableProps, data, handle, actionsItems, {
