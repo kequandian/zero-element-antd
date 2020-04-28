@@ -38,11 +38,11 @@ export default (props) => {
       <ZEle
         MODAL={true}
         namespace={`${namespace}_actionModal`}
+        {...restProps}
         config={{
           layout: 'Empty',
           ...rest,
         }}
-        {...restProps}
         onClose={handleCloseAndQuery}
       />
     </Modal>

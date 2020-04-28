@@ -178,235 +178,6 @@
   overflow  : hidden;
   transition: all .2s;
 }
-.ZEleA-table-operation {
-  height     : 40px;
-  line-height: 40px;
-}
-
-.ZEleA-table-selected {
-  background: #e6f7ff;
-}
-
-.ZEleA-table-odd {
-  background: #f8f8f8;
-}
-
-.ZEleA-table-action {
-  display: flex;
-}
-
-.ZEleA-table-action-Outside {
-  flex      : 1;
-  text-align: right;
-}
-
-.ZEleA-table-action-Outside>span {
-  margin-right: 12px;
-}
-
-.ZEleA-table-action-empty {
-  color: #e8e8e8;
-}
-
-.ZEleA-table-action-Outside-normal {
-  vertical-align: middle;
-  cursor        : pointer;
-  color         : #1890ff;
-}
-
-.ZEleA-table-action .anticon-ellipsis {
-  cursor: pointer;
-}
-
-.ZEleA-table-action-menuItem {
-  min-width: 100px;
-}
-
-.ZEleA-table-action-menuItem i {
-  margin-right: 8px;
-}
-
-.ZEleA-ReportList table {
-  border: 1px solid #ededed;
-}
-
-.ZEleA-ReportList td {
-  padding      : 4px !important;
-  border-bottom: none !important;
-}
-
-.ZEleA-ReportList .ant-table-thead>tr>th {
-  font-size       : 12px;
-  color           : #606060;
-  background-color: #ededed;
-  padding         : 8px !important;
-  border          : none;
-}
-
-.ZEleA-ListFieldsEdit-settingIcon {
-  cursor       : pointer;
-  padding-right: 6px;
-}
-
-.ZEleA-ListFieldsEdit-divider {
-  position     : absolute;
-  bottom       : 0;
-  width        : 100%;
-  border-top   : 1px solid #e8e8e8;
-  padding      : 10px 16px;
-  text-align   : right;
-  left         : 0;
-  background   : #fff;
-  border-radius: 0 0 4px 4px;
-}
-
-.ZEleA-ListFieldsEdit-divider>button {
-  margin-left: 4px;
-}
-
-.ZEleA-ListFieldsEdit-FieldItem {
-  margin-bottom: .5em;
-  padding      : 8px;
-  transition   : all .2s;
-}
-
-.ZEleA-ListFieldsEdit-FieldItem:hover {
-  background: #188fff2f;
-}
-
-.ZEleA-ListFieldsEdit-FieldItem-label {
-  cursor     : pointer;
-  margin-left: .5em;
-}
-
-.ZEleA-ListFieldsEdit-FieldItem-icon {
-  cursor: pointer;
-  margin: 0 .5em;
-}
-
-.ZEleA-table-action-Sort {
-  text-align: right;
-}
-
-.ZEleA-table-action-Sort>i {
-  margin-right: 8px;
-  cursor      : pointer;
-}
-.ZEleA-Form-ruleTips {
-  color      : #ff4d4f;
-  flex-basis : 100%;
-  margin-left: 98px;
-  height     : 0;
-  opacity    : 0;
-  transition : all .2s;
-}
-
-.ZEleA-Form-ruleTips.error {
-  opacity      : 1;
-  margin-bottom: 18px;
-}
-
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
-.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
-  border-color: #ff4d4f;
-}
-
-.ZEleA-Form-vertical>.ant-row,
-.ZEleA-Form-horizontal>.ant-row {
-  margin-bottom: 8px;
-}
-
-.ZEleA-Form-item-label {
-  margin-right: 8px;
-}
-
-.ZEleA-Form-item-required::before {
-  display     : inline-block;
-  margin-right: 4px;
-  color       : #f5222d;
-  font-size   : 14px;
-  font-family : SimSun, sans-serif;
-  line-height : 1;
-  content     : '*';
-}
-
-.ZEleA-Form-item-label-colon::after {
-  content : ':';
-  position: relative;
-  top     : -0.5px;
-  margin  : 0 8px 0 2px;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item {
-  display      : flex;
-  align-items  : center;
-  margin-bottom: 8px;
-  flex-wrap    : wrap;
-  min-height   : 32px;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-label {
-  text-align: right;
-  min-width : 90px;
-}
-
-@media (min-width: 768px) {
-  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
-    min-width: 106px;
-  }
-
-  .ZEleA-Form-ruleTips {
-    margin-left: 114px;
-  }
-}
-
-.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
-  width: 6em;
-}
-
-.ZEleA-Form-horizontal .ZEleA-Form-item-element {
-  width: 0;
-  flex : 1;
-}
-
-.ZEleA-Form-item-element input,
-.ZEleA-Form-item-element .ant-input-number,
-.ZEleA-Form-item-element .ant-select,
-.ZEleA-Form-item-element .ant-input-password {
-  width    : 240px;
-  max-width: 100%;
-}
-
-.ZEleA-Form-item-element .ant-radio-group,
-.ZEleA-Form-item-element .ant-checkbox-group {
-  vertical-align: sub;
-  vertical-align: -webkit-baseline-middle;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker {
-  display  : flex;
-  width    : 240px;
-  max-width: 100%;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker[tabindex="0"] {
-  width    : 320px;
-  max-width: 100%;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker>div {
-  width: 0;
-  flex : 1;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker-input {
-  display: flex;
-}
-
-.ZEleA-Form-item-element .ant-calendar-picker-input input {
-  flex : 1;
-  width: 100%;
-}
 .ZEleA-DnDFormEdit-tips {
   text-align: center;
   color     : #cbc5c5;
@@ -570,6 +341,235 @@
 .ZEleA-DnDFormEdit-EchoPanel {
   min-height: 60px;
   padding   : 8px 16px;
+}
+.ZEleA-Form-ruleTips {
+  color      : #ff4d4f;
+  flex-basis : 100%;
+  margin-left: 98px;
+  height     : 0;
+  opacity    : 0;
+  transition : all .2s;
+}
+
+.ZEleA-Form-ruleTips.error {
+  opacity      : 1;
+  margin-bottom: 18px;
+}
+
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error,
+.ZEleA-Form-item-element .ZEleA-Form-ruleTips-error .ant-select-selection {
+  border-color: #ff4d4f;
+}
+
+.ZEleA-Form-vertical>.ant-row,
+.ZEleA-Form-horizontal>.ant-row {
+  margin-bottom: 8px;
+}
+
+.ZEleA-Form-item-label {
+  margin-right: 8px;
+}
+
+.ZEleA-Form-item-required::before {
+  display     : inline-block;
+  margin-right: 4px;
+  color       : #f5222d;
+  font-size   : 14px;
+  font-family : SimSun, sans-serif;
+  line-height : 1;
+  content     : '*';
+}
+
+.ZEleA-Form-item-label-colon::after {
+  content : ':';
+  position: relative;
+  top     : -0.5px;
+  margin  : 0 8px 0 2px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item {
+  display      : flex;
+  align-items  : center;
+  margin-bottom: 8px;
+  flex-wrap    : wrap;
+  min-height   : 32px;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-label {
+  text-align: right;
+  min-width : 90px;
+}
+
+@media (min-width: 768px) {
+  .ZEleA-Form-horizontal .ZEleA-Form-item-label {
+    min-width: 106px;
+  }
+
+  .ZEleA-Form-ruleTips {
+    margin-left: 114px;
+  }
+}
+
+.ZEleA-Form-horizontal.ZEleA-Form-item-label.ZEleA-Form-item-label-colon {
+  width: 6em;
+}
+
+.ZEleA-Form-horizontal .ZEleA-Form-item-element {
+  width: 0;
+  flex : 1;
+}
+
+.ZEleA-Form-item-element input,
+.ZEleA-Form-item-element .ant-input-number,
+.ZEleA-Form-item-element .ant-select,
+.ZEleA-Form-item-element .ant-input-password {
+  width    : 240px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-radio-group,
+.ZEleA-Form-item-element .ant-checkbox-group {
+  vertical-align: sub;
+  vertical-align: -webkit-baseline-middle;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker {
+  display  : flex;
+  width    : 240px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker[tabindex="0"] {
+  width    : 320px;
+  max-width: 100%;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker>div {
+  width: 0;
+  flex : 1;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker-input {
+  display: flex;
+}
+
+.ZEleA-Form-item-element .ant-calendar-picker-input input {
+  flex : 1;
+  width: 100%;
+}
+.ZEleA-table-operation {
+  height     : 40px;
+  line-height: 40px;
+}
+
+.ZEleA-table-selected {
+  background: #e6f7ff;
+}
+
+.ZEleA-table-odd {
+  background: #f8f8f8;
+}
+
+.ZEleA-table-action {
+  display: flex;
+}
+
+.ZEleA-table-action-Outside {
+  flex      : 1;
+  text-align: right;
+}
+
+.ZEleA-table-action-Outside>span {
+  margin-right: 12px;
+}
+
+.ZEleA-table-action-empty {
+  color: #e8e8e8;
+}
+
+.ZEleA-table-action-Outside-normal {
+  vertical-align: middle;
+  cursor        : pointer;
+  color         : #1890ff;
+}
+
+.ZEleA-table-action .anticon-ellipsis {
+  cursor: pointer;
+}
+
+.ZEleA-table-action-menuItem {
+  min-width: 100px;
+}
+
+.ZEleA-table-action-menuItem i {
+  margin-right: 8px;
+}
+
+.ZEleA-ReportList table {
+  border: 1px solid #ededed;
+}
+
+.ZEleA-ReportList td {
+  padding      : 4px !important;
+  border-bottom: none !important;
+}
+
+.ZEleA-ReportList .ant-table-thead>tr>th {
+  font-size       : 12px;
+  color           : #606060;
+  background-color: #ededed;
+  padding         : 8px !important;
+  border          : none;
+}
+
+.ZEleA-ListFieldsEdit-settingIcon {
+  cursor       : pointer;
+  padding-right: 6px;
+}
+
+.ZEleA-ListFieldsEdit-divider {
+  position     : absolute;
+  bottom       : 0;
+  width        : 100%;
+  border-top   : 1px solid #e8e8e8;
+  padding      : 10px 16px;
+  text-align   : right;
+  left         : 0;
+  background   : #fff;
+  border-radius: 0 0 4px 4px;
+}
+
+.ZEleA-ListFieldsEdit-divider>button {
+  margin-left: 4px;
+}
+
+.ZEleA-ListFieldsEdit-FieldItem {
+  margin-bottom: .5em;
+  padding      : 8px;
+  transition   : all .2s;
+}
+
+.ZEleA-ListFieldsEdit-FieldItem:hover {
+  background: #188fff2f;
+}
+
+.ZEleA-ListFieldsEdit-FieldItem-label {
+  cursor     : pointer;
+  margin-left: .5em;
+}
+
+.ZEleA-ListFieldsEdit-FieldItem-icon {
+  cursor: pointer;
+  margin: 0 .5em;
+}
+
+.ZEleA-table-action-Sort {
+  text-align: right;
+}
+
+.ZEleA-table-action-Sort>i {
+  margin-right: 8px;
+  cursor      : pointer;
 }
 .ZEleA-Layout-table {
   display: table;

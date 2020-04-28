@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Modal, Button } from 'antd';
 import _ from 'lodash';
-import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import TableSelect from './TableSelect';
+import { removeModel } from 'zero-element/lib/Model';
 
 export default function ModalRadio(props) {
   const {
@@ -41,7 +42,10 @@ export default function ModalRadio(props) {
     const selectedValue = typeof value === 'object' ? [value] : [{ [optValue]: value }];
 
     setV(selectedValue);
-  }, [value])
+  }, [value]);
+  useWillUnmount(_ => {
+    removeModel(`${namespace}_${name}_ModalRadio`);
+  });
 
   function handleChange(value) {
     setDisable(value);
@@ -100,7 +104,7 @@ export default function ModalRadio(props) {
       <TableSelect
         value={v}
         onChange={handleChange}
-        namespace={`${namespace}_ModalRadio`}
+        namespace={`${namespace}_${name}_ModalRadio`}
         options={{
           API,
           fields,
