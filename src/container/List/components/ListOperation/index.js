@@ -1,6 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 import ZEle from 'zero-element';
-import { get as LAGet } from 'zero-element-global/lib/listAction';
+import { get as LAGet } from 'zero-element/lib/config/listAction';
 import { Modal } from 'antd';
 import PageContext from 'zero-element/lib/context/PageContext';
 import { formatAPI } from 'zero-element/lib/utils/format';

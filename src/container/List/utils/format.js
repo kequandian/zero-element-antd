@@ -1,7 +1,7 @@
 import React from 'react';
 import ListOperation from '../components/ListOperation';
 import ListFieldsEdit from '../components/ListFieldsEdit';
-import { Render } from 'zero-element-global/lib/valueType';
+import { Render } from 'zero-element/lib/config/valueType';
 
 /**
  *

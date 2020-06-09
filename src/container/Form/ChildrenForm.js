@@ -4,7 +4,7 @@ import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 import useFormHandle from './utils/useFormHandle';
 
 export default function ChildrenForm(props) {

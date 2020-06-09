@@ -9,7 +9,7 @@ import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import PageContext from 'zero-element/lib/context/PageContext';
 import { Flex } from 'layout-flex';
 
-import global from 'zero-element-global/lib/global';
+import global from 'zero-element/lib/config/global';
 
 import ComponentPanel from './ComponentPanel';
 import Fields from './Fields';

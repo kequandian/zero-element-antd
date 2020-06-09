@@ -1,13 +1,13 @@
 import Load from '@/utils/Load';
 
-import { set as APIConfig } from 'zero-element-global/lib/APIConfig';
+import { set as APIConfig } from 'zero-element/lib/config/APIConfig';
 
-import { set as LayoutSet } from 'zero-element-global/lib/layout';
-import { set as CSet } from 'zero-element-global/lib/container';
-import { set as LASet } from 'zero-element-global/lib/listAction';
-import { set as FITSet } from 'zero-element-global/lib/formItemType';
-import { set as AITSet } from 'zero-element-global/lib/actionItemType';
-import { set as VTSet } from 'zero-element-global/lib/valueType';
+import { set as LayoutSet } from 'zero-element/lib/config/layout';
+import { set as CSet } from 'zero-element/lib/config/container';
+import { set as LASet } from 'zero-element/lib/config/listAction';
+import { set as FITSet } from 'zero-element/lib/config/formItemType';
+import { set as AITSet } from 'zero-element/lib/config/actionItemType';
+import { set as VTSet } from 'zero-element/lib/config/valueType';
 
 import onRequest from '@/listAction/onRequest';
 

@@ -4,7 +4,7 @@ import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from '@/utils/request';
 import useOperation from './utils/useOperation';
@@ -89,8 +89,13 @@ export default function TreeTable(props) {
   }
   function handleAppend(id) {
     if (!API.appendAPI) return false;
+    const api = formatAPI(API.appendAPI, {
+      namespace,
+      data: {
+        id,
+      },
+    });
 
-    const api = API.appendAPI.replace(/(\<\w+\>)/, id);
     setLoading(true);
     query(api)
       .then(data =>
@@ -120,7 +125,7 @@ export default function TreeTable(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, modelStatus, handle, {
+      }, modelStatus, handle, {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         namespace,
         extraData,
         config,

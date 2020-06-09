@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { Render } from 'zero-element-global/lib/formItemType';
+import { Render } from 'zero-element/lib/config/formItemType';
 import './index.css';
 
 export default function FormItemWrapped({

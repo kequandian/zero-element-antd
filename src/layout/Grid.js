@@ -1,5 +1,5 @@
 import React from 'react';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 import { Row, Col } from 'antd';
 
 export default function Grid(props) {
