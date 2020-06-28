@@ -21,7 +21,7 @@ export default function ChildrenList(props) {
     itemsPath: itemsField,
   }, config);
 
-  const { data, handle, modelStatus } = childrenProps;
+  const { data, handle, model } = childrenProps;
   const { onCreate, onCreateList, onEdit } = handle;
   const { columns } = formatTableFields(fields, operation, handle);
 
@@ -33,7 +33,7 @@ export default function ChildrenList(props) {
         onCreate,
         onCreateList,
         onEdit,
-      }, modelStatus, {}, {
+      }, model, {}, {
         namespace,
       }))}
     </Render>

@@ -33,7 +33,7 @@ export default function ChildrenForm(props) {
     config,
   });
 
-  const { loading, data, modelStatus, handle } = formProps;
+  const { loading, data, model, handle } = formProps;
   const initData = useRef(props.data || {});
   const { onGetOne } = handle;
 
@@ -109,7 +109,7 @@ export default function ChildrenForm(props) {
             onSubmit={handleSubmit}
           >
             <Render n={layout} {...layoutConfig}>
-              {fields.map(field => getFormItem(field, modelStatus, {
+              {fields.map(field => getFormItem(field, model, {
                 namespace,
                 values,
                 handle: {

@@ -40,15 +40,13 @@ export default function BaseForm(props) {
   }, config);
   const { router, goBack } = global;
 
-  const { loading, data, modelStatus, handle } = formProps;
+  const { loading, data, model, handle } = formProps;
 
   const initData = useRef({
     ...extraData,
     ...data,
   });
-  const [{
-    model,
-  }, {
+  const [, {
     onFormatValue,
     handleFormatValue,
     onSaveOtherValue,
@@ -64,7 +62,7 @@ export default function BaseForm(props) {
   });
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);
-  const { onGetOne, onCreateForm, onUpdateForm, onClearForm, onCanRecyclable } = handle;
+  const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
   const [destroy, setDestroy] = useState(false);
   const init = useRef(true);
 
@@ -89,7 +87,7 @@ export default function BaseForm(props) {
 
   useWillUnmount(_ => {
     if (keepData && !MODAL) {
-      onCanRecyclable();
+      // onCanRecyclable();
     } else {
       onClearForm();
     }
@@ -200,12 +198,7 @@ export default function BaseForm(props) {
 
   function handleReset() {
     formRef.current.form.reset();
-    model.dispatch({
-      type: 'save',
-      payload: {
-        formData: initData.current,
-      }
-    });
+    model.save('formData', initData.current);
   }
   function renderFooter() {
     function onSubmit() {
@@ -235,16 +228,12 @@ export default function BaseForm(props) {
               onSubmit: handleSubmit,
             };
 
-            if (keepData) {
-              model.setState('formData', values);
-            }
-
             return <form
               className={`ZEleA-Form-${layoutType}`}
               onSubmit={handleSubmit}
             >
               <Render n={layout} {...layoutConfig}>
-                {fields.map(field => getFormItem(field, modelStatus, {
+                {fields.map(field => getFormItem(field, model, {
                   namespace,
                   values,
                   handle: {

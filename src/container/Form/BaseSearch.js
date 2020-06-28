@@ -22,11 +22,9 @@ export default function BaseSearch(props) {
   } = layoutConfig;
   const searchProps = useBaseSearch({
     namespace,
-    modelPath: 'searchData',
-    extraData,
   }, config);
 
-  const { loading, data, modelStatus, handle } = searchProps;
+  const { loading, data, model, handle } = searchProps;
   const initData = useRef(data);
   const model = getModel(namespace);
   const { onSearch, onSetSearchData, onClearSearch } = handle;
@@ -102,7 +100,7 @@ export default function BaseSearch(props) {
             values,
             onSubmit: handleSubmit,
           };
-          const renderFieldsAndButton = fields.map(field => getFormItem(field, modelStatus, {
+          const renderFieldsAndButton = fields.map(field => getFormItem(field, model, {
             namespace,
             values,
           }))

@@ -20,7 +20,7 @@
     "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "^16.8.6",
     "react-final-form": "^6.0.1",
-    "zero-element": "^1.0.0-beta.9"
+    "zero-element": "kequandian/zero-element#1.0-Beta"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
