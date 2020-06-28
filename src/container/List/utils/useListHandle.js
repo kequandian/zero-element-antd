@@ -10,15 +10,12 @@ import { getActionItem } from '@/utils/readConfig';
 
 export default function useListHandle({
   namespace,
-  extraData,
   config,
 
   props,
 }) {
   const listProps = useBaseList({
     namespace,
-    modelPath: 'listData',
-    extraData,
   }, config);
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
@@ -38,11 +35,11 @@ export default function useListHandle({
   const [order, setOrder] = useState(null);
   const [orderFields, setOrderFields] = useState(fields);
 
-  const { loading, data, handle, modelStatus } = listProps;
-  const { onGetList, onClearList, onCanRecyclable } = handle;
+  const { loading, data, handle, model } = listProps;
+  const { onGetList, onClearList } = handle;
   const [rowSelection, onSetSelection] = useRowSelection(handle);
 
-  const { listData } = modelStatus;
+  const { listData } = model;
   const { records, ...pagination } = listData;
 
   const { columns, width } = formatTableFields(orderFields, operation, {
@@ -94,7 +91,6 @@ export default function useListHandle({
 
   useWillUnmount(_ => {
     if (keepData) {
-      onCanRecyclable();
     } else {
       onClearList();
     }
@@ -143,7 +139,7 @@ export default function useListHandle({
   const actionsItems = actions.map((action, i) => getActionItem({
     key: i,
     ...action,
-  }, modelStatus, handle, {
+  }, model, handle, {
     namespace,
     extraData,
     config,

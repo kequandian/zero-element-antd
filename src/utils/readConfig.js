@@ -6,7 +6,7 @@ import ActionItem from '@/container/List/ActionItemWrapped';
 import checkExpected from './checkExpected';
 
 
-export function getFormItem(field, modelStatus,
+export function getFormItem(field, model,
   { namespace, values, handle, bindOnChange, hooks }
 ) {
   const {
@@ -16,7 +16,7 @@ export function getFormItem(field, modelStatus,
     options = {},
     expect,
     ...rest } = field;
-  const formData = modelStatus[options.expectedPath || 'formData'];
+  const formData = model[options.expectedPath || 'formData'];
 
   if (type === 'empty') {
     return null;
@@ -63,9 +63,9 @@ export function getFormItem(field, modelStatus,
   </Field>
 }
 
-export function getActionItem(action, modelStatus, handle, props) {
+export function getActionItem(action, model, handle, props) {
   const { options = {}, expect } = action;
-  const listData = modelStatus[options.expectedPath || 'listData'];
+  const listData = model[options.expectedPath || 'listData'];
 
   if (options.expectedField) {
     console.warn('options 的 expectedField 即将弃用，请改为放在 expect 内');
