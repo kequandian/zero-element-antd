@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 
 import DrawerContent from './DrawerContent';
 import { arrayItemMove } from '@/utils/tool';
@@ -56,7 +56,7 @@ export default function ListFieldsEdit(props) {
       className="ZEleA-ListFieldsEdit-settingIcon"
       onClick={onSwitchVisibel}
     >
-      <Icon type="setting" title="编辑字段" />
+      <SettingOutlined title="编辑字段" />
     </span>
     <DrawerContent {...drawerProps} />
   </>

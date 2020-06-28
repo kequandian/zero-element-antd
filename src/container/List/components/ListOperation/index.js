@@ -1,8 +1,8 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import ZEle from 'zero-element';
 import { get as LAGet } from 'zero-element/lib/config/listAction';
 import { Modal } from 'antd';
-import PageContext from 'zero-element/lib/context/PageContext';
+// import PageContext from 'zero-element/lib/context/PageContext';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import ListOperation from './ListOperation';
 import reducer from './reducer';
@@ -17,7 +17,7 @@ const initialState = {
 };
 
 export default function ListOperationWrapped(props) {
-  const context = useContext(PageContext);
+  // const context = useContext(PageContext);
   const [state, dispatch] = useReducer(reducer, initialState);
   const { index, namespace, handle = {}, extraData = {} } = props;
 
@@ -73,7 +73,6 @@ export default function ListOperationWrapped(props) {
       {...props}
       state={state}
       dispatch={dispatch}
-      context={context}
       handle={{
         ...handle,
         onModal,
@@ -95,7 +94,7 @@ export default function ListOperationWrapped(props) {
       <ZEle
         MODAL={true}
         index={index || state.index}
-        namespace={context.namespace}
+        namespace={'todo'}
         config={{
           layout: 'Empty',
           ...state.modalConfig,

@@ -67,9 +67,6 @@ export function getActionItem(action, model, handle, props) {
   const { options = {}, expect } = action;
   const listData = model[options.expectedPath || 'listData'];
 
-  if (options.expectedField) {
-    console.warn('options 的 expectedField 即将弃用，请改为放在 expect 内');
-  }
   if (!checkExpected(listData, expect || options)) {
     return null;
   }

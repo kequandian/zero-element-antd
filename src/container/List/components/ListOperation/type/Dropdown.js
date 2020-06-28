@@ -1,12 +1,15 @@
 import React from 'react';
-import { Icon, Menu } from 'antd';
+import { Menu } from 'antd';
+import {
+  DeleteOutlined, SnippetsOutlined, LinkOutlined, RightOutlined
+} from '@ant-design/icons';
 
 export default (item, i, { index, record }, onAction) => {
   const iconMap = {
-    'delete': 'delete',
-    'modal': 'snippets',
-    'path': 'link',
-    'default': 'right',
+    'delete': DeleteOutlined,
+    'modal': SnippetsOutlined,
+    'path': LinkOutlined,
+    'default': RightOutlined,
   };
   const iconColorMap = {
     'delete': '#f5222d',
@@ -14,11 +17,12 @@ export default (item, i, { index, record }, onAction) => {
     'path': '#1890ff',
     'default': '#666',
   };
+
+  const Icon = item.options.icon || iconMap[item.action] || iconMap['default'];
   return (
     <Menu.Item key={i} className="ZEleA-table-action-menuItem" onClick={onAction.bind(null, item.action, item.options)} >
       <span>
         <Icon
-          type={item.options.icon || iconMap[item.action] || iconMap['default']}
           style={{ color: `${item.options.color || iconColorMap[item.action] || iconColorMap['default']}` }}
         />{item.title}
       </span>

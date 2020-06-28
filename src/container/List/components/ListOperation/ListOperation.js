@@ -1,14 +1,14 @@
 import React from 'react';
-import { Icon, Dropdown, Menu, Popconfirm } from 'antd';
+import { Dropdown, Menu, Popconfirm } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
 import handleAction from './handleAction';
 import checkExpected from '@/utils/checkExpected';
 import { getModel } from 'zero-element/lib/Model';
 import operationMap from './type';
 
 export default function ListOperation(props) {
-  const { state, dispatch, index, record, operation, context, handle } = props;
-  const { namespace } = context;
-  const { listData } = getModel(namespace).state;
+  const { state, model, dispatch, index, record, operation, handle } = props;
+  const { listData } = getModel(model.namespace);
   const { records } = listData;
 
   if (record.operation === false) {
@@ -71,7 +71,7 @@ export default function ListOperation(props) {
       </div>
       {dropdownList.length ? (
         <Dropdown overlay={renderMemu(dropdownList)} trigger={['click']} placement="bottomRight">
-          <Icon style={{ fontSize: '24px' }} type="ellipsis" />
+          <EllipsisOutlined style={{ fontSize: '24px' }} />
         </Dropdown>
       ) : outsideList.length === 0 ?
           (<span className="ZEleA-table-action-empty">暂无</span>) : null}

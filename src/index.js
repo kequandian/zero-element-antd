@@ -52,7 +52,7 @@ CSet({
   AutoReportSearch: Load('container/Form/AutoReportSearch'),
   BaseForm: Load('container/Form/BaseForm'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
-  DnDFormEdit: Load('container/DnDFormEdit'),
+  // DnDFormEdit: Load('container/DnDFormEdit'),
 });
 
 LASet({

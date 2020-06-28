@@ -1,11 +1,9 @@
-import { getDataPool } from 'zero-element/lib/DataPool';
 import { formatAPI } from 'zero-element/lib/utils/format';
 
 export default function handleAction(type, options, props, dispatch) {
-  const { record, handle, context } = props;
+  const { record, handle, model } = props;
   const { API, tips, saveToForm } = options;
-  const { namespace } = context;
-  const dataPool = getDataPool(namespace);
+  const { namespace } = model;
 
   function handleResponse(func, ...rest) {
     const rst = func(...rest);
@@ -24,7 +22,7 @@ export default function handleAction(type, options, props, dispatch) {
 
   const actionFunc = handle[`on${type}`];
   if (typeof actionFunc === 'function') {
-    dataPool.setRecord(record);
+    model.setRecord(record);
     if (handle.onClickOperation) {
       handle.onClickOperation(record);
     }

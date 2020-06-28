@@ -48,8 +48,9 @@ export default function useListHandle({
     onFieldsOrder,
   }, {
     namespace,
-    extraData,
+    extraData: {},
     fields,
+    model,
   });
 
   useDidMount(_ => {
@@ -141,7 +142,7 @@ export default function useListHandle({
     ...action,
   }, model, handle, {
     namespace,
-    extraData,
+    extraData: {},
     config,
   }));
 

@@ -6,7 +6,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
-import PageContext from 'zero-element/lib/context/PageContext';
+// import PageContext from 'zero-element/lib/context/PageContext';
 import { Flex } from 'layout-flex';
 
 import global from 'zero-element/lib/config/global';
@@ -56,8 +56,9 @@ function DndFormEdit(props) {
     spinning, spinningTip
   } = state;
   const { API, path } = props.config;
-  const context = useContext(PageContext);
-  const { namespace } = context;
+  // const context = useContext(PageContext);
+  // const { namespace } = context;
+  const namespace = 'todo';
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',

@@ -5,11 +5,11 @@ import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
-import { getModel } from 'zero-element/lib/Model';
+import { RollbackOutlined } from '@ant-design/icons';
 
 export default function BaseSearch(props) {
   const formRef = useRef({});
-  const { namespace, config, extraData, keepData = true } = props;
+  const { namespace, config, keepData = true } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {},
   } = config;
@@ -26,7 +26,6 @@ export default function BaseSearch(props) {
 
   const { loading, data, model, handle } = searchProps;
   const initData = useRef(data);
-  const model = getModel(namespace);
   const { onSearch, onSetSearchData, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(defaultExpand);
@@ -61,9 +60,9 @@ export default function BaseSearch(props) {
       ...data,
       ...formRef.current.values,
     });
-    if (keepData) {
-      model.setState('searchData', formRef.current.values);
-    }
+    // if (keepData) {
+    //   model.setState('searchData', formRef.current.values);
+    // }
 
   }
   function handleReset() {
@@ -76,7 +75,7 @@ export default function BaseSearch(props) {
   function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
       <Tooltip title="重置">
-        <Button onClick={handleReset} type="link" icon="rollback"></Button>
+        <Button onClick={handleReset} type="link" icon={<RollbackOutlined />}></Button>
       </Tooltip>
       <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
       {validLength > collapse ? (
@@ -113,9 +112,9 @@ export default function BaseSearch(props) {
 
           renderFieldsAndButton.splice(collapse, 0, renderFooter(validLength));
 
-          if (keepData) {
-            model.setState('searchData', values);
-          }
+          // if (keepData) {
+          //   model.setState('searchData', values);
+          // }
 
           return <form
             className={`ZEleA-Form-${layoutType}`}
