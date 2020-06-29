@@ -1,5 +1,5 @@
 import React, { useReducer, useRef, useMemo, useState, useEffect } from 'react';
-import { Form, FormSpy } from 'react-final-form';
+import { Form } from 'antd';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -10,8 +10,16 @@ import global from 'zero-element/lib/config/global';
 import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 
+const defaultLabelCol = {
+  xs: { span: 3, },
+  sm: { span: 8, },
+};
+const defaultWrapperCol = {
+  xs: { span: 21, },
+  sm: { span: 16, },
+};
 export default function BaseForm(props) {
-  const formRef = useRef({});
+  const [form] = Form.useForm();
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const {
     MODAL, namespace, config, extraData = {},
@@ -46,25 +54,20 @@ export default function BaseForm(props) {
     ...extraData,
     ...data,
   });
-  const [, {
+  const {
     onFormatValue,
     handleFormatValue,
     onSaveOtherValue,
     onGetFormData,
-    bindOnChange,
-    onSpyChange,
-  }] = useFormHandle(namespace, {
+  } = useFormHandle(form, {
     config,
     forceInitForm,
-    keepData,
     onGetOne: handleGetData,
-    formRef,
   });
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
   const [destroy, setDestroy] = useState(false);
-  const init = useRef(true);
 
   useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
@@ -74,16 +77,7 @@ export default function BaseForm(props) {
     if (onSetExtraElement && goBack) {
       onSetExtraElement(<Button onClick={goBack}>返回</Button>);
     }
-    if (typeof onGetFormRef === 'function') {
-      onGetFormRef(formRef);
-    }
   });
-  useEffect(_ => {
-    if (!init.current && Object.keys(data).length !== 0) {
-      formRef.current.form.reset(data);
-    }
-    init.current = false;
-  }, [data]);
 
   useWillUnmount(_ => {
     if (keepData && !MODAL) {
@@ -134,7 +128,7 @@ export default function BaseForm(props) {
     });
   }
 
-  function handleSubmitForm() {
+  function handleSubmitForm(values) {
     const extraSubmit = {};
     fields.forEach(field => {
       if (field.type === 'hidden') {
@@ -143,7 +137,7 @@ export default function BaseForm(props) {
     })
     const submitData = {
       ...extraSubmit,
-      ...formRef.current.values,
+      ...values,
     };
 
     handleFormatValue(submitData);
@@ -197,12 +191,12 @@ export default function BaseForm(props) {
   }
 
   function handleReset() {
-    formRef.current.form.reset();
-    model.save('formData', initData.current);
+    // form.setFieldsValue(initData.current);
+    form.resetFields();
   }
   function renderFooter() {
     function onSubmit() {
-      formRef.current.onSubmit();
+      form.submit();
     }
 
     if (footer !== undefined || footerOpt !== undefined) {
@@ -219,39 +213,26 @@ export default function BaseForm(props) {
     <div className={fields.length ? 'ant-modal-body' : undefined}>
       {destroy ? null : (
         <Form
+          form={form}
+          layout={layoutType}
+          labelCol={defaultLabelCol}
+          wrapperCol={defaultWrapperCol}
           initialValues={initData.current}
-          onSubmit={handleSubmitForm}
-          render={({ handleSubmit, form, submitting, pristine, values }) => {
-            formRef.current = {
+          onFinish={handleSubmitForm}
+        >
+          <Render n={layout} {...layoutConfig}>
+            {fields.map(field => getFormItem(field, model, {
+              namespace,
               form,
-              values,
-              onSubmit: handleSubmit,
-            };
-
-            return <form
-              className={`ZEleA-Form-${layoutType}`}
-              onSubmit={handleSubmit}
-            >
-              <Render n={layout} {...layoutConfig}>
-                {fields.map(field => getFormItem(field, model, {
-                  namespace,
-                  values,
-                  handle: {
-                    onFormatValue,
-                    onSaveOtherValue,
-                    onGetFormData,
-                  },
-                  bindOnChange,
-                  hooks,
-                }))}
-              </Render>
-              <FormSpy
-                subscription={{ values }}
-                onChange={onSpyChange}
-              />
-            </form>
-          }}
-        />
+              handle: {
+                onFormatValue,
+                onSaveOtherValue,
+                onGetFormData,
+              },
+              hooks,
+            }))}
+          </Render>
+        </Form>
       )}
     </div>
     {renderFooter()}

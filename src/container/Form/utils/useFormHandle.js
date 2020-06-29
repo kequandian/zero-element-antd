@@ -1,6 +1,4 @@
 import { useRef, useEffect } from "react";
-import { getModel } from 'zero-element/lib/Model';
-import Sub from './Subscription';
 
 const toTypeMap = {
   'html': function (value) {
@@ -54,16 +52,12 @@ function mapObject(obj, map) {
   return obj;
 }
 
-export default function useFormHandle(namespace, {
+export default function useFormHandle(form, {
   config,
   forceInitForm,
-  keepData,
   onGetOne,
-  formRef,
 }) {
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
-  const sub = useRef(new Sub());
-  const model = getModel(namespace);
   const firstGetForm = useRef(true);
   const { API } = config;
 
@@ -90,10 +84,7 @@ export default function useFormHandle(namespace, {
     }
   }
   function handleGetFormData() {
-    if (formRef) {
-      return formRef.current.values;
-    }
-    return model.getState().formData;
+    return form.getFieldsValue();
   }
   /**
    * 提交数据之前，格式化 value
@@ -112,37 +103,13 @@ export default function useFormHandle(namespace, {
   }
 
   function handleSaveData(key, value) {
-    if (keepData) {
-      const formData = model.getState().formData;
-      formData[key] = value;
-
-      model.setState('formData', {
-        ...formData,
-      });
-      // model.dispatch({
-      //   type: 'save',
-      //   payload: {
-      //     formData: {
-      //       ...formData,
-      //     },
-      //   }
-      // });
-    }
-    sub.current.changeValue.bind(sub.current)(key, value);
+    form.setFieldsValue(key, value);
   }
 
-  return [
-    {
-      sub,
-      model,
-    },
-    {
-      onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
-      handleFormatValue, // format 全部已标记字段
-      onSaveOtherValue: handleSaveData,
-      onGetFormData: handleGetFormData, // 获取 model 里面的 form data
-      bindOnChange: sub.current.recordOnChange.bind(sub.current),
-      onSpyChange: sub.current.subscriptionChange.bind(sub.current),
-    }
-  ]
+  return {
+    onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
+    handleFormatValue, // format 全部已标记字段
+    onSaveOtherValue: handleSaveData,
+    onGetFormData: handleGetFormData, // 获取 model 里面的 form data
+  }
 }

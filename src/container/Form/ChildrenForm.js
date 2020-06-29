@@ -1,5 +1,5 @@
 import React, { useReducer, useRef, useMemo } from 'react';
-import { Form, FormSpy } from 'react-final-form';
+import { Form } from 'antd';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button } from 'antd';
@@ -8,6 +8,8 @@ import { Render } from 'zero-element/lib/config/layout';
 import useFormHandle from './utils/useFormHandle';
 
 export default function ChildrenForm(props) {
+  const [form] = Form.useForm();
+
   const formRef = useRef({});
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const { namespace, config, index, onClose, onSubmit } = props;
@@ -22,14 +24,14 @@ export default function ChildrenForm(props) {
     modelPath: 'formData',
   }, config);
 
-  const [, {
+  const {
     onFormatValue,
     handleFormatValue,
     onSaveOtherValue,
     onGetFormData,
     bindOnChange,
     onSpyChange,
-  }] = useFormHandle(namespace, {
+  } = useFormHandle(form, {
     config,
   });
 

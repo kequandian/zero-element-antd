@@ -1,40 +1,13 @@
 import React from 'react';
-import { Tooltip } from 'antd';
 import { Render } from 'zero-element/lib/config/formItemType';
 import './index.css';
 
 export default function FormItemWrapped({
-  label, type, input, meta, options, required, style,
+  type, options,
   ...rest
 }) {
-  const visibleError = Boolean(meta.error && meta.touched);
-  const labelClassNames = [
-    'ZEleA-Form-item-label',
-    required ? 'ZEleA-Form-item-required' : '',
-    label ? 'ZEleA-Form-item-label-colon' : '',
-  ];
 
-  return <div style={style} className="ZEleA-Form-item">
-    {label ? (
-      <label className={labelClassNames.join(' ')}>
-        {label}
-      </label>
-    ) : null}
-    <div className="ZEleA-Form-item-element">
-      <Render n={type}
-        className={visibleError ? 'ZEleA-Form-ruleTips-error' : ''}
-        options={options} {...input} {...rest}
-      />
-    </div>
-    <div
-      className="ZEleA-Form-ruleTips"
-      className={visibleError ?
-        'ZEleA-Form-ruleTips error' : 'ZEleA-Form-ruleTips'
-      }
-    >
-      {visibleError ? (
-        meta.error
-      ) : null}
-    </div>
-  </div>
+  return <Render n={type}
+    options={options} {...rest}
+  />
 }

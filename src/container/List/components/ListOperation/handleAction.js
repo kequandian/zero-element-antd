@@ -53,11 +53,11 @@ export default function handleAction(type, options, props, dispatch) {
           type: 'openConfirm',
           payload: {
             title: tips,
-            action: handleResponse.bind(null, actionFunc, payloadData, context),
+            action: handleResponse.bind(null, actionFunc, payloadData, model),
           }
         });
       } else {
-        handleResponse(actionFunc, payloadData, context);
+        handleResponse(actionFunc, payloadData, model);
         // rst && rst.then(_ => {
         //   if (handle.onRefresh) {
         //     handle.onRefresh();

@@ -19,7 +19,7 @@ const initialState = {
 export default function ListOperationWrapped(props) {
   // const context = useContext(PageContext);
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { index, namespace, handle = {}, extraData = {} } = props;
+  const { index, namespace, handle = {}, extraData = {}, model } = props;
 
   function onModal(cfg) {
     const { options } = cfg;
@@ -94,7 +94,7 @@ export default function ListOperationWrapped(props) {
       <ZEle
         MODAL={true}
         index={index || state.index}
-        namespace={'todo'}
+        namespace={model.namespace}
         config={{
           layout: 'Empty',
           ...state.modalConfig,
