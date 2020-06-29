@@ -1,4 +1,5 @@
 import { useRef, useEffect } from "react";
+import { setPageData } from 'zero-element/lib/Model';
 
 const toTypeMap = {
   'html': function (value) {
@@ -53,6 +54,7 @@ function mapObject(obj, map) {
 }
 
 export default function useFormHandle(form, {
+  namespace,
   config,
   forceInitForm,
   onGetOne,
@@ -106,10 +108,18 @@ export default function useFormHandle(form, {
     form.setFieldsValue(key, value);
   }
 
+  function handleValuesChange(changedValues, allValues) {
+    if (!namespace) {
+      console.warn('Parameter namespace is required');
+    }
+    setPageData(namespace, 'formData', allValues);
+  }
+
   return {
     onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
     handleFormatValue, // format 全部已标记字段
     onSaveOtherValue: handleSaveData,
     onGetFormData: handleGetFormData, // 获取 model 里面的 form data
+    onValuesChange: handleValuesChange,
   }
 }

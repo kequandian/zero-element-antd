@@ -58,7 +58,9 @@ export default function BaseForm(props) {
     handleFormatValue,
     onSaveOtherValue,
     onGetFormData,
+    onValuesChange,
   } = useFormHandle(form, {
+    namespace,
     config,
     forceInitForm,
     onGetOne: handleGetData,
@@ -210,6 +212,7 @@ export default function BaseForm(props) {
           labelCol={defaultLabelCol}
           wrapperCol={defaultWrapperCol}
           initialValues={initData.current}
+          onValuesChange={onValuesChange}
           onFinish={handleSubmitForm}
         >
           <Render n={layout} {...layoutConfig}>
