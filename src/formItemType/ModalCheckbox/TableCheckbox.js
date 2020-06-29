@@ -2,12 +2,14 @@ import React from 'react';
 import TableSelect from '../TableSelect';
 
 export default function TableCheckbox({
+  namespace,
   value, field, optValue,
   onChange,
   onGetFormData,
   ...rest // API fields pagination requireValid
 }) {
   return <TableSelect
+    namespace={namespace}
     value={getSelectedKeys(value, onGetFormData, {
       field,
       vField: optValue,

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useMemo } from 'react';
-import { Form } from 'react-final-form';
+import { Form } from 'antd';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
@@ -7,9 +7,18 @@ import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
 import { RollbackOutlined } from '@ant-design/icons';
 
+const defaultLabelCol = {
+  xs: { span: 3, },
+  sm: { span: 8, },
+};
+const defaultWrapperCol = {
+  xs: { span: 21, },
+  sm: { span: 16, },
+};
 export default function BaseSearch(props) {
-  const formRef = useRef({});
-  const { namespace, config, keepData = true } = props;
+  const [form] = Form.useForm();
+
+  const { namespace, config } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {},
   } = config;
@@ -20,6 +29,7 @@ export default function BaseSearch(props) {
     defaultExpand = fields.length > collapse ? false : null,
     buttonSpan,
   } = layoutConfig;
+
   const searchProps = useBaseSearch({
     namespace,
   }, config);
@@ -33,9 +43,7 @@ export default function BaseSearch(props) {
   useMemo(recordDefaultValue, [fields]);
 
   useWillUnmount(_ => {
-    if (!keepData) {
-      onClearSearch();
-    }
+    onClearSearch();
   });
 
   function handleExpand() {
@@ -55,21 +63,15 @@ export default function BaseSearch(props) {
     onSetSearchData(initData.current);
   }
 
-  function handleSubmitForm() {
+  function handleSubmitForm(values) {
     onSearch({
       ...data,
-      ...formRef.current.values,
+      ...values,
     });
-    // if (keepData) {
-    //   model.setState('searchData', formRef.current.values);
-    // }
 
   }
   function handleReset() {
-    formRef.current.form.reset();
-    if (keepData) {
-      onClearSearch();
-    }
+    form.resetFields();
   }
 
   function renderFooter(validLength) {
@@ -88,44 +90,33 @@ export default function BaseSearch(props) {
     </div>
   }
 
+  const renderFieldsAndButton = fields.map(field => getFormItem(field, model, {
+    namespace,
+    form,
+  }))
+    .filter(field => field);
+  const validLength = renderFieldsAndButton.length;
+
+  if (expand === false) {
+    renderFieldsAndButton.splice(collapse);
+  }
+
+  renderFieldsAndButton.splice(collapse, 0, renderFooter(validLength));
+
   return <Spin spinning={false}>
     <Render n="SearchLayout" >
       <Form
+        form={form}
+        layout={layoutType}
+        labelCol={defaultLabelCol}
+        wrapperCol={defaultWrapperCol}
         initialValues={initData.current}
-        onSubmit={handleSubmitForm}
-        render={({ handleSubmit, form, submitting, pristine, values }) => {
-          formRef.current = {
-            form,
-            values,
-            onSubmit: handleSubmit,
-          };
-          const renderFieldsAndButton = fields.map(field => getFormItem(field, model, {
-            namespace,
-            values,
-          }))
-            .filter(field => field);
-          const validLength = renderFieldsAndButton.length;
-
-          if (expand === false) {
-            renderFieldsAndButton.splice(collapse);
-          }
-
-          renderFieldsAndButton.splice(collapse, 0, renderFooter(validLength));
-
-          // if (keepData) {
-          //   model.setState('searchData', values);
-          // }
-
-          return <form
-            className={`ZEleA-Form-${layoutType}`}
-            onSubmit={handleSubmit}
-          >
-            <Render n={layout} value={value} {...layoutConfig}>
-              {renderFieldsAndButton}
-            </Render>
-          </form>
-        }}
-      />
+        onFinish={handleSubmitForm}
+      >
+        <Render n={layout} value={value} {...layoutConfig}>
+          {renderFieldsAndButton}
+        </Render>
+      </Form>
     </Render>
   </Spin>
 }

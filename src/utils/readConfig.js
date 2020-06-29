@@ -38,6 +38,7 @@ export function getFormItem(field, model,
     {...rest}
   >
     <FormIten
+      name={fieldName}
       type={type}
       options={options}
       namespace={namespace}

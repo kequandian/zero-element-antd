@@ -20,6 +20,7 @@ const defaultWrapperCol = {
 };
 export default function BaseForm(props) {
   const [form] = Form.useForm();
+
   const [, forceUpdate] = useReducer(x => x + 1, 0);
   const {
     MODAL, namespace, config, extraData = {},
@@ -27,8 +28,6 @@ export default function BaseForm(props) {
     loading: propsLoading,
     forceInitForm,
     footer,
-    onGetFormRef,
-    keepData = true,
     hooks,
   } = props;
   const {
@@ -79,13 +78,7 @@ export default function BaseForm(props) {
     }
   });
 
-  useWillUnmount(_ => {
-    if (keepData && !MODAL) {
-      // onCanRecyclable();
-    } else {
-      onClearForm();
-    }
-  });
+  useWillUnmount(onClearForm);
 
   function handleGetData() {
     setDestroy(true);
@@ -191,7 +184,6 @@ export default function BaseForm(props) {
   }
 
   function handleReset() {
-    // form.setFieldsValue(initData.current);
     form.resetFields();
   }
   function renderFooter() {

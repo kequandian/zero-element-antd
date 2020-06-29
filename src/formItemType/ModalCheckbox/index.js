@@ -12,6 +12,7 @@ export default function ModalCheckbox(props) {
     handle,
     ...rest
   } = props;
+
   const {
     title = '选择数据',
     label = 'name', editLabel = label,
@@ -64,6 +65,7 @@ export default function ModalCheckbox(props) {
       onOk={handleSave}
     >
       <TableCheckbox
+        namespace={`${namespace}_${name}_ModalCheckbox`}
         value={value}
         field={field}
         optValue={optValue}
