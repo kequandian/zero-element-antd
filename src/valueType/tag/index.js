@@ -5,8 +5,8 @@ import defaultMap from '../status/status.config';
 
 export default function valueTypeTag(props) {
   const { options = {}, data: { text = '' } } = props;
-  const { colorMap = {}, map = {} } = options;
-  return <Tag color={colorMap[text] || config[text] || '#108ee9'}>
+  const { color = {}, map = {} } = options;
+  return <Tag color={color[text] || config[text] || '#108ee9'}>
     {map[text] || defaultMap[text] || text}
   </Tag>
 }

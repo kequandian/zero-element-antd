@@ -83,12 +83,17 @@ export default function useListHandle({
   }, [batchOperation]);
 
   useEffect(_ => {
-    if (order) {
-      setOrderFields(
-        filterFields(fields, order)
-      );
+
+    if (fields) {
+      if (order) {
+        setOrderFields(
+          filterFields(fields, order)
+        );
+      } else {
+        setOrderFields(fields)
+      }
     }
-  }, [order])
+  }, [fields, order])
 
   useWillUnmount(_ => {
     if (keepData) {

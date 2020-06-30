@@ -119,10 +119,10 @@ function formatToOptions(options) {
   return rst;
 }
 function formatToExpect(expect) {
-  if (expect && expect.expectedField) {
+  if (expect && expect.field) {
     return {
-      expectedField: expect.expectedField.value,
-      expectedValue: expect.expectedValue.value,
+      field: expect.field.value,
+      value: expect.value.value,
     }
   }
   return undefined;

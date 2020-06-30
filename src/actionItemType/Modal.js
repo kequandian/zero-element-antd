@@ -37,7 +37,8 @@ export default (props) => {
     >
       <ZEle
         MODAL={true}
-        namespace={`${namespace}_actionModal`}
+        // namespace={`${namespace}_actionModal`}
+        namespace={namespace}
         {...restProps}
         config={{
           layout: 'Empty',
