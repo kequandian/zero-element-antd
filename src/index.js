@@ -1,6 +1,6 @@
 import Load from '@/utils/Load';
 
-import { set as APIConfig } from 'zero-element/lib/config/APIConfig';
+// import { set as APIConfig } from 'zero-element/lib/config/APIConfig';
 
 import { set as LayoutSet } from 'zero-element/lib/config/layout';
 import { set as CSet } from 'zero-element/lib/config/container';
@@ -11,21 +11,21 @@ import { set as VTSet } from 'zero-element/lib/config/valueType';
 
 import onRequest from '@/listAction/onRequest';
 
-APIConfig({
-  'DEFAULT_current': 1,
-  'DEFAULT_pageSize': 10,
+// APIConfig({
+//   'DEFAULT_current': 1,
+//   'DEFAULT_pageSize': 10,
 
-  'REQUEST_FIELD_current': 'pageNumber',
-  'REQUEST_FIELD_pageSize': 'pageSize',
-  'REQUEST_FIELD_field': 'field',
-  'REQUEST_FIELD_order': 'order',
+//   'REQUEST_FIELD_current': 'pageNumber',
+//   'REQUEST_FIELD_pageSize': 'pageSize',
+//   'REQUEST_FIELD_field': 'field',
+//   'REQUEST_FIELD_order': 'order',
 
-  'RESPONSE_FIELD_current': 'current',
-  'RESPONSE_FIELD_pageSize': 'size',
-  'RESPONSE_FIELD_total': 'total',
-  'RESPONSE_FIELD_records': 'records',
-  'RESPONSE_FIELD_PID': 'pid',
-});
+//   'RESPONSE_FIELD_current': 'current',
+//   'RESPONSE_FIELD_pageSize': 'size',
+//   'RESPONSE_FIELD_total': 'total',
+//   'RESPONSE_FIELD_records': 'records',
+//   'RESPONSE_FIELD_PID': 'pid',
+// });
 
 LayoutSet({
   Empty: Load('layout/Empty'),

@@ -1,0 +1,83 @@
+{
+  "LayoutSet": {
+    "Empty": "layout/Empty",
+    "EmptyTitle": "layout/EmptyTitle",
+    "Loading": "layout/Loading",
+    "Alone": "layout/Alone",
+    "Row": "layout/Row",
+    "SearchLayout": "layout/SearchLayout",
+    "Grid": "layout/Grid",
+    "Content": "layout/Content",
+    "Items": "layout/Items"
+  },
+  "CSet": {
+    "BaseList": "container/List/BaseList",
+    "ReportList": "container/List/ReportList",
+    "TreeTable": "container/List/TreeTable",
+    "ChildrenList": "container/List/ChildrenList",
+    "TreeList": "container/List/TreeList",
+    "AutoReport": "container/List/AutoReport",
+    "TableSelect": "container/List/TableSelect",
+    "ItemList": "container/List/ItemList",
+    "BaseSearch": "container/Form/BaseSearch",
+    "AutoReportSearch": "container/Form/AutoReportSearch",
+    "BaseForm": "container/Form/BaseForm",
+    "ChildrenForm": "container/Form/ChildrenForm"
+  },
+  "LASet": {
+    "onRequest": "listAction/onRequest"
+  },
+  "FITSet": {
+    "plain": "formItemType/Plain",
+    "empty": "formItemType/Empty",
+    "hidden": "formItemType/Hidden",
+    "group": "formItemType/Group",
+    "input": "formItemType/Input",
+    "password": "formItemType/Password",
+    "number": "formItemType/Number",
+    "radio": "formItemType/Radio",
+    "select": "formItemType/Select",
+    "checkbox": "formItemType/Checkbox",
+    "map": "formItemType/Map",
+    "pcd": "formItemType/PCD",
+    "captcha": "formItemType/Captcha",
+    "date": "formItemType/Date/date",
+    "week": "formItemType/Date/week",
+    "month": "formItemType/Date/month",
+    "range": "formItemType/Date/range",
+    "table-select": "formItemType/TableSelect",
+    "modal-radio": "formItemType/ModalRadio",
+    "modal-checkbox": "formItemType/ModalCheckbox",
+    "upload-image": "formItemType/UploadImage",
+    "upload-file": "formItemType/UploadFile",
+    "checkbox-fetch": "formItemType/CheckboxFetch",
+    "select-fetch": "formItemType/SelectFetch",
+    "select-field": "formItemType/SelectField",
+    "text-area": "formItemType/TextArea",
+    "rich-text": "formItemType/RichText",
+    "one-mary": "formItemType/OneMary",
+    "number-range": "formItemType/NumberRange",
+    "pcdm": "formItemType/PCDM"
+  },
+  "AITSet": {
+    "modal": "actionItemType/Modal",
+    "request": "actionItemType/Request",
+    "children-modal-add": "actionItemType/ChildrenModalAdd",
+    "import-excel": "actionItemType/ImportExcel",
+    "export-excel": "actionItemType/ExportExcel",
+    "table-checkbox": "actionItemType/TableCheckbox"
+  },
+  "VTSet": {
+    "plain": "valueType/plain",
+    "status": "valueType/status",
+    "image": "valueType/image",
+    "tag": "valueType/tag",
+    "currency": "valueType/currency",
+    "percentage": "valueType/percentage",
+    "ellipsis": "valueType/ellipsis",
+    "input-number": "valueType/inputNumber",
+    "input-text": "valueType/inputText",
+    "input-select": "valueType/inputSelect",
+    "input-select-fetch": "valueType/inputSelectFetch"
+  }
+}
