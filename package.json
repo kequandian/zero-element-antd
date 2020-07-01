@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "@loadable/component": "^5.10.1",
-    "antd": "^4.2.2",
     "braft-editor": "^2.3.7",
     "final-form": "^4.13.1",
     "layout-flex": "github:kequandian/layout-flex",
