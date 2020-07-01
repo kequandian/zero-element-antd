@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Table } from 'antd';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
 
 export default function TableSelect(props) {

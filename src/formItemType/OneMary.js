@@ -2,7 +2,7 @@ import React, { useRef, useMemo } from 'react';
 import { formatTableFields } from '@/container/List/utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 import { query } from '@/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';

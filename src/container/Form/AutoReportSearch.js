@@ -4,7 +4,7 @@ import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 import { getModel } from 'zero-element/lib/Model';
 
 export default function AutoReportSearch(props) {

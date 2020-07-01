@@ -3,7 +3,7 @@ import useBaseChildren from 'zero-element/lib/helper/form/useBaseChildren';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
-import { Render } from 'zero-element-global/lib/layout';
+import { Render } from 'zero-element/lib/config/layout';
 
 export default function ChildrenList(props) {
   const { namespace, config } = props;

@@ -5,8 +5,8 @@ import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
-import { Render } from 'zero-element-global/lib/layout';
-import global from 'zero-element-global/lib/global';
+import { Render } from 'zero-element/lib/config/layout';
+import global from 'zero-element/lib/config/global';
 import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 
