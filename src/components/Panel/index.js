@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useReducer, useMemo } from 'react';
 import { Flex } from 'layout-flex';
-import { Icon } from 'antd';
+import { DownOutlined } from '@ant-design/icons';
 import './index.css';
 
 const { FlexItem } = Flex;
@@ -54,7 +54,7 @@ export default function Panel({
         </div>
       </FlexItem>
       <FlexItem className="ZEleA-Panel-icon" style={iconStyle}>
-        <Icon type="down" onClick={handleCollapse} />
+        <DownOutlined type="down" onClick={handleCollapse} />
       </FlexItem>
     </Flex>
     <div className="ZEleA-Panel-content"

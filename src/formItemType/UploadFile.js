@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Button, Icon } from 'antd';
+import { Upload, Button } from 'antd';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 const initFileList = [];
 export default function UploadFile(props) {
@@ -28,7 +29,8 @@ export default function UploadFile(props) {
 
   const uploadButton = (
     <Button>
-      <Icon type={loading ? 'loading' : 'plus'} /> {title}
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+      {title}
     </Button>
   );
 

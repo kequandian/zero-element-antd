@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Icon, Modal } from 'antd';
+import { Upload, Modal } from 'antd';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
+import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 const initFileList = [];
 export default function UploadImage(props) {
@@ -31,7 +32,7 @@ export default function UploadImage(props) {
   }
   const uploadButton = (
     <div>
-      <Icon type={loading ? 'loading' : 'plus'} />
+      {loading ? <LoadingOutlined /> : <PlusOutlined />}
       <div className="ant-upload-text">点击上传</div>
     </div>
   );

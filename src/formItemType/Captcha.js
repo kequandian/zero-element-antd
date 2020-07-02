@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Icon, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 import { LS } from 'zero-element/lib/utils/storage';
 import { post } from '@/utils/request';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import useInterval from '@/utils/hooks/useInterval';
+import { KeyOutlined } from '@ant-design/icons';
 
 const InputGroup = Input.Group;
 
@@ -67,7 +68,7 @@ export default function Captcha(props) {
   return <InputGroup compact {...propsOtp}>
     <Input
       style={{ width: '70%' }}
-      prefix={<Icon type="key" style={{ color: 'rgba(0,0,0,.25)' }} />}
+      prefix={<KeyOutlined style={{ color: 'rgba(0,0,0,.25)' }} />}
       placeholder="验证码"
       onChange={onChange}
     />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 
 export default ({ options }, i, { index, record, records }, onAction) => {
   const { entity } = options;
@@ -23,16 +23,14 @@ export default ({ options }, i, { index, record, records }, onAction) => {
   return <span key={i} className="ZEleA-table-action-Sort">
     {index === 0 ?
       null
-      : (<Icon
-        type="arrow-up"
+      : (<ArrowUpOutlined
         title="上移"
         onClick={handleUp}
       />)}
     {index === (records.length - 1) ?
       null :
-      (<Icon
+      (<ArrowDownOutlined
         onClick={handleDown}
-        type="arrow-down"
         title="下移"
       />)}
   </span>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex } from 'layout-flex';
-import { Checkbox, Icon } from 'antd';
+import { Checkbox } from 'antd';
+import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
 import '../../index.css';
 
 const { FlexItem } = Flex;
@@ -27,10 +28,10 @@ export default ({ data, checkedList, onSwitchChecked, onMoveField }) => {
       </span>
     </FlexItem>
     <FlexItem>
-      <Icon type="arrow-up" className="ZEleA-ListFieldsEdit-FieldItem-icon"
+      <ArrowUpOutlined className="ZEleA-ListFieldsEdit-FieldItem-icon"
         onClick={onUp}
       />
-      <Icon type="arrow-down" className="ZEleA-ListFieldsEdit-FieldItem-icon"
+      <ArrowDownOutlined className="ZEleA-ListFieldsEdit-FieldItem-icon"
         onClick={onDown}
       />
     </FlexItem>
