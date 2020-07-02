@@ -1,5 +1,6 @@
 import { useRef, useEffect } from "react";
 import { setPageData } from 'zero-element/lib/Model';
+import { useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 const toTypeMap = {
   'html': function (value) {
@@ -60,6 +61,8 @@ export default function useFormHandle(form, {
   onGetOne,
 }) {
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
+  const expectFieldRef = useRef({}); // 记录需要 expect 的字段
+  const forceUpdate = useForceUpdate();
   const firstGetForm = useRef(true);
   const { API } = config;
 
@@ -108,10 +111,21 @@ export default function useFormHandle(form, {
     form.setFieldsValue(key, value);
   }
 
+  function handleExpect(key) {
+    expectFieldRef.current[key] = true;
+  }
+
   function handleValuesChange(changedValues, allValues) {
     if (!namespace) {
       console.warn('Parameter namespace is required');
     }
+
+
+    const canReRender = Object.keys(changedValues).some(key => expectFieldRef.current[key]);
+    if (canReRender) {
+      forceUpdate();
+    }
+
     setPageData(namespace, 'formData', allValues);
   }
 
@@ -119,7 +133,8 @@ export default function useFormHandle(form, {
     onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
     handleFormatValue, // format 全部已标记字段
     onSaveOtherValue: handleSaveData,
-    onGetFormData: handleGetFormData, // 获取 model 里面的 form data
+    onGetFormData: handleGetFormData,
     onValuesChange: handleValuesChange,
+    onExpect: handleExpect,
   }
 }

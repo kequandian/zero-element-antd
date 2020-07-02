@@ -18,8 +18,8 @@ const rulesMap = {
     return value === 0 ? true : Boolean(value);
   }
 };
-export default function checkExpected(record = {}, options = {}) {
-  const { field, value, permission } = options;
+export default function checkExpected(record = {}, expect = {}) {
+  const { field, value, permission } = expect;  
 
   // // 若需要检测权限
   // if (permission) {
@@ -28,7 +28,6 @@ export default function checkExpected(record = {}, options = {}) {
   //   }
   // }
   if (!field) return true; // 没有预期就是什么都凑合
-
 
   const fieldList = field instanceof Array ? field : [field];
   const valueList = value instanceof Array ? value : [value];

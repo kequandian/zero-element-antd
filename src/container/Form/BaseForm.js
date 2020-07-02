@@ -1,8 +1,8 @@
-import React, { useReducer, useRef, useMemo, useState, useEffect } from 'react';
+import React, { useRef, useMemo, useState } from 'react';
 import { Form } from 'antd';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import useBaseForm from 'zero-element/lib/helper/form/useBaseForm';
-import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useDidMount, useWillUnmount, useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, message } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
@@ -11,17 +11,15 @@ import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 
 const defaultLabelCol = {
-  xs: { span: 3, },
-  sm: { span: 8, },
+  xs: { span: 8, },
 };
 const defaultWrapperCol = {
-  xs: { span: 21, },
-  sm: { span: 16, },
+  xs: { span: 16, },
 };
 export default function BaseForm(props) {
   const [form] = Form.useForm();
 
-  const [, forceUpdate] = useReducer(x => x + 1, 0);
+  const forceUpdate = useForceUpdate();
   const {
     MODAL, namespace, config, extraData = {},
     onClose, onSubmit, onSetExtraElement,
@@ -39,7 +37,7 @@ export default function BaseForm(props) {
     footer: footerOpt,
     requestOptions,
   } = config;
-  const { layoutType = 'horizontal' } = layoutConfig; // vertical horizontal
+  const { layoutType = 'inline' } = layoutConfig; // inline vertical horizontal
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
@@ -59,6 +57,7 @@ export default function BaseForm(props) {
     onSaveOtherValue,
     onGetFormData,
     onValuesChange,
+    onExpect,
   } = useFormHandle(form, {
     namespace,
     config,
@@ -223,6 +222,7 @@ export default function BaseForm(props) {
                 onFormatValue,
                 onSaveOtherValue,
                 onGetFormData,
+                onExpect,
               },
               hooks,
             }))}

@@ -349,6 +349,14 @@
 .ant-form .ant-form-item.ant-form-item-with-help {
   margin-bottom: 0;
 }
+
+.ant-form.ant-form-inline .ant-row {
+  width: 100%;
+}
+
+.ant-form-inline .ant-form-item>.ant-form-item-label {
+  min-width: 6em;
+}
 .ZEleA-table-operation {
   height     : 40px;
   line-height: 40px;

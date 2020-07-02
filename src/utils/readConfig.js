@@ -22,7 +22,10 @@ export function getFormItem(field, model,
     return null;
   }
 
-  if (!checkExpected(values, expect || options)) {
+  if (expect && expect.field) {
+    handle.onExpect(expect.field);
+  }
+  if (!checkExpected(values, expect)) {
     return null;
   }
 
