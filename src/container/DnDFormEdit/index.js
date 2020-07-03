@@ -42,7 +42,7 @@ const initState = {
 };
 
 function DndFormEdit(props) {
-  const { onSubmit, onGetFormRef, initData } = props;
+  const { onSubmit, initData } = props;
   const formRef = useRef({});
 
   const [state, dispatch] = useReducer(
@@ -105,9 +105,6 @@ function DndFormEdit(props) {
             }
           });
         })
-    }
-    if (typeof onGetFormRef === 'function') {
-      onGetFormRef(formRef);
     }
   });
 

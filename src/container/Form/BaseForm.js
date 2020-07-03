@@ -27,6 +27,8 @@ export default function BaseForm(props) {
     forceInitForm,
     footer,
     hooks,
+    formRef,
+    keepData = false, // 卸载 BaseForm 时不销毁 model.formData
   } = props;
   const {
     API = {},
@@ -51,6 +53,7 @@ export default function BaseForm(props) {
     ...extraData,
     ...data,
   });
+
   const {
     onFormatValue,
     handleFormatValue,
@@ -77,9 +80,16 @@ export default function BaseForm(props) {
     if (onSetExtraElement && goBack) {
       onSetExtraElement(<Button onClick={goBack}>返回</Button>);
     }
+    if (typeof formRef === 'object') {
+      formRef.current = form;
+    }
   });
 
-  useWillUnmount(onClearForm);
+  useWillUnmount(_ => {
+    if (!keepData) {
+      onClearForm();
+    }
+  });
 
   function handleGetData() {
     setDestroy(true);

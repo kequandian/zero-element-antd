@@ -8,7 +8,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 export default function OneMary(props) {
-  const { name, namespace, value, options = {}, handle, onChange, hooks = {} } = props;
+  const { name, namespace, value, options = {}, handle, onChange, hooks = {}, model } = props;
   const {
     API,
     layout = 'Empty',
@@ -100,6 +100,9 @@ export default function OneMary(props) {
   const { columns } = formatTableFields(fields, operation, {
     onRemoveChild: handleRemove,
     onEdit: handleEdit,
+  }, {
+    namespace,
+    model,
   });
 
 

@@ -11,11 +11,12 @@ import { getActionItem } from '@/utils/readConfig';
 export default function useListHandle({
   namespace,
   config,
-
+  extraData,
   props,
 }) {
   const listProps = useBaseList({
     namespace,
+    extraData,
   }, config);
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
@@ -48,7 +49,7 @@ export default function useListHandle({
     onFieldsOrder,
   }, {
     namespace,
-    extraData: {},
+    extraData,
     fields,
     model,
   });
@@ -147,7 +148,7 @@ export default function useListHandle({
     ...action,
   }, model, handle, {
     namespace,
-    extraData: {},
+    extraData,
     config,
   }));
 

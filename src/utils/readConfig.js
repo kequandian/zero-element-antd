@@ -49,6 +49,7 @@ export function getFormItem(field, model,
       formdata={values}
       hooks={hooks}
       {...rest}
+      model={model}
     />
   </Form.Item>
 }

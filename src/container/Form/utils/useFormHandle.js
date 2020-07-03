@@ -108,7 +108,9 @@ export default function useFormHandle(form, {
   }
 
   function handleSaveData(key, value) {
-    form.setFieldsValue(key, value);
+    const formData = form.getFieldsValue();
+    formData[key] = value;
+    form.setFieldsValue({ ...formData });
   }
 
   function handleExpect(key) {

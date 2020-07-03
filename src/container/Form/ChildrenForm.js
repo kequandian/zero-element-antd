@@ -10,7 +10,6 @@ import useFormHandle from './utils/useFormHandle';
 export default function ChildrenForm(props) {
   const [form] = Form.useForm();
 
-  const formRef = useRef({});
   const forceUpdate = useForceUpdate();
   const { namespace, config, index, onClose, onSubmit } = props;
   const {
@@ -18,7 +17,7 @@ export default function ChildrenForm(props) {
     layout = 'Empty', layoutConfig = {},
     fields,
   } = config;
-  const { layoutType = 'vertical' } = layoutConfig;
+  const { layoutType = 'inline' } = layoutConfig;
   const formProps = useBaseForm({
     namespace,
     modelPath: 'formData',
@@ -29,8 +28,6 @@ export default function ChildrenForm(props) {
     handleFormatValue,
     onSaveOtherValue,
     onGetFormData,
-    bindOnChange,
-    onSpyChange,
   } = useFormHandle(form, {
     config,
   });
@@ -59,9 +56,9 @@ export default function ChildrenForm(props) {
       }
     });
   }
-  function handleSubmitForm() {
+  function handleSubmitForm(values) {
     const submitData = {
-      ...formRef.current.values,
+      ...values,
     };
 
     handleFormatValue(submitData);
@@ -75,7 +72,6 @@ export default function ChildrenForm(props) {
         onSubmit(submitData);
       }
       if (onClose) {
-        formRef.current.onSubmit();
         onClose();
       }
       return false;
@@ -83,11 +79,11 @@ export default function ChildrenForm(props) {
   }
 
   function handleReset() {
-    formRef.current.form.reset();
+    form.resetFields();
   }
   function renderFooter() {
     function onSubmit() {
-      formRef.current.onSubmit();
+      form.submit();
     }
     return <div className="ant-modal-footer">
       <Button onClick={handleReset}>重置</Button>
@@ -98,37 +94,23 @@ export default function ChildrenForm(props) {
   return <Spin spinning={loading}>
     <div className={fields.length ? 'ant-modal-body' : undefined}>
       <Form
+        form={form}
+        layout={layoutType}
         initialValues={initData.current}
-        onSubmit={handleSubmitForm}
-        render={({ handleSubmit, form, submitting, pristine, values }) => {
-          formRef.current = {
+        onFinish={handleSubmitForm}
+      >
+        <Render n={layout} {...layoutConfig}>
+          {fields.map(field => getFormItem(field, model, {
+            namespace,
             form,
-            values,
-            onSubmit: handleSubmit,
-          };
-          return <form
-            className={`ZEleA-Form-${layoutType}`}
-            onSubmit={handleSubmit}
-          >
-            <Render n={layout} {...layoutConfig}>
-              {fields.map(field => getFormItem(field, model, {
-                namespace,
-                values,
-                handle: {
-                  onFormatValue,
-                  onSaveOtherValue,
-                  onGetFormData,
-                },
-                bindOnChange,
-              }))}
-            </Render>
-            <FormSpy
-              subscription={{ values }}
-              onChange={onSpyChange}
-            />
-          </form>
-        }}
-      />
+            handle: {
+              onFormatValue,
+              onSaveOtherValue,
+              onGetFormData,
+            },
+          }))}
+        </Render>
+      </Form>
     </div>
     {renderFooter()}
   </Spin>
