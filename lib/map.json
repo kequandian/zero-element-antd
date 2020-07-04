@@ -2,7 +2,7 @@
   "LayoutSet": {
     "Empty": "layout/Empty",
     "BaseTitle": "layout/BaseTitle",
-    "Table": "layout/Table",
+    "TitleContent": "layout/TitleContent",
     "Loading": "layout/Loading",
     "Alone": "layout/Alone",
     "Row": "layout/Row",

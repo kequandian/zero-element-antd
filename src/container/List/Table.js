@@ -18,6 +18,7 @@ export default function BaseTable(props) {
     tableProps, tableData, handle, actionsItems,
     {
       operationData,
+      renderBatchOperation,
     }
   ] = useListHandle({
     namespace,
@@ -38,6 +39,7 @@ export default function BaseTable(props) {
     namespace={namespace}
   >
     {canPortal(extraEl, <Render n={actionLayout} {...actionLayoutConfig}>
+      {renderBatchOperation()}
       {actionsItems}
     </Render>)}
     <Table

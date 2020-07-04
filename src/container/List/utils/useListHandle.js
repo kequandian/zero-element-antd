@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
-
+import { Menu, Dropdown, Button } from 'antd';
 import useOperation from './useOperation';
 import useRowSelection from './useRowSelection';
 import { formatTableFields } from './format';
 import { getActionItem } from '@/utils/readConfig';
-
+import { DownOutlined } from '@ant-design/icons';
 
 export default function useListHandle({
   namespace,
@@ -38,7 +38,7 @@ export default function useListHandle({
 
   const { loading, data, handle, model } = listProps;
   const { onGetList, onClearList } = handle;
-  const [rowSelection, onSetSelection] = useRowSelection(handle);
+  const rowSelection = useRowSelection(handle);
 
   const { listData } = model;
   const { records, ...pagination } = listData;
@@ -78,13 +78,6 @@ export default function useListHandle({
   }, [forceInitList]);
 
   useEffect(_ => {
-    if (batchOperation !== undefined) {
-      onSetSelection(batchOperation);
-    }
-  }, [batchOperation]);
-
-  useEffect(_ => {
-
     if (fields) {
       if (order) {
         setOrderFields(
@@ -124,10 +117,42 @@ export default function useListHandle({
     setOrder(order);
   }
 
+  function handleMenuClick(e) {
+    const { key } = e;
+    const batchItem = batchOperation[key];
+    if (batchItem && typeof batchItem.onClick === 'function') {
+      batchItem.onClick({
+        selectedRowKeys: rowSelection.selectedRowKeys,
+        selectedRows: rowSelection.selectedRows,
+        onRefresh: handle.onRefresh,
+      });
+    }
+  }
+
+  function renderBatchOperation() {
+    if (Array.isArray(batchOperation) && rowSelection.selectedRowKeys.length) {
+      const menu = (
+        <Menu onClick={handleMenuClick}>
+          {batchOperation.map((item, i) => {
+            return <Menu.Item key={i}>
+              {item.title}
+            </Menu.Item>
+          })}
+        </Menu>
+      );
+      return <Dropdown overlay={menu}>
+        <Button>
+          批量操作 <DownOutlined />
+        </Button>
+      </Dropdown>
+    }
+    return null;
+  }
+
   const tableProps = {
     columns,
     loading,
-    rowSelection: batchOperation ? rowSelection : undefined,
+    rowSelection,
     onChange: handleFilterSorter,
     pagination: propsPagination ? {
       showSizeChanger: true,
@@ -154,6 +179,7 @@ export default function useListHandle({
 
   return [tableProps, data, handle, actionsItems, {
     operationData: oData,
+    renderBatchOperation,
   }];
 }
 
