@@ -25,7 +25,8 @@ export default function ListFieldsEdit(props) {
     if (index > -1) {
       newCheckedList.splice(index, 1);
     } else {
-      newCheckedList.push(field);
+      const index = fields.findIndex(i => i.field === field);
+      newCheckedList.splice(index, 0, field);
     }
     setCheckedList(newCheckedList);
   }

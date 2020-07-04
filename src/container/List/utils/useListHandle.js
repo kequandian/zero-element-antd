@@ -152,7 +152,7 @@ export default function useListHandle({
   const tableProps = {
     columns,
     loading,
-    rowSelection,
+    rowSelection: batchOperation ? rowSelection : undefined,
     onChange: handleFilterSorter,
     pagination: propsPagination ? {
       showSizeChanger: true,

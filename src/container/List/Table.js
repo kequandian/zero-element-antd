@@ -2,7 +2,7 @@ import React from 'react';
 import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
-import TableFooter from './components/TableFooter';
+import tableFooter from './components/TableFooter';
 import canPortal from '@/utils/canPortal';
 
 export default function BaseTable(props) {
@@ -49,12 +49,10 @@ export default function BaseTable(props) {
       dataSource={props.data || tableData}
       {...tableProps}
       {...propsCfg}
-      footer={() => {
-        return <TableFooter
-          dataSource={props.data || tableData}
-          columns={tableProps.columns}
-        />
-      }}
+      footer={tableFooter(
+        props.data || tableData,
+        tableProps.columns)
+      }
     />
   </Render>
 }
