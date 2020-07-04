@@ -9,12 +9,13 @@ import { Render } from 'zero-element/lib/config/layout';
 import global from 'zero-element/lib/config/global';
 import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
+import canPortal from '@/utils/canPortal';
 
 const defaultLabelCol = {
   xs: { span: 8, },
 };
 const defaultWrapperCol = {
-  xs: { span: 16, },
+  // xs: { span: 16, },
 };
 export default function BaseForm(props) {
   const [form] = Form.useForm();
@@ -22,7 +23,7 @@ export default function BaseForm(props) {
   const forceUpdate = useForceUpdate();
   const {
     MODAL, namespace, config, extraData = {},
-    onClose, onSubmit, onSetExtraElement,
+    onClose, onSubmit, extraEl,
     loading: propsLoading,
     forceInitForm,
     footer,
@@ -46,6 +47,8 @@ export default function BaseForm(props) {
     extraData,
   }, config);
   const { router, goBack } = global;
+
+  const renderGoBack = extraEl && extraEl.current && goBack;
 
   const { loading, data, model, handle } = formProps;
 
@@ -76,9 +79,6 @@ export default function BaseForm(props) {
   useDidMount(_ => {
     if (API.getAPI) {
       handleGetData();
-    }
-    if (onSetExtraElement && goBack) {
-      onSetExtraElement(<Button onClick={goBack}>返回</Button>);
     }
     if (typeof formRef === 'object') {
       formRef.current = form;
@@ -213,6 +213,7 @@ export default function BaseForm(props) {
   }
 
   return <Spin spinning={propsLoading || loading}>
+    {renderGoBack && canPortal(extraEl, <Button onClick={goBack}>返回</Button>)}
     <div className={fields.length ? 'ant-modal-body' : undefined}>
       {destroy ? null : (
         <Form
@@ -235,6 +236,7 @@ export default function BaseForm(props) {
                 onExpect,
               },
               hooks,
+              extraData,
             }))}
           </Render>
         </Form>

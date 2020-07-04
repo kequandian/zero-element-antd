@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { Flex } from 'layout-flex';
 import './index.css';
 
 const { FlexItem } = Flex;
 
-export default function EmptyTitle(props) {
+export default function BaseTitle(props) {
   const { title, style, extra, children } = props;
-  const [extraEle, setExtraEle] = useState(extra);
+  const extraEl = useRef(null);
 
-  function onSetExtraElement(ele) {
-    setExtraEle(ele);
-  }
   return <div style={style}>
-    {title ? <div className="ZEleA-Layout-EmptyTitle">
+    {title ? <div className="ZEleA-Layout-BaseTitle">
       <Flex>
         <FlexItem flex={1}>
           {title}
         </FlexItem>
         <FlexItem>
-          {extraEle}
+          <div ref={extraEl}>
+          </div>
         </FlexItem>
       </Flex>
     </div> : null}
     {React.Children.map(children, child => {
       return React.cloneElement(child, {
-        onSetExtraElement,
+        extraEl,
       })
     })}
   </div>

@@ -19,7 +19,7 @@ const rulesMap = {
   }
 };
 export default function checkExpected(record = {}, expect = {}) {
-  const { field, value, permission } = expect;  
+  const { field, value, permission } = expect;
 
   // // 若需要检测权限
   // if (permission) {

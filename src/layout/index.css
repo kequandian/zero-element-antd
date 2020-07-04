@@ -21,7 +21,7 @@
   margin: 4px 8px;
 }
 
-.ZEleA-Layout-EmptyTitle {
+.ZEleA-Layout-BaseTitle {
   color      : rgba(0, 0, 0, 0.85);
   background : white;
   box-shadow : 0 2px 8px rgba(0, 0, 0, 0.15);

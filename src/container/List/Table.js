@@ -3,9 +3,10 @@ import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
 import TableFooter from './components/TableFooter';
+import canPortal from '@/utils/canPortal';
 
-export default function BaseList(props) {
-  const { namespace, config, extraData } = props;
+export default function BaseTable(props) {
+  const { namespace, config, extraData, extraEl } = props;
   const {
     layout = 'Empty', layoutConfig = {},
     props: propsCfg = {},
@@ -36,9 +37,9 @@ export default function BaseList(props) {
     handle={handle}
     namespace={namespace}
   >
-    <Render n={actionLayout} {...actionLayoutConfig}>
+    {canPortal(extraEl, <Render n={actionLayout} {...actionLayoutConfig}>
       {actionsItems}
-    </Render>
+    </Render>)}
     <Table
       rowKey="id"
       size="middle"

@@ -48,7 +48,7 @@ const configTemplate = {
   items: [
     {
       layout: 'Empty',
-      component: 'BaseSearch',
+      component: 'Search',
       config: {
         share: '',
         layoutConfig: {

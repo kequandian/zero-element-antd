@@ -34,7 +34,7 @@ export default function ImportExcel(props) {
     items: [
       {
         layout: 'Empty',
-        component: 'BaseForm',
+        component: 'Form',
         config: {
           API: {
             getAPI: url,

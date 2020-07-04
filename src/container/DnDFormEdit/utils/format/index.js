@@ -20,14 +20,14 @@ export default function formatToConfig(cfg, formName, opt) {
   });
 
   const config = {
-    layout: 'EmptyTitle',
+    layout: 'BaseTitle',
     title: formName || '表单',
     items: [],
   }
   let count = 0;
   config.items.push({
     layout: 'Content',
-    component: 'BaseForm',
+    component: 'Form',
     config: {
       layout: 'Grid',
       layoutConfig: {

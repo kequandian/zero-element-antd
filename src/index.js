@@ -29,7 +29,8 @@ import onRequest from '@/listAction/onRequest';
 
 LayoutSet({
   Empty: Load('layout/Empty'),
-  EmptyTitle: Load('layout/EmptyTitle'),
+  BaseTitle: Load('layout/BaseTitle'),
+  Table: Load('layout/Table'),
   Loading: Load('layout/Loading'),
   Alone: Load('layout/Alone'),
   Row: Load('layout/Row'),
@@ -40,7 +41,7 @@ LayoutSet({
 });
 
 CSet({
-  BaseList: Load('container/List/BaseList'),
+  Table: Load('container/List/Table'),
   ReportList: Load('container/List/ReportList'),
   TreeTable: Load('container/List/TreeTable'),
   ChildrenList: Load('container/List/ChildrenList'),
@@ -48,9 +49,9 @@ CSet({
   AutoReport: Load('container/List/AutoReport'),
   TableSelect: Load('container/List/TableSelect'),
   ItemList: Load('container/List/ItemList'),
-  BaseSearch: Load('container/Form/BaseSearch'),
+  Search: Load('container/Form/Search'),
   AutoReportSearch: Load('container/Form/AutoReportSearch'),
-  BaseForm: Load('container/Form/BaseForm'),
+  Form: Load('container/Form/Form'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
   // DnDFormEdit: Load('container/DnDFormEdit'),
 });

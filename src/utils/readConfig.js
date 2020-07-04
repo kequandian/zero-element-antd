@@ -7,7 +7,7 @@ import checkExpected from './checkExpected';
 
 
 export function getFormItem(field, model,
-  { namespace, form, handle, hooks }
+  { namespace, form, handle, hooks, extraData }
 ) {
   const {
     field: fieldName, label, value, extra = '', span,
@@ -25,7 +25,7 @@ export function getFormItem(field, model,
   if (expect && expect.field) {
     handle.onExpect(expect.field);
   }
-  if (!checkExpected(values, expect)) {
+  if (!checkExpected({ ...extraData, ...values }, expect)) {
     return null;
   }
 

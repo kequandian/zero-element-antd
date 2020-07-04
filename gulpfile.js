@@ -17,8 +17,12 @@ gulp.task('copy-less', function () {
 gulp.task('copy-png', function () {
   return gulp.src('./src/**/*.png').pipe(gulp.dest('./lib'));
 });
+gulp.task('copy-json', function () {
+  return gulp.src('./src/map.json')
+    .pipe(gulp.dest('./lib'));
+});
 
-const copyResources = gulp.parallel('copy-css', 'copy-less', 'copy-png');
+const copyResources = gulp.parallel('copy-css', 'copy-less', 'copy-png', 'copy-json');
 
 gulp.task('concat-css', () => {
   return gulp.src('./src/**/*.css')
@@ -30,5 +34,5 @@ gulp.task('default',
   gulp.series(
     'babel',
     copyResources,
-    'concat-css',
+    // 'concat-css',
   ));

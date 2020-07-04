@@ -62,7 +62,7 @@ export default {
         items: [
           {
             layout: 'Empty',
-            component: 'BaseForm',
+            component: 'Form',
             config: {
               API: {
                 createAPI: options.config.API.value,
@@ -89,7 +89,7 @@ export default {
           items: [
             {
               layout: 'Empty',
-              component: 'BaseForm',
+              component: 'Form',
               config: {
                 API: {
                   getAPI: `${options.config.API.value}/(id)`,
