@@ -12,7 +12,7 @@
     "braft-editor": "^2.3.7",
     "final-form": "^4.13.1",
     "layout-flex": "github:kequandian/layout-flex",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "react": "^16.8.6",
     "react-contextmenu": "^2.11.0",
     "react-dnd": "^7.4.5",
