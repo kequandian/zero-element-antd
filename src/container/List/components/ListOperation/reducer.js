@@ -23,6 +23,7 @@ export default function reducer(state, { type, payload }) {
         onSubmit: payload.onSubmit,
         data: payload.data,
         index: payload.index,
+        pagination: payload.pagination,
         modal: true,
       };
     },
@@ -33,6 +34,7 @@ export default function reducer(state, { type, payload }) {
         modalConfig: {},
         onSubmit: undefined,
         data: undefined,
+        pagination: undefined,
         modal: false,
       };
     },

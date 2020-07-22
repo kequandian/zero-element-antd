@@ -21,6 +21,8 @@ export default function TableSelect(props) {
     value: optValue = 'id',
     requireValid,
     pagination = false,
+    rowSelection = true,
+    rowKey,
   } = options;
 
   const [
@@ -53,7 +55,7 @@ export default function TableSelect(props) {
 
   function handleChange(selectedRowKeys, selectedRows) {
     setSelectedRowKeys(selectedRowKeys);
-    onChange(selectedRows);
+    onChange(selectedRows, selectedRowKeys);
   }
   function handleDisabled(record) {
     const valid = record && record[optValue] !== 0 && Boolean(record[optValue]);
@@ -70,7 +72,7 @@ export default function TableSelect(props) {
       {actionsItems}
     </Render>
     <Table
-      rowKey={optValue}
+      rowKey={rowKey || optValue}
       size="small"
       bordered={false}
       rowClassName={handleRowClassName}
@@ -86,12 +88,14 @@ export default function TableSelect(props) {
           }
           : false
       }
-      rowSelection={{
-        type: type,
-        selectedRowKeys,
-        onChange: handleChange,
-        getCheckboxProps: requireValid ? handleDisabled : undefined,
-      }}
+      rowSelection={
+        rowSelection ? {
+          type: type,
+          selectedRowKeys,
+          onChange: handleChange,
+          getCheckboxProps: requireValid ? handleDisabled : undefined,
+        } : rowSelection
+      }
     />
   </Render>
 }

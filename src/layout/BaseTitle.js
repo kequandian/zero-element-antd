@@ -15,7 +15,7 @@ export default function BaseTitle(props) {
           {title}
         </FlexItem>
         <FlexItem>
-          <div ref={extraEl}>
+          <div className="ZEleA-Layout-Row" ref={extraEl}>
           </div>
         </FlexItem>
       </Flex>

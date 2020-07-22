@@ -1,27 +1,40 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect, useReducer } from 'react';
 import { formatTableFields } from '@/container/List/utils/format';
 import { getActionItem } from '@/utils/readConfig';
-import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
-import { query } from '@/utils/request';
-import { formatAPI } from 'zero-element/lib/utils/format';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import TableSelect from '@/formItemType/TableSelect';
 
 export default function OneMary(props) {
-  const { name, namespace, value, options = {}, handle, onChange, hooks = {}, model } = props;
+  const {
+    name, namespace, value, options = {},
+    handle,
+    onChange,
+    hooks = {},
+    model,
+    formdata,
+  } = props;
   const {
     API,
     layout = 'Empty',
-    dataField = 'records',
     fields, operation, actions = [],
     props: propsCfg = {}, layoutConfig = {},
     actionLayout = 'Row',
     actionLayoutConfig = {},
     JSONString,
     map,
+
+    value: optValue,
+    pagination = false,
+    rowSelection = false,
+    type = 'checkbox',
+
+    effectField,
   } = options;
   const { onFormatValue, onGetFormData } = handle;
   const { removeChildAfter } = hooks;
+  const effectFieldValue = formdata[effectField];
+  const [count, forcedUpdate] = useReducer(x => x + 1, 0);
 
   const idRef = useRef(1);
   const v = useMemo(_ => {
@@ -32,9 +45,6 @@ export default function OneMary(props) {
   }, [value])
 
   useWillMount(_ => {
-    if (API) {
-      queryData();
-    }
     if (map) {
       onFormatValue(name, 'map', map);
     }
@@ -43,21 +53,15 @@ export default function OneMary(props) {
     }
   });
 
-  function queryData() {
-    const fAPI = formatAPI(API, {
-      namespace,
-    });
-    query(fAPI).then(data => {
-      const list = Array.isArray(data) ?
-        data
-        : data[dataField];
+  useEffect(_ => {
+    if (effectField) {
+      forcedUpdate();
+      handleChange();
+    }
+  }, [effectFieldValue]);
 
-      if (Array.isArray(list)) {
-        onChange(list);
-      } else {
-        console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
-      }
-    })
+  function handleChange(selectedRows, selectedRowKeys) {
+    onChange(selectedRows);
   }
   function handleCreate(data) {
     const rst = Array.isArray(v) ? v : [];
@@ -105,7 +109,6 @@ export default function OneMary(props) {
     model,
   });
 
-
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actions.map((action, i) => getActionItem({
@@ -120,12 +123,39 @@ export default function OneMary(props) {
         namespace,
       }))}
     </Render>
-    <Table
+    <TableSelect
+      value={optValue}
+      onChange={handleChange}
+      namespace={namespace}
+      extraData={formdata}
+      forceInitList={count}
+      data={API ? undefined : v}
+      columns={columns}
+      options={{
+        API,
+        fields,
+        type,
+        pagination: pagination,
+        rowSelection: rowSelection,
+        searchFields: false,
+        value: optValue,
+        rowKey: row => String(row._id || row.id || row[optValue])
+      }}
+    />
+    {/* <Table
       rowKey={row => String(row._id || row.id)}
       dataSource={v || []}
       columns={columns}
       pagination={false}
       {...propsCfg}
-    />
+      loading={loading}
+      rowSelection={
+        rowSelection ? {
+          type,
+          selectedRowKeys,
+          onChange: handleChange,
+        } : false
+      }
+    /> */}
   </Render>
 }

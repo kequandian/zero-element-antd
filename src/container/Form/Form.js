@@ -75,7 +75,7 @@ export default function BaseForm(props) {
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
   const [destroy, setDestroy] = useState(false);
 
-  useMemo(recordDefaultValue, [fields]);
+  // useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
     if (API.getAPI) {
       handleGetData();
@@ -83,6 +83,7 @@ export default function BaseForm(props) {
     if (typeof formRef === 'object') {
       formRef.current = form;
     }
+    recordDefaultValue();
   });
 
   useWillUnmount(_ => {
@@ -130,6 +131,8 @@ export default function BaseForm(props) {
         initData.current[field] = value;
       }
     });
+    form.setFieldsValue({ ...initData.current });
+    forceUpdate();
   }
 
   function handleSubmitForm(values) {
@@ -157,7 +160,7 @@ export default function BaseForm(props) {
     });
 
     if (onSubmit) {
-      onSubmit(submitData);
+      onSubmit(submitData, handleResponse);
       return false;
     }
     if (API.updateAPI) {

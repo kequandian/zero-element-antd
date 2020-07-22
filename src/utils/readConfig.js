@@ -29,7 +29,6 @@ export function getFormItem(field, model,
     return null;
   }
 
-
   return <Form.Item
     key={fieldName}
     label={label}

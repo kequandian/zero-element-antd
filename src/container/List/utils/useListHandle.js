@@ -14,9 +14,11 @@ export default function useListHandle({
   extraData,
   props,
 }) {
+  const dataPath = props.MODAL ? 'temp_modal' : 'listData';
   const listProps = useBaseList({
     namespace,
     extraData,
+    dataPath,
   }, config);
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
@@ -40,7 +42,7 @@ export default function useListHandle({
   const { onGetList, onClearList } = handle;
   const rowSelection = useRowSelection(handle);
 
-  const { listData } = model;
+  const listData = model[dataPath] || {};
   const { records, ...pagination } = listData;
 
   const { columns, width } = formatTableFields(orderFields, operation, {
@@ -150,7 +152,7 @@ export default function useListHandle({
   }
 
   const tableProps = {
-    columns,
+    columns: props.columns || columns,
     loading,
     rowSelection: batchOperation ? rowSelection : undefined,
     onChange: handleFilterSorter,
@@ -175,6 +177,7 @@ export default function useListHandle({
     namespace,
     extraData,
     config,
+    hooks: props.hooks,
   }));
 
   return [tableProps, data, handle, actionsItems, {

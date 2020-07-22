@@ -12,8 +12,10 @@ export default function ModalRadio(props) {
     props: p,
     onChange,
     handle,
+    hooks = {},
     ...rest
   } = props;
+  const { formFieldMap } = hooks;
 
   const {
     title = '选择数据',
@@ -77,6 +79,15 @@ export default function ModalRadio(props) {
       Object.keys(saveData).forEach(key => {
         onSaveOtherValue(key, selectedData.current[saveData[key]]);
       });
+    }
+
+    if (typeof formFieldMap === 'function') {
+      formFieldMap(name, selectedData.current)
+        .then(data => {
+          Object.keys(data).forEach(key => {
+            onSaveOtherValue(key, data[key]);
+          });
+        })
     }
   }
 

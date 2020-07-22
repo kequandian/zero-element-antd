@@ -41,6 +41,7 @@ LayoutSet({
 });
 
 CSet({
+  Empty: Load('container/Empty'),
   Table: Load('container/List/Table'),
   ReportList: Load('container/List/ReportList'),
   TreeTable: Load('container/List/TreeTable'),

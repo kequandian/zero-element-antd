@@ -12,6 +12,7 @@
     "Items": "layout/Items"
   },
   "CSet": {
+    "Empty": "container/Empty",
     "Table": "container/List/Table",
     "ReportList": "container/List/ReportList",
     "TreeTable": "container/List/TreeTable",

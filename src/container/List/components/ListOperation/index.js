@@ -12,6 +12,7 @@ const initialState = {
   confirm: false,
   modal: false,
   modalTitle: '',
+  pagination: undefined,
   modalConfig: {},
   index: -1,
 };
@@ -23,7 +24,7 @@ export default function ListOperationWrapped(props) {
 
   function onModal(cfg) {
     const { options } = cfg;
-    const { modalTitle, modalWidth, ...rest } = options;
+    const { modalTitle, modalWidth, pagination, ...rest } = options;
     const fTitle = formatAPI(modalTitle, {
       namespace,
     });
@@ -33,6 +34,7 @@ export default function ListOperationWrapped(props) {
       payload: {
         modalTitle: fTitle,
         modalWidth,
+        pagination: pagination,
         modalConfig: rest,
       }
     });
@@ -103,6 +105,7 @@ export default function ListOperationWrapped(props) {
         onSubmit={state.onSubmit}
         data={state.data}
         extraData={extraData}
+        pagination={state.pagination}
       />
     </Modal>
   </>

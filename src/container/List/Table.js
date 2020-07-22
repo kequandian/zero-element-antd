@@ -10,8 +10,6 @@ export default function BaseTable(props) {
   const {
     layout = 'Empty', layoutConfig = {},
     props: propsCfg = {},
-    actionLayout = 'Row',
-    actionLayoutConfig = {},
   } = config;
 
   const [
@@ -38,10 +36,10 @@ export default function BaseTable(props) {
     handle={handle}
     namespace={namespace}
   >
-    {canPortal(extraEl, <Render n={actionLayout} {...actionLayoutConfig}>
+    {canPortal(extraEl, <>
       {renderBatchOperation()}
       {actionsItems}
-    </Render>)}
+    </>)}
     <Table
       rowKey="id"
       size="middle"

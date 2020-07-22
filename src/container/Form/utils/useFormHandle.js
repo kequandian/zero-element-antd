@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { setPageData } from 'zero-element/lib/Model';
+import { setPageData, getPageData } from 'zero-element/lib/Model';
 import { useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 const toTypeMap = {
@@ -111,17 +111,21 @@ export default function useFormHandle(form, {
     const formData = form.getFieldsValue();
     formData[key] = value;
     form.setFieldsValue({ ...formData });
+    handleValuesChange({ [key]: value }, { ...formData });
   }
 
   function handleExpect(key) {
-    expectFieldRef.current[key] = true;
+    if (Array.isArray(key)) {
+      key.forEach(k => expectFieldRef.current[k] = true)
+    } else {
+      expectFieldRef.current[key] = true;
+    }
   }
 
   function handleValuesChange(changedValues, allValues) {
     if (!namespace) {
       console.warn('Parameter namespace is required');
     }
-
 
     const canReRender = Object.keys(changedValues).some(key => expectFieldRef.current[key]);
     if (canReRender) {

@@ -6,6 +6,10 @@ export default function TableSelectWrapped(props) {
     value,
     options, namespace,
     onChange,
+    extraData,
+    forceInitList,
+    data,
+    columns,
   } = props;
 
   const config = useRef(
@@ -19,27 +23,31 @@ export default function TableSelectWrapped(props) {
     defaultExpand,
   } = options;
 
-  config.current.items[0].config.share = `${namespace}_tableSelect`;
-  if (searchFields) {
+  if (Array.isArray(searchFields)) {
     config.current.items[0].config.fields = searchFields;
     config.current.items[0].config.layoutConfig = {
       value: [8, 8, 8],
       collapse: 2,
       defaultExpand,
     };
+  } else if (searchFields === false) {
+    config.current.items[0] = { layout: 'Empty', component: 'Empty' };
   }
-  config.current.items[1].config.share = `${namespace}_tableSelect`;
   config.current.items[1].config.API = { listAPI: API };
   config.current.items[1].config.fields = fields;
 
   return <ZEle
     MODAL={true}
+    data={data}
+    columns={columns}
     namespace={namespace}
     options={options}
     onChange={onChange}
     value={value}
     config={config.current}
     mountFetch={mountFetch}
+    extraData={extraData}
+    forceInitList={forceInitList}
   />
 }
 

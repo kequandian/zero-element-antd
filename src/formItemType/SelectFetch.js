@@ -8,24 +8,29 @@ const Option = Select.Option;
 
 export default function SelectFetch(props) {
   const {
+    name,
     className,
     value,
     options,
     namespace,
     onChange,
     handle = {},
+    formdata,
+    hooks = {},
     ...rest
   } = props;
   const {
     API, dataField = 'records',
     label: optLabel = 'label', value: optValue = 'value',
+    saveData,
     effectField,
   } = options;
-  const { onGetFormData } = handle;
+
+  const { formFieldMap } = hooks;
+  const { onSaveOtherValue } = handle;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
-  const formData = onGetFormData && onGetFormData() || {};
-  const effectFieldValue = formData[effectField];
+  const effectFieldValue = formdata[effectField];
 
   useWillMount(_ => {
     if (effectField === undefined) {
@@ -43,7 +48,7 @@ export default function SelectFetch(props) {
     if (API) {
       const fAPI = formatAPI(API, {
         namespace,
-        data: formData,
+        data: formdata,
       });
       setLoading(true);
       query(fAPI)
@@ -69,6 +74,26 @@ export default function SelectFetch(props) {
         value,
       }
     });
+
+    const find = optionList.find(i => i[optValue] === value);
+
+    if (saveData) {
+      if (find) {
+        Object.keys(saveData).forEach(key => {
+          onSaveOtherValue(key, find[saveData[key]]);
+        });
+      } else {
+        console.log(`未能找到 ${optValue} 为 ${value} 的数据, saveData 选项无法生效`);
+      }
+    }
+    if (typeof formFieldMap === 'function') {
+      formFieldMap(name, find)
+        .then(data => {
+          Object.keys(data).forEach(key => {
+            onSaveOtherValue(key, data[key]);
+          });
+        })
+    }
   }
 
   return <Spin className={className} spinning={loading}>
