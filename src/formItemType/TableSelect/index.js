@@ -6,10 +6,9 @@ export default function TableSelectWrapped(props) {
     value,
     options, namespace,
     onChange,
-    extraData,
-    forceInitList,
     data,
     columns,
+    ...restProps
   } = props;
 
   const config = useRef(
@@ -38,6 +37,7 @@ export default function TableSelectWrapped(props) {
 
   return <ZEle
     MODAL={true}
+    {...restProps}
     data={data}
     columns={columns}
     namespace={namespace}
@@ -46,8 +46,6 @@ export default function TableSelectWrapped(props) {
     value={value}
     config={config.current}
     mountFetch={mountFetch}
-    extraData={extraData}
-    forceInitList={forceInitList}
   />
 }
 

@@ -3,7 +3,7 @@ import { Modal, Button } from 'antd';
 import _ from 'lodash';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import TableSelect from './TableSelect';
-import { removeModel } from 'zero-element/lib/Model';
+import { getPageData, removeModel } from 'zero-element/lib/Model';
 
 export default function ModalRadio(props) {
   const {
@@ -15,7 +15,7 @@ export default function ModalRadio(props) {
     hooks = {},
     ...rest
   } = props;
-  const { formFieldMap } = hooks;
+  const { onFormFieldMap } = hooks;
 
   const {
     title = '选择数据',
@@ -31,7 +31,7 @@ export default function ModalRadio(props) {
     mountFetch,
     defaultExpand,
   } = options;
-  const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
+  const { onFormatValue, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
   const [disabled, setDisable] = useState(null);
   const selectedData = useRef({});
@@ -81,8 +81,8 @@ export default function ModalRadio(props) {
       });
     }
 
-    if (typeof formFieldMap === 'function') {
-      formFieldMap(name, selectedData.current)
+    if (typeof onFormFieldMap === 'function') {
+      onFormFieldMap(name, selectedData.current)
         .then(data => {
           Object.keys(data).forEach(key => {
             onSaveOtherValue(key, data[key]);
@@ -95,7 +95,7 @@ export default function ModalRadio(props) {
     <Button
       onClick={onOpen}
     >
-      {echoName(value, onGetFormData, { label, editLabel }) || title}
+      {echoName(value, getPageData(namespace).formData, { label, editLabel }) || title}
     </Button>
     <Modal
       destroyOnClose
@@ -137,26 +137,26 @@ export default function ModalRadio(props) {
  * 优先显示已选择的数据的名称
  *
  * @param {number | object} value
- * @param {function} getFormData
+ * @param {Objrct} formdata
  * @param {object} {
  *   label,
  *   editLabel,
  * }
  * @returns
  */
-function echoName(value, getFormData, {
+function echoName(value, formdata, {
   label,
   editLabel,
 }) {
+
   if (value) {
     if (typeof value === 'object') {
       return value[label];
     }
   }
-  const formData = getFormData();
-  if (formData) {
-    if (typeof formData === 'object') {
-      return _.get(formData, editLabel) || value;
+  if (formdata) {
+    if (typeof formdata === 'object') {
+      return _.get(formdata, editLabel) || value;
     }
   }
   return value;

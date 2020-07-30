@@ -6,6 +6,7 @@ import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
 import { RollbackOutlined } from '@ant-design/icons';
+import useFormHandle from './utils/useFormHandle';
 
 const defaultLabelCol = {
   xs: { span: 3, },
@@ -35,10 +36,22 @@ export default function BaseSearch(props) {
   }, config);
 
   const { loading, data, model, handle } = searchProps;
-  const initData = useRef(data);
+  const initData = useRef({
+    ...data,
+  });
   const { onSearch, onSetSearchData, onClearSearch } = handle;
 
   const [expand, setExpand] = useState(defaultExpand);
+  const {
+    onFormatValue,
+    onSaveOtherValue,
+    onGetFormData,
+    onValuesChange,
+    onExpect,
+  } = useFormHandle(form, {
+    namespace,
+    config,
+  });
 
   useMemo(recordDefaultValue, [fields]);
 
@@ -93,6 +106,12 @@ export default function BaseSearch(props) {
   const renderFieldsAndButton = fields.map(field => getFormItem(field, model, {
     namespace,
     form,
+    handle: {
+      onFormatValue,
+      onSaveOtherValue,
+      onGetFormData,
+      onExpect,
+    }
   }))
     .filter(field => field);
   const validLength = renderFieldsAndButton.length;
@@ -111,6 +130,7 @@ export default function BaseSearch(props) {
         labelCol={defaultLabelCol}
         wrapperCol={defaultWrapperCol}
         initialValues={initData.current}
+        onValuesChange={onValuesChange}
         onFinish={handleSubmitForm}
       >
         <Render n={layout} value={value} {...layoutConfig}>

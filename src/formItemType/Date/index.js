@@ -22,25 +22,41 @@ function date(componentName) {
   return function DateConstructor(props) {
     const { value, options = {}, onChange,
       props: propsOpt,
+      formdata,
+      handle,
       // ...restProps
     } = props;
     const {
       nowTime = false,
       format = formatMap[componentName],
+      startDate,
+      endDate,
     } = options;
+    const { onExpect, onSaveOtherValue } = handle;
+
+    let val = value;
+
+    if (componentName === 'range' && startDate && endDate) {
+      val = [formdata[startDate], formdata[endDate]];
+    }
 
     const dateProps = {
       showToday: true,
       allowClear: false,
       ...propsOpt,
       // ...restProps,
-      value: formatDate(value, format),
+      value: formatDate(val, format),
       format,
       onChange: handleChange,
     };
 
     function handleChange(moment, dateString) {
-      onChange(dateString);
+      if (componentName === 'range' && startDate && endDate && onSaveOtherValue) {
+        onSaveOtherValue(startDate, dateString[0]);
+        onSaveOtherValue(endDate, dateString[1]);
+      } else {
+        onChange(dateString);
+      }
     }
 
     useDidMount(_ => {
@@ -53,6 +69,9 @@ function date(componentName) {
         } else {
           onChange(moment().format(format));
         }
+      }
+      if (componentName === 'range' && startDate && endDate) {
+        onExpect([startDate, endDate]);
       }
     });
 

@@ -10,6 +10,7 @@ import global from 'zero-element/lib/config/global';
 import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 import canPortal from '@/utils/canPortal';
+import { setPageData, getPageData, clearPageData } from 'zero-element/lib/Model';
 
 const defaultLabelCol = {
   xs: { span: 8, },
@@ -27,7 +28,7 @@ export default function BaseForm(props) {
     loading: propsLoading,
     forceInitForm,
     footer,
-    hooks,
+    hooks = {},
     formRef,
     keepData = false, // 卸载 BaseForm 时不销毁 model.formData
   } = props;
@@ -51,9 +52,12 @@ export default function BaseForm(props) {
   const renderGoBack = extraEl && extraEl.current && goBack;
 
   const { loading, data, model, handle } = formProps;
+  const { onFormMap } = hooks;
+  const pageDataFormData = getPageData(namespace).formData;
 
   const initData = useRef({
     ...extraData,
+    ...pageDataFormData,
     ...data,
   });
 
@@ -89,6 +93,7 @@ export default function BaseForm(props) {
   useWillUnmount(_ => {
     if (!keepData) {
       onClearForm();
+      clearPageData(namespace, 'formData');
     }
   });
 
@@ -98,6 +103,7 @@ export default function BaseForm(props) {
       if (code === 200) {
         initData.current = data;
         const { extra } = data;
+        setPageData(namespace, 'formData', data);
         if (extra && Array.isArray(extra.items)) {
           setExtraFields(extra.items);
         } else {
@@ -142,7 +148,7 @@ export default function BaseForm(props) {
         extraSubmit[field.field] = extraData[field.field] || field.value;
       }
     })
-    const submitData = {
+    let submitData = {
       ...extraSubmit,
       ...values,
     };
@@ -163,6 +169,11 @@ export default function BaseForm(props) {
       onSubmit(submitData, handleResponse);
       return false;
     }
+
+    if (typeof onFormMap === 'function') {
+      submitData = onFormMap(submitData, pageDataFormData);
+    }
+
     if (API.updateAPI) {
       onUpdateForm({
         fields: submitData,
@@ -197,6 +208,17 @@ export default function BaseForm(props) {
     }
   }
 
+  function handleGoBack() {
+    if (path) {
+      const fPath = formatAPI(path, {
+        namespace,
+      });
+      router(fPath);
+    } else {
+      goBack();
+    }
+  }
+
   function handleReset() {
     form.resetFields();
   }
@@ -216,7 +238,7 @@ export default function BaseForm(props) {
   }
 
   return <Spin spinning={propsLoading || loading}>
-    {renderGoBack && canPortal(extraEl, <Button onClick={goBack}>返回</Button>)}
+    {renderGoBack && canPortal(extraEl, <Button onClick={handleGoBack}>返回</Button>)}
     <div className={fields.length ? 'ant-modal-body' : undefined}>
       {destroy ? null : (
         <Form

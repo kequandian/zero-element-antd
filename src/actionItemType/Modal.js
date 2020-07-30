@@ -6,6 +6,8 @@ export default (props) => {
   const { title, options, namespace, handle, hooks = {}, ...restProps } = props;
   const { icon, modalTitle, modalWidth, ...rest } = options;
   const [visible, setVisible] = useState(false);
+  const [loading, setLoading] = useState(undefined);
+  const { onSubmitActionModal } = hooks;
 
   function handleOpen() {
     setVisible(true);
@@ -18,6 +20,15 @@ export default (props) => {
     if (typeof handle.onRefresh === 'function') {
       handle.onRefresh();
     }
+    if (loading) {
+      setLoading(false);
+    }
+  }
+
+  function handleSubmit(data, handleResponse) {
+    setLoading(true);
+    onSubmitActionModal(data, handleResponse)
+      .finally(_ => setLoading(false));
   }
 
   return <>
@@ -45,7 +56,8 @@ export default (props) => {
           ...rest,
         }}
         onClose={handleCloseAndQuery}
-        onSubmit={hooks.onSubmitActionModal}
+        onSubmit={onSubmitActionModal ? handleSubmit : undefined}
+        loading={loading}
       />
     </Modal>
   </>

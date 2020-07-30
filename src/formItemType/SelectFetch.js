@@ -26,7 +26,7 @@ export default function SelectFetch(props) {
     effectField,
   } = options;
 
-  const { formFieldMap } = hooks;
+  const { onFormFieldMap } = hooks;
   const { onSaveOtherValue } = handle;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
@@ -86,8 +86,8 @@ export default function SelectFetch(props) {
         console.log(`未能找到 ${optValue} 为 ${value} 的数据, saveData 选项无法生效`);
       }
     }
-    if (typeof formFieldMap === 'function') {
-      formFieldMap(name, find)
+    if (typeof onFormFieldMap === 'function') {
+      onFormFieldMap(name, find)
         .then(data => {
           Object.keys(data).forEach(key => {
             onSaveOtherValue(key, data[key]);

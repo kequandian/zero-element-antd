@@ -8,6 +8,15 @@
  */
 
 const rulesMap = {
+  'IS_NULL': (value) => {
+    if (typeof value === 'object') {
+      if (Array.isArray(value)) {
+        return value.length === 0;
+      }
+      return Object.keys(value || {}).length === 0;
+    }
+    return value === 0 ? false : !Boolean(value);
+  },
   'IS_NOT_NULL': (value) => {
     if (typeof value === 'object') {
       if (Array.isArray(value)) {

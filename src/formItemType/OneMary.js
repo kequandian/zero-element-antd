@@ -142,20 +142,5 @@ export default function OneMary(props) {
         rowKey: row => String(row._id || row.id || row[optValue])
       }}
     />
-    {/* <Table
-      rowKey={row => String(row._id || row.id)}
-      dataSource={v || []}
-      columns={columns}
-      pagination={false}
-      {...propsCfg}
-      loading={loading}
-      rowSelection={
-        rowSelection ? {
-          type,
-          selectedRowKeys,
-          onChange: handleChange,
-        } : false
-      }
-    /> */}
   </Render>
 }

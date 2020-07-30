@@ -4,7 +4,6 @@ import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from '@/utils/request';
 
-import read from './read';
 import findNode from './findNode';
 import findNodes from './findNodes';
 import formatInit from './formatInit';
@@ -19,6 +18,8 @@ export default (props) => {
     initData = {},
     onChange,
     defaultAelectedKeys,
+    childrenColumnName = 'children',
+    id = 'id',
     ...rest
   } = props;
 
@@ -48,7 +49,7 @@ export default (props) => {
     setTreeLoading(true);
     query(api)
       .then(data => {
-        const rst = formatInit(data);
+        const rst = formatInit(data, childrenColumnName, id);
         setTreeData(rst);
         if (defaultAelectedKeys) {
           handleSelect(defaultAelectedKeys);
@@ -62,7 +63,14 @@ export default (props) => {
       .finally(_ => setTreeLoading(false));
   }
   function handleLoadData(treeNode) {
-    const { id } = treeNode.props;
+    const { id, key } = treeNode;
+
+    if (key && !expandedKeys.includes(key)) {
+      handleExpand([
+        ...expandedKeys,
+        key,
+      ]);
+    }
 
     if (API.appendAPI === undefined) {
       return new Promise((res) => res());;
@@ -90,6 +98,13 @@ export default (props) => {
   }
   function handleSelect(selectedKeys) {
     setSelectedKeys(selectedKeys);
+
+    if (selectedKeys[0] && !expandedKeys.includes(selectedKeys[0])) {
+      handleExpand([
+        ...expandedKeys,
+        selectedKeys[0]
+      ]);
+    }
   }
   function handleSelectChange() {
     const id = selectedKeys[0];
@@ -111,9 +126,6 @@ export default (props) => {
     }
   }
   function handleRemoteSearch(value) {
-    if (API.searchAPI === undefined) {
-      return false;
-    }
 
     const api = formatAPI(API.searchAPI, {
       namespace,
@@ -152,23 +164,24 @@ export default (props) => {
   }
 
   return <Spin spinning={treeLoading}>
-    <Search
-      style={{
-        // marginTop: 16,
-        marginBottom: 8,
-      }}
-      placeholder="搜索"
-      onChange={handleLocalSearch}
-      onSearch={handleRemoteSearch}
-    />
+    {API.searchAPI ? (
+      <Search
+        style={{
+          // marginTop: 16,
+          marginBottom: 8,
+        }}
+        placeholder="搜索"
+        onChange={handleLocalSearch}
+        onSearch={handleRemoteSearch}
+      />
+    ) : null}
     {treeData && (treeData.length || Object.keys(treeData).length) ? (
       <Tree
         showLine
         autoExpandParent={autoExpandParent}
         {...treeProps}
-      >
-        {read(treeData)}
-      </Tree>
+        treeData={treeData}
+      />
     ) : <Empty />}
   </Spin>
 
