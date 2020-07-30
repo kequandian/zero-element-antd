@@ -106,7 +106,7 @@ AITSet({
 
 VTSet({
   'plain': Load('valueType/plain'),
-  'status': Load('valueType/status'),
+  'map': Load('valueType/map'),
   'image': Load('valueType/image'),
   'tag': Load('valueType/tag'),
   'currency': Load('valueType/currency'),

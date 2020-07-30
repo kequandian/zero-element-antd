@@ -80,7 +80,7 @@ export default {
 
     oneManyObj.config.operation.push(
       {
-        title: '编辑', action: 'modal',
+        title: '编辑', type: 'modal',
         options: {
           outside: true,
           modalTitle: '编辑数据',
@@ -107,7 +107,7 @@ export default {
       },
       {
         title: '删除',
-        action: 'delete',
+        type: 'delete',
         options: {
           icon: 'delete',
           color: '#f5222d',

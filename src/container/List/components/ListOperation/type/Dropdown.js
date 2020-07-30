@@ -18,12 +18,12 @@ export default (item, i, { index, record }, onAction) => {
     'default': '#666',
   };
 
-  const Icon = item.options.icon || iconMap[item.action] || iconMap['default'];
+  const Icon = item.options.icon || iconMap[item.type] || iconMap['default'];
   return (
-    <Menu.Item key={i} className="ZEleA-table-action-menuItem" onClick={onAction.bind(null, item.action, item.options)} >
+    <Menu.Item key={i} className="ZEleA-table-action-menuItem" onClick={onAction.bind(null, item.type, item.options)} >
       <span>
         <Icon
-          style={{ color: `${item.options.color || iconColorMap[item.action] || iconColorMap['default']}` }}
+          style={{ color: `${item.options.color || iconColorMap[item.type] || iconColorMap['default']}` }}
         />{item.title}
       </span>
     </Menu.Item>

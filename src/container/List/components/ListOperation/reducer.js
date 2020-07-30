@@ -5,14 +5,14 @@ export default function reducer(state, { type, payload }) {
       return {
         confirm: true,
         title: payload.title,
-        action: payload.action,
+        type: payload.type,
       };
     },
     closeConfirm() {
       return {
         confirm: false,
         title: '',
-        action: null,
+        type: null,
       };
     },
     openModal() {

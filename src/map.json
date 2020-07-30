@@ -71,7 +71,7 @@
   },
   "VTSet": {
     "plain": "valueType/plain",
-    "status": "valueType/status",
+    "map": "valueType/map",
     "image": "valueType/image",
     "tag": "valueType/tag",
     "currency": "valueType/currency",

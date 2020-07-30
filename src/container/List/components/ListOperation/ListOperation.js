@@ -24,8 +24,8 @@ export default function ListOperation(props) {
     }
   }
   function handleConfirm() {
-    if (typeof state.action === 'function') {
-      state.action();
+    if (typeof state.type === 'function') {
+      state.type();
     }
     dispatch({
       type: 'closeConfirm',
@@ -51,8 +51,8 @@ export default function ListOperation(props) {
       if (item.options.outside) {
         outsideList.push(operationMap['outside'](item, i, { index, record, records }, onAction));
       } else {
-        if (operationMap[item.action]) {
-          outsideList.push(operationMap[item.action](item, i, { index, record, records }, onAction));
+        if (operationMap[item.type]) {
+          outsideList.push(operationMap[item.type](item, i, { index, record, records }, onAction));
         } else {
           dropdownList.push((operationMap['dropdown'])(item, i, { index, record, records }, onAction));
         }

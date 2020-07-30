@@ -36,7 +36,7 @@ export default function handleAction(type, options, props, dispatch) {
         type: 'openConfirm',
         payload: {
           title: tips || '确定要删除该项吗？',
-          action: actionFunc.bind(null, { record }),
+          type: actionFunc.bind(null, { record }),
         }
       });
     } else {
@@ -53,7 +53,7 @@ export default function handleAction(type, options, props, dispatch) {
           type: 'openConfirm',
           payload: {
             title: tips,
-            action: handleResponse.bind(null, actionFunc, payloadData, model),
+            type: handleResponse.bind(null, actionFunc, payloadData, model),
           }
         });
       } else {
