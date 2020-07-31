@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import { download } from 'zero-element/lib/utils/request';
-import { useModel } from 'zero-element/lib/Model';
+import { getPageData } from 'zero-element/lib/Model';
 import { get } from 'zero-element/lib/utils/request/endpoint';
+import { DownloadOutlined } from '@ant-design/icons';
 import './index.css';
 
 export default function ExportExcel(props) {
@@ -17,8 +18,8 @@ export default function ExportExcel(props) {
   } = options;
   const { API: lAPI = {} } = config;
   const { listAPI } = lAPI;
-  const [state] = useModel({ namespace });
-  const { searchData, listData } = state;
+  const pageData = getPageData(namespace);
+  const { queryData, listData } = pageData;
 
   function handleClick() {
 
@@ -26,7 +27,7 @@ export default function ExportExcel(props) {
       method,
       fileName,
     }, {
-      ...searchData,
+      ...queryData,
       templateName: name,
       api: `${get()}${listAPI}?pageNum=${listData.current}&pageSize=${listData.total}`,
     });
@@ -35,7 +36,7 @@ export default function ExportExcel(props) {
   return <Button
     className="ZEle-action-button"
     onClick={handleClick}
-    icon={icon}
+    icon={<DownloadOutlined />}
   >
     {title}
   </Button>

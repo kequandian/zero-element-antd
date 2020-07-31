@@ -123,21 +123,23 @@ export default function BaseSearch(props) {
   renderFieldsAndButton.splice(collapse, 0, renderFooter(validLength));
 
   return <Spin spinning={false}>
-    <Render n="SearchLayout" >
-      <Form
-        form={form}
-        layout={layoutType}
-        labelCol={defaultLabelCol}
-        wrapperCol={defaultWrapperCol}
-        initialValues={initData.current}
-        onValuesChange={onValuesChange}
-        onFinish={handleSubmitForm}
-      >
-        <Render n={layout} value={value} {...layoutConfig}>
-          {renderFieldsAndButton}
-        </Render>
-      </Form>
-    </Render>
+    {renderFieldsAndButton.length > 1 ? (
+      <Render n="SearchLayout" >
+        <Form
+          form={form}
+          layout={layoutType}
+          labelCol={defaultLabelCol}
+          wrapperCol={defaultWrapperCol}
+          initialValues={initData.current}
+          onValuesChange={onValuesChange}
+          onFinish={handleSubmitForm}
+        >
+          <Render n={layout} value={value} {...layoutConfig}>
+            {renderFieldsAndButton}
+          </Render>
+        </Form>
+      </Render>
+    ) : null}
   </Spin>
 }
 

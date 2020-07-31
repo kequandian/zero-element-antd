@@ -1,15 +1,25 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { Form } from 'react-final-form';
+import { Form } from 'antd';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
-import { getModel } from 'zero-element/lib/Model';
+import { RollbackOutlined } from '@ant-design/icons';
+import useFormHandle from './utils/useFormHandle';
 
+const defaultLabelCol = {
+  xs: { span: 3, },
+  sm: { span: 8, },
+};
+const defaultWrapperCol = {
+  xs: { span: 21, },
+  sm: { span: 16, },
+};
 export default function AutoReportSearch(props) {
-  const formRef = useRef({});
-  const { namespace, config, extraData, keepData = true } = props;
+  const [form] = Form.useForm();
+
+  const { namespace, config, extraData, } = props;
   const { layout = 'Grid',
     layoutConfig = {},
   } = config;
@@ -25,13 +35,22 @@ export default function AutoReportSearch(props) {
     extraData,
   }, config);
 
-  const { loading, data, modelStatus, handle } = searchProps;
-  const model = getModel(namespace);
+  const { loading, data, modelStatus, handle, model } = searchProps;
   const { onSearch, onClearSearch } = handle;
-  const { listData } = modelStatus;
+  const { listData } = model;
   const { searchColumns, header, columns } = listData;
   const [fields, setFields] = useState([]);
   const [expand, setExpand] = useState(false);
+  const {
+    onFormatValue,
+    onSaveOtherValue,
+    onGetFormData,
+    onValuesChange,
+    onExpect,
+  } = useFormHandle(form, {
+    namespace,
+    config,
+  });
 
   useEffect(_ => {
     if (Array.isArray(header) && Array.isArray(columns) && Array.isArray(searchColumns)) {
@@ -67,68 +86,68 @@ export default function AutoReportSearch(props) {
     setExpand(false);
   }
 
-  function handleSubmitForm() {
+  function handleSubmitForm(values) {
     onSearch({
       ...data,
-      ...formRef.current.values,
+      ...values,
     });
-    model.setState('searchData', formRef.current.values);
   }
   function handleReset() {
-    formRef.current.form.reset();
+    form.resetFields();
   }
 
-  function renderFooter() {
+  function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
       <Tooltip title="重置">
-        <Button onClick={handleReset} type="link" icon="rollback"></Button>
+        <Button onClick={handleReset} type="link" icon={<RollbackOutlined />}></Button>
       </Tooltip>
       <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
-      <ExpandButton
-        expand={expand}
-        onExpand={handleExpand}
-        onCollapse={handleCollapse}
-      />
+      {validLength > collapse ? (
+        <ExpandButton
+          expand={expand}
+          onExpand={handleExpand}
+          onCollapse={handleCollapse}
+        />
+      ) : null}
     </div>
   }
 
+  const renderFieldsAndButton = fields.map(field => getFormItem(field, modelStatus, {
+    namespace,
+    form,
+    handle: {
+      onFormatValue,
+      onSaveOtherValue,
+      onGetFormData,
+      onExpect,
+    }
+  }))
+    .filter(field => field);
+  const validLength = renderFieldsAndButton.length;
+
+  if (expand === false) {
+    renderFieldsAndButton.splice(collapse);
+  }
+
+  renderFieldsAndButton.splice(collapse, 0, renderFooter(validLength));
+
   return <Spin spinning={false}>
-    <Render n="SearchLayout" >
-      <Form
-        onSubmit={handleSubmitForm}
-        render={({ handleSubmit, form, submitting, pristine, values }) => {
-          formRef.current = {
-            form,
-            values,
-            onSubmit: handleSubmit,
-          };
-          const renderFieldsAndButton = fields.map(field => getFormItem(field, modelStatus, {
-            namespace,
-            values,
-          }))
-            .filter(field => field);
-
-          if (expand === false) {
-            renderFieldsAndButton.splice(collapse);
-          }
-
-          renderFieldsAndButton.splice(collapse, 0, renderFooter());
-
-          if (keepData) {
-            model.setState('searchData', values);
-          }
-
-          return <form
-            className={`ZEleA-Form-${layoutType}`}
-            onSubmit={handleSubmit}
-          >
-            <Render n={layout} value={value} {...layoutConfig}>
-              {renderFieldsAndButton}
-            </Render>
-          </form>
-        }}
-      />
-    </Render>
+    {renderFieldsAndButton.length > 1 ? (
+      <Render n="SearchLayout" >
+        <Form
+          form={form}
+          layout={layoutType}
+          labelCol={defaultLabelCol}
+          wrapperCol={defaultWrapperCol}
+          onValuesChange={onValuesChange}
+          onFinish={handleSubmitForm}
+        >
+          <Render n={layout} value={value} {...layoutConfig}>
+            {renderFieldsAndButton}
+          </Render>
+        </Form>
+      </Render>
+    ) : null}
   </Spin>
 }
 

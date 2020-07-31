@@ -24,9 +24,9 @@ export default function AutoReport(props) {
     modelPath: 'listData',
     extraData,
   }, config);
-  const { loading, data, handle, modelStatus } = listProps;
+  const { loading, data, handle, model } = listProps;
   const { onGetList, onClearList } = handle;
-  const { listData } = modelStatus;
+  const { listData } = model;
   const { rows, header, columns, ...pagination } = listData;
 
   const [tColumns, setTColumns] = useState([]);
@@ -62,7 +62,7 @@ export default function AutoReport(props) {
   const actionsItems = actions.map((action, i) => getActionItem({
     key: i,
     ...action,
-  }, modelStatus, handle, {
+  }, model, handle, {
     namespace,
     extraData,
     config,
