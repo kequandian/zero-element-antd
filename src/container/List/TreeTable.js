@@ -32,7 +32,7 @@ export default function TreeTable(props) {
     extraData,
   }, config);
 
-  const { handle, data, modelStatus } = listProps;
+  const { handle, data, model } = listProps;
   const [treeData, setTreeData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [expandedRowKeys, setExpandedRowKeys] = useState([]);
@@ -45,6 +45,7 @@ export default function TreeTable(props) {
   }, {
     namespace,
     extraData,
+    model,
   });
 
   useDidMount(_ => {
@@ -125,7 +126,7 @@ export default function TreeTable(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, modelStatus, handle, {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      }, model, handle, {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
         namespace,
         extraData,
         config,

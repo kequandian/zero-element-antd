@@ -25,7 +25,19 @@ const rulesMap = {
       return Object.keys(value || {}).length !== 0;
     }
     return value === 0 ? true : Boolean(value);
-  }
+  },
+  'IS_OBJECT': (value) => {
+    return typeof value === 'object' && String(value) === '[object Object]';
+  },
+  'IS_ARRAY': (value) => {
+    return Array.isArray(value);
+  },
+  'IS_STRING': (value) => {
+    return typeof value === 'string';
+  },
+  'IS_NUMBER': (value) => {
+    return typeof value === 'number';
+  },
 };
 export default function checkExpected(record = {}, expect = {}) {
   const { field, value, permission } = expect;

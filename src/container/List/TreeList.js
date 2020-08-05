@@ -38,12 +38,13 @@ export default function TreeList(props) {
     extraData,
   }, config);
 
-  const { loading, data, handle, modelStatus } = listProps;
+  const { loading, data, handle, model } = listProps;
   const { onGetList, onClearList } = handle;
 
   const { columns } = formatTableFields(fields, operation, handle, {
     namespace,
     extraData,
+    model,
   });
 
   useDidMount(_ => {
@@ -70,7 +71,7 @@ export default function TreeList(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, modelStatus, handle, {
+      }, model, handle, {
         namespace,
         extraData,
         config,
