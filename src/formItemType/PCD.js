@@ -4,6 +4,7 @@ import { query } from '@/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Flex } from 'layout-flex';
+import { getPageData } from 'zero-element/lib/Model';
 
 const Option = Select.Option;
 
@@ -15,6 +16,7 @@ export default function PCD(props) {
     namespace,
     onChange,
     handle,
+    formdata,
     ...rest
   } = props;
   const {
@@ -26,7 +28,7 @@ export default function PCD(props) {
       d: 'district',
     },
   } = options;
-  const { onSaveOtherValue, onGetFormData } = handle;
+  const { onSaveOtherValue } = handle;
 
   const [loading, setLoading] = useState(false);
   const [provinceList, setProvinceList] = useState([]);
@@ -36,13 +38,11 @@ export default function PCD(props) {
   const [districtList, setDistrictList] = useState([]);
   const [district, setDistrict] = useState({ key: -1, label: '' });
 
-  const formData = onGetFormData();
-
   useDidMount(queryProvinceData);
 
   useEffect(_ => {
     // TODO init defaultValue
-  }, [formData]);
+  }, [formdata]);
 
   useEffect(_ => {
     if (province.key) {

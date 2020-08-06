@@ -5,12 +5,12 @@ export default function TableCheckbox({
   namespace,
   value, field, optValue,
   onChange,
-  onGetFormData,
+  formData,
   ...rest // API fields pagination requireValid
 }) {
   return <TableSelect
     namespace={namespace}
-    value={getSelectedKeys(value, onGetFormData, {
+    value={getSelectedKeys(value, formData, {
       field,
       vField: optValue,
     })}
@@ -25,13 +25,12 @@ export default function TableCheckbox({
 }
 
 
-function getSelectedKeys(data, getFormData, { field, vField }) {
+function getSelectedKeys(data, formData, { field, vField }) {
   if (data) {
     if (Array.isArray(data.value)) {
       return data.value;
     }
   }
-  const formData = getFormData();
 
   if (formData) {
     if (typeof formData === 'object') {

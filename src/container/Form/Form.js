@@ -11,6 +11,7 @@ import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 import canPortal from '@/utils/canPortal';
 import { setPageData, getPageData, clearPageData } from 'zero-element/lib/Model';
+import './index.css';
 
 const defaultLabelCol = {
   xs: { span: 8, },
@@ -62,10 +63,10 @@ export default function BaseForm(props) {
   });
 
   const {
+    hiddenFields,
     onFormatValue,
     handleFormatValue,
     onSaveOtherValue,
-    onGetFormData,
     onValuesChange,
     onExpect,
   } = useFormHandle(form, {
@@ -257,13 +258,25 @@ export default function BaseForm(props) {
               handle: {
                 onFormatValue,
                 onSaveOtherValue,
-                onGetFormData,
                 onExpect,
               },
               hooks,
               extraData,
             }))}
           </Render>
+          <div className="ZEle-Form-hidden">
+            {hiddenFields.map(field => getFormItem(field, model, {
+              namespace,
+              form,
+              handle: {
+                onFormatValue,
+                onSaveOtherValue,
+                onExpect,
+              },
+              hooks,
+              extraData,
+            }))}
+          </div>
         </Form>
       )}
     </div>

@@ -45,7 +45,6 @@ export default function BaseSearch(props) {
   const {
     onFormatValue,
     onSaveOtherValue,
-    onGetFormData,
     onValuesChange,
     onExpect,
   } = useFormHandle(form, {
@@ -109,7 +108,6 @@ export default function BaseSearch(props) {
     handle: {
       onFormatValue,
       onSaveOtherValue,
-      onGetFormData,
       onExpect,
     }
   }))

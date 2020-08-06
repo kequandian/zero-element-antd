@@ -44,7 +44,6 @@ export default function AutoReportSearch(props) {
   const {
     onFormatValue,
     onSaveOtherValue,
-    onGetFormData,
     onValuesChange,
     onExpect,
   } = useFormHandle(form, {
@@ -118,7 +117,6 @@ export default function AutoReportSearch(props) {
     handle: {
       onFormatValue,
       onSaveOtherValue,
-      onGetFormData,
       onExpect,
     }
   }))

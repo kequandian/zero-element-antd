@@ -31,7 +31,7 @@ export default function OneMary(props) {
 
     effectField,
   } = options;
-  const { onFormatValue, onGetFormData } = handle;
+  const { onFormatValue } = handle;
   const { removeChildAfter } = hooks;
   const effectFieldValue = formdata[effectField];
   const [count, forcedUpdate] = useReducer(x => x + 1, 0);
@@ -115,11 +115,11 @@ export default function OneMary(props) {
         key: i,
         ...action,
         value: v,
+      }, {}, {
         onCreate: handleCreate,
         onCreateList: handleCreateList,
         onEdit: handleEdit,
-        onGetFormData: onGetFormData,
-      }, {}, {}, {
+      }, {
         namespace,
       }))}
     </Render>

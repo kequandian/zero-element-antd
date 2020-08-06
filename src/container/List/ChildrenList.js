@@ -30,10 +30,11 @@ export default function ChildrenList(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
+      }, model, {
         onCreate,
         onCreateList,
         onEdit,
-      }, model, {}, {
+      }, {
         namespace,
       }))}
     </Render>

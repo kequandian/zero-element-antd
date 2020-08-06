@@ -15,6 +15,7 @@
     "Empty": "container/Empty",
     "Table": "container/List/Table",
     "ReportList": "container/List/ReportList",
+    "ReportTable": "container/List/ReportList",
     "TreeTable": "container/List/TreeTable",
     "ChildrenList": "container/List/ChildrenList",
     "TreeList": "container/List/TreeList",

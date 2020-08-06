@@ -27,7 +27,6 @@ export default function ChildrenForm(props) {
     onFormatValue,
     handleFormatValue,
     onSaveOtherValue,
-    onGetFormData,
     onValuesChange,
     onExpect,
   } = useFormHandle(form, {
@@ -117,7 +116,6 @@ export default function ChildrenForm(props) {
               handle: {
                 onFormatValue,
                 onSaveOtherValue,
-                onGetFormData,
                 onExpect,
               },
             }))}

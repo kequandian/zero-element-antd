@@ -10,6 +10,7 @@ export default function ModalCheckbox(props) {
     props: p,
     onChange,
     handle,
+    formdata,
     ...rest
   } = props;
 
@@ -24,7 +25,7 @@ export default function ModalCheckbox(props) {
     requireValid,
     pagination,
   } = options;
-  const { onFormatValue, onGetFormData, onSaveOtherValue } = handle;
+  const { onFormatValue, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
   const selectedData = useRef({});
 
@@ -55,7 +56,7 @@ export default function ModalCheckbox(props) {
     <Button
       onClick={switchVisible}
     >
-      {echoName(value, onGetFormData, { field, label, editLabel }) || title}
+      {echoName(value, formdata, { field, label, editLabel }) || title}
     </Button>
     <Modal
       destroyOnClose
@@ -70,7 +71,7 @@ export default function ModalCheckbox(props) {
         field={field}
         optValue={optValue}
         onChange={handleChange}
-        onGetFormData={onGetFormData}
+        formData={formData}
 
         API={API}
         fields={fields}
@@ -86,14 +87,14 @@ export default function ModalCheckbox(props) {
  * 优先显示已选择的数据的名称
  *
  * @param {number | object} value
- * @param {function} getFormData
+ * @param {object} formData
  * @param {object} {
  *   label,
  *   editLabel,
  * }
  * @returns
  */
-function echoName(value, getFormData, {
+function echoName(value, formData, {
   field,
   label,
   editLabel,
@@ -103,7 +104,6 @@ function echoName(value, getFormData, {
       return value.value.map(value => value[label]).join(', ');
     }
   }
-  const formData = getFormData();
   if (formData) {
     if (typeof formData === 'object') {
       if (Array.isArray(formData[field])) {

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { setPageData, getPageData } from 'zero-element/lib/Model';
 import { useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
 
@@ -64,6 +64,7 @@ export default function useFormHandle(form, {
   const expectFieldRef = useRef({}); // 记录需要 expect 的字段
   const forceUpdate = useForceUpdate();
   const firstGetForm = useRef(true);
+  const hiddenFieldsRef = useRef([]);
   const { API } = config;
 
   useEffect(_ => {
@@ -77,6 +78,12 @@ export default function useFormHandle(form, {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceInitForm])
 
+  useEffect(_ => {
+    if (!firstGetForm.current) {
+      forceUpdate();
+    }
+  }, [hiddenFieldsRef.current.length])
+
   function formatValue(field, toType, opt) {
     // 保存需要 format 的 字段与 format 的方式
     if (opt) {
@@ -87,9 +94,6 @@ export default function useFormHandle(form, {
     } else {
       formatValueRef.current[field] = toType;
     }
-  }
-  function handleGetFormData() {
-    return form.getFieldsValue();
   }
   /**
    * 提交数据之前，格式化 value
@@ -109,6 +113,13 @@ export default function useFormHandle(form, {
 
   function handleSaveData(key, value) {
     const formData = form.getFieldsValue();
+    if (!Object.getOwnPropertyNames(formData).includes(key)) {
+      if (process.env.NODE_ENV === 'development') {
+        console.log('自动添加隐藏 field', key, value);
+      }
+      hiddenFieldsRef.current.push({ label: key, field: key, type: 'plain', value: value });
+      forceUpdate();
+    }
     formData[key] = value;
     form.setFieldsValue({ ...formData });
     handleValuesChange({ [key]: value }, { ...formData });
@@ -136,10 +147,10 @@ export default function useFormHandle(form, {
   }
 
   return {
+    hiddenFields: hiddenFieldsRef.current,
     onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
     handleFormatValue, // format 全部已标记字段
     onSaveOtherValue: handleSaveData,
-    onGetFormData: handleGetFormData,
     onValuesChange: handleValuesChange,
     onExpect: handleExpect,
   }

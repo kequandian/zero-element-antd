@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Button, Modal } from 'antd';
 import TableCheckbox from '@/formItemType/ModalCheckbox/TableCheckbox';
+import { getPageData } from 'zero-element/lib/Model';
 
 export default (props) => {
-  const { value, title, options, namespace, onCreateList, onGetFormData } = props;
+  const { value, title, options, namespace, onCreateList } = props;
   const {
     modalTitle, modalWidth,
     API,
@@ -16,6 +17,7 @@ export default (props) => {
   } = options;
   const [visible, setViseble] = useState(false);
   const selectedData = useRef([]);
+  const { formData } = getPageData(namespace);
 
   function handleOpen() {
     setViseble(true);
@@ -52,7 +54,7 @@ export default (props) => {
         field={field}
         optValue={optValue}
         onChange={handleChange}
-        onGetFormData={onGetFormData}
+        formData={formData}
 
         API={API}
         fields={fields}
