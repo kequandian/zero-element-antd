@@ -82,13 +82,13 @@ export default function BaseForm(props) {
 
   // useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
+    recordDefaultValue();
     if (API.getAPI) {
       handleGetData();
     }
     if (typeof formRef === 'object') {
       formRef.current = form;
     }
-    recordDefaultValue();
   });
 
   useWillUnmount(_ => {
@@ -105,6 +105,8 @@ export default function BaseForm(props) {
         initData.current = data;
         const { extra } = data;
         setPageData(namespace, 'formData', data);
+        form.setFieldsValue({ ...initData.current });
+
         if (extra && Array.isArray(extra.items)) {
           setExtraFields(extra.items);
         } else {

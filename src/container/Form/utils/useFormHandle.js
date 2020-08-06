@@ -109,6 +109,11 @@ export default function useFormHandle(form, {
       submitData[field] = toTypeMap[type](value, typeRecord.options);
     });
 
+    Object.keys(submitData).forEach(key => {
+      if (/^(_)/.test(key)) {
+        delete submitData[key];
+      }
+    })
   }
 
   function handleSaveData(key, value) {

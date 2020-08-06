@@ -46,7 +46,7 @@ CSet({
   ReportList: Load('container/List/ReportList'),
   ReportTable: Load('container/List/ReportList'),
   TreeTable: Load('container/List/TreeTable'),
-  ChildrenList: Load('container/List/ChildrenList'),
+  ChildrenTable: Load('container/List/ChildrenTable'),
   TreeList: Load('container/List/TreeList'),
   AutoReport: Load('container/List/AutoReport'),
   TableSelect: Load('container/List/TableSelect'),

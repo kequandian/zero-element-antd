@@ -5,7 +5,7 @@ import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 
-export default function ChildrenList(props) {
+export default function ChildrenTable(props) {
   const { namespace, config } = props;
   const {
     layout = 'Empty',

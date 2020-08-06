@@ -94,6 +94,7 @@ const defaultRule = {
     }
     return {
       required: true,
+      message: msg,
     };
   },
   email: (msg = '请输入正确的电子邮箱格式') => {
@@ -125,7 +126,7 @@ const defaultRule = {
       },
     }
   },
-  undefined: () => {
+  undefined: () => {phone
     return {
       validator(rule, value) {
         return Promise.reject(`值: ${value} 使用了未知的校验规则`);

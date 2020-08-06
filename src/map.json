@@ -17,7 +17,7 @@
     "ReportList": "container/List/ReportList",
     "ReportTable": "container/List/ReportList",
     "TreeTable": "container/List/TreeTable",
-    "ChildrenList": "container/List/ChildrenList",
+    "ChildrenTable": "container/List/ChildrenTable",
     "TreeList": "container/List/TreeList",
     "AutoReport": "container/List/AutoReport",
     "TableSelect": "container/List/TableSelect",

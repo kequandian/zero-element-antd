@@ -7,23 +7,18 @@ export default function valueTypeEllipsis(props) {
     options = {},
     data: { index, text = '', record },
   } = props;
-  const { max = 16, textTemp, textTempFields, textTempNull = '' } = options;
+  const { max = 16, format, placeholder = '' } = options;
   const [t, setT] = useState(text);
 
   useEffect(_ => {
-    if (textTemp && Array.isArray(textTempFields)) {
-      let rst = textTemp;
-      textTempFields.forEach(key => {
-        const v = record[key];
-        const toValue = (v || v === 0) ? v : textTempNull;
-        rst = rst.replace(`{${key}}`, toValue)
-      });
+    if (format) {
+      let rst = formatAPI(format, { namespace, placeholder, data: record });
       setT(rst);
 
     } else {
       setT(String(text));
     }
-  }, [text, textTemp]);
+  }, [text, format]);
 
   if (!t || t === 'null') return null;
 
