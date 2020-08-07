@@ -1,12 +1,13 @@
 import React, { useRef, useState, useMemo } from 'react';
 import { Form } from 'antd';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
-import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useWillUnmount, useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
 import { RollbackOutlined } from '@ant-design/icons';
 import useFormHandle from './utils/useFormHandle';
+import useLongPress from '@/utils/hooks/useLongPress';
 
 const defaultLabelCol = {
   xs: { span: 3, },
@@ -31,6 +32,7 @@ export default function BaseSearch(props) {
     buttonSpan,
   } = layoutConfig;
 
+  const forceUpdate = useForceUpdate();
   const searchProps = useBaseSearch({
     namespace,
   }, config);
@@ -50,9 +52,20 @@ export default function BaseSearch(props) {
   } = useFormHandle(form, {
     namespace,
     config,
+    dataPath: 'searchData',
   });
 
   useMemo(recordDefaultValue, [fields]);
+
+  const onLongPress = useLongPress(_ => {
+    const data = {};
+    fields.forEach(field => {
+      data[field.field] = undefined;
+    })
+    onSetSearchData(data);
+    onClearSearch();
+    form.setFieldsValue(data);
+  });
 
   useWillUnmount(_ => {
     onClearSearch();
@@ -84,12 +97,17 @@ export default function BaseSearch(props) {
   }
   function handleReset() {
     form.resetFields();
+    forceUpdate();
   }
 
   function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
-      <Tooltip title="重置">
-        <Button onClick={handleReset} type="link" icon={<RollbackOutlined />}></Button>
+      <Tooltip title="点击重置, 长按清除">
+        <Button
+          type="link" icon={<RollbackOutlined />}
+          onClick={handleReset}
+          {...onLongPress}
+        ></Button>
       </Tooltip>
       <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
       {validLength > collapse ? (

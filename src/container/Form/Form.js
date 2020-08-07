@@ -78,7 +78,7 @@ export default function BaseForm(props) {
   const extraFields = useRef([]);
   const [fields, setFields] = useState(fieldsCfg);
   const { onGetOne, onCreateForm, onUpdateForm, onClearForm } = handle;
-  const [destroy, setDestroy] = useState(false);
+  const [canRenderForm, setCanRenderForm] = useState(API.getAPI ? false : true);
 
   // useMemo(recordDefaultValue, [fields]);
   useDidMount(_ => {
@@ -99,7 +99,7 @@ export default function BaseForm(props) {
   });
 
   function handleGetData() {
-    setDestroy(true);
+    setCanRenderForm(false);
     onGetOne({}).then(({ code, data }) => {
       if (code === 200) {
         initData.current = data;
@@ -115,7 +115,7 @@ export default function BaseForm(props) {
       }
     })
       .finally(_ => {
-        setDestroy(false);
+        setCanRenderForm(true);
       })
   }
   function setExtraFields(items) {
@@ -243,7 +243,7 @@ export default function BaseForm(props) {
   return <Spin spinning={propsLoading || loading}>
     {renderGoBack && canPortal(extraEl, <Button onClick={handleGoBack}>返回</Button>)}
     <div className={fields.length ? 'ant-modal-body' : undefined}>
-      {destroy ? null : (
+      {canRenderForm ? (
         <Form
           form={form}
           layout={layoutType}
@@ -280,7 +280,7 @@ export default function BaseForm(props) {
             }))}
           </div>
         </Form>
-      )}
+      ) : <Form form={form} />}
     </div>
     {renderFooter()}
   </Spin>

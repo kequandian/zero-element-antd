@@ -59,6 +59,7 @@ export default function useFormHandle(form, {
   config,
   forceInitForm,
   onGetOne,
+  dataPath = 'formData',
 }) {
   const formatValueRef = useRef({}); // 记录在提交之前需要格式化的字段
   const expectFieldRef = useRef({}); // 记录需要 expect 的字段
@@ -148,7 +149,7 @@ export default function useFormHandle(form, {
       forceUpdate();
     }
 
-    setPageData(namespace, 'formData', allValues);
+    setPageData(namespace, dataPath, allValues);
   }
 
   return {
