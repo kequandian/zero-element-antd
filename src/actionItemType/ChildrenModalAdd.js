@@ -3,7 +3,8 @@ import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 
 export default (props) => {
-  const { title, options, namespace, onCreate, onCreateList } = props;
+  const { title, options, namespace, handle } = props;
+  const { onCreate, onCreateList } = handle;
   const {
     modalTitle, modalWidth,
     childAppendField,

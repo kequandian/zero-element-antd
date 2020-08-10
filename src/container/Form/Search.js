@@ -5,9 +5,10 @@ import { useWillUnmount, useForceUpdate } from 'zero-element/lib/utils/hooks/lif
 import { Spin, Button, Tooltip } from 'antd';
 import { getFormItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
-import { RollbackOutlined } from '@ant-design/icons';
+import { CheckOutlined, RollbackOutlined } from '@ant-design/icons';
 import useFormHandle from './utils/useFormHandle';
 import useLongPress from '@/utils/hooks/useLongPress';
+import { useDebounceFn } from 'ahooks';
 
 const defaultLabelCol = {
   xs: { span: 3, },
@@ -33,6 +34,7 @@ export default function BaseSearch(props) {
   } = layoutConfig;
 
   const forceUpdate = useForceUpdate();
+  const [resetCD, setResetCD] = useState(false);
   const searchProps = useBaseSearch({
     namespace,
   }, config);
@@ -57,7 +59,7 @@ export default function BaseSearch(props) {
 
   useMemo(recordDefaultValue, [fields]);
 
-  const onLongPress = useLongPress(_ => {
+  const { run } = useDebounceFn(_ => {
     const data = {};
     fields.forEach(field => {
       data[field.field] = undefined;
@@ -65,11 +67,18 @@ export default function BaseSearch(props) {
     onSetSearchData(data);
     onClearSearch();
     form.setFieldsValue(data);
+    setResetCD(true);
+    setTimeout(() => {
+      setResetCD(false);
+    }, 500);
+  }, {
+    wait: 300,
   });
+  const onLongPress = useLongPress(run);
 
-  useWillUnmount(_ => {
-    onClearSearch();
-  });
+  // useWillUnmount(_ => {
+  //   onClearSearch();
+  // });
 
   function handleExpand() {
     setExpand(true);
@@ -103,11 +112,14 @@ export default function BaseSearch(props) {
   function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
       <Tooltip title="点击重置, 长按清除">
-        <Button
-          type="link" icon={<RollbackOutlined />}
-          onClick={handleReset}
-          {...onLongPress}
-        ></Button>
+        {resetCD ?
+          <Button type="link" icon={<CheckOutlined />} /> :
+          <Button
+            type="link" icon={<RollbackOutlined />}
+            onClick={handleReset}
+            {...onLongPress}
+          ></Button>
+        }
       </Tooltip>
       <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
       {validLength > collapse ? (

@@ -1,6 +1,6 @@
 {
   "name": "zero-element-antd",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "在 zero-element 里面注入封装过的 antd 相关组件",
   "main": "src/index.js",
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.10.1",
+    "ahooks": "^2.4.0",
     "braft-editor": "^2.3.7",
     "final-form": "^4.13.1",
     "layout-flex": "github:kequandian/layout-flex",

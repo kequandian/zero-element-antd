@@ -4,7 +4,8 @@ import TableCheckbox from '@/formItemType/ModalCheckbox/TableCheckbox';
 import { getPageData } from 'zero-element/lib/Model';
 
 export default (props) => {
-  const { value, title, options, namespace, onCreateList } = props;
+  const { value, title, options, namespace, handle } = props;
+  const { onCreateList } = handle;
   const {
     modalTitle, modalWidth,
     API,

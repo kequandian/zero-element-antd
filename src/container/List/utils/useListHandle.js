@@ -126,9 +126,13 @@ export default function useListHandle({
       batchItem.onClick({
         selectedRowKeys: rowSelection.selectedRowKeys,
         selectedRows: rowSelection.selectedRows,
-        onRefresh: handle.onRefresh,
+        onRefresh: handleCancelSelect,
       });
     }
+  }
+  function handleCancelSelect() {
+    handle.onRefresh();
+    rowSelection.onChange([], []);
   }
 
   function renderBatchOperation() {
