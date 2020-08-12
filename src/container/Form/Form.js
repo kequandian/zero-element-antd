@@ -189,11 +189,14 @@ export default function BaseForm(props) {
       }).then(handleResponse);
     }
   }
-  function handleResponse(data = {}) {
+  function handleResponse(data = {}, opt = {}) {
+    const { message: msg = '操作成功' } = opt;
     if (data.code === 200) {
-      message.success('操作成功');
+      if (msg) {
+        message.success(msg);
+      }
       if (onClose) {
-        onClose();
+        onClose(data);
       }
       if (router) {
         if (path) {
@@ -224,6 +227,7 @@ export default function BaseForm(props) {
 
   function handleReset() {
     form.resetFields();
+    forceUpdate();
   }
   function renderFooter() {
     function onSubmit() {

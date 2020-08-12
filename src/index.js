@@ -77,6 +77,7 @@ FITSet({
   map: Load('formItemType/Map'),
   pcd: Load('formItemType/PCD'),
   captcha: Load('formItemType/Captcha'),
+  tags: Load('formItemType/Tags'),
   date: Load('formItemType/Date/date'),
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),

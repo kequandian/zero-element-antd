@@ -23,7 +23,9 @@ export default function useListHandle({
   const [oData, onClickOperation] = useOperation();
   const firstGetList = useRef(true);
   const {
-    forceInitList, keepData = true, batchOperation,
+    forceInitList, keepData = true,
+    batchOperation,
+    selections,
     pagination: propsPagination = true,
     mountFetch = true,
   } = props;
@@ -40,7 +42,7 @@ export default function useListHandle({
 
   const { loading, data, handle, model } = listProps;
   const { onGetList, onClearList } = handle;
-  const rowSelection = useRowSelection(handle);
+  const rowSelection = useRowSelection(namespace, selections);
 
   const listData = model[dataPath] || {};
   const { records, ...pagination } = listData;

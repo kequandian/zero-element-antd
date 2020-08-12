@@ -44,6 +44,7 @@
     "map": "formItemType/Map",
     "pcd": "formItemType/PCD",
     "captcha": "formItemType/Captcha",
+    "tags": "formItemType/Tags",
     "date": "formItemType/Date/date",
     "week": "formItemType/Date/week",
     "month": "formItemType/Date/month",

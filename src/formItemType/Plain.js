@@ -13,7 +13,7 @@ export default (props) => {
     onChange,
     ...rest
   } = props;
-  const { format, placeholder = '-', map } = options;
+  const { format, placeholder = '-', map, autoSave = false } = options;
 
   let v = value;
   if (format) {
@@ -24,10 +24,10 @@ export default (props) => {
   }
 
   useEffect(_ => {
-    if (v !== value) {
+    if (autoSave && v !== value) {
       onChange(v);
     }
-  }, [value]);
+  }, [autoSave, value]);
 
   return <div {...rest}{...propsOtp}>{String(v === undefined ? placeholder : v)}</div>;
 }

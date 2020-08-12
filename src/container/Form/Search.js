@@ -21,7 +21,7 @@ const defaultWrapperCol = {
 export default function BaseSearch(props) {
   const [form] = Form.useForm();
 
-  const { namespace, config } = props;
+  const { namespace, config, extraData = {} } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {},
   } = config;
@@ -91,7 +91,7 @@ export default function BaseSearch(props) {
     fields.forEach(item => {
       const { field, value } = item;
       if (value !== undefined && initData.current[field] === undefined) {
-        initData.current[field] = value;
+        initData.current[field] = extraData[field] || value;
       }
     });
     onSetSearchData(initData.current);
