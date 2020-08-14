@@ -63,7 +63,6 @@ export default function BaseForm(props) {
   });
 
   const {
-    hiddenFields,
     onFormatValue,
     handleFormatValue,
     onSaveOtherValue,
@@ -270,19 +269,6 @@ export default function BaseForm(props) {
               extraData,
             }))}
           </Render>
-          <div className="ZEle-Form-hidden">
-            {hiddenFields.map(field => getFormItem(field, model, {
-              namespace,
-              form,
-              handle: {
-                onFormatValue,
-                onSaveOtherValue,
-                onExpect,
-              },
-              hooks,
-              extraData,
-            }))}
-          </div>
         </Form>
       ) : <Form form={form} />}
     </div>

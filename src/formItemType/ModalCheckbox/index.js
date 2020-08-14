@@ -71,7 +71,7 @@ export default function ModalCheckbox(props) {
         field={field}
         optValue={optValue}
         onChange={handleChange}
-        formData={formData}
+        formData={formdata}
 
         API={API}
         fields={fields}

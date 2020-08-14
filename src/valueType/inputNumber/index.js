@@ -7,14 +7,20 @@ export default function ValueTypeInputNumber(props) {
   const {
     field,
     handle,
+    options = {},
     data: { index, text = '', record },
   } = props;
   const { onEdit } = handle;
+  const { defaultValue } = options;
 
   const v = toNumber(text);
 
   useWillMount(_ => {
-    handleChange(v);
+    if (v === '' && defaultValue !== undefined) {
+      handleChange(defaultValue);
+    } else {
+      handleChange(v);
+    }
   });
 
   function handleChange(value) {

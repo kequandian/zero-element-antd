@@ -38,7 +38,9 @@ export default function BaseTable(props) {
   >
     {canPortal(extraEl, <>
       {renderBatchOperation()}
-      {actionsItems}
+      <Render n={'Row'}>
+        {actionsItems}
+      </Render>
     </>)}
     <Table
       rowKey="id"

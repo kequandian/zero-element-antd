@@ -2,6 +2,7 @@ import React from 'react';
 import { Form } from 'antd';
 import FormIten from '@/container/Form/FormItemWrapped';
 import ActionItem from '@/container/List/ActionItemWrapped';
+import { getPageData } from 'zero-element/lib/Model';
 
 import checkExpected from './checkExpected';
 
@@ -16,7 +17,8 @@ export function getFormItem(field, model,
     options = {},
     expect,
     ...rest } = field;
-  const values = form.getFieldsValue();
+  // const values = form.getFieldsValue();
+  const { formData: values = {} } = getPageData(namespace);
 
   if (type === 'empty') {
     return null;
@@ -126,7 +128,8 @@ const defaultRule = {
       },
     }
   },
-  undefined: () => {phone
+  undefined: () => {
+    phone
     return {
       validator(rule, value) {
         return Promise.reject(`值: ${value} 使用了未知的校验规则`);

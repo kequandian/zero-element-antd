@@ -65,7 +65,6 @@ export default function useFormHandle(form, {
   const expectFieldRef = useRef({}); // 记录需要 expect 的字段
   const forceUpdate = useForceUpdate();
   const firstGetForm = useRef(true);
-  const hiddenFieldsRef = useRef([]);
   const { API } = config;
 
   useEffect(_ => {
@@ -78,12 +77,6 @@ export default function useFormHandle(form, {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [forceInitForm])
-
-  useEffect(_ => {
-    if (!firstGetForm.current) {
-      forceUpdate();
-    }
-  }, [hiddenFieldsRef.current.length])
 
   function formatValue(field, toType, opt) {
     // 保存需要 format 的 字段与 format 的方式
@@ -123,7 +116,6 @@ export default function useFormHandle(form, {
       if (process.env.NODE_ENV === 'development') {
         console.log('自动添加隐藏 field', key, value);
       }
-      hiddenFieldsRef.current.push({ label: key, field: key, type: 'plain', value: value });
       forceUpdate();
     }
     formData[key] = value;
@@ -144,16 +136,21 @@ export default function useFormHandle(form, {
       console.warn('Parameter namespace is required');
     }
 
+    const formData = getPageData(namespace)[dataPath];
+
+    setPageData(namespace, dataPath, {
+      ...formData,
+      ...allValues,
+      ...changedValues,
+    });
+
     const canReRender = Object.keys(changedValues).some(key => expectFieldRef.current[key]);
     if (canReRender) {
       forceUpdate();
     }
-
-    setPageData(namespace, dataPath, allValues);
   }
 
   return {
-    hiddenFields: hiddenFieldsRef.current,
     onFormatValue: formatValue, // 字段自己标记自己是否需要在提交之前 format
     handleFormatValue, // format 全部已标记字段
     onSaveOtherValue: handleSaveData,
