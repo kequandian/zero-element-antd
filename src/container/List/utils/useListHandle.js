@@ -25,7 +25,6 @@ export default function useListHandle({
   const {
     forceInitList, keepData = true,
     batchOperation,
-    selections,
     pagination: propsPagination = true,
     mountFetch = true,
   } = props;
@@ -42,7 +41,7 @@ export default function useListHandle({
 
   const { loading, data, handle, model } = listProps;
   const { onGetList, onClearList } = handle;
-  const rowSelection = useRowSelection(namespace, selections);
+  const rowSelection = useRowSelection(namespace, props.rowSelection);
 
   const listData = model[dataPath] || {};
   const { records, ...pagination } = listData;
@@ -159,7 +158,7 @@ export default function useListHandle({
 
   const tableProps = {
     columns: props.columns || columns,
-    loading,
+    loading: props.loading || loading,
     rowSelection: batchOperation ? rowSelection : undefined,
     onChange: handleFilterSorter,
     pagination: propsPagination ? {

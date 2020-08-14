@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import global from 'zero-element/lib/config/global';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 
@@ -20,6 +21,7 @@ const formatMap = {
 function date(componentName) {
   const Match = componentMap[componentName];
   return function DateConstructor(props) {
+    const { dateFormat = {} } = global;
     const { value, options = {}, onChange,
       props: propsOpt,
       formdata,
@@ -28,7 +30,7 @@ function date(componentName) {
     } = props;
     const {
       nowTime = false,
-      format = formatMap[componentName],
+      format = dateFormat[componentName] || formatMap[componentName],
       startDate,
       endDate,
     } = options;

@@ -1,6 +1,7 @@
 import { useState } from "react";
 
-export default function useRowSelection(namespace, selections) {
+export default function useRowSelection(namespace, rowSelectionProsp = {}) {
+  const { selections, ...rest } = rowSelectionProsp;
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -12,13 +13,14 @@ export default function useRowSelection(namespace, selections) {
   const rowSelection = {
     selectedRowKeys,
     selectedRows,
+    hideDefaultSelections: true,
+    ...rest,
     selections: Array.isArray(selections) ?
       selections.map(sele => ({
         ...sele,
         onSelect: sele.onSelect.bind(null, setSelectedRowKeys)
       }))
       : selections,
-    hideDefaultSelections: true,
     onChange: handleSelectChange,
   };
 

@@ -1,6 +1,6 @@
 {
   "name": "zero-element-antd",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "在 zero-element 里面注入封装过的 antd 相关组件",
   "main": "src/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "react-dnd": "^7.4.5",
     "react-dnd-html5-backend": "^7.4.4",
     "react-dom": "^16.8.6",
-    "zero-element": "kequandian/zero-element#1.0-Beta"
+    "zero-element": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
