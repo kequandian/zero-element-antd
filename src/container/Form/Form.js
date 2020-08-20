@@ -152,6 +152,7 @@ export default function BaseForm(props) {
     })
     let submitData = {
       ...extraSubmit,
+      ...pageDataFormData,
       ...values,
     };
 

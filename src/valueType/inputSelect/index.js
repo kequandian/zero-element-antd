@@ -1,5 +1,6 @@
 import React from 'react';
 import { Select } from 'antd';
+import _ from 'lodash';
 
 export default function valueTypeInputSelect(props) {
   const {
@@ -12,8 +13,8 @@ export default function valueTypeInputSelect(props) {
   const { width = 120, options: opts = [] } = options;
 
   function handleChange(value) {
-    record[field] = value;
-    onEdit(index, record);
+    _.set(record, field, value);
+    onEdit && onEdit(index, record);
   }
 
   return <Select

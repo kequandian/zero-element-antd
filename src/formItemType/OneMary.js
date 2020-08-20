@@ -60,6 +60,10 @@ export default function OneMary(props) {
     }
   }, [effectFieldValue]);
 
+  function handleChangeTableData(data) {
+    onChange(data);
+  }
+
   function handleChange(selectedRows, selectedRowKeys) {
     onChange(selectedRows);
   }
@@ -126,10 +130,11 @@ export default function OneMary(props) {
     <TableSelect
       value={optValue}
       onChange={handleChange}
+      onChangeTableData={API ? handleChangeTableData : undefined}
       namespace={namespace}
       extraData={formdata}
       forceInitList={count}
-      data={API ? undefined : v}
+      data={v}
       columns={columns}
       options={{
         API,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input } from 'antd';
+import _ from 'lodash';
 
 export default function valueTypeInputText(props) {
   const {
@@ -11,8 +12,8 @@ export default function valueTypeInputText(props) {
 
   function handleChange(e) {
     const value = e.target.value;
-    record[field] = value;
-    onEdit(index, record);
+    _.set(record, field, value);
+    onEdit && onEdit(index, record);
   }
 
   return <Input

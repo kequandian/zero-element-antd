@@ -37,8 +37,8 @@ export default function BaseTable(props) {
     namespace={namespace}
   >
     {canPortal(extraEl, <>
-      {renderBatchOperation()}
       <Render n={'Row'}>
+        {renderBatchOperation()}
         {actionsItems}
       </Render>
     </>)}

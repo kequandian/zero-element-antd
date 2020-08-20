@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
@@ -8,6 +8,7 @@ export default function TableSelect(props) {
     namespace, config,
     extraData,
     options, value, onChange,
+    onChangeTableData,
   } = props;
   const {
     layout = 'Empty', layoutConfig = {},
@@ -39,6 +40,7 @@ export default function TableSelect(props) {
   });
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const selectedRef = useRef({});
 
   useEffect(_ => {
     if (Array.isArray(value)) {
@@ -46,6 +48,11 @@ export default function TableSelect(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
+  useEffect(_ => {
+    if (onChangeTableData) {
+      onChangeTableData(JSON.parse(JSON.stringify(tableData)));
+    }
+  }, [tableData])
 
   function handleRowClassName(record) {
     if (operationData.id === record.id) {
@@ -54,8 +61,28 @@ export default function TableSelect(props) {
   }
 
   function handleChange(selectedRowKeys, selectedRows) {
-    setSelectedRowKeys(selectedRowKeys);
-    onChange(selectedRows, selectedRowKeys);
+    const { current } = tableProps.pagination;
+
+    let sKeys = selectedRowKeys;
+    let sRows = selectedRows;
+
+    if (type === 'checkbox') {
+      selectedRef.current[current] = {
+        selectedRows,
+        selectedRowKeys,
+      }
+
+      sKeys = [];
+      sRows = [];
+      Object.keys(selectedRef.current).forEach(i => {
+        if (selectedRef.current) {
+          sKeys.push(...selectedRef.current[i].selectedRowKeys);
+          sRows.push(...selectedRef.current[i].selectedRows);
+        }
+      })
+    }
+    setSelectedRowKeys(sKeys);
+    onChange(sRows, sKeys);
   }
   function handleDisabled(record) {
     const valid = record && record[optValue] !== 0 && Boolean(record[optValue]);
@@ -76,7 +103,7 @@ export default function TableSelect(props) {
       size="small"
       bordered={false}
       rowClassName={handleRowClassName}
-      dataSource={props.data || tableData}
+      dataSource={onChangeTableData ? props.data : tableData}
       {...tableProps}
       {...propsCfg}
 

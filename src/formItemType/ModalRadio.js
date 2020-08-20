@@ -36,6 +36,7 @@ export default function ModalRadio(props) {
   const [disabled, setDisable] = useState(null);
   const selectedData = useRef({});
   const [v, setV] = useState([{ [optValue]: value }]);
+  const formData = getPageData(namespace).formData;
 
   useDidMount(_ => {
     onFormatValue(name, 'toValue');
@@ -95,7 +96,7 @@ export default function ModalRadio(props) {
     <Button
       onClick={onOpen}
     >
-      {echoName(value, getPageData(namespace).formData, { label, editLabel }) || title}
+      {echoName(value, formData, { label, editLabel }) || title}
     </Button>
     <Modal
       destroyOnClose
@@ -116,6 +117,7 @@ export default function ModalRadio(props) {
         value={v}
         onChange={handleChange}
         namespace={`${namespace}_${name}_ModalRadio`}
+        extraData={formData}
         options={{
           API,
           fields,

@@ -1,7 +1,8 @@
 import React from 'react';
 import { toNumber } from '@/utils/tool';
 import { InputNumber } from 'antd';
-import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import _ from 'lodash';
 
 export default function ValueTypeInputNumber(props) {
   const {
@@ -15,17 +16,17 @@ export default function ValueTypeInputNumber(props) {
 
   const v = toNumber(text);
 
-  useWillMount(_ => {
+  useDidMount(_ => {
     if (v === '' && defaultValue !== undefined) {
       handleChange(defaultValue);
-    } else {
+    } else if (v) {
       handleChange(v);
     }
   });
 
   function handleChange(value) {
-    record[field] = toNumber(value);
-    onEdit(index, record);
+    _.set(record, field, toNumber(value));
+    onEdit && onEdit(index, record);
   }
 
   return <InputNumber
