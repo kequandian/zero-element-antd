@@ -1,6 +1,6 @@
 {
   "name": "zero-element-antd",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "在 zero-element 里面注入封装过的 antd 相关组件",
   "main": "src/index.js",
   "scripts": {

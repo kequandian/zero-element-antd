@@ -19,7 +19,7 @@ export default function ExportExcel(props) {
   const { API: lAPI = {} } = config;
   const { listAPI } = lAPI;
   const pageData = getPageData(namespace);
-  const { queryData, current, total } = pageData;
+  const { searchData, current, total } = pageData;
 
   function handleClick() {
 
@@ -27,7 +27,7 @@ export default function ExportExcel(props) {
       method,
       fileName,
     }, {
-      ...queryData,
+      ...searchData,
       templateName: name,
       api: `${get()}${listAPI}?pageNum=${current}&pageSize=${total}`,
     });

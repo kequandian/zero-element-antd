@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
+import { UploadOutlined } from '@ant-design/icons';
 import './index.css';
 
 export default function ImportExcel(props) {
   const { title = '导入', options, namespace, handle, ...restProps } = props;
   const {
     icon = 'upload', modalTitle = 'Excel 导入', modalWidth,
-    url,
+    API,
     ...rest
   } = options;
   const [visible, setViseble] = useState(false);
@@ -25,8 +26,8 @@ export default function ImportExcel(props) {
     }
   }
 
-  if (!url) {
-    console.warn('import-excel 缺少必要的 options : url');
+  if (!API) {
+    console.warn('import-excel 缺少必要的 options : API');
   }
 
   const config = {
@@ -37,7 +38,7 @@ export default function ImportExcel(props) {
         component: 'Form',
         config: {
           API: {
-            getAPI: url,
+            getAPI: API,
           },
           fields: [
             {
@@ -57,7 +58,7 @@ export default function ImportExcel(props) {
     <Button
       className="ZEle-action-button"
       onClick={handleOpen}
-      icon={icon}
+      icon={<UploadOutlined />}
     >
       {title}
     </Button>
