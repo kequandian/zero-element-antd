@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Tooltip } from 'antd';
+import { formatAPI } from 'zero-element/lib/utils/format';
 
 export default function valueTypeEllipsis(props) {
   const {
     field,
+    namespace,
     options = {},
     data: { index, text = '', record },
   } = props;
