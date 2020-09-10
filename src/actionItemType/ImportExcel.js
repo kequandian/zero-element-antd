@@ -5,9 +5,9 @@ import { UploadOutlined } from '@ant-design/icons';
 import './index.css';
 
 export default function ImportExcel(props) {
-  const { title = '导入', options, namespace, handle, ...restProps } = props;
+  const { title = '导入', options = {}, namespace, handle, ...restProps } = props;
   const {
-    icon = 'upload', modalTitle = 'Excel 导入', modalWidth,
+    modalTitle = 'Excel 导入', modalWidth,
     API,
     ...rest
   } = options;

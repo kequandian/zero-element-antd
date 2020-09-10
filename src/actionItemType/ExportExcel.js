@@ -7,9 +7,8 @@ import { DownloadOutlined } from '@ant-design/icons';
 import './index.css';
 
 export default function ExportExcel(props) {
-  const { title = '导出', options, namespace, handle, config, ...restProps } = props;
+  const { title = '导出', options = {}, namespace, handle, config, ...restProps } = props;
   const {
-    icon = 'download',
     API,
     method,
     name = namespace,
