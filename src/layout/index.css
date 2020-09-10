@@ -32,6 +32,8 @@
 
 .ZEleA-Layout-Row {
   margin-bottom: 8px;
+  display      : flex;
+  align-items  : center;
 }
 
 .ZEleA-Layout-Row>button {
