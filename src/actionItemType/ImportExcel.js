@@ -8,7 +8,8 @@ export default function ImportExcel(props) {
   const { title = '导入', options = {}, namespace, handle, ...restProps } = props;
   const {
     modalTitle = 'Excel 导入', modalWidth,
-    API,
+    API = '/api/io/excel/import',
+    name,
     ...rest
   } = options;
   const [visible, setViseble] = useState(false);
@@ -42,12 +43,13 @@ export default function ImportExcel(props) {
           },
           fields: [
             {
-              label: 'Excel 文件', field: 'file', type: 'upload-file',
+              label: 'Excel 文件', field: 'multipartFile', type: 'upload-file',
               options: {
                 fileNameField: 'source',
                 ...rest,
               }
-            }
+            },
+            { field: 'name', type: 'hidden', value: name },
           ]
         }
       }
