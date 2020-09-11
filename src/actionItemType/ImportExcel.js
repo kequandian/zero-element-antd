@@ -7,7 +7,7 @@ import './index.css';
 export default function ImportExcel(props) {
   const { title = '导入', options = {}, namespace, handle, ...restProps } = props;
   const {
-    modalTitle = 'Excel 导入', modalWidth,
+    modalTitle = '文件导入', modalWidth,
     API = '/api/io/excel/import',
     name,
     ...rest
@@ -32,18 +32,16 @@ export default function ImportExcel(props) {
   }
 
   const config = {
-    layout: 'Empty',
     items: [
       {
-        layout: 'Empty',
         component: 'Form',
         config: {
           API: {
-            getAPI: API,
+            createAPI: API,
           },
           fields: [
             {
-              label: 'Excel 文件', field: 'multipartFile', type: 'upload-file',
+              label: '上传文件', field: 'multipartFile', type: 'upload-file',
               options: {
                 fileNameField: 'source',
                 ...rest,
@@ -78,8 +76,8 @@ export default function ImportExcel(props) {
       <ZEle
         MODAL={true}
         namespace={namespace}
-        config={config}
         {...restProps}
+        config={config}
         onClose={handleCloseAndQuery}
       />
     </Modal>
