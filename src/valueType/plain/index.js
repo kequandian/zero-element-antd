@@ -21,7 +21,7 @@ export default function valueTypePlain(props) {
     } else {
       setT([String(text)]);
     }
-  }, [text, format]);
+  }, [record, format]);
 
   if (format) {
     return <div>

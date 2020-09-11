@@ -13,7 +13,7 @@ export default function valueTypePercentage(props) {
     v = returnFloatOne(toNumber(text));
   }
 
-  return <div style={{ color }}>
+  return <span style={{ color }}>
     {`${v} %`}
-  </div>
+  </span>
 }

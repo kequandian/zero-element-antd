@@ -72,6 +72,7 @@
     "table-checkbox": "actionItemType/TableCheckbox"
   },
   "VTSet": {
+    "index": "valueType/index",
     "plain": "valueType/plain",
     "map": "valueType/map",
     "image": "valueType/image",
@@ -79,6 +80,7 @@
     "currency": "valueType/currency",
     "percentage": "valueType/percentage",
     "ellipsis": "valueType/ellipsis",
+    "complex": "valueType/complex",
     "input-number": "valueType/inputNumber",
     "input-text": "valueType/inputText",
     "input-select": "valueType/inputSelect",

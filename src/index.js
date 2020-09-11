@@ -107,6 +107,7 @@ AITSet({
 });
 
 VTSet({
+  'index': Load('valueType/index'),
   'plain': Load('valueType/plain'),
   'map': Load('valueType/map'),
   'image': Load('valueType/image'),
@@ -114,6 +115,7 @@ VTSet({
   'currency': Load('valueType/currency'),
   'percentage': Load('valueType/percentage'),
   'ellipsis': Load('valueType/ellipsis'),
+  'complex': Load('valueType/complex'),
   'input-number': Load('valueType/inputNumber'),
   'input-text': Load('valueType/inputText'),
   'input-select': Load('valueType/inputSelect'),

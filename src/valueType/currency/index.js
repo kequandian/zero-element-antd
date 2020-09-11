@@ -15,7 +15,7 @@ export default function valueTypeCurrency(props) {
     v = returnFloat(toNumber(text));
   }
 
-  return <div style={{ color }}>
+  return <span style={{ color }}>
     {`${s} ${v}`}
-  </div>
+  </span>
 }
