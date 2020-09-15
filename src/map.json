@@ -49,6 +49,7 @@
     "week": "formItemType/Date/week",
     "month": "formItemType/Date/month",
     "range": "formItemType/Date/range",
+    "time-range": "formItemType/Time/TimeRange",
     "table-select": "formItemType/TableSelect",
     "modal-radio": "formItemType/ModalRadio",
     "modal-checkbox": "formItemType/ModalCheckbox",
