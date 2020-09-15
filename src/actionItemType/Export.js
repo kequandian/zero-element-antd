@@ -6,7 +6,7 @@ import { get } from 'zero-element/lib/utils/request/endpoint';
 import { DownloadOutlined } from '@ant-design/icons';
 import './index.css';
 
-export default function ExportExcel(props) {
+export default function Export(props) {
   const { title = '导出', options = {}, namespace, handle, config, ...restProps } = props;
   const {
     API,

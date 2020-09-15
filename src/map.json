@@ -68,8 +68,8 @@
     "modal": "actionItemType/Modal",
     "request": "actionItemType/Request",
     "children-modal-add": "actionItemType/ChildrenModalAdd",
-    "import-excel": "actionItemType/ImportExcel",
-    "export-excel": "actionItemType/ExportExcel",
+    "import": "actionItemType/Import",
+    "export": "actionItemType/Export",
     "table-checkbox": "actionItemType/TableCheckbox"
   },
   "VTSet": {

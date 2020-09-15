@@ -49,7 +49,7 @@ export default function TableSelect(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   useEffect(_ => {
-    if (onChangeTableData) {
+    if (onChangeTableData && tableData) {
       onChangeTableData(JSON.parse(JSON.stringify(tableData)));
     }
   }, [tableData])
@@ -103,7 +103,7 @@ export default function TableSelect(props) {
       size="small"
       bordered={false}
       rowClassName={handleRowClassName}
-      dataSource={onChangeTableData ? props.data : tableData}
+      dataSource={props.data || tableData}
       {...tableProps}
       {...propsCfg}
 

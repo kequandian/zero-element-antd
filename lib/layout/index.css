@@ -31,12 +31,12 @@
 }
 
 .ZEleA-Layout-Row {
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
   display      : flex;
   align-items  : center;
 }
 
-.ZEleA-Layout-Row>button {
+.ZEleA-Layout-Row>* {
   margin-right: 4px;
 }
 

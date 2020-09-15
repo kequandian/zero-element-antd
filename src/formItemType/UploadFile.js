@@ -52,7 +52,11 @@ export default function UploadFile(props) {
       }));
       props.onChange(saveFileList);
       if (max === 1) {
-        onSaveOtherValue(fileNameField, saveFileList[0].name);
+        if (saveFileList[0]) {
+          onSaveOtherValue(fileNameField, saveFileList[0].name);
+        } else {
+          onSaveOtherValue(fileNameField, '');
+        }
       }
     }
   }

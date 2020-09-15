@@ -27,6 +27,7 @@ export default function OneMary(props) {
     value: optValue,
     pagination = false,
     rowSelection = false,
+    searchFields = false,
     type = 'checkbox',
 
     effectField,
@@ -86,8 +87,10 @@ export default function OneMary(props) {
     onChange([...rst]);
   }
   function handleEdit(index, data) {
-    v[index] = data;
-    onChange([...v]);
+    if (v) {
+      v[index] = data;
+      onChange([...v]);
+    }
   }
   function handleRemove({ record, options = {} }) {
 
@@ -134,7 +137,7 @@ export default function OneMary(props) {
       namespace={namespace}
       extraData={formdata}
       forceInitList={count}
-      data={v}
+      data={API ? undefined : v}
       columns={columns}
       options={{
         API,
@@ -142,7 +145,7 @@ export default function OneMary(props) {
         type,
         pagination: pagination,
         rowSelection: rowSelection,
-        searchFields: false,
+        searchFields,
         value: optValue,
         rowKey: row => String(row._id || row.id || row[optValue])
       }}

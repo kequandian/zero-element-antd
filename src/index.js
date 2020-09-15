@@ -102,8 +102,8 @@ AITSet({
   modal: Load('actionItemType/Modal'),
   request: Load('actionItemType/Request'),
   'children-modal-add': Load('actionItemType/ChildrenModalAdd'),
-  'import-excel': Load('actionItemType/ImportExcel'),
-  'export-excel': Load('actionItemType/ExportExcel'),
+  'import': Load('actionItemType/Import'),
+  'export': Load('actionItemType/Export'),
   'table-checkbox': Load('actionItemType/TableCheckbox'),
 });
 
