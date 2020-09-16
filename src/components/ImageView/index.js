@@ -33,7 +33,7 @@ export default function ImageView(props) {
   return <>
     {
       list.map((item, i) => {
-        return <div
+        return <span
           className={className}
           key={i}
           style={{
@@ -43,16 +43,16 @@ export default function ImageView(props) {
           onClick={handlePreview.bind(null, item.url)}
         >
           {background ? (
-            <div
+            <span
               className="bgConter"
               style={{
                 backgroundImage: `url(${item.url})`,
               }}
-            ></div>
+            ></span>
           ) : (
               <img src={item.url} />
             )}
-        </div>
+        </span>
       })
     }
     <Modal

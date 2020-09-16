@@ -6,7 +6,7 @@ export default function valueTypeComplex(props) {
   const { options, handle, data: { index, record }, } = props;
   const { fields } = options;
 
-  return <span>{fields.map(field => {
+  return <span>{fields.map((field, i) => {
     const { type } = field;
     return <Render
       key={field.field}
@@ -20,6 +20,7 @@ export default function valueTypeComplex(props) {
         type,
       }}
       handle={handle}
+      options={fields[i] && fields[i].options || {}}
     />
   })}</span>
 }
