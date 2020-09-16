@@ -80,6 +80,7 @@
     "tag": "valueType/tag",
     "currency": "valueType/currency",
     "percentage": "valueType/percentage",
+    "download": "valueType/download",
     "ellipsis": "valueType/ellipsis",
     "complex": "valueType/complex",
     "input-number": "valueType/inputNumber",

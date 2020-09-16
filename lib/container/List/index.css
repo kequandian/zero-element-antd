@@ -112,3 +112,7 @@
   margin-right: 8px;
   cursor      : pointer;
 }
+
+.ant-table-wrapper {
+  margin-top: 6px;
+}

@@ -62,7 +62,6 @@ export default function PCD(props) {
   function queryProvinceData() {
     getData({})
       .then(data => {
-        // setSelectedValue(['356', '357', '358']);
         const formatData = data.map(i => ({
           label: i[optLabel],
           value: i[optValue],
