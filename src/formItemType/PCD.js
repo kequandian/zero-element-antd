@@ -1,17 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { Select, Spin } from 'antd';
+import React, { useState, useEffect, useRef } from 'react';
+import { Cascader } from 'antd';
 import { query } from '@/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
-import { Flex } from 'layout-flex';
-import { getPageData } from 'zero-element/lib/Model';
-
-const Option = Select.Option;
 
 export default function PCD(props) {
   const {
     className,
-    value,
     options,
     namespace,
     onChange,
@@ -30,42 +25,22 @@ export default function PCD(props) {
   } = options;
   const { onSaveOtherValue } = handle;
 
-  const [loading, setLoading] = useState(false);
-  const [provinceList, setProvinceList] = useState([]);
-  const [province, setProvince] = useState({ key: -1, label: '' });
-  const [cityList, setCityList] = useState([]);
-  const [city, setCity] = useState({ key: -1, label: '' });
-  const [districtList, setDistrictList] = useState([]);
-  const [district, setDistrict] = useState({ key: -1, label: '' });
+  const [selectedValue, setSelectedValue] = useState([]);
+  const [listData, setListData] = useState([]);
+  const initRef = useRef(false);
 
   useDidMount(queryProvinceData);
-
   useEffect(_ => {
-    // TODO init defaultValue
-  }, [formdata]);
-
-  useEffect(_ => {
-    if (province.key) {
-      queryCityData(province.key);
-      setCity({ key: -1, label: '' });
-      setDistrict({ key: -1, label: '' });
+    if (!initRef.current && listData.length) {
+      initData(listData);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [province]);
-  useEffect(_ => {
-    if (city.key) {
-      queryDistrictData(city.key);
-      setDistrict({ key: -1, label: '' });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [city]);
+  }, [listData])
 
   function getData(queryData) {
     if (API) {
       const fAPI = formatAPI(API, {
         namespace,
       });
-      setLoading(true);
       return query(fAPI, queryData)
         .then(data => {
           const list = Array.isArray(data) ?
@@ -80,7 +55,6 @@ export default function PCD(props) {
           }
         })
         .finally(_ => {
-          setLoading(false);
         })
     }
     return Promise.resolve([]);
@@ -88,73 +62,107 @@ export default function PCD(props) {
   function queryProvinceData() {
     getData({})
       .then(data => {
-        setProvinceList(data);
+        // setSelectedValue(['356', '357', '358']);
+        const formatData = data.map(i => ({
+          label: i[optLabel],
+          value: i[optValue],
+          type: 'p',
+          isLeaf: false,
+        }));
+        setListData(formatData);
       })
   }
-  function queryCityData(p) {
-    getData({
+  function queryCityData(id) {
+    return getData({
       type: 'c',
-      pid: p,
+      pid: id,
     })
       .then(data => {
-        setCityList(data);
+        return Promise.resolve(data.map(i => ({
+          label: i[optLabel],
+          value: i[optValue],
+          type: 'c',
+          isLeaf: false,
+        })))
       })
   }
-  function queryDistrictData(p) {
-    getData({
+  function queryDistrictData(id) {
+    return getData({
       type: 'd',
-      pid: p,
+      pid: id,
     })
       .then(data => {
-        setDistrictList(data);
+        return Promise.resolve(data.map(i => ({
+          label: i[optLabel],
+          value: i[optValue],
+          type: 'd',
+        })))
       })
   }
 
-  function handlePChange(item) {
-    setProvince(item);
-    onSaveOtherValue(map.p, item.label);
-  }
-  function handleCChange(item) {
-    setCity(item);
-    onSaveOtherValue(map.c, item.label);
-  }
-  function handleDChange(item) {
-    setDistrict(item);
-    onSaveOtherValue(map.d, item.label);
+  function loadData(selectedOptions) {
+    const targetOption = selectedOptions[selectedOptions.length - 1];
+    targetOption.loading = true;
+
+    let queryData;
+    if (targetOption.type === 'p') {
+      queryData = queryCityData;
+    } else {
+      queryData = queryDistrictData;
+    }
+
+    queryData(targetOption.value).then(data => {
+      targetOption.loading = false;
+      targetOption.children = data;
+      setListData([...listData]);
+    })
+  };
+
+  function handleChange(value, selectedOptions) {
+    setSelectedValue(value);
+    selectedOptions.forEach(selected => {
+      onSaveOtherValue(map[selected.type], selected.label);
+    })
   }
 
-  return <Spin className={className} spinning={loading}>
-    <Flex>
-      <Select
-        labelInValue
-        onChange={handlePChange} value={province} {...rest}
-      >
-        {provinceList.map(opt => (
-          <Option key={opt[optValue]} value={opt[optValue]}>
-            {opt[optLabel]}
-          </Option>
-        ))}
-      </Select>
-      <Select
-        labelInValue
-        onChange={handleCChange} value={city} {...rest}
-      >
-        {cityList.map(opt => (
-          <Option key={opt[optValue]} value={opt[optValue]}>
-            {opt[optLabel]}
-          </Option>
-        ))}
-      </Select>
-      <Select
-        labelInValue
-        onChange={handleDChange} value={district} {...rest}
-      >
-        {districtList.map(opt => (
-          <Option key={opt[optValue]} value={opt[optValue]}>
-            {opt[optLabel]}
-          </Option>
-        ))}
-      </Select>
-    </Flex>
-  </Spin>
+  function initData(pList) {
+    const rst = [];
+    findData(formdata[map.p], pList, rst, queryCityData)
+      .then(list => findData(formdata[map.c], list, rst, queryDistrictData))
+      .then(list => findData(formdata[map.d], list, rst))
+      .then(_ => {
+        initRef.current = true;
+        setSelectedValue(rst);
+        setListData([...listData]);
+      })
+  }
+
+  function findData(value, list, rst, queryData) {
+    if (value) {
+      const find = list.find(i => i.label === value);
+      if (find) {
+        rst.push(find.value);
+
+        if (typeof queryData === 'function') {
+          find.loading = true;
+          return queryData(find.value)
+            .then(data => {
+              find.children = data;
+              find.loading = false;
+              return data;
+            })
+        }
+      }
+    }
+    return Promise.resolve([]);
+  }
+
+  return <Cascader
+    allowClear={false}
+    value={selectedValue}
+    options={listData}
+    loadData={loadData}
+    onChange={handleChange}
+  // changeOnSelect
+  />
 }
