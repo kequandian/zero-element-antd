@@ -8,7 +8,7 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 const initFileList = [];
 export default function UploadImage(props) {
   const { value, options, namespace, ...rest } = props;
-  const { API = '/api/upload/files', max = 9 } = options;
+  const { API = '/api/fs/uploadfile', max = 9 } = options;
   const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');

@@ -129,7 +129,6 @@ const defaultRule = {
     }
   },
   undefined: () => {
-    phone
     return {
       validator(rule, value) {
         return Promise.reject(`值: ${value} 使用了未知的校验规则`);

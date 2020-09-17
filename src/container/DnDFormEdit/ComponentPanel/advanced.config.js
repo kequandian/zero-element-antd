@@ -163,7 +163,7 @@ export default [
         },
         API: {
           label: '上传 API',
-          value: '/api/upload/files',
+          value: '/api/fs/uploadfile',
         },
         max: {
           label: '最大上传数量',

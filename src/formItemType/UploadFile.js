@@ -10,7 +10,7 @@ export default function UploadFile(props) {
   const { value, options, namespace, handle, ...rest } = props;
   const {
     title = '点击上传',
-    API = '/api/upload/files',
+    API = '/api/fs/uploadfile',
     max = 9,
     fileNameField = 'fileName'
   } = options;
