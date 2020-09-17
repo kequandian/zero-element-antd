@@ -17,7 +17,16 @@ export default (props) => {
 
   let v = value;
   if (format) {
-    v = formatAPI(format, { namespace, placeholder, data: formdata });
+    const rst = [];
+
+    if (Array.isArray(format)) {
+      format.forEach(f => {
+        rst.push(formatAPI(f, { namespace, placeholder, data: formdata }))
+      })
+    } else {
+      rst.push(formatAPI(format, { namespace, placeholder, data: formdata }));
+    }
+    v = rst.join('\n');
   }
   if (map) {
     v = map[v];

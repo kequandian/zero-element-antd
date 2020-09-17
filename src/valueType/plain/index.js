@@ -14,7 +14,7 @@ export default function valueTypePlain(props) {
           rst.push(formatAPI(f, { namespace, placeholder, data: record }))
         })
       } else {
-        rst.push(formatAPI(f, { namespace, placeholder, data: record }))
+        rst.push(formatAPI(format, { namespace, placeholder, data: record }))
       }
       setT(rst);
 

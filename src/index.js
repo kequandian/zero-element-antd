@@ -30,6 +30,7 @@ import onRequest from '@/listAction/onRequest';
 LayoutSet({
   Empty: Load('layout/Empty'),
   BaseTitle: Load('layout/BaseTitle'),
+  NotTitleContent: Load('layout/NotTitleContent'),
   TitleContent: Load('layout/TitleContent'),
   Loading: Load('layout/Loading'),
   Alone: Load('layout/Alone'),
