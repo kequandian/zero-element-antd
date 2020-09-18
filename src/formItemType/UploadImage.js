@@ -8,7 +8,7 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 const initFileList = [];
 export default function UploadImage(props) {
   const { value, options, namespace, ...rest } = props;
-  const { API = '/api/fs/uploadfile', max = 9 } = options;
+  const { API = '/api/fs/uploadfile', max = 9, type = 'json' } = options;
   const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -48,7 +48,11 @@ export default function UploadImage(props) {
 
       const doneImageList = fileList.filter(file => file.status === 'done');
       const saveimageList = doneImageList.map(file => ({ url: file.response ? file.response.data.url : file.url }));
-      props.onChange(saveimageList);
+      if (type === 'json') {
+        props.onChange(saveimageList);
+      } else {
+        props.onChange(saveimageList.map(i => i.url).join(';'));
+      }
     }
   }
 
@@ -87,7 +91,10 @@ function format(value) {
       rst = value;
     }
   } catch (e) {
-    // rst.push(value);
+    rst.push({
+      name: '图片',
+      url: value,
+    });
   }
   rst.length > 0 && rst.map((item, index) => {
     rst[index] = {

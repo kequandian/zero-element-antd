@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
+import { Image, Modal } from 'antd';
 import './index.css';
 
 export default function ImageView(props) {
@@ -39,18 +39,23 @@ export default function ImageView(props) {
           style={{
             width,
             height,
+            display: 'inline-block',
           }}
-          onClick={handlePreview.bind(null, item.url)}
         >
           {background ? (
             <span
+              onClick={handlePreview.bind(null, item.url)}
               className="bgConter"
               style={{
                 backgroundImage: `url(${item.url})`,
               }}
             ></span>
           ) : (
-              <img src={item.url} />
+              <Image
+                src={item.url}
+                width={width}
+                height={height}
+              />
             )}
         </span>
       })
