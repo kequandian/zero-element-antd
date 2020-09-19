@@ -16,6 +16,7 @@ export default function ModalCheckbox(props) {
 
   const {
     title = '选择数据',
+    modalWidth,
     label = 'name', editLabel = label,
     field = name,
     value: optValue = 'id',
@@ -62,6 +63,7 @@ export default function ModalCheckbox(props) {
       destroyOnClose
       visible={visible}
       title={title}
+      width={modalWidth}
       onCancel={switchVisible}
       onOk={handleSave}
     >

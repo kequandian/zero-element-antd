@@ -151,7 +151,7 @@ export default function PCD(props) {
         data: map,
       });
       const checkboxed = [
-        [...checkboxValue].filter(i => i !== currentValue),
+        ...[...checkboxValue].filter(i => i !== currentValue),
         currentValue];
       setCheckboxValue(checkboxed);
       onChange(checkboxed);
