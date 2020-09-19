@@ -9,6 +9,7 @@ export default function TableSelect(props) {
     extraData,
     options, value, onChange,
     onChangeTableData,
+    recordsToItems,
   } = props;
   const {
     layout = 'Empty', layoutConfig = {},
@@ -49,7 +50,7 @@ export default function TableSelect(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   useEffect(_ => {
-    if (onChangeTableData && tableData) {
+    if (onChangeTableData && tableData && recordsToItems) {
       onChangeTableData(JSON.parse(JSON.stringify(tableData)));
     }
   }, [tableData])

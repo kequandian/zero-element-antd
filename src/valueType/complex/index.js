@@ -5,9 +5,9 @@ import _ from 'lodash';
 
 export default function valueTypeComplex(props) {
   const { options, handle, data: { index, record }, } = props;
-  const { fields } = options;
+  const { fields, direction = 'horizontal' } = options;
 
-  return <Space>{fields.map((field, i) => {
+  return <Space direction={direction}>{fields.map((field, i) => {
     const { type } = field;
     return <Render
       key={field.field}

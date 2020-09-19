@@ -30,6 +30,8 @@ export default function OneMary(props) {
     searchFields = false,
     type = 'checkbox',
 
+    recordsToItems = false,
+
     effectField,
   } = options;
   const { onFormatValue } = handle;
@@ -133,7 +135,10 @@ export default function OneMary(props) {
     <TableSelect
       value={optValue}
       onChange={handleChange}
+
       onChangeTableData={API ? handleChangeTableData : undefined}
+      recordsToItems={recordsToItems}
+
       namespace={namespace}
       extraData={formdata}
       forceInitList={count}
