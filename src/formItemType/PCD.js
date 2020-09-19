@@ -17,6 +17,11 @@ export default function PCD(props) {
   const {
     API = '/api/pcd/list', dataField = 'data',
     label: optLabel = 'name', value: optValue = 'id',
+    limit = {
+      p: false,
+      c: false,
+      d: false,
+    },
     map = {
       p: 'province',
       c: 'city',
@@ -66,7 +71,7 @@ export default function PCD(props) {
           label: i[optLabel],
           value: i[optValue],
           type: 'p',
-          isLeaf: false,
+          isLeaf: Boolean(limit && limit.c),
         }));
         setListData(formatData);
       })
@@ -81,7 +86,7 @@ export default function PCD(props) {
           label: i[optLabel],
           value: i[optValue],
           type: 'c',
-          isLeaf: false,
+          isLeaf: Boolean(limit && limit.d),
         })))
       })
   }
