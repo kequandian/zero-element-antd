@@ -3,7 +3,7 @@ import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 
 export default (props) => {
-  const { title, options, namespace, handle } = props;
+  const { title, options, className, namespace, handle } = props;
   const { onCreate, onCreateList } = handle;
   const {
     modalTitle, modalWidth,
@@ -26,8 +26,8 @@ export default (props) => {
     }
   }
 
-  return <div>
-    <Button onClick={handleOpen} type="primary">
+  return <>
+    <Button onClick={handleOpen} className={className}>
       {title}
     </Button>
     <Modal
@@ -52,5 +52,5 @@ export default (props) => {
         onSubmit={handleSubmit}
       />
     </Modal>
-  </div>
+  </>
 }

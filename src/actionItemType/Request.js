@@ -13,7 +13,7 @@ const methodMap = {
 import './index.css';
 
 export default function Request(props) {
-  const { title = 'Request', options, namespace, handle, ...restProps } = props;
+  const { title = 'Request', options, className, namespace, handle, ...restProps } = props;
   const {
     icon = 'monitor',
     method = 'get',
@@ -64,7 +64,7 @@ export default function Request(props) {
   }
 
   return <Button
-    className="ZEle-action-button"
+    className={className}
     onClick={handleClick}
     icon={icon}
     {...buttonProps}

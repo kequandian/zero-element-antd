@@ -7,12 +7,12 @@ export default (props) => {
 
   if (Array.isArray(text)) {
     return text.map((item, i) => {
-      return <Button key={item.id || i} type="link" href={item.url} >{item.name}</Button>
+      return <Button type="link" size="small" key={item.id || i} href={item.url} >{item.name}</Button>
     })
   }
 
   if (text) {
-    return <Button type="link" href={text} >{record[fileName] || fileName}</Button>;
+    return <Button type="link" size="small" href={text} >{record[fileName] || fileName}</Button>;
   }
   return '无';
 }

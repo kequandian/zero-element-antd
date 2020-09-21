@@ -3,8 +3,8 @@ import { Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 
 export default (props) => {
-  const { title, options, namespace, handle, hooks = {}, ...restProps } = props;
-  const { icon, modalTitle, modalWidth, ...rest } = options;
+  const { title, className, options, namespace, handle, hooks = {}, ...restProps } = props;
+  const { modalTitle, modalWidth, ...rest } = options;
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(undefined);
   const { onSubmitActionModal } = hooks;
@@ -32,7 +32,7 @@ export default (props) => {
   }
 
   return <>
-    <Button onClick={handleOpen} type="primary" icon={icon}>
+    <Button onClick={handleOpen} className={className}>
       {title}
     </Button>
     <Modal

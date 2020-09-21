@@ -1,5 +1,6 @@
 import React from 'react';
 import { toNumber, returnFloat } from '@/utils/tool';
+import './index.less';
 
 export default function valueTypeCurrency(props) {
   const { options = {}, data: { text = '' } } = props;
@@ -15,7 +16,8 @@ export default function valueTypeCurrency(props) {
     v = returnFloat(toNumber(text));
   }
 
-  return <span style={{ color }}>
-    {`${s} ${v}`}
+  return <span className="ZEle-valueType-currency">
+    <span className="label">{S}</span>
+    <span>{v}</span>
   </span>
 }

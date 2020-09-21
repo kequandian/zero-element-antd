@@ -36,7 +36,7 @@ export default function valueTypePlain(props) {
             <span>{value}</span>
           </div>
         }
-        return <div className="ZEle-valueType-plain">{text}</div>;
+        return <div className="ZEle-valueType-plain" key={i}>{text}</div>;
       })}
     </div>
   }

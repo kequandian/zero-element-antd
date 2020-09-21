@@ -4,10 +4,9 @@ import { download } from 'zero-element/lib/utils/request';
 import { getPageData } from 'zero-element/lib/Model';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { DownloadOutlined } from '@ant-design/icons';
-import './index.css';
 
 export default function Export(props) {
-  const { title = '导出', options = {}, namespace, handle, config, ...restProps } = props;
+  const { title = '导出', options = {}, className, namespace, handle, config, ...restProps } = props;
   const {
     API,
     method,
@@ -33,7 +32,7 @@ export default function Export(props) {
   }
 
   return <Button
-    className="ZEle-action-button"
+    className={className}
     onClick={handleClick}
     icon={<DownloadOutlined />}
   >

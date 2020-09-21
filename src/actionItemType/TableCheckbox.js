@@ -4,7 +4,7 @@ import TableCheckbox from '@/formItemType/ModalCheckbox/TableCheckbox';
 import { getPageData } from 'zero-element/lib/Model';
 
 export default (props) => {
-  const { value, title, options, namespace, handle } = props;
+  const { value, title, options, className, namespace, handle } = props;
   const { onCreateList } = handle;
   const {
     modalTitle, modalWidth,
@@ -35,8 +35,8 @@ export default (props) => {
     handleClose();
   }
 
-  return <div>
-    <Button onClick={handleOpen} type="primary">
+  return <>
+    <Button onClick={handleOpen} className={className}>
       {title}
     </Button>
     <Modal
@@ -63,5 +63,5 @@ export default (props) => {
         requireValid={requireValid}
       />
     </Modal>
-  </div>
+  </>
 }

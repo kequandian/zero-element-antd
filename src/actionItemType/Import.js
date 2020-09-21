@@ -7,7 +7,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 
 
 export default function Import(props) {
-  const { title = '导入', options = {}, namespace, handle, ...restProps } = props;
+  const { title = '导入', options = {}, className, namespace, handle, ...restProps } = props;
   const {
     API = '/api/io/excel/import',
     name,
@@ -59,7 +59,7 @@ export default function Import(props) {
     >
       <Button
         loading={loading}
-        className="ZEle-action-button"
+        className={className}
         icon={<UploadOutlined />}
       >
         {title}
