@@ -17,7 +17,7 @@ export default function valueTypeCurrency(props) {
   }
 
   return <span className="ZEle-valueType-currency">
-    <span className="label">{S}</span>
+    <span className="label">{s}</span>
     <span>{v}</span>
   </span>
 }
