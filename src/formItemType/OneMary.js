@@ -5,6 +5,11 @@ import { Render } from 'zero-element/lib/config/layout';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import TableSelect from '@/formItemType/TableSelect';
 
+/**
+ * mode
+ * - append 由用户手动附加数据 作为一对多子项
+ * - records 由用户从 api 中返回的数据中选取数据 作为一对多子项
+ */
 export default function OneMary(props) {
   const {
     name, namespace, value, options = {},
@@ -24,13 +29,13 @@ export default function OneMary(props) {
     JSONString,
     map,
 
-    value: optValue,
+    value: optValue = 'id',
     pagination = false,
     rowSelection = false,
     searchFields = false,
     type = 'checkbox',
 
-    recordsToItems = false,
+    mode = API ? 'records' : 'append',
 
     effectField,
   } = options;
@@ -133,16 +138,16 @@ export default function OneMary(props) {
       }))}
     </Render>
     <TableSelect
-      value={optValue}
       onChange={handleChange}
 
       onChangeTableData={API ? handleChangeTableData : undefined}
-      recordsToItems={recordsToItems}
+      mode={mode}
 
       namespace={namespace}
       extraData={formdata}
       forceInitList={count}
-      data={API ? undefined : v}
+      data={mode === 'append' ? v : undefined}
+      value={mode === 'records' ? v : undefined}
       columns={columns}
       options={{
         API,

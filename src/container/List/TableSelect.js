@@ -9,7 +9,7 @@ export default function TableSelect(props) {
     extraData,
     options, value, onChange,
     onChangeTableData,
-    recordsToItems,
+    mode,
   } = props;
   const {
     layout = 'Empty', layoutConfig = {},
@@ -45,15 +45,20 @@ export default function TableSelect(props) {
 
   useEffect(_ => {
     if (Array.isArray(value)) {
-      setSelectedRowKeys(value.map(item => item[optValue]));
+      setSelectedRowKeys(value.map(item => {
+        if (item && typeof item === 'object') {
+          return String(item[optValue]);
+        }
+        return String(item);
+      }));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
-  useEffect(_ => {
-    if (onChangeTableData && tableData && recordsToItems) {
-      onChangeTableData(JSON.parse(JSON.stringify(tableData)));
-    }
-  }, [tableData])
+  // useEffect(_ => {
+  //   if (onChangeTableData && tableData) {
+  //     onChangeTableData(JSON.parse(JSON.stringify(tableData)));
+  //   }
+  // }, [tableData])
 
   function handleRowClassName(record) {
     if (operationData.id === record.id) {
