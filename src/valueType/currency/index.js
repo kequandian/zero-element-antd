@@ -3,7 +3,7 @@ import { toNumber, returnFloat } from '@/utils/tool';
 
 export default function valueTypeCurrency(props) {
   const { options = {}, data: { text = '' } } = props;
-  const { symbol = '￥', color, nullPlaceholder } = options;
+  const { symbol = '￥', color = '#610b0b', nullPlaceholder } = options;
 
   let v;
   let s = symbol;
