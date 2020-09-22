@@ -4,7 +4,7 @@ import './index.less';
 
 export default function valueTypePlain(props) {
   const { namespace, options = {}, data: { index, text = '', record }, } = props;
-  const { style, format, placeholder = '' } = options;
+  const { style, format, placeholder = '-' } = options;
   const [t, setT] = useState([]);
 
   useEffect(_ => {
