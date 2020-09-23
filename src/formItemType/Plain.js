@@ -13,7 +13,12 @@ export default (props) => {
     onChange,
     ...rest
   } = props;
-  const { format, placeholder = '-', symbol = '/', map, autoSave = false } = options;
+  const {
+    placeholder = '-',
+    autoSave = false,
+    format, map,
+    symbol = '/', joinField,
+  } = options;
 
   let v = value;
   if (format) {
@@ -33,7 +38,11 @@ export default (props) => {
   }
 
   if (Array.isArray(v)) {
-    v = v.join(symbol);
+    if (joinField) {
+      v = v.map(i => i[joinField]).join(symbol);
+    } else {
+      v = v.join(symbol);
+    }
   }
 
   useEffect(_ => {
