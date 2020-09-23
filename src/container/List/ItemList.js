@@ -7,6 +7,7 @@ export default function ItemList(props) {
   const {
     namespace, config, extraData,
     Item,
+    ...restProps
   } = props;
   const {
     layout = 'Empty', layoutConfig = {},
@@ -49,8 +50,10 @@ export default function ItemList(props) {
       {listData.map((item, i) => (
         <Item
           key={item.id}
+          namespace={namespace}
           {...tableProps}
           {...propsCfg}
+          {...restProps}
           index={i}
           data={item}
           handle={handle}
