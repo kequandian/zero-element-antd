@@ -100,7 +100,7 @@ export default function BaseForm(props) {
   function handleGetData() {
     setCanRenderForm(false);
     onGetOne({}).then(({ code, data }) => {
-      if (code === 200) {
+      if (code === 200 && data) {
         initData.current = data;
         const { extra } = data;
         setPageData(namespace, 'formData', data);

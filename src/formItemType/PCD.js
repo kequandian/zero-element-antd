@@ -20,16 +20,12 @@ export default function PCD(props) {
     label: optLabel = 'name', value: optValue = 'id',
     type = 'radio',
     checkboxTemplate = '<p>-<c>-<d>',
-    limit = {
-      p: false,
-      c: false,
-      d: false,
-    },
-    map = {
-      p: 'province',
-      c: 'city',
-      d: 'district',
-    },
+    limit = [false, false, false],
+    map = [
+      { type: 'p', value: 'province' },
+      { type: 'c', value: 'city' },
+      { type: 'd', value: 'district' },
+    ],
   } = options;
   const { onSaveOtherValue } = handle;
 
@@ -77,42 +73,50 @@ export default function PCD(props) {
     }
     return Promise.resolve([]);
   }
+  /**
+   * 查询第一级的数据
+   */
   function queryProvinceData() {
-    getData({})
+    const type = map[0].type;
+    getData({
+      type,
+    })
       .then(data => {
         const formatData = data.map(i => ({
           label: i[optLabel],
           value: i[optValue],
-          type: 'p',
-          isLeaf: Boolean(limit && limit.c),
+          type,
+          isLeaf: Boolean(limit && limit[0]),
         }));
         setListData(formatData);
       })
   }
   function queryCityData(id) {
+    const type = map[1].type;
     return getData({
-      type: 'c',
+      type,
       pid: id,
     })
       .then(data => {
         return Promise.resolve(data.map(i => ({
           label: i[optLabel],
           value: i[optValue],
-          type: 'c',
-          isLeaf: Boolean(limit && limit.d),
+          type,
+          isLeaf: Boolean(limit && limit[1]),
         })))
       })
   }
   function queryDistrictData(id) {
+    const type = map[2].type;
     return getData({
-      type: 'd',
+      type,
       pid: id,
     })
       .then(data => {
         return Promise.resolve(data.map(i => ({
           label: i[optLabel],
           value: i[optValue],
-          type: 'd',
+          type,
         })))
       })
   }
@@ -122,7 +126,9 @@ export default function PCD(props) {
     targetOption.loading = true;
 
     let queryData;
-    if (targetOption.type === 'p') {
+    const type = map[0].type;
+
+    if (targetOption.type === type) {
       queryData = queryCityData;
     } else {
       queryData = queryDistrictData;
@@ -139,7 +145,10 @@ export default function PCD(props) {
     if (type === 'radio') {
       setSelectedValue(value);
       selectedOptions.forEach(selected => {
-        onSaveOtherValue(map[selected.type], selected.label);
+        const find = map.find(i => i.type === selected.type);
+        if (find) {
+          onSaveOtherValue(find.value, selected.label);
+        }
       })
     } else {
       const map = {};
@@ -160,9 +169,9 @@ export default function PCD(props) {
 
   function initData(pList) {
     const rst = [];
-    findData(formdata[map.p], pList, rst, queryCityData)
-      .then(list => findData(formdata[map.c], list, rst, queryDistrictData))
-      .then(list => findData(formdata[map.d], list, rst))
+    findData(formdata[map[0].type], pList, rst, queryCityData)
+      .then(list => findData(formdata[map[1].type], list, rst, queryDistrictData))
+      .then(list => findData(formdata[map[2].type], list, rst))
       .then(_ => {
         initRef.current = true;
         setSelectedValue(rst);
