@@ -13,7 +13,7 @@ export default (props) => {
     onChange,
     ...rest
   } = props;
-  const { format, placeholder = '-', map, autoSave = false } = options;
+  const { format, placeholder = '-', symbol = '/', map, autoSave = false } = options;
 
   let v = value;
   if (format) {
@@ -30,6 +30,10 @@ export default (props) => {
   }
   if (map) {
     v = map[v];
+  }
+
+  if (Array.isArray(v)) {
+    v = v.join(symbol);
   }
 
   useEffect(_ => {

@@ -76,6 +76,7 @@
   "VTSet": {
     "index": "valueType/index",
     "plain": "valueType/plain",
+    "join": "valueType/join",
     "map": "valueType/map",
     "image": "valueType/image",
     "tag": "valueType/tag",

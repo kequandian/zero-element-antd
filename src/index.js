@@ -111,6 +111,7 @@ AITSet({
 VTSet({
   'index': Load('valueType/index'),
   'plain': Load('valueType/plain'),
+  'join': Load('valueType/join'),
   'map': Load('valueType/map'),
   'image': Load('valueType/image'),
   'tag': Load('valueType/tag'),
