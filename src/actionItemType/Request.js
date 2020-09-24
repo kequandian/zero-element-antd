@@ -10,7 +10,6 @@ const methodMap = {
   'delete': remove,
   'download': download,
 };
-import './index.css';
 
 export default function Request(props) {
   const { title = 'Request', options, className, namespace, handle, ...restProps } = props;
