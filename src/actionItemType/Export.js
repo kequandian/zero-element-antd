@@ -8,7 +8,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 export default function Export(props) {
   const { title = '导出', options = {}, className, namespace, handle, config, ...restProps } = props;
   const {
-    API,
+    API = '/api/io/excel/export',
     method,
     name = namespace,
     fileName,
