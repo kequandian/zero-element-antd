@@ -86,7 +86,7 @@ export default function PCD(props) {
           label: i[optLabel],
           value: i[optValue],
           type,
-          isLeaf: Boolean(limit && limit[0]),
+          isLeaf: Boolean(limit && limit[1]),
         }));
         setListData(formatData);
       })
@@ -102,7 +102,7 @@ export default function PCD(props) {
           label: i[optLabel],
           value: i[optValue],
           type,
-          isLeaf: Boolean(limit && limit[1]),
+          isLeaf: Boolean(limit && limit[2]),
         })))
       })
   }
