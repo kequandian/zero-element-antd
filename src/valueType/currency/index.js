@@ -4,7 +4,7 @@ import './index.less';
 
 export default function valueTypeCurrency(props) {
   const { options = {}, data: { text = '' } } = props;
-  const { symbol = '￥', color, nullPlaceholder = '-' } = options;
+  const { symbol = '￥', style, color, nullPlaceholder = '-' } = options;
 
   let v;
   let s = symbol;
@@ -18,6 +18,6 @@ export default function valueTypeCurrency(props) {
 
   return <span className="ZEle-valueType-currency">
     <span className="label">{s}</span>
-    <span style={{ color }}>{v}</span>
+    <span style={{ ...style, color }}>{v}</span>
   </span>
 }
