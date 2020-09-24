@@ -25,8 +25,9 @@ export default function Export(props) {
       method,
       fileName,
     }, {
-      ...searchData,
-      templateName: name,
+      exportName: name,
+      search: searchData,
+      type: 'API',
       api: `${get()}${listAPI}?pageNum=${current}&pageSize=${total}`,
     });
   }
