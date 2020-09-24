@@ -75,9 +75,11 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
   };
 }
 function valueTypeRender(type, config, props, handle) {
-  if (!type) return undefined;
+  if (type === null) {
+    return undefined;
+  }
   return (text, record, index) => <Render
-    n={type}
+    n={type || 'plain'}
     {...config}
     {...props}
     data={{

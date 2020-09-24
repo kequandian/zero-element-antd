@@ -7,7 +7,7 @@ export default function valueTypeEllipsis(props) {
     field,
     namespace,
     options = {},
-    data: { index, text = '', record },
+    data: { index, text = '-', record },
   } = props;
   const { max = 16, format, placeholder = '' } = options;
   const [t, setT] = useState(text);
@@ -22,7 +22,7 @@ export default function valueTypeEllipsis(props) {
     }
   }, [text, format]);
 
-  if (!t || t === 'null') return null;
+  if (!t || t === 'null') return '-';
 
   return t.length < max ? t : (
     <Tooltip title={t}>

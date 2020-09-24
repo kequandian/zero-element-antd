@@ -40,5 +40,10 @@ export default function valueTypePlain(props) {
       })}
     </div>
   }
-  return <span style={style}>{text}</span>
+
+  let echoText = text;
+  if (text && text !== 0) {
+    echoText = placeholder;
+  }
+  return <span style={style}>{echoText}</span>
 }
