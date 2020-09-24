@@ -9,7 +9,7 @@ export default function Export(props) {
   const { title = '导出', options = {}, className, namespace, handle, config, ...restProps } = props;
   const {
     API = '/api/io/excel/export',
-    method,
+    method = 'post',
     name = namespace,
     fileName,
     ...rest
