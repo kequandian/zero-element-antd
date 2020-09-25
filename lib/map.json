@@ -33,6 +33,7 @@
   },
   "FITSet": {
     "plain": "formItemType/Plain",
+    "image": "formItemType/Image",
     "empty": "formItemType/Empty",
     "hidden": "formItemType/Hidden",
     "group": "formItemType/Group",

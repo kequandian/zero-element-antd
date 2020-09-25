@@ -65,6 +65,7 @@ LASet({
 
 FITSet({
   plain: Load('formItemType/Plain'),
+  image: Load('formItemType/Image'),
   empty: Load('formItemType/Empty'),
   hidden: Load('formItemType/Hidden'),
   group: Load('formItemType/Group'),
