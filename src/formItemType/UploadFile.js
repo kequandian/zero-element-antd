@@ -12,7 +12,8 @@ export default function UploadFile(props) {
     title = '点击上传',
     API = '/api/fs/uploadfile',
     max = 9,
-    fileNameField = 'fileName'
+    fileNameField = 'fileName',
+    type = 'json'
   } = options;
   const { onSaveOtherValue } = handle;
   const [fileList, setFileList] = useState(initFileList);
@@ -50,7 +51,13 @@ export default function UploadFile(props) {
         name: file.response ? file.response.data.originalFileName || file.response.data.name : file.name,
         url: file.response ? file.response.data.url : file.url
       }));
-      props.onChange(saveFileList);
+
+      if (type === 'json') {
+        props.onChange(saveimageList);
+      } else {
+        props.onChange(saveimageList.map(i => i.url).join(';'));
+      }
+
       if (max === 1) {
         if (saveFileList[0]) {
           onSaveOtherValue(fileNameField, saveFileList[0].name);
@@ -90,7 +97,10 @@ function format(value) {
       rst = value;
     }
   } catch (e) {
-    // rst.push(value);
+    rst.push({
+      name: '文件',
+      url: value,
+    });
   }
   rst.length > 0 && rst.map((item, index) => {
     rst[index] = {

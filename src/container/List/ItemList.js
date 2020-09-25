@@ -60,9 +60,13 @@ export default function ItemList(props) {
         />
       ))}
     </Render>
-    <br />
-    {tableProps.pagination ? <Pagination
-      {...tableProps.pagination}
-    /> : null}
+    {tableProps.pagination ? (
+      <>
+        <br />
+        <Pagination
+          {...tableProps.pagination}
+        />
+      </>
+    ) : null}
   </Render>
 }
