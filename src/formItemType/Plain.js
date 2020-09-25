@@ -51,5 +51,10 @@ export default (props) => {
     }
   }, [autoSave, value]);
 
-  return <div {...rest}{...propsOtp}>{String(v === undefined ? placeholder : v)}</div>;
+  let echoText = v;
+  if (!v && v !== 0) {
+    echoText = placeholder;
+  }
+
+  return <div {...rest}{...propsOtp}>{String(echoText)}</div>;
 }

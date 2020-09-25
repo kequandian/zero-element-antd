@@ -121,6 +121,7 @@ VTSet({
   'ellipsis': Load('valueType/ellipsis'),
   'complex': Load('valueType/complex'),
   'download': Load('valueType/download'),
+  'count-down': Load('valueType/countDown'),
   'input-number': Load('valueType/inputNumber'),
   'input-text': Load('valueType/inputText'),
   'input-select': Load('valueType/inputSelect'),

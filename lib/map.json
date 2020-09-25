@@ -86,6 +86,7 @@
     "download": "valueType/download",
     "ellipsis": "valueType/ellipsis",
     "complex": "valueType/complex",
+    "count-down": "valueType/countDown",
     "input-number": "valueType/inputNumber",
     "input-text": "valueType/inputText",
     "input-select": "valueType/inputSelect",

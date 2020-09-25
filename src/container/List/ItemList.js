@@ -1,7 +1,7 @@
 import React from 'react';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
-import { Pagination } from 'antd';
+import { Pagination, Empty } from 'antd';
 
 export default function ItemList(props) {
   const {
@@ -60,6 +60,7 @@ export default function ItemList(props) {
         />
       ))}
     </Render>
+    {listData.length ? null : <Empty />}
     {tableProps.pagination ? (
       <>
         <br />
