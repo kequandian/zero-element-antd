@@ -238,7 +238,8 @@ export default function BaseForm(props) {
       return footer;
     }
 
-    return <div className="ant-modal-footer">
+    const classes = MODAL ? 'ant-modal-footer' : 'ZEle-Form-footer';
+    return <div className={classes}>
       <Button onClick={handleReset}>重置</Button>
       <Button type="primary" htmlType="submit" onClick={onSubmit}>保存</Button>
     </div>

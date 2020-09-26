@@ -13,3 +13,11 @@
 .ant-form-inline .ant-form-item>.ant-form-item-label {
   min-width: 6em;
 }
+
+.ZEle-Form-footer {
+  margin-left: 108px;
+}
+
+.ZEle-Form-footer .ant-btn+.ant-btn {
+  margin-left: 4px;
+}

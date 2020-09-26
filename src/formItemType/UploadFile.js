@@ -3,7 +3,9 @@ import { Upload, Button } from 'antd';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined, UploadOutlined } from '@ant-design/icons';
+
+const { Dragger } = Upload;
 
 const initFileList = [];
 export default function UploadFile(props) {
@@ -13,7 +15,8 @@ export default function UploadFile(props) {
     API = '/api/fs/uploadfile',
     max = 9,
     fileNameField = 'fileName',
-    type = 'json'
+    type = 'json',
+    dragger = false,
   } = options;
   const { onSaveOtherValue } = handle;
   const [fileList, setFileList] = useState(initFileList);
@@ -37,7 +40,12 @@ export default function UploadFile(props) {
 
   function handleChange(info) {
     const { fileList } = info;
-    setFileList(fileList);
+    setFileList(fileList.map(file => ({
+      ...file,
+      name: getValue(file, 'originalFileName', 'name'),
+      url: getValue(file, 'url'),
+    })));
+
     if (info.file.status === 'uploading' && fileList.length > 0) {
       setLoading(true);
     }
@@ -46,16 +54,16 @@ export default function UploadFile(props) {
       info.file.status === 'removed') {
       setLoading(false);
 
-      const doneImageList = fileList.filter(file => file.status === 'done');
-      const saveFileList = doneImageList.map(file => ({
-        name: file.response ? file.response.data.originalFileName || file.response.data.name : file.name,
-        url: file.response ? file.response.data.url : file.url
+      const doneFileList = fileList.filter(file => file.status === 'done');
+      const saveFileList = doneFileList.map(file => ({
+        name: getValue(file, 'originalFileName', 'name'),
+        url: getValue(file, 'url'),
       }));
 
       if (type === 'json') {
-        props.onChange(saveimageList);
+        props.onChange(saveFileList);
       } else {
-        props.onChange(saveimageList.map(i => i.url).join(';'));
+        props.onChange(saveFileList.map(i => i.url).join(';'));
       }
 
       if (max === 1) {
@@ -79,12 +87,24 @@ export default function UploadFile(props) {
     onChange: handleChange
   }
 
-  return <div className="clearfix" style={{ marginTop: '0.5em' }} {...rest}>
-    <Upload
-      {...uploadProps}
-    >
-      {fileList.length >= max ? '' : uploadButton}
-    </Upload>
+  const limit = fileList.length >= max;
+
+  return <div className="clearfix" {...rest}>
+    {dragger ?
+      (
+        <Dragger {...uploadProps} className={limit ? 'ZEleA-UploadFile-hidden' : ''}>
+          <p className="ant-upload-drag-icon">
+            <UploadOutlined />
+          </p>
+          <p className="ant-upload-text">点击或拖拽文件以上传</p>
+        </Dragger>
+      ) : (
+        <Upload
+          {...uploadProps}
+        >
+          {limit ? '' : uploadButton}
+        </Upload>
+      )}
   </div>
 }
 
@@ -111,4 +131,23 @@ function format(value) {
     }
   });
   return rst;
+}
+
+function getValue(obj, key, spareKey) {
+  if (!obj) return undefined;
+  if (obj.response) {
+    if (obj.response.data && obj.response.data[key]) {
+      return obj.response.data[key];
+    }
+    if (obj.response.data && obj.response.data[spareKey]) {
+      return obj.response.data[spareKey];
+    }
+  }
+  if (obj[key]) {
+    return obj[key];
+  }
+  if (obj[spareKey]) {
+    return obj[spareKey];
+  }
+  return undefined;
 }

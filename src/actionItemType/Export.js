@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { download } from 'zero-element/lib/utils/request';
 import { getPageData } from 'zero-element/lib/Model';
@@ -18,9 +18,10 @@ export default function Export(props) {
   const { listAPI } = lAPI;
   const pageData = getPageData(namespace);
   const { searchData, current, total } = pageData;
+  const [loading, setLoading] = useState(false);
 
   function handleClick() {
-
+    setLoading(true);
     download(API, {
       method,
       fileName,
@@ -29,12 +30,16 @@ export default function Export(props) {
       search: searchData,
       type: 'API',
       api: `${get()}${listAPI}?pageNum=${current}&pageSize=${total}`,
-    });
+    })
+      .finally(_ => {
+        setLoading(false);
+      })
   }
 
   return <Button
     className={className}
     onClick={handleClick}
+    loading={loading}
     icon={<DownloadOutlined />}
   >
     {title}

@@ -59,3 +59,7 @@
 .ZEleA-NumberRange>span {
   padding: 0 4px;
 }
+
+.ZEleA-UploadFile-hidden {
+  display: none;
+}

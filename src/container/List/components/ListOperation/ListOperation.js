@@ -11,7 +11,7 @@ export default function ListOperation(props) {
   const { listData } = getModel(model.namespace);
   const { records } = listData;
 
-  if (record.operation === false) {
+  if (record && record.operation === false) {
     return null;
   }
 
