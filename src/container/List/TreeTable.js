@@ -61,11 +61,10 @@ export default function TreeTable(props) {
   }, [data]);
   useEffect(_ => {
     const { children = [] } = treeData[0] || {};
-    if (
-      treeData.length === 1 &&
-      (expandedRowKeys.length === 0 && children.length === 0)
-    ) {
-      handleAppend(treeData[0].id);
+    if (treeData.length === 1 && (expandedRowKeys.length === 0)) {
+      if (children.length === 0) {
+        handleAppend(treeData[0].id);
+      }
       setExpandedRowKeys([treeData[0].id]);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -126,7 +125,7 @@ export default function TreeTable(props) {
       {actions.map((action, i) => getActionItem({
         key: i,
         ...action,
-      }, model, handle, {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+      }, model, handle, {
         namespace,
         extraData,
         config,

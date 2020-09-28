@@ -169,9 +169,9 @@ export default function PCD(props) {
 
   function initData(pList) {
     const rst = [];
-    findData(formdata[map[0].type], pList, rst, queryCityData)
-      .then(list => findData(formdata[map[1].type], list, rst, queryDistrictData))
-      .then(list => findData(formdata[map[2].type], list, rst))
+    findData(formdata[map[0].value], pList, rst, queryCityData)
+      .then(list => findData(formdata[map[1].value], list, rst, queryDistrictData))
+      .then(list => findData(formdata[map[2].value], list, rst))
       .then(_ => {
         initRef.current = true;
         setSelectedValue(rst);

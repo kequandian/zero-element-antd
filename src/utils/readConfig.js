@@ -132,6 +132,19 @@ const defaultRule = {
       },
     }
   },
+  password: (msg = '两次输入的密码不一致', options, formData, handle) => {
+    const { field = 'password' } = options;
+
+    return {
+      validator(rule, value) {
+        if (!value && value !== 0) return Promise.resolve();
+        if (value === formData[field]) {
+          return Promise.resolve();
+        }
+        return Promise.reject(msg);
+      },
+    }
+  },
   error: () => {
     return {
       validator(rule, value) {

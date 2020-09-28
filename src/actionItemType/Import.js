@@ -34,6 +34,7 @@ export default function Import(props) {
     if (info.file.status === 'done') {
       message.success('导入成功');
       handleCloseAndQuery();
+      setLoading(false);
     }
     if (info.file.status === 'error') {
       message.error('导入失败');

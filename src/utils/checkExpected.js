@@ -6,8 +6,15 @@
  * @param {*} options
  * @returns
  */
+import global from 'zero-element/lib/config/global';
 
 const rulesMap = {
+  'IS_RESOLVE': (value) => {
+    return true;
+  },
+  'IS_REJECT': (value) => {
+    return false;
+  },
   'IS_NULL': (value) => {
     if (typeof value === 'object') {
       if (Array.isArray(value)) {
@@ -42,12 +49,12 @@ const rulesMap = {
 export default function checkExpected(record = {}, expect = {}) {
   const { field, value, permission } = expect;
 
-  // // 若需要检测权限
-  // if (permission) {
-  //   if (checkPerm(permission) === false) {
-  //     return false;
-  //   }
-  // }
+  // 若需要检测权限
+  if (permission) {
+    if (checkPerm(permission) === false) {
+      return false;
+    }
+  }
   if (!field) return true; // 没有预期就是什么都凑合
 
   const fieldList = field instanceof Array ? field : [field];
@@ -111,5 +118,21 @@ function extendsExpectedValue(values, recordValue) {
     return values.some(value => judge(value, recordValue));
   } else {
     return judge(values, recordValue);
+  }
+}
+
+function checkPerm(permission) {
+  const { getPerm } = global;
+
+  if (typeof getPerm === 'function') {
+    const permObj = getPerm();
+    if (permObj[permission]) {
+      return true;
+    } else {
+      return false;
+    }
+
+  } else {
+    console.log('权限功能需要在全局配置里面定义 getPerm 函数才能正常使用');
   }
 }
