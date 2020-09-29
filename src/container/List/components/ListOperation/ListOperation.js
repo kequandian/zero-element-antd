@@ -40,6 +40,11 @@ export default function ListOperation(props) {
     visible: state.confirm,
     onCancel: handleCancel,
     onConfirm: handleConfirm,
+    arrowPointAtCenter: true,
+    getPopupContainer: triggerNode => triggerNode,
+    overlayStyle: {
+      minWidth: 200,
+    }
   };
 
   const outsideList = [];

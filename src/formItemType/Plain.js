@@ -34,7 +34,7 @@ export default (props) => {
     v = rst.join('\n');
   }
   if (map) {
-    v = map[v];
+    v = map[v] || v;
   }
 
   if (Array.isArray(v)) {
