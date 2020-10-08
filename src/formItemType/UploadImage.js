@@ -7,7 +7,7 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 
 const initFileList = [];
 export default function UploadImage(props) {
-  const { value, options, namespace, ...rest } = props;
+  const { value, options, namespace, props: restProps } = props;
   const { API = '/api/fs/uploadfile', max = 9, type = 'json' } = options;
   const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
@@ -70,9 +70,10 @@ export default function UploadImage(props) {
     onChange: handleChange
   }
 
-  return <div className="clearfix" style={{ marginTop: '0.5em' }} {...rest}>
+  return <div className="clearfix" style={{ marginTop: '0.5em' }}>
     <Upload
       {...uploadProps}
+      {...restProps}
     >
       {fileList.length >= max ? '' : uploadButton}
     </Upload>
@@ -99,7 +100,7 @@ function format(value) {
   rst.length > 0 && rst.map((item, index) => {
     rst[index] = {
       ...item,
-      uid: index,
+      uid: String(-index),
       status: 'done',
     }
   });

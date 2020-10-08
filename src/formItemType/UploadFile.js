@@ -9,7 +9,7 @@ const { Dragger } = Upload;
 
 const initFileList = [];
 export default function UploadFile(props) {
-  const { value, options, namespace, handle, ...rest } = props;
+  const { value, options, namespace, handle, props: restProps } = props;
   const {
     title = '点击上传',
     API = '/api/fs/uploadfile',
@@ -89,10 +89,14 @@ export default function UploadFile(props) {
 
   const limit = fileList.length >= max;
 
-  return <div className="clearfix" {...rest}>
+  return <div className="clearfix">
     {dragger ?
       (
-        <Dragger {...uploadProps} className={limit ? 'ZEleA-UploadFile-hidden' : ''}>
+        <Dragger
+          {...uploadProps}
+          {...restProps}
+          className={limit ? 'ZEleA-UploadFile-hidden' : ''}
+        >
           <p className="ant-upload-drag-icon">
             <UploadOutlined />
           </p>
@@ -101,6 +105,7 @@ export default function UploadFile(props) {
       ) : (
         <Upload
           {...uploadProps}
+          {...restProps}
         >
           {limit ? '' : uploadButton}
         </Upload>
@@ -126,7 +131,7 @@ function format(value) {
     rst[index] = {
       ...item,
       name: item.name || item.url,
-      uid: index,
+      uid: String(-index),
       status: 'done',
     }
   });
