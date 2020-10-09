@@ -33,7 +33,7 @@ export default function BaseSearch(props) {
     buttonSpan,
   } = layoutConfig;
 
-  const forceUpdate = useForceUpdate();
+  // const forceUpdate = useForceUpdate();
   const [resetCD, setResetCD] = useState(false);
   const searchProps = useBaseSearch({
     namespace,
@@ -69,12 +69,21 @@ export default function BaseSearch(props) {
     form.setFieldsValue(data);
     setResetCD(true);
     setTimeout(() => {
+      handleSubmitForm(data);
       setResetCD(false);
     }, 500);
   }, {
     wait: 300,
   });
   const onLongPress = useLongPress(run);
+
+  const { run: autoSearch } = useDebounceFn(values => {
+    handleSubmitForm(values)
+  },
+    {
+      wait: 500,
+    },
+  );
 
   // useWillUnmount(_ => {
   //   onClearSearch();
@@ -97,6 +106,10 @@ export default function BaseSearch(props) {
     onSetSearchData(initData.current);
   }
 
+  function handleValuesChange(changedValues, allValues) {
+    onValuesChange(changedValues, allValues);
+    autoSearch(allValues);
+  }
   function handleSubmitForm(values) {
     onSearch({
       ...data,
@@ -106,12 +119,18 @@ export default function BaseSearch(props) {
   }
   function handleReset() {
     form.resetFields();
-    forceUpdate();
+    const data = {};
+    fields.forEach(field => {
+      data[field.field] = undefined;
+    })
+    form.setFieldsValue(data);
+    // forceUpdate();
+    handleSubmitForm(data);
   }
 
   function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
-      <Tooltip title="点击重置, 长按清除">
+      <Tooltip title="点击重置">
         {resetCD ?
           <Button type="link" icon={<CheckOutlined />} /> :
           <Button
@@ -121,7 +140,7 @@ export default function BaseSearch(props) {
           ></Button>
         }
       </Tooltip>
-      <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
+      {/* <Button type="primary" htmlType="submit" loading={loading}>搜索</Button> */}
       {validLength > collapse ? (
         <ExpandButton
           expand={expand}
@@ -159,7 +178,7 @@ export default function BaseSearch(props) {
           labelCol={defaultLabelCol}
           wrapperCol={defaultWrapperCol}
           initialValues={initData.current}
-          onValuesChange={onValuesChange}
+          onValuesChange={handleValuesChange}
           onFinish={handleSubmitForm}
         >
           <Render n={layout} value={value} {...layoutConfig}>

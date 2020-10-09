@@ -13,6 +13,7 @@ export default function PCD(props) {
     handle,
     formdata,
     value,
+    props: restProps,
     ...rest
   } = props;
   const {
@@ -208,6 +209,7 @@ export default function PCD(props) {
   return <>
     <Cascader
       allowClear={false}
+      {...restProps}
       value={selectedValue}
       options={listData}
       loadData={loadData}
