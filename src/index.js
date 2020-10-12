@@ -10,6 +10,7 @@ import { set as AITSet } from 'zero-element/lib/config/actionItemType';
 import { set as VTSet } from 'zero-element/lib/config/valueType';
 
 import onRequest from '@/listAction/onRequest';
+import onTips from '@/listAction/onTips';
 
 // APIConfig({
 //   'DEFAULT_current': 1,
@@ -61,6 +62,7 @@ CSet({
 
 LASet({
   'onRequest': onRequest,
+  'onTips': onTips,
 });
 
 FITSet({

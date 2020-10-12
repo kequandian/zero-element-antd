@@ -29,7 +29,8 @@
     "ChildrenForm": "container/Form/ChildrenForm"
   },
   "LASet": {
-    "onRequest": "listAction/onRequest"
+    "onRequest": "listAction/onRequest",
+    "onTips": "listAction/onTips"
   },
   "FITSet": {
     "plain": "formItemType/Plain",

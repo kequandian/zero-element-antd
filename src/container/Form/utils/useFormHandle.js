@@ -136,7 +136,7 @@ export default function useFormHandle(form, {
       console.warn('Parameter namespace is required');
     }
 
-    const formData = getPageData(namespace)[dataPath];
+    const formData = (getPageData(namespace) || {})[dataPath];
 
     setPageData(namespace, dataPath, {
       ...formData,

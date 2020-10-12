@@ -101,17 +101,23 @@ function echoName(value, formData, {
   label,
   editLabel,
 }) {
-  if (value) {
-    if (Array.isArray(value.value)) {
-      return value.value.map(value => value[label]).join(', ');
-    }
-  }
+
   if (formData) {
     if (typeof formData === 'object') {
+      if (Array.isArray(formData[editLabel])) {
+        return formData[editLabel].map(item => item[label]).join(', ');
+      }
       if (Array.isArray(formData[field])) {
         return formData[field].map(item => item[editLabel]).join(', ');
       }
     }
   }
+
+  if (value) {
+    if (Array.isArray(value.value)) {
+      return value.value.map(value => value[label]).join(', ');
+    }
+  }
+
   return undefined;
 }
