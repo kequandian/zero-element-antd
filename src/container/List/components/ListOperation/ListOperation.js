@@ -5,11 +5,13 @@ import handleAction from './handleAction';
 import checkExpected from '@/utils/checkExpected';
 import { getModel } from 'zero-element/lib/Model';
 import operationMap from './type';
+import global from 'zero-element/lib/config/global';
 
 export default function ListOperation(props) {
   const { state, model, dispatch, index, record, operation, handle } = props;
   const { listData } = getModel(model.namespace);
   const { records } = listData;
+  const { listOperationEmptyText } = global;
 
   if (record && record.operation === false) {
     return null;
@@ -76,14 +78,14 @@ export default function ListOperation(props) {
           <EllipsisOutlined style={{ fontSize: '24px' }} />
         </Dropdown>
       ) : outsideList.length === 0 ?
-          (<span className="ZEleA-table-action-empty">暂无</span>) : null}
+          (<span className="ZEleA-table-action-empty">{listOperationEmptyText}</span>) : null}
     </div>
   </Popconfirm>
 }
 
 function renderMemu(menuItemList) {
   if (menuItemList.length === 0) {
-    menuItemList.push(<Menu.Item key="99" disabled>暂无</Menu.Item>);
+    menuItemList.push(<Menu.Item key="99" disabled>{listOperationEmptyText}</Menu.Item>);
   }
   return <Menu>
     {menuItemList}
