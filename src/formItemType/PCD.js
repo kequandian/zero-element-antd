@@ -20,7 +20,7 @@ export default function PCD(props) {
     API = '/api/pcd/list', dataField = 'data',
     label: optLabel = 'name', value: optValue = 'id',
     type = 'radio',
-    checkboxTemplate = '<p>-<c>-<d>',
+    format = '<p>-<c>-<d>',
     limit = [false, false, false],
     map = [
       { type: 'p', value: 'province' },
@@ -145,18 +145,27 @@ export default function PCD(props) {
   function handleChange(value, selectedOptions) {
     if (type === 'radio') {
       setSelectedValue(value);
+      const data = {};
       selectedOptions.forEach(selected => {
         const find = map.find(i => i.type === selected.type);
         if (find) {
           onSaveOtherValue(find.value, selected.label);
+          data[find.type] = selected.label;
         }
-      })
+      });
+      const currentValue = formatAPI(format, {
+        namespace,
+        data: data,
+      });
+
+      onChange(currentValue);
+
     } else {
       const map = {};
       selectedOptions.forEach(item => {
         map[item.type] = item.label;
       });
-      const currentValue = formatAPI(checkboxTemplate, {
+      const currentValue = formatAPI(format, {
         namespace,
         data: map,
       });
