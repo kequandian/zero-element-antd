@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Button } from 'antd';
+import { Upload, Button, message } from 'antd';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
@@ -53,6 +53,10 @@ export default function UploadFile(props) {
       info.file.status === 'error' ||
       info.file.status === 'removed') {
       setLoading(false);
+
+      if (info.file.status === 'error') {
+        message.error(`文件 ${info.file.name} 上传失败`);
+      }
 
       const doneFileList = fileList.filter(file => file.status === 'done');
       const saveFileList = doneFileList.map(file => ({

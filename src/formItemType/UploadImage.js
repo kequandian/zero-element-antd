@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Upload, Modal } from 'antd';
+import { Upload, Modal, message } from 'antd';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
@@ -44,6 +44,10 @@ export default function UploadImage(props) {
       setLoading(true);
     }
     if (info.file.status === 'done' || info.file.status === 'error' || info.file.status === 'removed') {
+      if (info.file.status === 'error') {
+        message.error(`图片 ${info.file.name} 上传失败`);
+      }
+
       setLoading(false);
 
       const doneImageList = fileList.filter(file => file.status === 'done');
