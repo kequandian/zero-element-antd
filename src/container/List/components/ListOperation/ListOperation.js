@@ -74,7 +74,12 @@ export default function ListOperation(props) {
         {outsideList}
       </div>
       {dropdownList.length ? (
-        <Dropdown overlay={renderMemu(dropdownList)} trigger={['click']} placement="bottomRight">
+        <Dropdown
+          overlay={renderMemu(dropdownList)}
+          trigger={['click']}
+          placement="bottomRight"
+          getPopupContainer={triggerNode => triggerNode}
+        >
           <EllipsisOutlined style={{ fontSize: '24px' }} />
         </Dropdown>
       ) : outsideList.length === 0 ?
