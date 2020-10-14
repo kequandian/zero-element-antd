@@ -15,6 +15,7 @@ const initialState = {
   pagination: undefined,
   modalConfig: {},
   index: -1,
+  loading: false,
 };
 
 export default function ListOperationWrapped(props) {

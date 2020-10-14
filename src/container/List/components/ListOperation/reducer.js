@@ -3,6 +3,7 @@ export default function reducer(state, { type, payload }) {
   const map = {
     openConfirm() {
       return {
+        ...state,
         confirm: true,
         title: payload.title,
         type: payload.type,
@@ -10,6 +11,7 @@ export default function reducer(state, { type, payload }) {
     },
     closeConfirm() {
       return {
+        ...state,
         confirm: false,
         title: '',
         type: null,
@@ -37,6 +39,16 @@ export default function reducer(state, { type, payload }) {
         pagination: undefined,
         modal: false,
       };
+    },
+    isLoading() {
+      return {
+        loading: true,
+      }
+    },
+    endOfLoading() {
+      return {
+        loading: false,
+      }
     },
     defaults() {
       console.warn(`未定义的方法: ${type}`);

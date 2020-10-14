@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Menu, Popconfirm } from 'antd';
+import { Dropdown, Menu, Spin, Popconfirm } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import handleAction from './handleAction';
 import checkExpected from '@/utils/checkExpected';
@@ -27,7 +27,19 @@ export default function ListOperation(props) {
   }
   function handleConfirm() {
     if (typeof state.type === 'function') {
-      state.type();
+      const rst = state.type();
+
+      if (rst && typeof rst.then === 'function') {
+        dispatch({
+          type: 'isLoading',
+        });
+
+        rst.then(_ => {
+          dispatch({
+            type: 'endOfLoading',
+          });
+        })
+      }
     }
     dispatch({
       type: 'closeConfirm',
@@ -69,22 +81,24 @@ export default function ListOperation(props) {
   })
 
   return <Popconfirm {...popconfirmProps}>
-    <div className="ZEleA-table-action">
-      <div className="ZEleA-table-action-Outside">
-        {outsideList}
+    <Spin spinning={state.loading}>
+      <div className="ZEleA-table-action">
+        <div className="ZEleA-table-action-Outside">
+          {outsideList}
+        </div>
+        {dropdownList.length ? (
+          <Dropdown
+            overlay={renderMemu(dropdownList)}
+            trigger={['click']}
+            placement="bottomRight"
+            getPopupContainer={triggerNode => triggerNode}
+          >
+            <EllipsisOutlined style={{ fontSize: '24px' }} />
+          </Dropdown>
+        ) : outsideList.length === 0 ?
+            (<span className="ZEleA-table-action-empty">{listOperationEmptyText}</span>) : null}
       </div>
-      {dropdownList.length ? (
-        <Dropdown
-          overlay={renderMemu(dropdownList)}
-          trigger={['click']}
-          placement="bottomRight"
-          getPopupContainer={triggerNode => triggerNode}
-        >
-          <EllipsisOutlined style={{ fontSize: '24px' }} />
-        </Dropdown>
-      ) : outsideList.length === 0 ?
-          (<span className="ZEleA-table-action-empty">{listOperationEmptyText}</span>) : null}
-    </div>
+    </Spin>
   </Popconfirm>
 }
 

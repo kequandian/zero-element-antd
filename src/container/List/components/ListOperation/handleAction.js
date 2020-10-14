@@ -7,7 +7,7 @@ export default function handleAction(type, options, props, dispatch) {
 
   function handleResponse(func, ...rest) {
     const rst = func(...rest);
-    rst && rst.then(_ => {
+    return rst && rst.then(_ => {
       if (handle.onRefresh) {
         handle.onRefresh();
       }
@@ -15,7 +15,7 @@ export default function handleAction(type, options, props, dispatch) {
   }
 
   if (type === undefined) {
-    console.warn('请指定 list operation 所用的 action');
+    console.warn('请指定 list operation 所用的 action type');
     return false;
   }
   type = type.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
