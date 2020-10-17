@@ -15,6 +15,20 @@
   display: flex;
 }
 
+.ZEleA-table-action .ant-popover-message .anticon-exclamation-circle {
+  font-size: 18px;
+}
+
+.ZEleA-table-action .ant-popover-message-title {
+  font-size: 18px;
+}
+
+.ZEleA-table-action .ant-popover-buttons .ant-btn-sm {
+  font-size: 16px;
+  height   : 28px;
+  padding  : 0px 10px;
+}
+
 .ZEleA-table-action-Outside {
   flex      : 1;
   text-align: right;

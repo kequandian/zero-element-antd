@@ -1,5 +1,4 @@
 import { query, post, update, remove } from 'zero-element/lib/utils/request';
-import { error } from 'zero-element/lib/utils/request/axios';
 import { message } from 'antd';
 
 function requestWrapped(method, api, payload, options = {}) {
@@ -25,7 +24,7 @@ function requestWrapped(method, api, payload, options = {}) {
       }
       return Promise.reject(data.data);
 
-    }).catch(error)
+    })
 }
 
 /**

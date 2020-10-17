@@ -45,10 +45,10 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
     operationObj = {
       dataIndex: 'operation',
       align: 'right',
-      // ...(width > 0 ? {
-      //   fixed: 'right',
-      //   width: 100,
-      // } : {}),
+      ...(width > 0 ? {
+        // fixed: 'right',
+        // width: 100,
+      } : {}),
       ...operationCfg, // fixed  width
       title: handle.onFieldsOrder ?
         () => <ListFieldsEdit

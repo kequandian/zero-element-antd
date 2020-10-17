@@ -9,7 +9,7 @@ import { formatAPI } from 'zero-element/lib/utils/format';
 export default function Import(props) {
   const { title = '导入', options = {}, className, namespace, handle, ...restProps } = props;
   const {
-    API = '/api/io/excel/import',
+    API = '/api/io/excel/import/<name>',
     name,
     ...rest
   } = options;
@@ -17,6 +17,9 @@ export default function Import(props) {
 
   const fAPI = formatAPI(API, {
     namespace,
+    data: {
+      name,
+    }
   });
 
   function handleCloseAndQuery() {

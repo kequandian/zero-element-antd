@@ -14,7 +14,8 @@ const initialState = {
   modalTitle: '',
   pagination: undefined,
   modalConfig: {},
-  index: -1,
+  index: -1, // modal
+  operationIndex: -1, // 当前激活的 operation index
   loading: false,
 };
 

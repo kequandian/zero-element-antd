@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Dropdown, Menu, Spin, Popconfirm } from 'antd';
 import { EllipsisOutlined } from '@ant-design/icons';
 import handleAction from './handleAction';
@@ -12,6 +12,7 @@ export default function ListOperation(props) {
   const { listData } = getModel(model.namespace);
   const { records } = listData;
   const { listOperationEmptyText } = global;
+  const containerRef = useRef(null);
 
   if (record && record.operation === false) {
     return null;
@@ -34,7 +35,7 @@ export default function ListOperation(props) {
           type: 'isLoading',
         });
 
-        rst.then(_ => {
+        rst.finally(_ => {
           dispatch({
             type: 'endOfLoading',
           });
@@ -45,20 +46,26 @@ export default function ListOperation(props) {
       type: 'closeConfirm',
     });
   }
-  function onAction(action, options) {
-    handleAction(action, options, props, dispatch);
+  function onAction(action, options, other) {
+    handleAction(action, options, props, dispatch, other);
   }
 
-  const popconfirmProps = {
-    title: state.title,
-    visible: state.confirm,
+  const globalPopconfirmProps = {
+    title: <div>{state.title}</div>,
+    visible: state.operationIndex === -1 ? state.confirm : undefined,
     onCancel: handleCancel,
     onConfirm: handleConfirm,
-    arrowPointAtCenter: true,
-    getPopupContainer: triggerNode => triggerNode,
+    arrowPointAtCenter: false,
+    getPopupContainer: triggerNode => triggerNode.parentNode,
     overlayStyle: {
-      minWidth: 200,
-    }
+      minWidth: 260,
+    },
+    placement: 'topRight',
+  };
+  const popconfirmProps = {
+    ...globalPopconfirmProps,
+    operationIndex: state.operationIndex,
+    visible: undefined,
   };
 
   const outsideList = [];
@@ -68,38 +75,56 @@ export default function ListOperation(props) {
 
     if (checkExpected(record, item.expect || item.options)) {
       if (item.options.outside) {
-        outsideList.push(operationMap['outside'](item, i, { index, record, records }, onAction));
+        outsideList.push(operationMap['outside'](
+          item, i,
+          { index, record, records },
+          onAction,
+          popconfirmProps
+        ));
       } else {
         if (operationMap[item.type]) {
-          outsideList.push(operationMap[item.type](item, i, { index, record, records }, onAction));
+          outsideList.push(operationMap[item.type](
+            item, i,
+            { index, record, records },
+            onAction,
+            popconfirmProps
+          ));
         } else {
-          dropdownList.push((operationMap['dropdown'])(item, i, { index, record, records }, onAction));
+          dropdownList.push((operationMap['dropdown'])(
+            item, i,
+            { index, record, records },
+            onAction,
+            {}
+          ));
         }
       }
     }
 
   })
 
-  return <Popconfirm {...popconfirmProps}>
-    <Spin spinning={state.loading}>
-      <div className="ZEleA-table-action">
-        <div className="ZEleA-table-action-Outside">
-          {outsideList}
-        </div>
-        {dropdownList.length ? (
+  return <Spin spinning={state.loading}>
+    <div className="ZEleA-table-action" ref={containerRef}>
+      <div className="ZEleA-table-action-Outside">
+        {outsideList}
+      </div>
+      {dropdownList.length ? (
+        <Popconfirm
+          {...globalPopconfirmProps}
+          placement="topRight"
+        >
           <Dropdown
             overlay={renderMemu(dropdownList)}
             trigger={['click']}
-            placement="bottomRight"
-            getPopupContainer={triggerNode => triggerNode}
+            placement={(index + 1) === records.length ? 'topRight' : 'bottomRight'}
+            getPopupContainer={_ => containerRef.current}
           >
             <EllipsisOutlined style={{ fontSize: '24px' }} />
           </Dropdown>
-        ) : outsideList.length === 0 ?
-            (<span className="ZEleA-table-action-empty">{listOperationEmptyText}</span>) : null}
-      </div>
-    </Spin>
-  </Popconfirm>
+        </Popconfirm>
+      ) : outsideList.length === 0 ?
+          (<span className="ZEleA-table-action-empty">{listOperationEmptyText}</span>) : null}
+    </div>
+  </Spin>
 }
 
 function renderMemu(menuItemList) {

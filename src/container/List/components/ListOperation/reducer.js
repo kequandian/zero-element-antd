@@ -7,6 +7,7 @@ export default function reducer(state, { type, payload }) {
         confirm: true,
         title: payload.title,
         type: payload.type,
+        operationIndex: payload.operationIndex,
       };
     },
     closeConfirm() {
@@ -15,10 +16,12 @@ export default function reducer(state, { type, payload }) {
         confirm: false,
         title: '',
         type: null,
+        operationIndex: -1,
       };
     },
     openModal() {
       return {
+        ...state,
         modalTitle: payload.modalTitle,
         modalWidth: payload.modalWidth,
         modalConfig: payload.modalConfig,
@@ -31,6 +34,7 @@ export default function reducer(state, { type, payload }) {
     },
     closeModal() {
       return {
+        ...state,
         modalTitle: '',
         modalWidth: undefined,
         modalConfig: {},

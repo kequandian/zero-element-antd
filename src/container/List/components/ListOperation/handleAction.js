@@ -1,17 +1,24 @@
 import { formatAPI } from 'zero-element/lib/utils/format';
 
-export default function handleAction(type, options, props, dispatch) {
+export default function handleAction(type, options, props, dispatch, other = {}) {
   const { record, handle, model } = props;
-  const { API, tips, saveToForm } = options;
+  const { API, tips, outside, saveToForm } = options;
   const { namespace } = model;
+  const {
+    index, // 当前点击的 outside index
+  } = other;
 
   function handleResponse(func, ...rest) {
     const rst = func(...rest);
-    return rst && rst.then(_ => {
-      if (handle.onRefresh) {
-        handle.onRefresh();
-      }
-    }).catch(_ => 0);
+
+    if (rst && typeof rst.then === 'function') {
+      return rst && rst.then(_ => {
+        if (handle.onRefresh) {
+          handle.onRefresh();
+        }
+      }).catch(_ => 0);
+    }
+    return Promise.resolve();
   }
 
   if (type === undefined) {
@@ -36,6 +43,7 @@ export default function handleAction(type, options, props, dispatch) {
         type: 'openConfirm',
         payload: {
           title: tips || '确定要删除该项吗？',
+          operationIndex: -1,
           type: actionFunc.bind(null, { record }),
         }
       });
@@ -53,6 +61,7 @@ export default function handleAction(type, options, props, dispatch) {
           type: 'openConfirm',
           payload: {
             title: tips,
+            operationIndex: outside ? index : -1,
             type: handleResponse.bind(null, actionFunc, payloadData, model),
           }
         });
