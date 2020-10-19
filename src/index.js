@@ -45,8 +45,7 @@ LayoutSet({
 CSet({
   Empty: Load('container/Empty'),
   Table: Load('container/List/Table'),
-  ReportList: Load('container/List/ReportList'),
-  ReportTable: Load('container/List/ReportList'),
+  ReportTable: Load('container/List/ReportTable'),
   TreeTable: Load('container/List/TreeTable'),
   ChildrenTable: Load('container/List/ChildrenTable'),
   TreeList: Load('container/List/TreeList'),
@@ -82,6 +81,7 @@ FITSet({
   pcd: Load('formItemType/PCD'),
   captcha: Load('formItemType/Captcha'),
   tags: Load('formItemType/Tags'),
+  download: Load('formItemType/Download'),
   date: Load('formItemType/Date/date'),
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),

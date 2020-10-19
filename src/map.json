@@ -15,8 +15,7 @@
   "CSet": {
     "Empty": "container/Empty",
     "Table": "container/List/Table",
-    "ReportList": "container/List/ReportList",
-    "ReportTable": "container/List/ReportList",
+    "ReportTable": "container/List/ReportTable",
     "TreeTable": "container/List/TreeTable",
     "ChildrenTable": "container/List/ChildrenTable",
     "TreeList": "container/List/TreeList",
@@ -48,6 +47,7 @@
     "pcd": "formItemType/PCD",
     "captcha": "formItemType/Captcha",
     "tags": "formItemType/Tags",
+    "download": "formItemType/Download",
     "date": "formItemType/Date/date",
     "week": "formItemType/Date/week",
     "month": "formItemType/Date/month",

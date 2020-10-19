@@ -60,16 +60,16 @@
   margin-right: 8px;
 }
 
-.ZEleA-ReportList table {
+.ZEleA-ReportTable table {
   border: 1px solid #ededed;
 }
 
-.ZEleA-ReportList td {
+.ZEleA-ReportTable td {
   padding      : 4px !important;
   border-bottom: none !important;
 }
 
-.ZEleA-ReportList .ant-table-thead>tr>th {
+.ZEleA-ReportTable .ant-table-thead>tr>th {
   font-size       : 12px;
   color           : #606060;
   background-color: #ededed;

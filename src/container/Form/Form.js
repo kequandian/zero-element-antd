@@ -99,7 +99,8 @@ export default function BaseForm(props) {
 
   function handleGetData() {
     setCanRenderForm(false);
-    onGetOne({}).then(({ code, data }) => {
+    onGetOne({}).then((response) => {
+      const { code, data } = response || {};
       if (code === 200 && data) {
         initData.current = data;
         const { extra } = data;

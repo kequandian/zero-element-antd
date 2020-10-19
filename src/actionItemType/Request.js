@@ -14,7 +14,7 @@ const methodMap = {
 export default function Request(props) {
   const { title = 'Request', options, className, namespace, handle, ...restProps } = props;
   const {
-    icon = 'monitor',
+    // icon = 'monitor',
     method = 'get',
     message = '操作成功',
     API,
@@ -48,6 +48,7 @@ export default function Request(props) {
             handle.onRefresh();
           }
         })
+        .finally(_ => setLoading(false))
     } else {
       match(API, data)
         .then(_ => {
@@ -59,13 +60,14 @@ export default function Request(props) {
             handle.onRefresh();
           }
         })
+        .finally(_ => setLoading(false))
     }
   }
 
   return <Button
     className={className}
     onClick={handleClick}
-    icon={icon}
+    // icon={icon}
     {...buttonProps}
     loading={loading}
   >

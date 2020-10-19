@@ -3,7 +3,7 @@ import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
 
-export default function ReportList(props) {
+export default function ReportTable(props) {
   const { namespace, config, extraData } = props;
   const {
     layout = 'Empty', layoutConfig = {},
@@ -36,7 +36,7 @@ export default function ReportList(props) {
     <Table
       rowKey="id"
       size="middle"
-      className="ZEleA-ReportList"
+      className="ZEleA-ReportTable"
       dataSource={props.data || tableData}
       rowClassName={handleRowClassName}
       {...tableProps}

@@ -92,7 +92,7 @@ export default function AutoReport(props) {
     <Table
       rowKey="id"
       size="middle"
-      className="ZEleA-ReportList"
+      className="ZEleA-ReportTable"
       rowClassName={handleRowClassName}
       columns={tColumns}
       dataSource={records}
