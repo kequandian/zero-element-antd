@@ -5,9 +5,10 @@ import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { getActionItem } from '@/utils/readConfig';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
+import canPortal from '@/utils/canPortal';
 
 export default function AutoReport(props) {
-  const { namespace, config, extraData } = props;
+  const { namespace, config, extraData, extraEl } = props;
   const {
     API,
     layout = 'Empty', layoutConfig = {},
@@ -86,9 +87,11 @@ export default function AutoReport(props) {
     handle={handle}
     namespace={namespace}
   >
-    <Render n={actionLayout} {...actionLayoutConfig}>
-      {actionsItems}
-    </Render>
+    {canPortal(extraEl, <>
+      <Render n={actionLayout} {...actionLayoutConfig}>
+        {actionsItems}
+      </Render>
+    </>)}
     <Table
       rowKey="id"
       size="middle"

@@ -107,6 +107,7 @@ AITSet({
   request: Load('actionItemType/Request'),
   'children-modal-add': Load('actionItemType/ChildrenModalAdd'),
   'import': Load('actionItemType/Import'),
+  'import-modal': Load('actionItemType/ImportModal'),
   'export': Load('actionItemType/Export'),
   'table-checkbox': Load('actionItemType/TableCheckbox'),
 });

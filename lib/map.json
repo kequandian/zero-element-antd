@@ -72,6 +72,7 @@
     "request": "actionItemType/Request",
     "children-modal-add": "actionItemType/ChildrenModalAdd",
     "import": "actionItemType/Import",
+    "import-modal": "actionItemType/ImportModal",
     "export": "actionItemType/Export",
     "table-checkbox": "actionItemType/TableCheckbox"
   },

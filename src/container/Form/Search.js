@@ -21,7 +21,7 @@ const defaultWrapperCol = {
 export default function BaseSearch(props) {
   const [form] = Form.useForm();
 
-  const { namespace, config, extraData = {} } = props;
+  const { namespace, config, extraData = {}, auto = true } = props;
   const { layout = 'Grid', fields,
     layoutConfig = {},
   } = config;
@@ -108,7 +108,9 @@ export default function BaseSearch(props) {
 
   function handleValuesChange(changedValues, allValues) {
     onValuesChange(changedValues, allValues);
-    autoSearch(allValues);
+    if (auto) {
+      autoSearch(allValues);
+    }
   }
   function handleSubmitForm(values) {
     onSearch({
@@ -119,18 +121,14 @@ export default function BaseSearch(props) {
   }
   function handleReset() {
     form.resetFields();
-    const data = {};
-    fields.forEach(field => {
-      data[field.field] = undefined;
-    })
-    form.setFieldsValue(data);
+    form.setFieldsValue(initData.current);
     // forceUpdate();
-    handleSubmitForm(data);
+    handleSubmitForm(initData.current);
   }
 
   function renderFooter(validLength) {
     return <div key="searchButton" span={buttonSpan} style={{ marginLeft: '8px' }}>
-      <Tooltip title="点击重置">
+      <Tooltip title="点击重置, 长按清除">
         {resetCD ?
           <Button type="link" icon={<CheckOutlined />} /> :
           <Button
@@ -140,7 +138,9 @@ export default function BaseSearch(props) {
           ></Button>
         }
       </Tooltip>
-      {/* <Button type="primary" htmlType="submit" loading={loading}>搜索</Button> */}
+      {auto ? null : (
+        <Button type="primary" htmlType="submit" loading={loading}>搜索</Button>
+      )}
       {validLength > collapse ? (
         <ExpandButton
           expand={expand}

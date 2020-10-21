@@ -17,7 +17,7 @@ export function getFormItem(field, model,
     options = {},
     expect,
     ...rest } = field;
-  // const values = form.getFieldsValue();
+  const formValues = form.getFieldsValue(); // 同时兼容 Search 和 Form 的初始值
   const { formData: values = {} } = getPageData(namespace);
 
   if (type === 'empty') {
@@ -27,7 +27,7 @@ export function getFormItem(field, model,
   if (expect && expect.field) {
     handle.onExpect(expect.field);
   }
-  if (!checkExpected({ ...extraData, ...values }, expect)) {
+  if (!checkExpected({ ...extraData, ...formValues, ...values }, expect)) {
     return null;
   }
 

@@ -30,6 +30,7 @@ export default function ModalRadio(props) {
     searchFields,
     mountFetch,
     defaultExpand,
+    auto, // 自动触发搜索
   } = options;
   const { onFormatValue, onSaveOtherValue } = handle;
   const [visible, setVisible] = useState(false);
@@ -118,6 +119,7 @@ export default function ModalRadio(props) {
         onChange={handleChange}
         namespace={`${namespace}_${name}_ModalRadio`}
         extraData={formData}
+        auto={auto}
         options={{
           API,
           fields,

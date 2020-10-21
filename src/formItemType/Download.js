@@ -5,7 +5,7 @@ import { message as msg } from 'antd';
 
 export default function (props) {
   const { options = {} } = props;
-  const { title, API, fileName, downloadMethod, message } = options;
+  const { title, API, fileName, downloadMethod = 'get', message } = options;
 
   function handleClick() {
     return download(API, {
