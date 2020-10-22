@@ -4,11 +4,12 @@ import { download } from 'zero-element/lib/utils/request';
 import { getPageData } from 'zero-element/lib/Model';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { DownloadOutlined } from '@ant-design/icons';
+import { formatAPI } from 'zero-element/lib/utils/format';
 
 export default function Export(props) {
   const { title = '导出', options = {}, className, namespace, handle, config, ...restProps } = props;
   const {
-    API = '/api/io/excel/export',
+    API = '/api/io/excel/export/<name>',
     method = 'post',
     name = namespace,
     fileName,
@@ -22,7 +23,14 @@ export default function Export(props) {
 
   function handleClick() {
     setLoading(true);
-    download(API, {
+    const fAPI = formatAPI(API, {
+      namespace,
+      data: {
+        name,
+      }
+    });
+
+    download(fAPI, {
       method,
       fileName,
     }, {
