@@ -8,12 +8,7 @@ export default ({ props = {}, ...rest }) => {
   const { minRows = 2 } = autoSize;
 
   // antd 的 TextArea 用在模态框里有闪烁的问题
-  // 暂时用回原生文本域
-  return <textarea
-    className="ant-input"
-    rows={minRows}
-    {...rest}
-  />
+  // 已修复, 原因是使用了样式 * { transition： all .3s }
 
   return <Input.TextArea
     autoSize={{
