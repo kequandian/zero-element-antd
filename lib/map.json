@@ -52,6 +52,7 @@
     "week": "formItemType/Date/week",
     "month": "formItemType/Date/month",
     "range": "formItemType/Date/range",
+    "direct-upload": "formItemType/DirectUpload",
     "time-range": "formItemType/Time/TimeRange",
     "table-select": "formItemType/TableSelect",
     "modal-radio": "formItemType/ModalRadio",

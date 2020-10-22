@@ -1,6 +1,7 @@
-import React from 'react';
-import { Button } from 'antd';
+import React, { useState } from 'react';
+import { Button, Modal } from 'antd';
 import { formatAPI } from 'zero-element/lib/utils/format';
+import ZEle from 'zero-element';
 
 /**
  * 在弹出的模态框里面完成导入
@@ -16,6 +17,7 @@ export default function ImportModal(props) {
     name,
     ...rest
   } = options;
+  const [visible, setVisible] = useState(false);
 
   const fAPI = formatAPI(API, {
     namespace,
@@ -24,7 +26,15 @@ export default function ImportModal(props) {
     }
   });
 
+  function handleOpen() {
+    setVisible(true);
+  }
+  function handleClose() {
+    setVisible(false);
+  }
+
   function handleCloseAndQuery() {
+    handleClose();
     if (typeof handle.onRefresh === 'function') {
       handle.onRefresh();
     }
@@ -42,21 +52,20 @@ export default function ImportModal(props) {
       {
         component: 'Form',
         config: {
-          API: {
-            createAPI: fAPI,
-          },
+          API: {},
           fields: [
             {
               label: '导入模板', field: '_template', type: 'download',
               options: {
                 title: '点击下载',
-                API: templateUrl,
+                url: templateUrl,
               }
             },
             {
-              label: '导入文件', field: 'multipartFile', type: 'upload-file',
+              label: '导入文件', field: 'multipartFile', type: 'direct-upload',
               options: {
-                max: 1,
+                title: '点击上传',
+                API: fAPI,
               }
             }
           ]
@@ -74,7 +83,7 @@ export default function ImportModal(props) {
       width={modalWidth}
       visible={visible}
       destroyOnClose={true}
-      onCancel={handleClose}
+      onCancel={handleCloseAndQuery}
       bodyStyle={{
         padding: 0,
       }}
@@ -89,6 +98,7 @@ export default function ImportModal(props) {
           ...config,
         }}
         onClose={handleCloseAndQuery}
+        footer={null}
       />
     </Modal>
   </>
