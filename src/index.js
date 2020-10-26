@@ -120,6 +120,7 @@ VTSet({
   'map': Load('valueType/map'),
   'image': Load('valueType/image'),
   'tag': Load('valueType/tag'),
+  'dot': Load('valueType/dot'),
   'currency': Load('valueType/currency'),
   'percentage': Load('valueType/percentage'),
   'ellipsis': Load('valueType/ellipsis'),

@@ -53,7 +53,7 @@ export default function BaseForm(props) {
   const renderGoBack = extraEl && extraEl.current && goBack;
 
   const { loading, data, model, handle } = formProps;
-  const { onFormMap } = hooks;
+  const { onGetData, onFormMap } = hooks;
   const pageDataFormData = getPageData(namespace).formData;
 
   const initData = useRef({
@@ -102,9 +102,14 @@ export default function BaseForm(props) {
     onGetOne({}).then((response) => {
       const { code, data } = response || {};
       if (code === 200 && data) {
-        initData.current = data;
-        const { extra } = data;
-        setPageData(namespace, 'formData', data);
+        let formData = data;
+        if (typeof onGetData === 'function') {
+          formData = onGetData(data);
+        }
+
+        initData.current = formData;
+        const { extra } = formData;
+        setPageData(namespace, 'formData', formData);
         form.setFieldsValue({ ...initData.current });
 
         if (extra && Array.isArray(extra.items)) {

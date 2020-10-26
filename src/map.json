@@ -84,6 +84,7 @@
     "map": "valueType/map",
     "image": "valueType/image",
     "tag": "valueType/tag",
+    "dot": "valueType/dot",
     "currency": "valueType/currency",
     "percentage": "valueType/percentage",
     "download": "valueType/download",

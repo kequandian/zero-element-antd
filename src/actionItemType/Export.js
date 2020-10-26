@@ -13,6 +13,7 @@ export default function Export(props) {
     method = 'post',
     name = namespace,
     fileName,
+    type = 'API',
     ...rest
   } = options;
   const { API: lAPI = {} } = config;
@@ -36,7 +37,7 @@ export default function Export(props) {
     }, {
       exportName: name,
       search: searchData,
-      type: 'API',
+      type,
       api: `${get()}${listAPI}?pageNum=${current}&pageSize=${total}`,
     })
       .finally(_ => {
