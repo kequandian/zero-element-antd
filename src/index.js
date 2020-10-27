@@ -82,6 +82,7 @@ FITSet({
   captcha: Load('formItemType/Captcha'),
   tags: Load('formItemType/Tags'),
   download: Load('formItemType/Download'),
+  JSON: Load('formItemType/JSON'),
   date: Load('formItemType/Date/date'),
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
