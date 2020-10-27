@@ -9,7 +9,9 @@ export default function (props) {
   }
 
   const defaultProps = {
+    enableClipboard: false,
     displayDataTypes: false,
+    name: false,
     onEdit: handleChange,
     onAdd: handleChange,
     onDelete: handleChange,

@@ -1,19 +1,29 @@
 import React from 'react';
 import { Flex } from 'layout-flex';
 import { Checkbox } from 'antd';
-import { ArrowUpOutlined, ArrowDownOutlined } from '@ant-design/icons';
+import { ArrowUpOutlined, ArrowDownOutlined, SettingOutlined } from '@ant-design/icons';
 import '../../index.css';
 
 const { FlexItem } = Flex;
 
-export default ({ data, checkedList, onSwitchChecked, onMoveField }) => {
-  const checked = checkedList.findIndex(key => key === data.field) > -1;
+export default ({
+  data,
+  onSwitchChecked, onMoveField,
+  onOpenModal,
+}) => {
+  const checked = data._checked === false ? false : true;
 
   function onUp() {
     onMoveField('up', data);
   }
   function onDown() {
     onMoveField('down', data);
+  }
+  function onModal() {
+    onOpenModal({
+      ...data,
+      id: data._id,
+    });
   }
 
   return <Flex className="ZEleA-ListFieldsEdit-FieldItem">
@@ -33,6 +43,9 @@ export default ({ data, checkedList, onSwitchChecked, onMoveField }) => {
       />
       <ArrowDownOutlined className="ZEleA-ListFieldsEdit-FieldItem-icon"
         onClick={onDown}
+      />
+      <SettingOutlined className="ZEleA-ListFieldsEdit-FieldItem-icon"
+        onClick={onModal}
       />
     </FlexItem>
   </Flex>

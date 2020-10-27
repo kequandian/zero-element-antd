@@ -199,10 +199,10 @@ export default function useListHandle({
 
 function filterFields(fields, order) {
   const rst = [];
-  order.forEach(key => {
-    const find = fields.find(i => i.field === key);
-    if (find) {
-      rst.push(find);
+  order.forEach(item => {
+    const { _id, _checked, ...rest } = item;
+    if (_checked !== false) {
+      rst.push(rest);
     }
   })
   return rst;

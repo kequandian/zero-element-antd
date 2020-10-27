@@ -60,7 +60,7 @@ export default function TreeList(props) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [extraData]);
-  useWillUnmount(onClearList);
+  // useWillUnmount(onClearList);
 
   function handleSelect(data) {
     setExtraData(data);
@@ -79,6 +79,7 @@ export default function TreeList(props) {
     </Render>
     <Flex align="flex-start">
       {treeAPI ? (<FlexItem>
+        <br />
         <Tree
           API={treeAPI}
           searchField={searchField}

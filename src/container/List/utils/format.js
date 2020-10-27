@@ -54,6 +54,7 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
         () => <ListFieldsEdit
           fields={props.fields}
           handle={handle}
+          namespace={props.namespace}
         />
         : '操作',
       render: (text, record, index) => {

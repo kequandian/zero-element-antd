@@ -48,6 +48,7 @@
     "captcha": "formItemType/Captcha",
     "tags": "formItemType/Tags",
     "download": "formItemType/Download",
+    "json": "formItemType/JSON",
     "date": "formItemType/Date/date",
     "week": "formItemType/Date/week",
     "month": "formItemType/Date/month",

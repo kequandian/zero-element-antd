@@ -49,7 +49,11 @@ export default (props) => {
     setTreeLoading(true);
     query(api)
       .then(data => {
-        const rst = formatInit(data, childrenColumnName, id);
+        const rst = formatInit(
+          JSON.parse(JSON.stringify(data)),
+          childrenColumnName,
+          id
+        );
         setTreeData(rst);
         if (defaultAelectedKeys) {
           handleSelect(defaultAelectedKeys);
