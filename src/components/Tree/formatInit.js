@@ -48,7 +48,8 @@ function mergeData(rspData, childrenField, idField) {
   const data = checkData(rspData, childrenField);
 
   let rst = [];
-  if (Array.isArray(data) && data.length === 1) {
+  // 在只返回了一条数据的情况下, 未必是树结构
+  if (Array.isArray(data) && data.length === 1 && data[0][childrenField]) {
     rst = formatToTreeData(data[0][childrenField], {
       id: idField,
       children: childrenField,

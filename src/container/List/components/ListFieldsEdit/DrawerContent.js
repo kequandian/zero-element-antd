@@ -2,8 +2,9 @@ import React, { useState, useRef } from 'react';
 import { Drawer, Button, Modal } from 'antd';
 import ZEle from 'zero-element';
 import FieldItem from './FieldItem';
-import '../../index.css';
+import global from 'zero-element/lib/config/global';
 import useArray from '@/utils/hooks/useArray';
+import '../../index.css';
 
 export default ({
   namespace,
@@ -13,6 +14,7 @@ export default ({
 }) => {
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [modalData, setModalData] = useState({});
   const formRef = useRef();
   const [fieldList, handle] = useArray(fields);
@@ -44,7 +46,21 @@ export default ({
   }
 
   function handleSaveFields() {
-    onSaveFields(fieldList);
+    const { listConfigChange } = global;
+
+    if (typeof listConfigChange === 'function') {
+      setLoading(true);
+      listConfigChange({
+        namespace,
+        fields: fieldList,
+      })
+        .then(_ => {
+          onSaveFields(fieldList);
+        })
+        .finally(_ => setLoading(false))
+    } else {
+      onSaveFields(fieldList);
+    }
   }
 
   const fieldItemProps = {
@@ -64,8 +80,8 @@ export default ({
       return <FieldItem data={item} key={item._id} {...fieldItemProps} />
     })}
     <div className="ZEleA-ListFieldsEdit-divider">
-      <Button onClick={onSwitchVisibel}>取消</Button>
-      <Button type="primary" onClick={handleSaveFields}>确定</Button>
+      <Button onClick={onSwitchVisibel} disabled={loading}>取消</Button>
+      <Button type="primary" onClick={handleSaveFields} loading={loading}>确定</Button>
     </div>
     <Modal
       title="编辑字段属性"
