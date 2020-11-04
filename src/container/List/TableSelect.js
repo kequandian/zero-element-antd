@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
+import { getPageData, removeModel } from 'zero-element/lib/Model';
+import { useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
+import _ from 'lodash';
 
 export default function TableSelect(props) {
   const {
@@ -42,23 +45,53 @@ export default function TableSelect(props) {
 
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const selectedRef = useRef({});
+  const initSselectedRef = useRef({
+    selectedRowKeys: [],
+    selectedRows: [],
+  });
+  const initRef = useRef(false);
 
   useEffect(_ => {
     if (Array.isArray(value)) {
-      setSelectedRowKeys(value.map(item => {
+      const initSelected = value.map(item => {
         if (item && typeof item === 'object') {
           return String(item[optValue]);
         }
         return String(item);
-      }));
+      });
+
+      setSelectedRowKeys(initSelected);
+      initSselectedRef.current = {
+        selectedRows: initSelected.map(id => ({ id })),
+        selectedRowKeys: initSelected,
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
-  // useEffect(_ => {
-  //   if (onChangeTableData && tableData) {
-  //     onChangeTableData(JSON.parse(JSON.stringify(tableData)));
-  //   }
-  // }, [tableData])
+  useEffect(_ => {
+    if (Array.isArray(tableData)) {
+      const { selectedRows, selectedRowKeys } = initSselectedRef.current;
+
+      tableData.forEach(item => {
+        const index = selectedRowKeys.findIndex(id => id === item.id);
+        if (index > -1) {
+          selectedRows.splice(index, 1, item);
+        }
+      })
+
+      if (type === 'checkbox') {
+        if (initRef.current) {
+          const rst = getSelectedData();
+          setSelectedRowKeys(rst.selectedRowKeys);
+        } else {
+          initRef.current = true;
+        }
+      }
+    }
+  }, [tableData])
+  useWillUnmount(_ => {
+    removeModel(namespace);
+  })
 
   function handleRowClassName(record) {
     if (operationData.id === record.id) {
@@ -68,28 +101,61 @@ export default function TableSelect(props) {
 
   function handleChange(selectedRowKeys, selectedRows) {
     const { current } = tableProps.pagination;
+    const { searchData } = getPageData(namespace);
 
     let sKeys = selectedRowKeys;
     let sRows = selectedRows;
 
     if (type === 'checkbox') {
-      selectedRef.current[current] = {
+      selectedRef.current[JSON.stringify({ ...searchData, current })] = {
         selectedRows,
         selectedRowKeys,
       }
 
-      sKeys = [];
-      sRows = [];
-      Object.keys(selectedRef.current).forEach(i => {
-        if (selectedRef.current) {
-          sKeys.push(...selectedRef.current[i].selectedRowKeys);
-          sRows.push(...selectedRef.current[i].selectedRows);
-        }
-      })
+      const rst = getSelectedData();
+      sKeys = rst.selectedRowKeys;
+      sRows = rst.selectedRows;
     }
     setSelectedRowKeys(sKeys);
-    onChange(sRows, sKeys);
   }
+
+  function getSelectedData() {
+    const { selectedRows, selectedRowKeys } = initSselectedRef.current;
+    const sKeys = [];
+    const sRows = [];
+
+
+    Object.values(selectedRef.current).forEach(item => {
+      if (item) {
+        const { selectedRows, selectedRowKeys } = item;
+        sKeys.push(...selectedRowKeys);
+        sRows.push(...selectedRows);
+      }
+    })
+
+    sKeys.push(...selectedRowKeys);
+    sRows.push(...selectedRows);
+
+    const uniq = _.uniqBy(sRows, 'id');
+
+    onChange(uniq, uniq.map(i => i.id));
+    return {
+      selectedRowKeys: uniq.map(i => i.id),
+      selectedRows: uniq,
+    }
+  }
+
+  function handleCancelInitSelected(record, selected) {
+    const { selectedRowKeys, selectedRows } = initSselectedRef.current;
+    if (!selected && Array.isArray(selectedRowKeys)) {
+      const filter = selectedRowKeys.filter(id => id !== record.id);
+      initSselectedRef.current = {
+        selectedRows: selectedRows.filter(i => i.id !== record.id),
+        selectedRowKeys: filter,
+      }
+    }
+  }
+
   function handleDisabled(record) {
     const valid = record && record[optValue] !== 0 && Boolean(record[optValue]);
     return {
@@ -126,6 +192,7 @@ export default function TableSelect(props) {
           type: type,
           selectedRowKeys,
           onChange: handleChange,
+          onSelect: handleCancelInitSelected,
           getCheckboxProps: requireValid ? handleDisabled : undefined,
         } : rowSelection
       }
