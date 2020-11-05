@@ -136,7 +136,8 @@ function format(value) {
   rst.length > 0 && rst.map((item, index) => {
     rst[index] = {
       ...item,
-      name: item.name || item.url,
+      name: item.name || item.fileName || item.url,
+      url: item.url || item.fileUrl || undefined,
       uid: String(-index),
       status: 'done',
     }
