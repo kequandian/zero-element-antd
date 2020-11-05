@@ -90,7 +90,8 @@ export default function TableSelect(props) {
     }
   }, [tableData])
   useWillUnmount(_ => {
-    removeModel(namespace);
+    // 会触发意外的回收
+    // removeModel(namespace);
   })
 
   function handleRowClassName(record) {
@@ -115,6 +116,8 @@ export default function TableSelect(props) {
       const rst = getSelectedData();
       sKeys = rst.selectedRowKeys;
       sRows = rst.selectedRows;
+    } else {
+      onChange(sRows, sKeys);
     }
     setSelectedRowKeys(sKeys);
   }
