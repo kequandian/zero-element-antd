@@ -62,6 +62,8 @@ export default function UploadFile(props) {
       const saveFileList = doneFileList.map(file => ({
         name: getValue(file, 'originalFileName', 'name'),
         url: getValue(file, 'url'),
+        fileName: getValue(file, 'originalFileName', 'name'),
+        fileUrl: getValue(file, 'url'),
       }));
 
       if (type === 'json') {
