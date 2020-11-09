@@ -42,6 +42,10 @@
   transition: all .2s;
 }
 
+.ZEleA-DnDFormEdit-row .ZEleA-Form-item-element {
+  width: 100%;
+}
+
 .ZEleA-Form-horizontal .ZEleA-DnDFormEdit-row {
   display      : flex;
   align-items  : center;

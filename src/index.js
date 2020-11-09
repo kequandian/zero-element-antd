@@ -56,7 +56,8 @@ CSet({
   AutoReportSearch: Load('container/Form/AutoReportSearch'),
   Form: Load('container/Form/Form'),
   ChildrenForm: Load('container/Form/ChildrenForm'),
-  // DnDFormEdit: Load('container/DnDFormEdit'),
+  DnDFormEdit: Load('container/DnDFormEdit'),
+  DnDListEdit: Load('container/DnDListEdit'),
 });
 
 LASet({

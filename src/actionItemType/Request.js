@@ -14,7 +14,6 @@ const methodMap = {
 export default function Request(props) {
   const { title = 'Request', options, className, namespace, handle, ...restProps } = props;
   const {
-    // icon = 'monitor',
     method = 'get',
     message = '操作成功',
     API,
@@ -67,7 +66,6 @@ export default function Request(props) {
   return <Button
     className={className}
     onClick={handleClick}
-    // icon={icon}
     {...buttonProps}
     loading={loading}
   >

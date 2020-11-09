@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { Icon } from 'antd';
+import {
+  DeleteOutlined,
+  UpOutlined,
+  DownOutlined,
+  EditOutlined,
+} from '@ant-design/icons';
 import EditModal from './EditModal';
 import '../../index.css';
 
@@ -44,7 +49,7 @@ export default function RowTool({ dispatch, config, component }) {
 
   return <div className="ZEleA-DnDFormEdit-rowBox">
     <div className="ZEleA-DnDFormEdit-itemTool ZEleA-DnDFormEdit-itemTool-left">
-      <Icon type="delete"
+      <DeleteOutlined
         onClick={handleRemoveRow.bind(null, dispatch, config)}
         className="ZEleA-DnDFormEdit-danger"
       />
@@ -52,15 +57,15 @@ export default function RowTool({ dispatch, config, component }) {
     <div
       className="ZEleA-DnDFormEdit-itemTool ZEleA-DnDFormEdit-itemTool-right"
     >
-      <Icon type="up"
+      <UpOutlined
         onClick={handleMoveUp.bind(null, dispatch, config)}
         className="ZEleA-DnDFormEdit-primary"
       />
-      <Icon type="down"
+      <DownOutlined
         onClick={handleMoveDown.bind(null, dispatch, config)}
         className="ZEleA-DnDFormEdit-primary"
       />
-      <Icon type="edit"
+      <EditOutlined
         onClick={handleOpenModal.bind(null, dispatch, config)}
         className="ZEleA-DnDFormEdit-primary"
       />

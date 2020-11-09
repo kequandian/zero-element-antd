@@ -18,7 +18,7 @@ export function getFormItem(field, model,
     expect,
     ...rest } = field;
   const formValues = form.getFieldsValue(); // 同时兼容 Search 和 Form 的初始值
-  const { formData: values = {} } = getPageData(namespace);
+  const { formData: values = {} } = getPageData(namespace) || {};
 
   if (type === 'empty') {
     return null;

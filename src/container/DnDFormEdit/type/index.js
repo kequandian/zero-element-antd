@@ -15,6 +15,7 @@ import Date from './Date';
 import TextArea from './TextArea';
 
 import OneMany from './OneMany';
+import Search from './Search';
 
 const typeMap = {
   Canvas,
@@ -34,5 +35,6 @@ const typeMap = {
   'SelectField': Select,
   'ModalRadio': Button,
   'UploadFile': Button,
+  Search,
 };
 export default typeMap;

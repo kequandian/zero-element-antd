@@ -1,11 +1,22 @@
 import React from 'react';
-import { Card, Input, Icon } from 'antd';
+import { Card, Input } from 'antd';
+import {
+  ArrowUpOutlined,
+  ArrowDownOutlined,
+  DeleteOutlined,
+  UpOutlined,
+  DownOutlined,
+} from '@ant-design/icons';
+import { Flex } from 'layout-flex';
 import Options from './Options';
+import EditJson from './EditJson';
 import './index.css';
+
+const { FlexItem } = Flex;
 
 export default function ItemEdit(props) {
   const {
-    label, index, options,
+    label, index, type, options,
     valueField = 'value',
     disabled, // 禁用 options 的编辑,
     text: {
@@ -37,26 +48,27 @@ export default function ItemEdit(props) {
       {label}
     </div>}
     extra={<div>
-      <Icon
-        type="arrow-up"
+      <ArrowUpOutlined
         className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
         onClick={handleMoveUp}
       />
-      <Icon
-        type="arrow-down"
+      <ArrowDownOutlined
         className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
         onClick={handleMoveDown}
       />
-      <Icon
-        type="delete"
+      <DeleteOutlined
         className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-delete"
         onClick={onRemove.bind(null, index)}
       />
-      <Icon
-        type={edit ? 'up' : 'down'}
-        className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
-        onClick={handleClick}
-      />
+      {edit ?
+        <UpOutlined
+          className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
+          onClick={handleClick}
+        />
+        : <DownOutlined
+          className="ZEleA-DnDFormEdit-ItemEdit-icon ZEleA-DnDFormEdit-ItemEdit-icon-edit"
+          onClick={handleClick}
+        />}
     </div>}
     bodyStyle={{
       display: edit ? 'block' : 'none',
@@ -69,6 +81,17 @@ export default function ItemEdit(props) {
       value={props[valueField]}
       onChange={onChange.bind(null, index, valueField)}
     />
+    <span>字段类型: </span>
+    {type !== undefined ? (
+      <Flex>
+        <FlexItem flex={1}>
+          <Input value={type} onChange={onChange.bind(null, index, 'type')} />
+        </FlexItem>
+        <FlexItem>
+          <EditJson value={options} onChange={onChange.bind(null, index, 'options')} />
+        </FlexItem>
+      </Flex>
+    ) : null}
     <Options
       index={index}
       data={options}

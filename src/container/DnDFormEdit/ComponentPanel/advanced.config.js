@@ -183,4 +183,41 @@ export default [
       expect: {},
     }
   },
+  {
+    title: '列表-搜索表单', type: 'Search', options: {
+      field: {},
+      base: {},
+      // config: {
+      //   fields: {
+      //     label: '搜索字段',
+      //   }
+      // },
+      searchItems: [
+        { label: '搜索', value: 'search', type: 'input' },
+      ],
+      // expect: {},
+    }
+  },
+  {
+    title: '列表-数据表格', type: 'Input', options: {
+      field: {},
+      base: {
+        label: {
+          label: '字段名',
+        },
+      },
+      config: {
+        field: {
+          label: '数字字典字段',
+        }
+      },
+      rules: {
+        required: {
+          label: '必填',
+          value: undefined,
+        },
+      },
+      expect: {},
+    }
+  },
 ];

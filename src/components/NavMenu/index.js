@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Menu, Pagination } from 'antd';
 import NavMenuItem from './NavMenuItem';
+import { PlusOutlined } from '@ant-design/icons';
 
 const { Item } = Menu;
 
@@ -24,7 +25,7 @@ export default function NavMenu({
   return <>
     {onCreate ? (
       <Button
-        icon="plus"
+        icon={<PlusOutlined />}
         type="dashed"
         block
         onClick={handleCreate}

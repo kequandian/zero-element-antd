@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
-import { Input, Icon, Tooltip } from 'antd';
+import { Input, Tooltip } from 'antd';
+import {
+  SaveOutlined,
+  DeleteOutlined,
+  RollbackOutlined,
+  FormOutlined,
+} from '@ant-design/icons';
 
 export default function NavMenuItem({
   data,
@@ -38,20 +44,20 @@ export default function NavMenuItem({
         title={(
           <>
             {onEdit ? (
-              <Icon type="save"
+              <SaveOutlined
                 onClick={handleSave}
               />
             )
               : null
             }
             {onRemote ? (
-              <Icon type="delete" className="ZEleA-margin-left"
+              <DeleteOutlined className="ZEleA-margin-left"
                 onClick={handleRemote}
               />
             )
               : null
             }
-            <Icon type="rollback" className="ZEleA-margin-left"
+            <RollbackOutlined className="ZEleA-margin-left"
               onClick={cancelEdit}
             />
           </>
@@ -66,7 +72,7 @@ export default function NavMenuItem({
       (
         <>
           {onEdit || onRemote ? (
-            <Icon type="form"
+            <FormOutlined
               onClick={handleEdit}
             />
           )

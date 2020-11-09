@@ -1,6 +1,9 @@
 import React from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
+import {
+  DeleteOutlined,
+} from '@ant-design/icons';
 import '../../index.css';
 
 export default ({ data, dispatch, children }) => {
@@ -22,7 +25,7 @@ export default ({ data, dispatch, children }) => {
       <MenuItem>
         <Menu>
           <Menu.Item onClick={handleRemove} >
-            <Icon type="delete" className="ZEleA-DnDFormEdit-danger" />移除
+            <DeleteOutlined className="ZEleA-DnDFormEdit-danger" />移除
           </Menu.Item>
         </Menu>
       </MenuItem>

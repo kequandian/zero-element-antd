@@ -4,10 +4,14 @@ import { toNumber } from '@/utils/tool';
 import ItemEdit from './components/ItemEdit';
 import { arrayItemMove } from '@/utils/tool';
 import { renderBaseOptions, renderStyleOptions, renderAdvancedOptions } from './components/render';
+import { PlusOutlined } from '@ant-design/icons';
 
-import '../index.css';
 import Checkbox from './components/Checkbox';
 import Expect from './components/Expect';
+
+import SearchItems from './Attributes/SearchItems';
+
+import '../index.css';
 
 const { Option } = Select;
 
@@ -35,6 +39,7 @@ export default ({ current, dispatch, fields, API }) => {
   const {
     field = {}, base = {}, rules = {}, style,
     items, advanced, config, table,
+    searchItems,
     expect,
     pdf,
   } = options;
@@ -84,13 +89,7 @@ export default ({ current, dispatch, fields, API }) => {
     items[i][type] = toNumber(e.target.value);
     onSave();
   }
-  function handleItemAdd() {
-    items.push({
-      label: `选项${items.length + 1}`,
-      value: items.length + 1,
-    });
-    onSave();
-  }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
   function handleItemIndexChange(type, index) {
     arrayItemMove(items, type, index);
     onSave();
@@ -189,7 +188,7 @@ export default ({ current, dispatch, fields, API }) => {
     {items ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">子项</div>
-        <Button type="dashed" icon="plus"
+        <Button type="dashed" icon={<PlusOutlined />}
           onClick={handleItemAdd}>
           添加子项
         </Button>
@@ -201,6 +200,7 @@ export default ({ current, dispatch, fields, API }) => {
         })}
       </>
     ) : null}
+    <SearchItems data={searchItems} onSave={onSave} />
     {config ?
       <>
         <div className="ZEleA-DnDFormEdit-title">配置</div>
@@ -230,7 +230,7 @@ export default ({ current, dispatch, fields, API }) => {
     {table ? (
       <>
         <div className="ZEleA-DnDFormEdit-title">显示字段</div>
-        <Button type="dashed" icon="plus"
+        <Button type="dashed" icon={<PlusOutlined />}
           onClick={handleTableAdd.bind(null, pdf)}>
           添加字段
         </Button>

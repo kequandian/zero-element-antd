@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Input } from 'antd';
 import { Flex } from 'layout-flex';
+import { PlusOutlined } from '@ant-design/icons';
 
 const { FlexItem } = Flex;
 
@@ -86,7 +87,7 @@ export default function ({ data, dispatch }) {
     })}
 
     <Button type="dashed" className="ZEleA-margin-left" size="small"
-      icon="plus"
+      icon={<PlusOutlined />}
       onClick={handleAppend}
     ></Button>
   </div>

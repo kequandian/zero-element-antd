@@ -10,15 +10,15 @@ import { Flex } from 'layout-flex';
 
 import global from 'zero-element/lib/config/global';
 
-import ComponentPanel from './ComponentPanel';
-import Fields from './Fields';
-import EchoPanel from './EchoPanel';
-import AttributesPanel from './AttributesPanel';
+import ComponentPanel from '@/container/DnDFormEdit/ComponentPanel';
+import Fields from '@/container/DnDFormEdit/Fields';
+import EchoPanel from '@/container/DnDFormEdit/EchoPanel';
+import AttributesPanel from '@/container/DnDFormEdit/AttributesPanel';
 
-import DnDContext from './utils/context';
-import handleState from './utils/dispatchState';
-import formatToConfig from './utils/format';
-import { assigned, fieldCount, setInitId } from './utils/Item';
+import DnDContext from '@/container/DnDFormEdit/utils/context';
+import handleState from '@/container/DnDFormEdit/utils/dispatchState';
+import formatToConfig from '@/container/DnDFormEdit/utils/format';
+import { assigned, fieldCount, setInitId } from '@/container/DnDFormEdit/utils/Item';
 
 import Panel from '@/components/Panel';
 
@@ -26,11 +26,11 @@ const { FlexItem } = Flex;
 
 const initState = {
   current: {}, // 当前编辑的元素
-  name: '', // 表单名称
+  name: '',
   fields: [],
   config: {
     id: 0,
-    title: '表单',
+    title: '列表',
     type: 'Canvas',
     items: [],
   },
@@ -40,10 +40,8 @@ const initState = {
   spinningTip: '',
 };
 
-function DndFormEdit(props) {
+function DnDListEdit(props) {
   const { namespace, onSubmit, initData } = props;
-  const formRef = useRef({});
-
   const [state, dispatch] = useReducer(
     handleState,
     initState,
@@ -55,64 +53,7 @@ function DndFormEdit(props) {
     spinning, spinningTip
   } = state;
   const { API, path } = props.config;
-  const formProps = useBaseForm({
-    namespace,
-    modelPath: 'formData',
-  }, props.config);
-  const { router } = global;
-  const originFields = useRef([]);
 
-  useDidMount(_ => {
-    if (typeof initData === 'object') {
-      const { originConfig = {} } = initData;
-      dispatch({
-        type: 'initConfig',
-        payload: initData,
-      });
-      setInitId(originConfig.finalId, originConfig.fieldCount);
-    }
-    if (API.getAPI) {
-      dispatch({
-        type: 'save',
-        payload: {
-          spinning: true,
-          spinningTip: '正在读取……',
-        }
-      });
-
-      formProps.handle.onGetOne({})
-        .then(({ code, data }) => {
-          const { originConfig = {} } = data;
-          if (code === 200) {
-            originFields.current = data.fields;
-            dispatch({
-              type: 'initConfig',
-              payload: data,
-            });
-            setInitId(originConfig.finalId, originConfig.fieldCount);
-          }
-        })
-        .finally(_ => {
-          dispatch({
-            type: 'save',
-            payload: {
-              spinning: false,
-              spinningTip: '',
-            }
-          });
-        })
-    }
-  });
-
-  function handleName(e) {
-    const name = e.target.value;
-    dispatch({
-      type: 'save',
-      payload: {
-        name,
-      }
-    });
-  }
   function handleSave() {
     const [data, otherFields] = formatToConfig(config, state.name, {
       layoutType,
@@ -124,14 +65,10 @@ function DndFormEdit(props) {
     const submitData = {
       title: state.name,
       config: data,
-      fields: uniqueFields(
-        fields.map(f => ({
-          field: f,
-          label: f,
-        })),
-        originFields.current,
-        otherFields
-      ),
+      fields: fields.map(f => ({
+        field: f,
+        label: f,
+      })),
       originConfig: {
         ...state.config,
         title: state.name,
@@ -186,26 +123,13 @@ function DndFormEdit(props) {
     </>
   }
 
-  formRef.current = {
-    onSubmit: handleSave,
-  };
-
   return <DnDContext.Provider value={state}>
     <Flex>
       <FlexItem flex={1}>
         <Spin spinning={spinning} tip={spinningTip}>
-          <Card size="small">
-            <div>
-              <h3>表单名称：</h3>
-              <Input value={state.name} onChange={handleName} />
-            </div>
-            {renderSubmitButton()}
-          </Card>
+          {renderSubmitButton()}
           <br />
-          <Panel title="表单字段">
-            <Fields data={fields} dispatch={dispatch} />
-          </Panel>
-          <Panel title="表单画布">
+          <Panel title="">
             <EchoPanel
               layoutType={layoutType}
               config={config}
@@ -230,29 +154,4 @@ function DndFormEdit(props) {
     </Flex>
   </DnDContext.Provider>
 }
-
-/**
- * 合并成唯一的字段列表
- *
- * @param {array} lowList
- * @param {array} midList
- * @param {array} highList
- * @returns
- */
-function uniqueFields(lowList, midList, highList) {
-  const records = {};
-  lowList.forEach(f => {
-    records[f.field] = f;
-  });
-  midList.forEach(f => {
-    const target = records[f.field];
-    if (target && target.label === target.field) {
-      records[f.field] = f;
-    }
-  })
-  highList.forEach(f => {
-    records[f.field] = f;
-  })
-  return Object.values(records);
-}
-export default DragDropContext(HTML5Backend)(DndFormEdit);
+export default DragDropContext(HTML5Backend)(DnDListEdit);
