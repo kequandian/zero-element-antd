@@ -1,51 +1,52 @@
 
-import unusualType from './unusualType';
 
 export default function formatToTableConfig(cfg, formName, opt) {
   const { items = [] } = cfg;
-  const { layoutType } = opt;
-  const unusualFields = [];
-
 
   const fields = [].concat(...items.map(row => row.items));
-  let searchFields = [];
-  fields.forEach(field => {
-    const { options } = field;
-    const { searchItems } = options;
-    if (Array.isArray(searchItems)) {
-      searchFields = searchItems;
-    }
-  })
-
   const config = {
     layout: 'TitleContent',
     title: formName || '表格',
     items: [],
   }
-  config.items.push({
-    component: 'Search',
-    config: {
-      layout: 'Grid',
-      layoutConfig: {
-        value: [6, 6, 6, 6],
-      },
-      fields: searchFields,
-    }
-  });
 
-  config.items.push({
-    component: 'Table',
-    config: {
-      API: {},
-      fields: [],
-    }
-  });
+  fields.forEach(field => {
+    const { options } = field;
+    const { searchItems, tableItems, config: cfg } = options;
 
-  unusualFields.forEach(cfg => {
-    cfg.func(cfg.field, config);
-  });
+    if (Array.isArray(searchItems)) {
+      config.items.push({
+        component: 'Search',
+        config: {
+          layout: 'Grid',
+          layoutConfig: {
+            value: [6, 6, 6, 6],
+          },
+          fields: searchItems,
+        }
+      });
+    }
+    if (Array.isArray(tableItems)) {
+      config.items.push({
+        component: 'Table',
+        config: {
+          API: formatToAPI(cfg),
+          fields: tableItems,
+        }
+      });
+    }
+  })
 
   return [config, pureFields(fields)];
+}
+
+function formatToAPI(cfg) {
+  const { listAPI, deleteAPI } = cfg;
+
+  return {
+    listAPI: listAPI.value,
+    deleteAPI: deleteAPI.value,
+  };
 }
 
 /**

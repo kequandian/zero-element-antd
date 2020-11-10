@@ -16,7 +16,7 @@ const { FlexItem } = Flex;
 
 export default function ItemEdit(props) {
   const {
-    label, index, type, options,
+    label, index, type, valueType, options,
     valueField = 'value',
     disabled, // 禁用 options 的编辑,
     text: {
@@ -81,16 +81,31 @@ export default function ItemEdit(props) {
       value={props[valueField]}
       onChange={onChange.bind(null, index, valueField)}
     />
-    <span>字段类型: </span>
     {type !== undefined ? (
-      <Flex>
-        <FlexItem flex={1}>
-          <Input value={type} onChange={onChange.bind(null, index, 'type')} />
-        </FlexItem>
-        <FlexItem>
-          <EditJson value={options} onChange={onChange.bind(null, index, 'options')} />
-        </FlexItem>
-      </Flex>
+      <>
+        <span>字段类型: </span>
+        <Flex>
+          <FlexItem flex={1}>
+            <Input value={type} onChange={onChange.bind(null, index, 'type')} />
+          </FlexItem>
+          <FlexItem>
+            <EditJson value={options} onChange={onChange.bind(null, index, 'options')} />
+          </FlexItem>
+        </Flex>
+      </>
+    ) : null}
+    {valueType !== undefined ? (
+      <>
+        <span>渲染类型: </span>
+        <Flex>
+          <FlexItem flex={1}>
+            <Input value={valueType} onChange={onChange.bind(null, index, 'valueType')} />
+          </FlexItem>
+          <FlexItem>
+            <EditJson value={options} onChange={onChange.bind(null, index, 'options')} />
+          </FlexItem>
+        </Flex>
+      </>
     ) : null}
     <Options
       index={index}

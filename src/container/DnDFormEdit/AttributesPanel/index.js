@@ -10,6 +10,7 @@ import Checkbox from './components/Checkbox';
 import Expect from './components/Expect';
 
 import SearchItems from './Attributes/SearchItems';
+import TableItems from './Attributes/TableItems';
 
 import '../index.css';
 
@@ -39,7 +40,7 @@ export default ({ current, dispatch, fields, API }) => {
   const {
     field = {}, base = {}, rules = {}, style,
     items, advanced, config, table,
-    searchItems,
+    searchItems, tableItems,
     expect,
     pdf,
   } = options;
@@ -210,6 +211,7 @@ export default ({ current, dispatch, fields, API }) => {
         {renderBaseOptions(config, handleConfigChange)}
       </> : null}
     <SearchItems data={searchItems} onSave={onSave} />
+    <TableItems data={tableItems} onSave={onSave} />
     {expect ?
       <>
         <div className="ZEleA-DnDFormEdit-title">预期</div>

@@ -201,25 +201,21 @@ export default [
     }
   },
   {
-    title: '列表-数据表格', type: 'Input', options: {
+    title: '列表-数据表格', type: 'Table', options: {
       field: {},
-      base: {
-        label: {
-          label: '字段名',
-        },
-      },
+      base: {},
       config: {
-        field: {
-          label: '数字字典字段',
-        }
-      },
-      rules: {
-        required: {
-          label: '必填',
-          value: undefined,
+        listAPI: {
+          label: '列表 API',
+        },
+        deleteAPI: {
+          label: '删除 API',
         },
       },
-      expect: {},
+      tableItems: [
+        { label: '名称', value: 'name', valueType: 'plain' },
+      ],
+      // expect: {},
     }
   },
 ];

@@ -3,7 +3,7 @@ import { Table, Typography } from 'antd';
 
 const { Title, Text } = Typography;
 
-export default function SRadio({ config }) {
+export default function OneMany({ config }) {
   const { options = {} } = config;
   const { base = {}, advanced = {}, table = [] } = options;
   const { sql = {}, tableName, field } = advanced;

@@ -16,6 +16,7 @@ import TextArea from './TextArea';
 
 import OneMany from './OneMany';
 import Search from './Search';
+import Table from './Table';
 
 const typeMap = {
   Canvas,
@@ -36,5 +37,6 @@ const typeMap = {
   'ModalRadio': Button,
   'UploadFile': Button,
   Search,
+  Table,
 };
 export default typeMap;
