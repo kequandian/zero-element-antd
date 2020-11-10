@@ -10,6 +10,7 @@ import Checkbox from './components/Checkbox';
 import Expect from './components/Expect';
 
 import SearchItems from './Attributes/SearchItems';
+import ActionItems from './Attributes/ActionItems';
 import TableItems from './Attributes/TableItems';
 
 import '../index.css';
@@ -40,7 +41,7 @@ export default ({ current, dispatch, fields, API }) => {
   const {
     field = {}, base = {}, rules = {}, style,
     items, advanced, config, table,
-    searchItems, tableItems,
+    searchItems, actions, tableItems,
     expect,
     pdf,
   } = options;
@@ -211,6 +212,7 @@ export default ({ current, dispatch, fields, API }) => {
         {renderBaseOptions(config, handleConfigChange)}
       </> : null}
     <SearchItems data={searchItems} onSave={onSave} />
+    <ActionItems data={actions} onSave={onSave} />
     <TableItems data={tableItems} onSave={onSave} />
     {expect ?
       <>

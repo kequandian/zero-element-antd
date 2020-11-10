@@ -2,12 +2,12 @@ import React from 'react';
 import { Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { toNumber, arrayItemMove } from '@/utils/tool';
-import ItemEdit from '../components/ItemEdit';
+import ActionEdit from '../components/ActionEdit';
 
 export default function ({ data, onSave }) {
 
   function renderItemsOptions(data, handle, otherProps = {}) {
-    return <ItemEdit
+    return <ActionEdit
       items={data}
       {...handle}
       {...otherProps}
@@ -21,9 +21,9 @@ export default function ({ data, onSave }) {
 
   function handleItemAdd() {
     data.push({
-      label: `字段${data.length + 1}`,
-      value: data.length + 1,
-      valueType: 'plain',
+      title: `Action${data.length + 1}`,
+      type: 'path',
+      options: {},
     });
     onSave();
   }
@@ -39,10 +39,10 @@ export default function ({ data, onSave }) {
   }
 
   return data ? (<>
-    <div className="ZEleA-DnDFormEdit-title">表格字段</div>
+    <div className="ZEleA-DnDFormEdit-title">表格Action</div>
     <Button type="dashed" icon={<PlusOutlined />}
       onClick={handleItemAdd}>
-      添加字段
+      添加Action
       </Button>
     <br /><br />
     {renderItemsOptions(data, {

@@ -212,6 +212,13 @@ export default [
           label: '删除 API',
         },
       },
+      actions: [
+        {
+          title: '新增', type: 'path', options: {
+            path: '/page/myAddPage',
+          }
+        },
+      ],
       tableItems: [
         { label: '名称', value: 'name', valueType: 'plain' },
       ],

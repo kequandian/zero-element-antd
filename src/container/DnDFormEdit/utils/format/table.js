@@ -12,7 +12,7 @@ export default function formatToTableConfig(cfg, formName, opt) {
 
   fields.forEach(field => {
     const { options } = field;
-    const { searchItems, tableItems, config: cfg } = options;
+    const { searchItems, tableItems, actions, config: cfg } = options;
 
     if (Array.isArray(searchItems)) {
       config.items.push({
@@ -31,6 +31,7 @@ export default function formatToTableConfig(cfg, formName, opt) {
         component: 'Table',
         config: {
           API: formatToAPI(cfg),
+          actions,
           fields: tableItems,
         }
       });

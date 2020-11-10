@@ -51,6 +51,7 @@ export default function EditJson({ value, onChange }) {
       onOk={handleSubmit}
       onCancel={handleClose}
       destroyOnClose
+      maskClosable={false}
     >
       {!value ? (
         <Radio.Group onChange={handleChangeInitValue} defaultValue="{}">
