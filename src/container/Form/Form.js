@@ -10,7 +10,7 @@ import global from 'zero-element/lib/config/global';
 import useFormHandle from './utils/useFormHandle';
 import extraFieldType from './utils/extraFieldType';
 import canPortal from '@/utils/canPortal';
-import { setPageData, getPageData, clearPageData } from 'zero-element/lib/Model';
+import { setPageData, getPageData, clearPageData, getHooks } from 'zero-element/lib/Model';
 import './index.css';
 
 const defaultLabelCol = {
@@ -53,7 +53,7 @@ export default function BaseForm(props) {
   const renderGoBack = extraEl && extraEl.current && goBack;
 
   const { loading, data, model, handle } = formProps;
-  const { onGetData, onFormMap } = hooks;
+  const { onGetData, onFormMap } = getHooks(namespace);
   const pageDataFormData = getPageData(namespace).formData;
 
   const initData = useRef({

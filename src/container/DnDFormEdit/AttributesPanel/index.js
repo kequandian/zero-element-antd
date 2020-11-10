@@ -89,7 +89,7 @@ export default ({ current, dispatch, fields, API }) => {
     items[i][type] = toNumber(e.target.value);
     onSave();
   }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
   function handleItemIndexChange(type, index) {
     arrayItemMove(items, type, index);
     onSave();
@@ -153,7 +153,11 @@ export default ({ current, dispatch, fields, API }) => {
    * @param {event} e
    */
   function handleConfigChange(key, e) {
-    config[key].value = e.target.value;
+    let value = e;
+    if (e && e.target) {
+      value = e.target.value;
+    }
+    config[key].value = value;
     onSave();
   }
 
@@ -200,12 +204,12 @@ export default ({ current, dispatch, fields, API }) => {
         })}
       </>
     ) : null}
-    <SearchItems data={searchItems} onSave={onSave} />
     {config ?
       <>
         <div className="ZEleA-DnDFormEdit-title">配置</div>
         {renderBaseOptions(config, handleConfigChange)}
       </> : null}
+    <SearchItems data={searchItems} onSave={onSave} />
     {expect ?
       <>
         <div className="ZEleA-DnDFormEdit-title">预期</div>

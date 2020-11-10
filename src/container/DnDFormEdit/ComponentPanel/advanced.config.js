@@ -187,11 +187,13 @@ export default [
     title: '列表-搜索表单', type: 'Search', options: {
       field: {},
       base: {},
-      // config: {
-      //   fields: {
-      //     label: '搜索字段',
-      //   }
-      // },
+      config: {
+        collapse: {
+          label: '折叠临界值',
+          value: 3,
+          type: 'number',
+        },
+      },
       searchItems: [
         { label: '搜索', value: 'search', type: 'input' },
       ],

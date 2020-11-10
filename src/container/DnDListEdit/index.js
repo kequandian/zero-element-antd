@@ -17,7 +17,7 @@ import AttributesPanel from '@/container/DnDFormEdit/AttributesPanel';
 
 import DnDContext from '@/container/DnDFormEdit/utils/context';
 import handleState from '@/container/DnDFormEdit/utils/dispatchState';
-import formatToConfig from '@/container/DnDFormEdit/utils/format';
+import formatToTableConfig from '@/container/DnDFormEdit/utils/format/table';
 import { assigned, fieldCount, setInitId } from '@/container/DnDFormEdit/utils/Item';
 
 import Panel from '@/components/Panel';
@@ -26,7 +26,7 @@ const { FlexItem } = Flex;
 
 const initState = {
   current: {}, // 当前编辑的元素
-  name: '',
+  name: '表格',
   fields: [],
   config: {
     id: 0,
@@ -47,6 +47,11 @@ function DnDListEdit(props) {
     initState,
     () => JSON.parse(JSON.stringify(initState))
   );
+  const formProps = useBaseForm({
+    namespace,
+    modelPath: 'formData',
+  }, props.config);
+
   const {
     fields,
     config, copyList, layoutType,
@@ -55,7 +60,7 @@ function DnDListEdit(props) {
   const { API, path } = props.config;
 
   function handleSave() {
-    const [data, otherFields] = formatToConfig(config, state.name, {
+    const [data, otherFields] = formatToTableConfig(config, state.name, {
       layoutType,
     });
     const method = API.updateAPI ?
