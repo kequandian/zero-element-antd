@@ -12,6 +12,7 @@ import Expect from './components/Expect';
 import SearchItems from './Attributes/SearchItems';
 import ActionItems from './Attributes/ActionItems';
 import TableItems from './Attributes/TableItems';
+import Operation from './Attributes/Operation';
 
 import '../index.css';
 
@@ -41,7 +42,7 @@ export default ({ current, dispatch, fields, API }) => {
   const {
     field = {}, base = {}, rules = {}, style,
     items, advanced, config, table,
-    searchItems, actions, tableItems,
+    searchItems, actions, tableItems, operation,
     expect,
     pdf,
   } = options;
@@ -214,6 +215,7 @@ export default ({ current, dispatch, fields, API }) => {
     <SearchItems data={searchItems} onSave={onSave} />
     <ActionItems data={actions} onSave={onSave} />
     <TableItems data={tableItems} onSave={onSave} />
+    <Operation data={operation} onSave={onSave} />
     {expect ?
       <>
         <div className="ZEleA-DnDFormEdit-title">预期</div>

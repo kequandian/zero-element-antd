@@ -222,6 +222,14 @@ export default [
       tableItems: [
         { label: '名称', value: 'name', valueType: 'plain' },
       ],
+      operation: [
+        {
+          title: '编辑', type: 'path', options: {
+            outside: true,
+            path: '/page/myEditPage',
+          }
+        },
+      ]
       // expect: {},
     }
   },

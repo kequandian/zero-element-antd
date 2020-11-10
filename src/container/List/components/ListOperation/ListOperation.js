@@ -9,8 +9,8 @@ import global from 'zero-element/lib/config/global';
 
 export default function ListOperation(props) {
   const { state, model, dispatch, index, record, operation, handle } = props;
-  const { listData } = getModel(model.namespace);
-  const { records } = listData;
+  const { listData = {} } = getModel(model.namespace) || {};
+  const { records = [] } = listData;
   const { listOperationEmptyText } = global;
   const containerRef = useRef(null);
 

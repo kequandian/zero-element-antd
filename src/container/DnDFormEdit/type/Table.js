@@ -11,10 +11,13 @@ const demoData = [
 
 export default function STable({ config }) {
   const { options = {} } = config;
-  const { tableItems = [], actions = [], config: cfg } = options;
+  const { tableItems = [], actions = [], operation = [], config: cfg } = options;
 
   const namespace = 'test';
-  const model = {};
+  const model = {
+    namespace,
+    setRecord: _ => void 0,
+  };
 
   const actionsItems = actions.map((action, i) => getActionItem({
     key: i,
@@ -24,7 +27,7 @@ export default function STable({ config }) {
     extraData: {},
   }));
   const { columns, width } = formatTableFields(tableItems.map(i => ({ ...i, field: i.value })),
-    {}, {}, {
+    operation, {}, {
     namespace,
     extraData: {},
     model,
