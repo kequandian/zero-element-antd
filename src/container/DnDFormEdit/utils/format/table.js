@@ -22,7 +22,7 @@ export default function formatToTableConfig(cfg, formName, opt) {
           layoutConfig: {
             value: [6, 6, 6, 6],
           },
-          fields: searchItems,
+          fields: formatToFields(searchItems),
         }
       });
     }
@@ -32,7 +32,7 @@ export default function formatToTableConfig(cfg, formName, opt) {
         config: {
           API: formatToAPI(cfg),
           actions,
-          fields: tableItems,
+          fields: formatToFields(tableItems),
           operation,
         }
       });
@@ -40,6 +40,16 @@ export default function formatToTableConfig(cfg, formName, opt) {
   })
 
   return [config, pureFields(fields)];
+}
+
+function formatToFields(fields) {
+  return fields.map(field => {
+    const { value, ...rest } = field;
+    return {
+      ...rest,
+      field: value,
+    };
+  });
 }
 
 function formatToAPI(cfg) {

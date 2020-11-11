@@ -68,6 +68,7 @@ function DnDListEdit(props) {
       : formProps.handle.onCreateForm;
 
     const submitData = {
+      namespace,
       title: state.name,
       config: data,
       fields: fields.map(f => ({
