@@ -210,6 +210,7 @@ export default function BaseForm(props) {
             namespace,
           });
           router(fPath);
+          return false;
         }
       }
       if (!MODAL && gobackOpt && goBack) {

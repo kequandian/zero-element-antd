@@ -1,12 +1,14 @@
 import React from 'react';
-import { Form } from 'antd';
+import { Form, Tooltip } from 'antd';
 import FormIten from '@/container/Form/FormItemWrapped';
 import ActionItem from '@/container/List/ActionItemWrapped';
 import { getPageData } from 'zero-element/lib/Model';
+import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import checkExpected from './checkExpected';
+import Penetrate from '@/components/Penetrate';
 
-
+const iconStyle = { color: '#108ee9', marginLeft: 4 };
 export function getFormItem(field, model,
   { namespace, form, handle = {}, hooks, extraData }
 ) {
@@ -15,6 +17,7 @@ export function getFormItem(field, model,
     rules = [],
     type,
     options = {},
+    tips,
     expect,
     ...rest } = field;
   const formValues = form.getFieldsValue(); // 同时兼容 Search 和 Form 的初始值
@@ -40,17 +43,24 @@ export function getFormItem(field, model,
     rules={[...rules.map(rule => handleRule(rule, values, handle))]}
     {...rest}
   >
-    <FormIten
-      name={fieldName}
-      type={type}
-      options={options}
-      namespace={namespace}
-      handle={handle}
-      formdata={values}
-      hooks={hooks}
-      {...rest}
-      model={model}
-    />
+    <Penetrate>
+      <FormIten
+        name={fieldName}
+        type={type}
+        options={options}
+        namespace={namespace}
+        handle={handle}
+        formdata={values}
+        hooks={hooks}
+        {...rest}
+        model={model}
+      />
+      {tips ? (
+        <Tooltip title={tips}>
+          <QuestionCircleOutlined style={iconStyle} />
+        </Tooltip>
+      ) : null}
+    </Penetrate>
   </Form.Item>
 }
 

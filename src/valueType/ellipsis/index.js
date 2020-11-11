@@ -10,7 +10,7 @@ export default function valueTypeEllipsis(props) {
     data: { index, text = '-', record },
   } = props;
   const { max = 16, format, placeholder = '' } = options;
-  const [t, setT] = useState(text);
+  const [t, setT] = useState(text === 0 ? 0 : String((text || '')));
 
   useEffect(_ => {
     if (format) {
