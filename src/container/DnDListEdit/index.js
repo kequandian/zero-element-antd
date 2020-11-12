@@ -1,7 +1,7 @@
 import React, { useReducer, useRef } from 'react';
 import { Button, Spin, Input, Card, message } from 'antd';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -129,35 +129,37 @@ function DnDListEdit(props) {
     </>
   }
 
-  return <DnDContext.Provider value={state}>
-    <Flex>
-      <FlexItem flex={1}>
-        <Spin spinning={spinning} tip={spinningTip}>
-          {renderSubmitButton()}
-          <br />
-          <Panel title="">
-            <EchoPanel
-              layoutType={layoutType}
-              config={config}
-              dispatch={dispatch}
-            />
-          </Panel>
-        </Spin>
-      </FlexItem>
-      <FlexItem style={{ width: '256px' }}>
-        <ComponentPanel
-          layoutType={layoutType}
-          dispatch={dispatch}
-          copyList={copyList}
-        />
-        <AttributesPanel
-          current={state.current}
-          dispatch={dispatch}
-          fields={fields}
-          API={API}
-        />
-      </FlexItem>
-    </Flex>
-  </DnDContext.Provider>
+  return <DndProvider backend={HTML5Backend}>
+    <DnDContext.Provider value={state}>
+      <Flex>
+        <FlexItem flex={1}>
+          <Spin spinning={spinning} tip={spinningTip}>
+            {renderSubmitButton()}
+            <br />
+            <Panel title="">
+              <EchoPanel
+                layoutType={layoutType}
+                config={config}
+                dispatch={dispatch}
+              />
+            </Panel>
+          </Spin>
+        </FlexItem>
+        <FlexItem style={{ width: '256px' }}>
+          <ComponentPanel
+            layoutType={layoutType}
+            dispatch={dispatch}
+            copyList={copyList}
+          />
+          <AttributesPanel
+            current={state.current}
+            dispatch={dispatch}
+            fields={fields}
+            API={API}
+          />
+        </FlexItem>
+      </Flex>
+    </DnDContext.Provider>
+  </DndProvider>
 }
-export default DragDropContext(HTML5Backend)(DnDListEdit);
+export default DnDListEdit;

@@ -1,7 +1,7 @@
 import React, { useReducer, useRef } from 'react';
 import { Button, Spin, Input, Card, message } from 'antd';
-import { DragDropContext } from 'react-dnd';
-import HTML5Backend from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -190,45 +190,47 @@ function DndFormEdit(props) {
     onSubmit: handleSave,
   };
 
-  return <DnDContext.Provider value={state}>
-    <Flex>
-      <FlexItem flex={1}>
-        <Spin spinning={spinning} tip={spinningTip}>
-          <Card size="small">
-            <div>
-              <h3>表单名称：</h3>
-              <Input value={state.name} onChange={handleName} />
-            </div>
-            {renderSubmitButton()}
-          </Card>
-          <br />
-          <Panel title="表单字段">
-            <Fields data={fields} dispatch={dispatch} />
-          </Panel>
-          <Panel title="表单画布">
-            <EchoPanel
-              layoutType={layoutType}
-              config={config}
-              dispatch={dispatch}
-            />
-          </Panel>
-        </Spin>
-      </FlexItem>
-      <FlexItem style={{ width: '256px' }}>
-        <ComponentPanel
-          layoutType={layoutType}
-          dispatch={dispatch}
-          copyList={copyList}
-        />
-        <AttributesPanel
-          current={state.current}
-          dispatch={dispatch}
-          fields={fields}
-          API={API}
-        />
-      </FlexItem>
-    </Flex>
-  </DnDContext.Provider>
+  return <DndProvider backend={HTML5Backend}>
+    <DnDContext.Provider value={state}>
+      <Flex>
+        <FlexItem flex={1}>
+          <Spin spinning={spinning} tip={spinningTip}>
+            <Card size="small">
+              <div>
+                <h3>表单名称：</h3>
+                <Input value={state.name} onChange={handleName} />
+              </div>
+              {renderSubmitButton()}
+            </Card>
+            <br />
+            <Panel title="表单字段">
+              <Fields data={fields} dispatch={dispatch} />
+            </Panel>
+            <Panel title="表单画布">
+              <EchoPanel
+                layoutType={layoutType}
+                config={config}
+                dispatch={dispatch}
+              />
+            </Panel>
+          </Spin>
+        </FlexItem>
+        <FlexItem style={{ width: '256px' }}>
+          <ComponentPanel
+            layoutType={layoutType}
+            dispatch={dispatch}
+            copyList={copyList}
+          />
+          <AttributesPanel
+            current={state.current}
+            dispatch={dispatch}
+            fields={fields}
+            API={API}
+          />
+        </FlexItem>
+      </Flex>
+    </DnDContext.Provider>
+  </DndProvider>
 }
 
 /**
@@ -255,4 +257,4 @@ function uniqueFields(lowList, midList, highList) {
   })
   return Object.values(records);
 }
-export default DragDropContext(HTML5Backend)(DndFormEdit);
+export default DndFormEdit;
