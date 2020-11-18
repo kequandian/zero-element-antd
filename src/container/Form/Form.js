@@ -91,7 +91,8 @@ export default function BaseForm(props) {
   });
 
   useWillUnmount(_ => {
-    if (!keepData) {
+    // if (!keepData) {
+    if (!keepData || MODAL) {
       onClearForm();
       clearPageData(namespace, 'formData');
     }

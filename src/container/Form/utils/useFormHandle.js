@@ -111,16 +111,30 @@ export default function useFormHandle(form, {
   }
 
   function handleSaveData(key, value) {
-    const formData = form.getFieldsValue();
-    if (!Object.getOwnPropertyNames(formData).includes(key)) {
-      if (process.env.NODE_ENV === 'development') {
-        console.log('自动添加隐藏 field', key, value);
+    let formData = form.getFieldsValue();
+    if (typeof key === 'string') {
+      if (!Object.getOwnPropertyNames(formData).includes(key)) {
+        if (process.env.NODE_ENV === 'development') {
+          console.log('自动添加隐藏 field', key, value);
+        }
+        forceUpdate();
       }
-      forceUpdate();
+      formData[key] = value;
+      handleValuesChange({ [key]: value }, { ...formData });
     }
-    formData[key] = value;
+
+    if (typeof key === 'object') {
+      formData = {
+        ...formData,
+        ...key,
+      };
+      handleValuesChange(key, formData);
+      const rst = Object.keys(key).some(k => !Object.getOwnPropertyNames(formData).includes(k));
+      if (rst) {
+        forceUpdate();
+      }
+    }
     form.setFieldsValue({ ...formData });
-    handleValuesChange({ [key]: value }, { ...formData });
   }
 
   function handleExpect(key) {
@@ -139,8 +153,8 @@ export default function useFormHandle(form, {
     const formData = (getPageData(namespace) || {})[dataPath];
 
     setPageData(namespace, dataPath, {
-      ...formData,
-      ...allValues,
+      ...formData, // 尽量维持 pageData 的可靠性
+      // ...allValues,
       ...changedValues,
     });
 

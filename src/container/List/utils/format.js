@@ -47,19 +47,19 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
       align: 'right',
       ...(width > 0 ? {
         // fixed: 'right',
-        // width: 100,
-      } : {}),
-      ...operationCfg, // fixed  width
-      title: handle.onFieldsOrder ?
-        () => <ListFieldsEdit
+        width: 100,
+      } : {}), 
+      ...operationCfg, // fixed  width 
+      title: handle.onFieldsOrder ? 
+        () => <ListFieldsEdit 
           fields={props.fields}
-          handle={handle}
+          handle={handle} 
           namespace={props.namespace}
-        />
+        /> 
         : '操作',
       render: (text, record, index) => {
         return <ListOperation
-          {...props}
+          {...props} 
           text={text}
           record={record}
           index={index}

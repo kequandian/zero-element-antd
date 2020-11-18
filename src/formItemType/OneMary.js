@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useEffect, useReducer } from 'react';
+import React, { useRef, useMemo, useEffect, useState } from 'react';
 import { formatTableFields } from '@/container/List/utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
@@ -41,8 +41,10 @@ export default function OneMary(props) {
   } = options;
   const { onFormatValue } = handle;
   const { removeChildAfter } = hooks;
-  const effectFieldValue = formdata[effectField];
-  const [count, forcedUpdate] = useReducer(x => x + 1, 0);
+  const countRef = useRef(0);
+  const effectFieldValue = useMemo(_ => {
+    return countRef.current++;
+  }, getValues(formdata, effectField));
 
   const idRef = useRef(1);
   const v = useMemo(_ => {
@@ -63,7 +65,6 @@ export default function OneMary(props) {
 
   useEffect(_ => {
     if (effectField) {
-      forcedUpdate();
       handleChange();
     }
   }, [effectFieldValue]);
@@ -145,7 +146,7 @@ export default function OneMary(props) {
 
       namespace={namespace}
       extraData={formdata}
-      forceInitList={count}
+      forceInitList={effectFieldValue}
       data={mode === 'append' ? v : undefined}
       value={mode === 'records' ? v : undefined}
       columns={columns}
@@ -161,4 +162,14 @@ export default function OneMary(props) {
       }}
     />
   </Render>
+}
+
+function getValues(data, arr) {
+  let fields;
+  if (Array.isArray(arr)) {
+    fields = arr;
+  } else {
+    fields = [arr];
+  }
+  return fields.map(field => data[field]);
 }
