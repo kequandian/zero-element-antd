@@ -21,3 +21,7 @@
 .ZEle-Form-footer .ant-btn+.ant-btn {
   margin-left: 4px;
 }
+
+.ant-modal-body .ZEle-Form-footer {
+  padding-bottom: 16px;
+}

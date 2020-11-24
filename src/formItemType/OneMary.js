@@ -33,13 +33,15 @@ export default function OneMary(props) {
     pagination = false,
     rowSelection = false,
     searchFields = false,
+    searchCol,
     type = 'checkbox',
 
     mode = API ? 'records' : 'append',
 
     effectField,
+    saveData,
   } = options;
-  const { onFormatValue } = handle;
+  const { onFormatValue, onSaveOtherValue } = handle;
   const { removeChildAfter } = hooks;
   const countRef = useRef(0);
   const effectFieldValue = useMemo(_ => {
@@ -74,6 +76,15 @@ export default function OneMary(props) {
   }
 
   function handleChange(selectedRows, selectedRowKeys) {
+    if (saveData && selectedRows && type === 'radio') {
+      const rst = {};
+      const data = selectedRows[0];
+      Object.keys(saveData).forEach(key => {
+        rst[key] = data[saveData[key]];
+      });
+
+      onSaveOtherValue(rst);
+    }
     onChange(selectedRows);
   }
   function handleCreate(data) {
@@ -157,6 +168,7 @@ export default function OneMary(props) {
         pagination: pagination,
         rowSelection: rowSelection,
         searchFields,
+        searchCol,
         value: optValue,
         rowKey: row => String(row._id || row.id || row[optValue])
       }}

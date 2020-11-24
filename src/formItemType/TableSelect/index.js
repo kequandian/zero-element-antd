@@ -18,6 +18,7 @@ export default function TableSelectWrapped(props) {
   const {
     API, fields,
     searchFields,
+    searchCol = 3,
     mountFetch,
     defaultExpand,
   } = options;
@@ -25,8 +26,8 @@ export default function TableSelectWrapped(props) {
   if (Array.isArray(searchFields)) {
     config.current.items[0].config.fields = searchFields;
     config.current.items[0].config.layoutConfig = {
-      value: [8, 8, 8],
-      collapse: 2,
+      value: new Array(searchCol).fill(~~24 / searchCol),
+      collapse: searchCol - 1,
       defaultExpand,
     };
   } else if (searchFields === false) {

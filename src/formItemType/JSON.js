@@ -3,6 +3,7 @@ import ReactJson from 'react-json-view';
 
 export default function (props) {
   const { value, name, options = {}, onChange } = props;
+  const { defaultValue, ...restOpt } = options;
 
   function handleChange({ updated_src }) {
     onChange(updated_src);
@@ -15,8 +16,8 @@ export default function (props) {
     onEdit: handleChange,
     onAdd: handleChange,
     onDelete: handleChange,
-    ...options,
+    ...restOpt,
   }
 
-  return <ReactJson src={value} {...defaultProps} />;
+  return <ReactJson src={value || defaultValue} {...defaultProps} />;
 }
