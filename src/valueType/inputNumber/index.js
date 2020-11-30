@@ -12,7 +12,7 @@ export default function ValueTypeInputNumber(props) {
     data: { index, text = '', record },
   } = props;
   const { onEdit } = handle;
-  const { defaultValue } = options;
+  const { defaultValue, maxField } = options;
 
   const v = toNumber(text);
 
@@ -25,12 +25,14 @@ export default function ValueTypeInputNumber(props) {
   });
 
   function handleChange(value) {
-    _.set(record, field, toNumber(value));
+    _.set(record, field.replace(/\,/g, '.'), toNumber(value));
     onEdit && onEdit(index, record);
   }
+  const maxValue = maxField ? _.get(record, maxField) : undefined;
 
   return <InputNumber
     value={v}
     onChange={handleChange}
+    max={maxValue}
   />
 }
