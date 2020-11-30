@@ -26,7 +26,7 @@ export default function TableSelect(props) {
     value: optValue = 'id',
     requireValid,
     pagination = false,
-    rowSelection = true,
+    rowSelection = Boolean(type),
     rowKey,
   } = options;
 
@@ -69,6 +69,9 @@ export default function TableSelect(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   useEffect(_ => {
+    if (onChangeTableData && type === false) {
+      onChangeTableData(tableData);
+    }
     if (Array.isArray(tableData)) {
       const { selectedRows, selectedRowKeys } = initSselectedRef.current;
 

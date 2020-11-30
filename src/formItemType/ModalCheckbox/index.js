@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Modal, Button } from 'antd';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import TableCheckbox from './TableCheckbox';
+import { getPageData } from 'zero-element/lib/Model';
 
 export default function ModalCheckbox(props) {
   const {
@@ -13,6 +14,7 @@ export default function ModalCheckbox(props) {
     formdata,
     ...rest
   } = props;
+  const { formData } = getPageData(namespace);
 
   const {
     title = '选择数据',
@@ -57,7 +59,7 @@ export default function ModalCheckbox(props) {
     <Button
       onClick={switchVisible}
     >
-      {echoName(value, formdata, { field, label, editLabel }) || title}
+      {echoName(value, formData, { field, label, editLabel }) || title}
     </Button>
     <Modal
       destroyOnClose
