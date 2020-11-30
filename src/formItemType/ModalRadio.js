@@ -70,8 +70,9 @@ export default function ModalRadio(props) {
       _toValue: null,
     };
     setV([]);
-    onChange(selectedData.current);
-    setVisible(false);
+    handleSave();
+    onChange(undefined);
+    // setVisible(false);
   }
   function handleSave() {
     onChange(selectedData.current);

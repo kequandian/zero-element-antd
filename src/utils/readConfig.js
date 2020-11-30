@@ -10,7 +10,7 @@ import Penetrate from '@/components/Penetrate';
 
 const iconStyle = { color: '#108ee9', marginLeft: 4 };
 export function getFormItem(field, model,
-  { namespace, form, handle = {}, hooks, extraData }
+  { namespace, form, handle = {}, hooks, extraData, childFormData }
 ) {
   const {
     field: fieldName, label, value, extra = '', span,
@@ -22,6 +22,7 @@ export function getFormItem(field, model,
     ...rest } = field;
   const formValues = form.getFieldsValue(); // 同时兼容 Search 和 Form 的初始值
   const { formData: values = {} } = getPageData(namespace) || {};
+  const vailFormData = childFormData || { ...formValues, ...values };
 
   if (type === 'empty') {
     return null;
@@ -30,7 +31,7 @@ export function getFormItem(field, model,
   if (expect && expect.field) {
     handle.onExpect(expect.field);
   }
-  if (!checkExpected({ ...extraData, ...formValues, ...values }, expect)) {
+  if (!checkExpected({ ...extraData, ...vailFormData }, expect)) {
     return null;
   }
 
@@ -50,7 +51,7 @@ export function getFormItem(field, model,
         options={options}
         namespace={namespace}
         handle={handle}
-        formdata={values}
+        formdata={vailFormData}
         hooks={hooks}
         {...rest}
         model={model}

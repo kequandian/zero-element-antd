@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { Spin, Input, Tree, Empty } from 'antd';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatAPI } from 'zero-element/lib/utils/format';
@@ -11,7 +11,7 @@ import checkData from './checkData';
 
 const { Search } = Input;
 
-export default (props) => {
+export default forwardRef(function TreeWrapped(props, ref) {
   const {
     API, searchField = 'search',
     namespace,
@@ -28,6 +28,10 @@ export default (props) => {
   const [selectedKeys, setSelectedKeys] = useState([]);
   const [autoExpandParent, setAutoExpandParent] = useState(true);
   const [treeLoading, setTreeLoading] = useState(false);
+
+  useImperativeHandle(ref, () => ({
+    onReInit: handleLoadInitData,
+  }));
 
   useDidMount(_ => {
     if (API) {
@@ -189,4 +193,4 @@ export default (props) => {
     ) : <Empty />}
   </Spin>
 
-}
+})

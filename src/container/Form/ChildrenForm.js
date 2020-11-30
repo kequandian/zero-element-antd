@@ -113,6 +113,7 @@ export default function ChildrenForm(props) {
             {fields.map(field => getFormItem(field, model, {
               namespace,
               form,
+              vailFormData: form.getFieldsValue(),
               handle: {
                 onFormatValue,
                 onSaveOtherValue,
