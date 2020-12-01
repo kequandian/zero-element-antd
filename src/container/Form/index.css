@@ -25,3 +25,8 @@
 .ant-modal-body .ZEle-Form-footer {
   padding-bottom: 16px;
 }
+
+.ZEleA-Form-tips-container .ant-form-item-control-input-content {
+  display    : flex;
+  align-items: center;
+}

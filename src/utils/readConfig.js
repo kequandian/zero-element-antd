@@ -39,6 +39,7 @@ export function getFormItem(field, model,
     key={fieldName}
     label={label}
     span={span}
+    className={tips ? 'ZEleA-Form-tips-container' : ''}
     name={fieldName}
     defaultValue={value}
     rules={[...rules.map(rule => handleRule(rule, values, handle))]}
@@ -57,7 +58,7 @@ export function getFormItem(field, model,
         model={model}
       />
       {tips ? (
-        <Tooltip title={tips}>
+        <Tooltip title={<pre>{tips}</pre>}>
           <QuestionCircleOutlined style={iconStyle} />
         </Tooltip>
       ) : null}

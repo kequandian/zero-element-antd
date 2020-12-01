@@ -25,7 +25,7 @@ export default function ValueTypeInputNumber(props) {
   });
 
   function handleChange(value) {
-    _.set(record, field.replace(/\,/g, '.'), toNumber(value));
+    _.set(record, field, toNumber(value));
     onEdit && onEdit(index, record);
   }
   const maxValue = maxField ? _.get(record, maxField) : undefined;
