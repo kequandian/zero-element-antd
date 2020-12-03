@@ -79,11 +79,13 @@ export default function OneMary(props) {
     if (saveData && selectedRows && type === 'radio') {
       const rst = {};
       const data = selectedRows[0];
-      Object.keys(saveData).forEach(key => {
-        rst[key] = data[saveData[key]];
-      });
+      if (data) {
+        Object.keys(saveData).forEach(key => {
+          rst[key] = data[saveData[key]];
+        });
 
-      onSaveOtherValue(rst);
+        onSaveOtherValue(rst);
+      }
     }
     onChange(selectedRows);
   }

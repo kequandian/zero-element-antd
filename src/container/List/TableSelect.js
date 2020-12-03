@@ -69,7 +69,9 @@ export default function TableSelect(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   useEffect(_ => {
+    onChange([], []);
     if (onChangeTableData && type === false) {
+      // 将 API 返回的结果直接作为一对多数据
       onChangeTableData(tableData);
     }
     if (Array.isArray(tableData)) {
@@ -177,11 +179,13 @@ export default function TableSelect(props) {
       {actionsItems}
     </Render>
     <Table
-      rowKey={rowKey || optValue}
+      // rowKey={rowKey || optValue}
+      rowKey={record => record[rowKey] || record[optValue] || record._index}
       size="small"
       bordered={false}
       rowClassName={handleRowClassName}
-      dataSource={props.data || tableData}
+      // dataSource={props.data || tableData}
+      dataSource={setBaseIndex(props.data || tableData)}
       {...tableProps}
       {...propsCfg}
 
@@ -204,4 +208,17 @@ export default function TableSelect(props) {
       }
     />
   </Render>
+}
+
+function setBaseIndex(arr) {
+  if (Array.isArray(arr)) {
+    return arr.map((item, i) => {
+      return {
+        ...item,
+        _index: `_${i}`,
+      };
+    })
+  }
+
+  return arr;
 }

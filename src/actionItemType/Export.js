@@ -5,6 +5,7 @@ import { getPageData } from 'zero-element/lib/Model';
 import { get } from 'zero-element/lib/utils/request/endpoint';
 import { DownloadOutlined } from '@ant-design/icons';
 import { formatAPI } from 'zero-element/lib/utils/format';
+import qs from 'querystring';
 
 export default function Export(props) {
   const { title = '导出', options = {}, className, namespace, handle, config, ...restProps } = props;
@@ -23,6 +24,7 @@ export default function Export(props) {
   const [loading, setLoading] = useState(false);
 
   function handleClick() {
+    const { pageNum, pageSize, ...rest } = searchData;
     setLoading(true);
     const fAPI = formatAPI(API, {
       namespace,
@@ -38,7 +40,7 @@ export default function Export(props) {
       exportName: name,
       search: searchData,
       type,
-      api: `${get()}${listAPI}?pageNum=${current}&pageSize=${total}`,
+      api: `${get()}${listAPI}?pageNum=${current}&pageSize=${total}&${qs.stringify(rest)}`,
     })
       .finally(_ => {
         setLoading(false);

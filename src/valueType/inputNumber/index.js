@@ -12,7 +12,7 @@ export default function ValueTypeInputNumber(props) {
     data: { index, text = '', record },
   } = props;
   const { onEdit } = handle;
-  const { defaultValue, maxField } = options;
+  const { defaultValue, maxField, ...restOpt } = options;
 
   const v = toNumber(text);
 
@@ -26,6 +26,8 @@ export default function ValueTypeInputNumber(props) {
 
   function handleChange(value) {
     _.set(record, field, toNumber(value));
+    console.log(123, index, value, record);
+
     onEdit && onEdit(index, record);
   }
   const maxValue = maxField ? _.get(record, maxField) : undefined;
@@ -34,5 +36,6 @@ export default function ValueTypeInputNumber(props) {
     value={v}
     onChange={handleChange}
     max={maxValue}
+    {...restOpt}
   />
 }

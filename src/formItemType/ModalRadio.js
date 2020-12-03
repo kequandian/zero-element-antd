@@ -53,9 +53,10 @@ export default function ModalRadio(props) {
 
   function handleChange(value) {
     setDisable(value);
+    const item = value[0] || {};
     selectedData.current = {
-      ...value[0],
-      _toValue: value[0][optValue],
+      ...item,
+      _toValue: item[optValue],
     };
   }
   function onOpen() {
