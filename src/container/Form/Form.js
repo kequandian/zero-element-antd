@@ -109,10 +109,25 @@ export default function BaseForm(props) {
         }
 
         initData.current = formData;
-        const { extra } = formData;
+        const { extra, images, tags } = formData;
         setPageData(namespace, 'formData', formData);
         form.setFieldsValue({ ...initData.current });
 
+        if (Array.isArray(images) || Array.isArray(tags)) {
+          const otherField = [];
+
+          if (Array.isArray(images)) {
+            otherField.push({ lable: '', field: 'tags', type: 'tags' });
+          }
+          if (Array.isArray(images)) {
+            otherField.push({ lable: '', field: 'images', type: 'upload-image' });
+          }
+
+          setFields([
+            ...fields,
+            ...otherField,
+          ]);
+        }
         if (extra && Array.isArray(extra.items)) {
           setExtraFields(extra.items);
         } else {

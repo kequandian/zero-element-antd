@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Select, Spin } from 'antd';
 import { query } from '@/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
@@ -17,6 +17,7 @@ export default function SelectFetch(props) {
     handle = {},
     formdata = {},
     hooks = {},
+    props: pProps,
     ...rest
   } = props;
   const {
@@ -30,6 +31,7 @@ export default function SelectFetch(props) {
   const { onSaveOtherValue } = handle;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
+  const initRef = useRef(false);
   const effectFieldValue = formdata[effectField];
 
   useWillMount(_ => {
@@ -39,8 +41,10 @@ export default function SelectFetch(props) {
   });
   useEffect(_ => {
     if (effectFieldValue) {
+      if (initRef.current) {
+        handleChange();
+      }
       getData();
-      handleChange();
     }
   }, [effectFieldValue]);
 
@@ -65,6 +69,7 @@ export default function SelectFetch(props) {
         })
         .finally(_ => {
           setLoading(false);
+          initRef.current = true;
         })
     }
   }
@@ -99,7 +104,7 @@ export default function SelectFetch(props) {
   }
 
   return <Spin className={className} spinning={loading}>
-    <Select onChange={handleChange} value={value} {...rest}>
+    <Select onChange={handleChange} value={value} {...pProps}>
       {optionList.map(opt => (
         <Option key={opt[optValue]} value={opt[optValue]}>
           {opt[optLabel]}

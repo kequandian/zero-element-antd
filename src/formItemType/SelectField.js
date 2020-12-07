@@ -19,6 +19,7 @@ export default function SelectField(props) {
     options,
     namespace,
     onChange,
+    props: pProps,
     ...rest
   } = props;
   const {
@@ -59,7 +60,7 @@ export default function SelectField(props) {
   }
 
   return <Spin className={className} spinning={loading}>
-    <Select onChange={handleChange} value={value} {...rest}>
+    <Select onChange={handleChange} value={value} {...pProps}>
       {optionList.map(opt => (
         <Option key={opt[optValue]} value={opt[optValue]}>{opt[optLabel]}</Option>
       ))}

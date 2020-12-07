@@ -69,7 +69,7 @@ export default function TableSelect(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
   useEffect(_ => {
-    onChange([], []);
+    // onChange([], []);
     if (onChangeTableData && type === false) {
       // 将 API 返回的结果直接作为一对多数据
       onChangeTableData(tableData);
@@ -213,10 +213,8 @@ export default function TableSelect(props) {
 function setBaseIndex(arr) {
   if (Array.isArray(arr)) {
     return arr.map((item, i) => {
-      return {
-        ...item,
-        _index: `_${i}`,
-      };
+      item['_index'] = `_${i}`;
+      return item;
     })
   }
 
