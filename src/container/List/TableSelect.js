@@ -57,7 +57,12 @@ export default function TableSelect(props) {
         if (item && typeof item === 'object') {
           return String(item[optValue]);
         }
-        return String(item);
+
+        if (item !== undefined) {
+          return String(item);
+        }
+
+        return item;
       });
 
       setSelectedRowKeys(initSelected);
@@ -180,7 +185,9 @@ export default function TableSelect(props) {
     </Render>
     <Table
       // rowKey={rowKey || optValue}
-      rowKey={record => record[rowKey] || record[optValue] || record._index}
+      rowKey={
+        typeof rowKey === 'function' ? rowKey : getKey.bind(null, rowKey, optValue)
+      }
       size="small"
       bordered={false}
       rowClassName={handleRowClassName}
@@ -219,4 +226,16 @@ function setBaseIndex(arr) {
   }
 
   return arr;
+}
+
+function getKey(rowKey, optValue, record) {
+
+  if (record[rowKey] || record[rowKey] === 0) {
+    return String(record[rowKey]);
+  }
+  if (record[optValue] || record[optValue] === 0) {
+    return String(record[optValue]);
+  }
+
+  return record._index;
 }

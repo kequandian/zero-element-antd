@@ -44,7 +44,7 @@ export default function useListHandle({
   const rowSelection = useRowSelection(namespace, props.rowSelection);
 
   const listData = model[dataPath] || {};
-  const { records, ...pagination } = listData;
+  const { records, size, ...pagination } = listData;
 
   const { columns, width } = formatTableFields(orderFields, operation, {
     ...handle,

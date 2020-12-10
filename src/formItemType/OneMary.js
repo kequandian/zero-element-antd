@@ -172,7 +172,7 @@ export default function OneMary(props) {
         searchFields,
         searchCol,
         value: optValue,
-        rowKey: row => String(row._id || row.id || row[optValue])
+        rowKey: getKey.bind(null, optValue),
       }}
     />
   </Render>
@@ -186,4 +186,11 @@ function getValues(data, arr) {
     fields = [arr];
   }
   return fields.map(field => data[field]);
+}
+
+function getKey(optValue, record) {
+  if (record[optValue] || record[optValue] === 0) {
+    return String(record[optValue]);
+  }
+  return record.id || record._id || record._index;
 }
