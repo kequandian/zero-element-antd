@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
 import { Table } from 'antd';
 import { Render } from 'zero-element/lib/config/layout';
 
+import useListHandle from './utils/useListHandle';
 import { Flex } from 'layout-flex';
 
 import Tree from '@/components/Tree';
@@ -32,20 +32,17 @@ export default function TreeList(props) {
 
   const [extraData, setExtraData] = useState({});
 
-  const listProps = useBaseList({
-    namespace,
-    modelPath: 'listData',
-    extraData,
-  }, config);
-
-  const { loading, data, handle, model } = listProps;
-  const { onGetList, onClearList } = handle;
-
-  const { columns } = formatTableFields(fields, operation, handle, {
+  const [
+    tableProps, tableData, handle, actionsItems,
+  ] = useListHandle({
     namespace,
     extraData,
-    model,
+    config,
+
+    props,
   });
+
+  const { onGetList, onClearList } = handle;
 
   useDidMount(_ => {
     if (API.listAPI) {
@@ -68,14 +65,7 @@ export default function TreeList(props) {
 
   return <Render n={layout} {...layoutConfig}>
     <Render n={actionLayout} {...actionLayoutConfig}>
-      {actions.map((action, i) => getActionItem({
-        key: i,
-        ...action,
-      }, model, handle, {
-        namespace,
-        extraData,
-        config,
-      }))}
+      {actionsItems}
     </Render>
     <Flex align="flex-start">
       {treeAPI ? (<FlexItem>
@@ -90,10 +80,9 @@ export default function TreeList(props) {
       <FlexItem flex={1}>
         <Table
           rowKey="id"
-          dataSource={props.data || data}
-          columns={columns}
-          loading={loading}
+          dataSource={props.data || tableData}
           childrenColumnName={field}
+          {...tableProps}
           {...propsCfg}
         />
       </FlexItem>

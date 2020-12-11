@@ -2,6 +2,7 @@ import React from 'react';
 import ListOperation from '../components/ListOperation';
 import ListFieldsEdit from '../components/ListFieldsEdit';
 import { Render } from 'zero-element/lib/config/valueType';
+import global from 'zero-element/lib/config/global';
 
 /**
  *
@@ -14,6 +15,7 @@ import { Render } from 'zero-element/lib/config/valueType';
  * @returns antd Table columns 和 sum width
  */
 export function formatTableFields(fields = [], operation = [], handle, props = {}) {
+  const { autoOperationFixed } = global;
   let operationCfg = {};
   let width = 0;
   let operationObj;
@@ -46,20 +48,20 @@ export function formatTableFields(fields = [], operation = [], handle, props = {
       dataIndex: 'operation',
       align: 'right',
       ...(width > 0 ? {
-        // fixed: 'right',
+        fixed: autoOperationFixed === true ? 'right' : undefined,
         width: 100,
-      } : {}), 
+      } : {}),
       ...operationCfg, // fixed  width 
-      title: handle.onFieldsOrder ? 
-        () => <ListFieldsEdit 
+      title: handle.onFieldsOrder ?
+        () => <ListFieldsEdit
           fields={props.fields}
-          handle={handle} 
+          handle={handle}
           namespace={props.namespace}
-        /> 
+        />
         : '操作',
       render: (text, record, index) => {
         return <ListOperation
-          {...props} 
+          {...props}
           text={text}
           record={record}
           index={index}

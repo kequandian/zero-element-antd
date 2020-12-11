@@ -11,7 +11,7 @@ export default function ListOperation(props) {
   const { state, model, dispatch, index, record, operation, handle } = props;
   const { listData = {} } = getModel(model.namespace) || {};
   const { records = [] } = listData;
-  const { listOperationEmptyText } = global;
+  const { listOperationEmptyText, autoOperationFixed } = global;
   const containerRef = useRef(null);
 
   if (record && record.operation === false) {
@@ -56,7 +56,7 @@ export default function ListOperation(props) {
     onCancel: handleCancel,
     onConfirm: handleConfirm,
     arrowPointAtCenter: false,
-    getPopupContainer: triggerNode => triggerNode.parentNode,
+    getPopupContainer: autoOperationFixed === true ? undefined : triggerNode => triggerNode.parentNode,
     overlayStyle: {
       minWidth: 260,
     },
@@ -116,7 +116,7 @@ export default function ListOperation(props) {
             overlay={renderMemu(dropdownList)}
             trigger={['click']}
             placement={(index + 1) === records.length ? 'topRight' : 'bottomRight'}
-            getPopupContainer={_ => containerRef.current}
+            getPopupContainer={autoOperationFixed === true ? undefined : _ => containerRef.current}
           >
             <EllipsisOutlined style={{ fontSize: '24px' }} />
           </Dropdown>
