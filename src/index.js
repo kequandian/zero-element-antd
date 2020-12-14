@@ -30,6 +30,7 @@ import onTips from '@/listAction/onTips';
 
 LayoutSet({
   Empty: Load('layout/Empty'),
+  Title: Load('layout/Title'),
   BaseTitle: Load('layout/BaseTitle'),
   NotTitleContent: Load('layout/NotTitleContent'),
   TitleContent: Load('layout/TitleContent'),

@@ -1,6 +1,7 @@
 {
   "LayoutSet": {
     "Empty": "layout/Empty",
+    "Title": "layout/Title",
     "BaseTitle": "layout/BaseTitle",
     "NotTitleContent": "layout/NotTitleContent",
     "TitleContent": "layout/TitleContent",

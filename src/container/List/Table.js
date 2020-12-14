@@ -27,7 +27,7 @@ export default function BaseTable(props) {
   });
 
   function handleRowClassName(record) {
-    if (operationData.id === record.id) {
+    if (record.id && operationData.id === record.id) {
       return 'ZEleA-table-selected';
     }
   }
