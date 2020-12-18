@@ -1,4 +1,4 @@
-import React, { useRef, useState, useMemo } from 'react';
+import React, { useRef, useState, useMemo, useEffect } from 'react';
 import { Form } from 'antd';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount, useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
@@ -9,6 +9,7 @@ import { CheckOutlined, RollbackOutlined } from '@ant-design/icons';
 import useFormHandle from './utils/useFormHandle';
 import useLongPress from '@/utils/hooks/useLongPress';
 import { useDebounceFn } from 'ahooks';
+import { setPageData, getPageData } from 'zero-element/lib/Model';
 
 const defaultLabelCol = {
   xs: { span: 3, },
@@ -120,10 +121,17 @@ export default function BaseSearch(props) {
 
   }
   function handleReset() {
+    setPageData(namespace, 'searchData', {});
+    const data = {};
+    fields.forEach(field => {
+      data[field.field] = undefined;
+    })
+    onSetSearchData({});
+
     form.resetFields();
     form.setFieldsValue(initData.current);
     // forceUpdate();
-    handleSubmitForm(initData.current);
+    handleSubmitForm(data);
   }
 
   function renderFooter(validLength) {

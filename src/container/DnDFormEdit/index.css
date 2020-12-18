@@ -46,6 +46,10 @@
   width: 100%;
 }
 
+.ZEleA-DnDFormEdit-row .ZEleA-Form-item-label {
+  width: 6em;
+}
+
 .ZEleA-Form-horizontal .ZEleA-DnDFormEdit-row {
   display      : flex;
   align-items  : center;

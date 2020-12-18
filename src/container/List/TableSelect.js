@@ -149,11 +149,11 @@ export default function TableSelect(props) {
     sKeys.push(...selectedRowKeys);
     sRows.push(...selectedRows);
 
-    const uniq = _.uniqBy(sRows, 'id');
+    const uniq = _.uniqWith(sRows, (arrVal, othVal) => String(arrVal.id) === String(othVal.id));
 
-    onChange(uniq, uniq.map(i => i.id));
+    onChange(uniq, uniq.map(i => String(i.id)));
     return {
-      selectedRowKeys: uniq.map(i => i.id),
+      selectedRowKeys: uniq.map(i => String(i.id)),
       selectedRows: uniq,
     }
   }
@@ -161,9 +161,9 @@ export default function TableSelect(props) {
   function handleCancelInitSelected(record, selected) {
     const { selectedRowKeys, selectedRows } = initSselectedRef.current;
     if (!selected && Array.isArray(selectedRowKeys)) {
-      const filter = selectedRowKeys.filter(id => id !== record.id);
+      const filter = selectedRowKeys.filter(id => String(id) !== String(record.id));
       initSselectedRef.current = {
-        selectedRows: selectedRows.filter(i => i.id !== record.id),
+        selectedRows: selectedRows.filter(i => String(i.id) !== String(record.id)),
         selectedRowKeys: filter,
       }
     }

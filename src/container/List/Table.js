@@ -47,11 +47,15 @@ export default function BaseTable(props) {
       size="middle"
       rowClassName={handleRowClassName}
       dataSource={props.data || tableData}
+      showSorterTooltip={false}
       {...tableProps}
       {...propsCfg}
-      footer={tableFooter(
-        props.data || tableData,
-        tableProps.columns)
+      footer={
+        props.footer !== undefined ?
+          props.footer :
+          tableFooter(
+            props.data || tableData,
+            tableProps.columns)
       }
     />
   </Render>

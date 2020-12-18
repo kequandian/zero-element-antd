@@ -58,9 +58,7 @@ function date(componentName) {
           [startDate]: dateString[0],
           [endDate]: dateString[1],
         });
-        onChange(
-          moment().format(format)
-        );
+        onChange(dateString[0]);
       } else {
         onChange(dateString);
       }
