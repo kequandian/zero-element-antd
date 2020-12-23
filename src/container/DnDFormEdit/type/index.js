@@ -18,6 +18,8 @@ import OneMany from './OneMany';
 import Search from './Search';
 import Table from './Table';
 
+import Todo from './Todo';
+
 const typeMap = {
   Canvas,
   Grid,
@@ -38,5 +40,7 @@ const typeMap = {
   'UploadFile': Button,
   Search,
   Table,
+
+  Todo,
 };
 export default typeMap;

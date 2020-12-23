@@ -47,6 +47,9 @@ export default function SelectFetch(props) {
       getData();
     }
   }, [effectFieldValue]);
+  useEffect(_ => {
+    handleChange(value);
+  }, [optionList])
 
   function getData() {
     if (API) {
