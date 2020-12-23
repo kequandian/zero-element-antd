@@ -26,9 +26,7 @@
     "Search": "container/Form/Search",
     "AutoReportSearch": "container/Form/AutoReportSearch",
     "Form": "container/Form/Form",
-    "ChildrenForm": "container/Form/ChildrenForm",
-    "DnDFormEdit": "container/DnDFormEdit",
-    "DnDListEdit": "container/DnDListEdit"
+    "ChildrenForm": "container/Form/ChildrenForm"
   },
   "LASet": {
     "onRequest": "listAction/onRequest",
