@@ -16,8 +16,6 @@
     "lodash": "^4.17.19",
     "react": "^16.8.6",
     "react-contextmenu": "^2.11.0",
-    "react-dnd": "^11.1.3",
-    "react-dnd-html5-backend": "^11.1.3",
     "react-dom": "^16.8.6",
     "react-json-view": "^1.19.1",
     "zero-element": "^1.0.0"

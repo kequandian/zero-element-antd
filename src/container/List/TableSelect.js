@@ -75,7 +75,8 @@ export default function TableSelect(props) {
   }, [value]);
   useEffect(_ => {
     // onChange([], []);
-    if (onChangeTableData && type === false) {
+    if (onChangeTableData) {
+      // && type === false
       // 将 API 返回的结果直接作为一对多数据
       onChangeTableData(tableData);
     }
