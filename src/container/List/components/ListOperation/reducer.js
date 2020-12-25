@@ -24,6 +24,7 @@ export default function reducer(state, { type, payload }) {
         ...state,
         modalTitle: payload.modalTitle,
         modalWidth: payload.modalWidth,
+        modalStyle: payload.modalStyle,
         modalConfig: payload.modalConfig,
         onSubmit: payload.onSubmit,
         data: payload.data,

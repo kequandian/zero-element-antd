@@ -12,6 +12,7 @@ const initialState = {
   confirm: false,
   modal: false,
   modalTitle: '',
+  modalStyle: {},
   pagination: undefined,
   modalConfig: {},
   index: -1, // modal
@@ -26,7 +27,7 @@ export default function ListOperationWrapped(props) {
 
   function onModal(cfg) {
     const { options } = cfg;
-    const { modalTitle, modalWidth, pagination, ...rest } = options;
+    const { modalTitle, modalWidth, modalStyle, pagination, ...rest } = options;
     const fTitle = formatAPI(modalTitle, {
       namespace,
     });
@@ -36,6 +37,7 @@ export default function ListOperationWrapped(props) {
       payload: {
         modalTitle: fTitle,
         modalWidth,
+        modalStyle,
         pagination: pagination,
         modalConfig: rest,
       }
@@ -54,7 +56,7 @@ export default function ListOperationWrapped(props) {
   }
   function onChildEditModal(cfg) {
     const { options } = cfg;
-    const { modalTitle, modalWidth, ...rest } = options;
+    const { modalTitle, modalWidth, modalStyle, ...rest } = options;
     const fTitle = formatAPI(modalTitle, {
       namespace,
     });
@@ -92,6 +94,7 @@ export default function ListOperationWrapped(props) {
       onCancel={handleClose}
       bodyStyle={{
         padding: 0,
+        ...state.modalStyle,
       }}
       footer={null}
     >
