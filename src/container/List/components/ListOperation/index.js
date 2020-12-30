@@ -87,6 +87,7 @@ export default function ListOperationWrapped(props) {
       }}
     />
     <Modal
+      style={state.modalStyle}
       visible={state.modal}
       title={state.modalTitle}
       width={state.modalWidth}
@@ -94,7 +95,6 @@ export default function ListOperationWrapped(props) {
       onCancel={handleClose}
       bodyStyle={{
         padding: 0,
-        ...state.modalStyle,
       }}
       footer={null}
     >

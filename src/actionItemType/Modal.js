@@ -36,6 +36,7 @@ export default (props) => {
       {title}
     </Button>
     <Modal
+      style={state.modalStyle}
       title={modalTitle}
       width={modalWidth}
       visible={visible}
@@ -43,7 +44,6 @@ export default (props) => {
       onCancel={handleClose}
       bodyStyle={{
         padding: 0,
-        ...modalStyle,
       }}
       footer={null}
     >
