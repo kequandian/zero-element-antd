@@ -1,4 +1,4 @@
 export default {
-  'STRING': 'input',
-  'INTEGER': 'number',
+  'S': 'input',
+  'N': 'number',
 }

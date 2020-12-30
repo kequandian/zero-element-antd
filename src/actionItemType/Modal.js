@@ -36,7 +36,7 @@ export default (props) => {
       {title}
     </Button>
     <Modal
-      style={state.modalStyle}
+      style={modalStyle}
       title={modalTitle}
       width={modalWidth}
       visible={visible}
