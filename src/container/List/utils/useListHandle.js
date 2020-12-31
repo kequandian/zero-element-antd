@@ -55,7 +55,9 @@ export default function useListHandle({
     extraData,
     fields,
     model,
-  });
+  },
+    data
+  );
 
   const forceUpdate = useForceUpdate();
 
