@@ -142,13 +142,13 @@ export default function BaseForm(props) {
   function setExtraFields(items) {
     setFields([
       ...fields,
-      ...items.map(item => {
+      ...items.map((item, i) => {
         extraFields.current.push(item.attr);
         return {
           label: item.fieldName,
-          field: item.attr,
+          field: ['extra', 'items', String(i), 'value'],
           type: extraFieldType[item.fieldType] || 'input',
-          value: item.value,
+          value: ['extra', 'items', String(i), 'value'],
         }
       }),
     ]);
@@ -180,15 +180,20 @@ export default function BaseForm(props) {
 
     handleFormatValue(submitData);
 
-
     // 修改并提交 extra 里面的数据
-    extraFields.current.forEach(field => {
-      const find = submitData.extra.items.find(item => item.attr === field);
-      if (find) {
-        find.value = submitData[field];
-        delete submitData[field];
-      }
-    });
+    if (extraFields.current.length) {
+      const extraData = submitData.extra.items;
+      submitData.extra.items = pageDataFormData.extra.items;
+
+      extraFields.current.forEach(field => {
+        const index = submitData.extra.items.findIndex(item => item.attr === field);
+        const find = submitData.extra.items[index];
+
+        if (find) {
+          find.value = extraData[index].value;
+        }
+      });
+    }
 
     if (typeof onSubmit === 'function') {
       onSubmit(submitData, handleResponse);
