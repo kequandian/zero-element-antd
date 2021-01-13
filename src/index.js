@@ -102,6 +102,7 @@ FITSet({
   'one-mary': Load('formItemType/OneMary'),
   'number-range': Load('formItemType/NumberRange'),
   'pcdm': Load('formItemType/PCDM'),
+  pcdForSearch: Load('formItemType/PCDForSearch')
 });
 
 AITSet({

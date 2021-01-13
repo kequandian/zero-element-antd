@@ -68,7 +68,8 @@
     "rich-text": "formItemType/RichText",
     "one-mary": "formItemType/OneMary",
     "number-range": "formItemType/NumberRange",
-    "pcdm": "formItemType/PCDM"
+    "pcdm": "formItemType/PCDM",
+    "pcdForSearch": "formItemType/PCDForSearch"
   },
   "AITSet": {
     "modal": "actionItemType/Modal",
