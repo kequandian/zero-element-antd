@@ -20,8 +20,12 @@ const toTypeMap = {
     return value;
   },
   'toValue': function (value) {
-    if (typeof value === 'object' && value.hasOwnProperty('_toValue')) {
-      return value._toValue;
+    if (typeof value === 'object') {
+      if(value != null){
+        if(value.hasOwnProperty('_toValue')){
+          return value._toValue;
+        }
+      }
     }
     return value;
   },
