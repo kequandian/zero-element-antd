@@ -2,9 +2,11 @@ import React from 'react';
 import { Checkbox } from 'antd';
 
 export default ({ props, defaultValue, value, ...rest }) => {
+  
+  let checkedList = value || defaultValue;
+
   return <Checkbox.Group
-    defaultValue={typeof defaultValue === 'string' ? [] : defaultValue}
-    value={typeof value === 'string' ? [] : value}
+    value={typeof checkedList === 'string' ? [] : checkedList}
     {...rest}
     {...props}
   />
