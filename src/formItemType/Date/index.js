@@ -27,6 +27,7 @@ function date(componentName) {
       formdata,
       handle,
       // ...restProps
+      defaultValue
     } = props;
     const {
       nowTime = false,
@@ -36,7 +37,7 @@ function date(componentName) {
     } = options;
     const { onExpect, onSaveOtherValue } = handle;
 
-    let val = value;
+    let val = value || defaultValue;
 
     if (componentName === 'range' && startDate && endDate) {
       val = [formdata[startDate], formdata[endDate]];
