@@ -189,6 +189,8 @@ export default forwardRef(function TreeWrapped(props, ref) {
         autoExpandParent={autoExpandParent}
         {...treeProps}
         treeData={treeData}
+
+        style={{minWidth:'150px', paddingRight:'10px'}}
       />
     ) : <Empty />}
   </Spin>
