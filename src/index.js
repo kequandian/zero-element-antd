@@ -87,7 +87,7 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
-  'TextNull':Load("formitemType/TextNull"),
+  'Space':Load("formitemType/Space"),
   'direct-upload': Load('formItemType/DirectUpload'),
   'time-range': Load('formItemType/Time/TimeRange'),
   'table-select': Load('formItemType/TableSelect'),
