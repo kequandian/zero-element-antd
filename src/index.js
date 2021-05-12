@@ -12,6 +12,8 @@ import { set as VTSet } from 'zero-element/lib/config/valueType';
 import onRequest from '@/listAction/onRequest';
 import onTips from '@/listAction/onTips';
 
+
+
 // APIConfig({
 //   'DEFAULT_current': 1,
 //   'DEFAULT_pageSize': 10,
