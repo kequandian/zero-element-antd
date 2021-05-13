@@ -10,7 +10,7 @@ import Penetrate from '@/components/Penetrate';
 
 const iconStyle = { color: '#108ee9', marginLeft: 4 };
 export function getFormItem(field, model,
-  { namespace, form, handle = {}, hooks, extraData, childformdata }
+  { namespace, form, style, handle = {}, hooks, extraData, childformdata }
 ) {
   const {
     field: fieldName, label, value, extra = '', span,
@@ -52,6 +52,7 @@ export function getFormItem(field, model,
         options={options}
         namespace={namespace}
         handle={handle}
+        className={`_Search_ ${style}`}
         formdata={vailFormData}
         childformdata={childformdata}
         hooks={hooks}
