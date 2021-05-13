@@ -1,0 +1,422 @@
+@import './theme.less';
+// Tag
+.ant-tag{
+    // border-radius: @TAG-ALL-BorderRadius!important;
+    padding:@TAG-ALL-Padding!important;
+  }
+  // tag风格
+  ._tag_color{
+    color: #fff !important;
+    background-color: @TAG-Default-color !important;
+    // status
+    &.status{
+      &.open{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSt-OPEN-Color!important;
+        }
+        &.Dot{
+          color: @TAGSt-OPEN-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSt-OPEN-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSt-OPEN-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+  
+      &.close{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSt-CLOSE-Color!important;
+        }
+        &.Dot{
+          color: @TAGSt-CLOSE-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSt-CLOSE-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSt-CLOSE-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+  
+      &.processing{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSt-PRO-Color!important;
+        }
+        &.Dot{
+          color: @TAGSt-PRO-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSt-PRO-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSt-PRO-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+  
+    }
+    // priority
+    &.priority{
+      &.P1{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGPri-P1-Color!important;
+        }
+        &.Dot{
+          color: @TAGPri-P1-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGPri-P1-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGPri-P1-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.P2{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGPri-P2-Color!important;
+        }
+        &.Dot{
+          color: @TAGPri-P2-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGPri-P2-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGPri-P2-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.P3{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGPri-P3-Color!important;
+        }
+        &.Dot{
+          color: @TAGPri-P3-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGPri-P3-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGPri-P3-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.P4{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGPri-P4-Color!important;
+        }
+        &.Dot{
+          color: @TAGPri-P4-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGPri-P4-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGPri-P4-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.P5{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGPri-P5-Color!important;
+        }
+        &.Dot{
+          color: @TAGPri-P5-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGPri-P5-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGPri-P5-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+    }
+    // security
+    &.security{
+      &.warning{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSec-WARNING-Color!important;
+        }
+        &.Dot{
+          color: @TAGSec-WARNING-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSec-WARNING-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSec-WARNING-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.danger{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSec-DANGER-Color!important;
+        }
+        &.Dot{
+          color: @TAGSec-DANGER-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSec-DANGER-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSec-DANGER-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.error{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSec-ERROR-Color!important;
+        }
+        &.Dot{
+          color: @TAGSec-ERROR-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSec-ERROR-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSec-ERROR-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.safe{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGSec-SAFE-Color!important;
+        }
+        &.Dot{
+          color: @TAGSec-SAFE-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGSec-SAFE-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGSec-SAFE-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+    }
+    // option
+    &.option{
+      &.blue{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-BLUE-Color!important;
+        }
+        &.Dot{
+          color: @TAGOp-BLUE-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-BLUE-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGOp-BLUE-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.cyan{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-CYAN-Color!important;
+        }
+        &.Dot{
+          color: @TAGOp-CYAN-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-CYAN-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGOp-CYAN-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.purple{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-PURPLE-Color!important;
+        }
+        &.Dot{
+          color: @TAGOp-PURPLE-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-PURPLE-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGOp-PURPLE-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.purple_dark{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-PURPLE-Dark-Color!important;
+        }
+        &.Dot{
+          color: @TAGOp-PURPLE-Dark-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-PURPLE-Dark-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGOp-PURPLE-Dark-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.orange{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-ORANGE-Color!important;
+        }
+        &.Dot{
+          color: @TAGOp-ORANGE-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-ORANGE-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGOp-ORANGE-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+      &.gray{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-GRAY-Color!important;
+        }
+        &.Dot{
+          color: @TAGOp-GRAY-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-GRAY-Color solid!important;
+        }
+        &.Online{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Online::before{
+          content: "●";
+          color: @TAGOp-GRAY-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
+    }
+  }

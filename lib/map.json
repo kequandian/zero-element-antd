@@ -33,6 +33,7 @@
     "onTips": "listAction/onTips"
   },
   "FITSet": {
+    "Space":"formitemType/Space",
     "plain": "formItemType/Plain",
     "image": "formItemType/Image",
     "empty": "formItemType/Empty",
