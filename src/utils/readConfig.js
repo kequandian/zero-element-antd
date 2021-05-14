@@ -20,6 +20,9 @@ export function getFormItem(field, model,
     tips,
     expect,
     ...rest } = field;
+
+  const search = style?`_Search_`:`_Default_Search`
+    
   const formValues = form.getFieldsValue(); // 同时兼容 Search 和 Form 的初始值
   const { formData: values = {} } = getPageData(namespace) || {};
   const vailFormData = { ...formValues, ...values };
@@ -52,7 +55,7 @@ export function getFormItem(field, model,
         options={options}
         namespace={namespace}
         handle={handle}
-        className={`_Search_ ${style}`}
+        className={style?`${search} ${style}`:`${search}`}
         formdata={vailFormData}
         childformdata={childformdata}
         hooks={hooks}

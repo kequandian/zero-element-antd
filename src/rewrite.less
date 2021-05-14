@@ -421,15 +421,18 @@
     }
   }
 
+  ._Default_Search{
+    max-width: 260px!important;
+  }
 
   ._Search_{
     &.default{
       border-radius: 5px 0 0 5px!important;
-      width: 280px;
+      width: 340px;
       // left: 10px;
       position: relative;
       left: 0;
-      margin-left: 5vw;
+      margin-left: 2vw;
       // flex: none;
       float: left;
     }
@@ -440,8 +443,18 @@
         line-height: 30px;
         height: 32px;
         width: 50px;
-        margin-left: -1.4vw;
+        margin-left: -1vw;
         border-radius: 0px 5px 5px 0px!important;
+      }
+    }
+  }
+
+  @media screen and (min-width:1850px){
+    ._Search_{
+      &.default{
+        &.button{
+          margin-left: -2vw;
+        }
       }
     }
   }
@@ -465,7 +478,7 @@
       }
     }
   }
-  @media screen and (min-width:1164px) and (max-width:1395px){
+  @media screen and (min-width:1190px) and (max-width:1395px){
     ._Search_{
       &.default{
         &.button{
@@ -474,7 +487,7 @@
       }
     }
   }
-  @media screen and (min-width:1000px) and (max-width:1164px){
+  @media screen and (min-width:1087px) and (max-width:1190px){
     ._Search_{
       &.default{
         &.button{
@@ -484,7 +497,7 @@
     }
   }
 
-  @media screen and (max-width:1000px){
+  @media screen and (max-width:1087px){
     ._Search_{
       &.default{
         &.button{
