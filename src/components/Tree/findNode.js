@@ -12,7 +12,6 @@ function findNode(id, treeData) {
   } else {
     stack.push(treeData);
   }
-
   let rst;
   while (stack.length) {
     const item = stack.shift();
@@ -24,6 +23,7 @@ function findNode(id, treeData) {
       stack.push(...item.children);
     }
   }
+
   return rst;
 }
 
