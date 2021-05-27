@@ -18,6 +18,7 @@ export default function SelectField(props) {
     value,
     options,
     namespace,
+    width,
     onChange,
     props: pProps,
     ...rest
@@ -59,11 +60,12 @@ export default function SelectField(props) {
     });
   }
 
-  return <Spin className={className} spinning={loading}>
+  return <div style={{width:width}}><Spin className={className} spinning={loading}>
     <Select onChange={handleChange} value={value} {...pProps}>
       {optionList.map(opt => (
         <Option key={opt[optValue]} value={opt[optValue]}>{opt[optLabel]}</Option>
       ))}
     </Select>
   </Spin>
+  </div>
 }
