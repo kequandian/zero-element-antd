@@ -12,6 +12,6 @@ export default function (props){
     const TopTitle = (<h2>{title}</h2>)
     const Content = (<h3>{content}</h3>)
     return <Popover title={TopTitle} placement={placement} content={Content} trigger={trigger}>
-        <div style={{marginTop:"15px"}}>{svg}</div>                
+        <span style={{marginTop:"15px"}}>{svg}</span>                
     </Popover>
 }
