@@ -70,7 +70,8 @@
     "one-mary": "formItemType/OneMary",
     "number-range": "formItemType/NumberRange",
     "pcdm": "formItemType/PCDM",
-    "pcdForSearch": "formItemType/PCDForSearch"
+    "pcdForSearch": "formItemType/PCDForSearch",
+    "toptips":"formItemType/Toptips"
   },
   "AITSet": {
     "modal": "actionItemType/Modal",

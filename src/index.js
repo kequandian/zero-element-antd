@@ -1,6 +1,4 @@
-import Load from '@/utils/Load';
-
-// import { set as APIConfig } from 'zero-element/lib/config/APIConfig';
+import Load from "./utils/Load"; // import { set as APIConfig } from 'zero-element/lib/config/APIConfig';
 
 import { set as LayoutSet } from 'zero-element/lib/config/layout';
 import { set as CSet } from 'zero-element/lib/config/container';
@@ -8,21 +6,14 @@ import { set as LASet } from 'zero-element/lib/config/listAction';
 import { set as FITSet } from 'zero-element/lib/config/formItemType';
 import { set as AITSet } from 'zero-element/lib/config/actionItemType';
 import { set as VTSet } from 'zero-element/lib/config/valueType';
-
-import onRequest from '@/listAction/onRequest';
-import onTips from '@/listAction/onTips';
-
-
-
-// APIConfig({
+import onRequest from "./listAction/onRequest";
+import onTips from "./listAction/onTips"; // APIConfig({
 //   'DEFAULT_current': 1,
 //   'DEFAULT_pageSize': 10,
-
 //   'REQUEST_FIELD_current': 'pageNumber',
 //   'REQUEST_FIELD_pageSize': 'pageSize',
 //   'REQUEST_FIELD_field': 'field',
 //   'REQUEST_FIELD_order': 'order',
-
 //   'RESPONSE_FIELD_current': 'current',
 //   'RESPONSE_FIELD_pageSize': 'size',
 //   'RESPONSE_FIELD_total': 'total',
@@ -42,9 +33,8 @@ LayoutSet({
   SearchLayout: Load('layout/SearchLayout'),
   Grid: Load('layout/Grid'),
   Content: Load('layout/Content'),
-  Items: Load('layout/Items'),
+  Items: Load('layout/Items')
 });
-
 CSet({
   Empty: Load('container/Empty'),
   Table: Load('container/List/Table'),
@@ -58,14 +48,12 @@ CSet({
   Search: Load('container/Form/Search'),
   AutoReportSearch: Load('container/Form/AutoReportSearch'),
   Form: Load('container/Form/Form'),
-  ChildrenForm: Load('container/Form/ChildrenForm'),
+  ChildrenForm: Load('container/Form/ChildrenForm')
 });
-
 LASet({
   'onRequest': onRequest,
-  'onTips': onTips,
+  'onTips': onTips
 });
-
 FITSet({
   plain: Load('formItemType/Plain'),
   image: Load('formItemType/Image'),
@@ -89,7 +77,8 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
-  'Space':Load("formItemType/Space"),
+  "TopTips":Load("formItemType/Toptips"),
+  'Space': Load("formItemType/Space"),
   'direct-upload': Load('formItemType/DirectUpload'),
   'time-range': Load('formItemType/Time/TimeRange'),
   'table-select': Load('formItemType/TableSelect'),
@@ -107,7 +96,6 @@ FITSet({
   'pcdm': Load('formItemType/PCDM'),
   pcdForSearch: Load('formItemType/PCDForSearch')
 });
-
 AITSet({
   modal: Load('actionItemType/Modal'),
   request: Load('actionItemType/Request'),
@@ -115,9 +103,8 @@ AITSet({
   'import': Load('actionItemType/Import'),
   'import-modal': Load('actionItemType/ImportModal'),
   'export': Load('actionItemType/Export'),
-  'table-checkbox': Load('actionItemType/TableCheckbox'),
+  'table-checkbox': Load('actionItemType/TableCheckbox')
 });
-
 VTSet({
   'index': Load('valueType/index'),
   'plain': Load('valueType/plain'),
@@ -136,5 +123,5 @@ VTSet({
   'input-number': Load('valueType/inputNumber'),
   'input-text': Load('valueType/inputText'),
   'input-select': Load('valueType/inputSelect'),
-  'input-select-fetch': Load('valueType/inputSelectFetch'),
+  'input-select-fetch': Load('valueType/inputSelectFetch')
 });
