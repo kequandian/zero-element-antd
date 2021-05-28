@@ -8,6 +8,7 @@ import { set as AITSet } from 'zero-element/lib/config/actionItemType';
 import { set as VTSet } from 'zero-element/lib/config/valueType';
 import onRequest from "./listAction/onRequest";
 import onTips from "./listAction/onTips"; // APIConfig({
+import onPath from "./listAction/onPath";
 //   'DEFAULT_current': 1,
 //   'DEFAULT_pageSize': 10,
 //   'REQUEST_FIELD_current': 'pageNumber',
@@ -52,7 +53,8 @@ CSet({
 });
 LASet({
   'onRequest': onRequest,
-  'onTips': onTips
+  'onTips': onTips,
+  "onPath":onPath
 });
 FITSet({
   plain: Load('formItemType/Plain'),

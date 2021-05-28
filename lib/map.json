@@ -30,7 +30,8 @@
   },
   "LASet": {
     "onRequest": "listAction/onRequest",
-    "onTips": "listAction/onTips"
+    "onTips": "listAction/onTips",
+    "onPath":"listAction/onPath"
   },
   "FITSet": {
     "Space":"formItemType/Space",
