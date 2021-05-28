@@ -57,6 +57,7 @@ LASet({
   "onPath":onPath
 });
 FITSet({
+  videoview:Load("formItemType/VideoView/VideoView"),
   plain: Load('formItemType/Plain'),
   image: Load('formItemType/Image'),
   empty: Load('formItemType/Empty'),

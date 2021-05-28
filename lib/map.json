@@ -34,6 +34,7 @@
     "onPath":"listAction/onPath"
   },
   "FITSet": {
+    "videoview":"formItemType/VideoView/VideoView",
     "Space":"formItemType/Space",
     "plain": "formItemType/Plain",
     "image": "formItemType/Image",
