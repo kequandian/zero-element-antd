@@ -65,6 +65,7 @@
     "upload-file": "formItemType/UploadFile",
     "checkbox-fetch": "formItemType/CheckboxFetch",
     "select-fetch": "formItemType/SelectFetch",
+    "select-fetch-val":"formItemType/SelectFetchVal",
     "select-field": "formItemType/SelectField",
     "text-area": "formItemType/TextArea",
     "rich-text": "formItemType/RichText",
