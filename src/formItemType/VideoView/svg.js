@@ -1,3 +1,4 @@
+import React from "react"
 export const PlaySvg =(props)=>{
     const {
         width=200,

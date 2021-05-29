@@ -15,11 +15,9 @@ export default function Video(props){
     const Mock = document.getElementById("Video_Mock")
     const View = document.getElementById("Video_View")
     const VideoPlay = document.getElementById("Video_Play")
-    const Svg = document.getElementsByClassName("svg")[0]
     const [controls,setControls] = useState(false)
     const [SvgSize,SetSvgSize] = useState("32")
     const [playing,SetPlaying] = useState(true)
-    const [Video,SetVideo] = useState()
     const [opacity,SetOpacity] = useState("1")
 
 
@@ -45,13 +43,16 @@ export default function Video(props){
     const fileSet=(filename)=>{
         if(!filename||typeof filename!='string'){
            return false
-        };
+        }
         let back = filename.split('').reverse().join('');
         let getname = back.substring(0,back.search(/\./)).split('').reverse().join('');
         let clearother = getname.split(/\?/)[0]
         return clearother
       };
-      let fileType = fileSet(value)
+
+      const Url = JSON.parse(value)[0].fileUrl
+
+      let fileType = fileSet(Url)
 
       
 
@@ -69,7 +70,7 @@ export default function Video(props){
     }
 
     const endpoint = getEndPoint()
-    const APISrc = endpoint+value
+    const APISrc = endpoint+Url
 
     return <div className="Video_Container">
         <div id="Video_Mock" onClick={hideClick}></div>
