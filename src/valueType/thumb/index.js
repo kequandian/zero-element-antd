@@ -1,10 +1,10 @@
 import React from 'react';
-import ImageView from '@/components/ImageView';
+import Thumb from '@/components/Thumb';
 
 export default function ValueTypeImage(props) {
   const { options = {}, data: { text = '' } } = props;
 
-  return <ImageView
+  return <Thumb
     value={text}
     {...options}
   />
