@@ -91,7 +91,7 @@
     "join": "valueType/join",
     "map": "valueType/map",
     "image": "valueType/image",
-    "thumb":"valueType/Thumb",
+    "thumb":"valueType/thumb",
     "tag": "valueType/tag",
     "dot": "valueType/dot",
     "currency": "valueType/currency",

@@ -115,7 +115,7 @@ VTSet({
   'join': Load('valueType/join'),
   'map': Load('valueType/map'),
   'image': Load('valueType/image'),
-  'thumb':Load("valueType/Thumb"),
+  'thumb':Load("valueType/thumb"),
   'tag': Load('valueType/tag'),
   'dot': Load('valueType/dot'),
   'currency': Load('valueType/currency'),
