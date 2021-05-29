@@ -8,8 +8,8 @@ import { set as AITSet } from 'zero-element/lib/config/actionItemType';
 import { set as VTSet } from 'zero-element/lib/config/valueType';
 import onRequest from "./listAction/onRequest";
 import onTips from "./listAction/onTips"; // APIConfig({
-import onPath from "./listAction/onPath";
-//   'DEFAULT_current': 1,
+
+import onPath from "./listAction/onPath"; //   'DEFAULT_current': 1,
 //   'DEFAULT_pageSize': 10,
 //   'REQUEST_FIELD_current': 'pageNumber',
 //   'REQUEST_FIELD_pageSize': 'pageSize',
@@ -54,10 +54,10 @@ CSet({
 LASet({
   'onRequest': onRequest,
   'onTips': onTips,
-  "onPath":onPath
+  "onPath": onPath
 });
 FITSet({
-  videoview:Load("formItemType/VideoView/VideoView"),
+  videoview: Load("formItemType/VideoView/VideoView"),
   plain: Load('formItemType/Plain'),
   image: Load('formItemType/Image'),
   empty: Load('formItemType/Empty'),
@@ -80,7 +80,7 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
-  "TopTips":Load("formItemType/Toptips"),
+  "TopTips": Load("formItemType/Toptips"),
   'Space': Load("formItemType/Space"),
   'direct-upload': Load('formItemType/DirectUpload'),
   'time-range': Load('formItemType/Time/TimeRange'),
@@ -91,7 +91,7 @@ FITSet({
   'upload-file': Load('formItemType/UploadFile'),
   'checkbox-fetch': Load('formItemType/CheckboxFetch'),
   'select-fetch': Load('formItemType/SelectFetch'),
-  'select-fetch-val':Load('formItemType/SelectFetchVal'),
+  'select-fetch-val': Load('formItemType/SelectFetchVal'),
   'select-field': Load('formItemType/SelectField'),
   'text-area': Load('formItemType/TextArea'),
   'rich-text': Load('formItemType/RichText'),
@@ -115,6 +115,7 @@ VTSet({
   'join': Load('valueType/join'),
   'map': Load('valueType/map'),
   'image': Load('valueType/image'),
+  'thumb':Load("valueType/Thumb"),
   'tag': Load('valueType/tag'),
   'dot': Load('valueType/dot'),
   'currency': Load('valueType/currency'),
