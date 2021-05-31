@@ -11,7 +11,6 @@ export default (({
   width="240px",
   ...rest
 }) => {
-  
   return toptips?<>
   <Input {...props} {...rest} style={{width:width}}></Input>
   <Toptips title={toptips} content={content} svg={svg} placement={placement} trigger={trigger}></Toptips>
