@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react"
+import React,{useState,useEffect,useRef} from "react"
 import './VideoView.less'
 import {PlaySvg,StopSvg} from './svg'
 import {get as getEndPoint } from 'zero-element/lib/utils/request/endpoint';
@@ -7,8 +7,8 @@ export default function Video(props){
     const{
         // API,
         src = "http://edge.ivideo.sina.com.cn/139420602.mp4?KID=sina,viask&Expires=1622304000&ssig=Rpl5SCDqCj&reqid=",
-        width = "300px",
-        height = "300px",
+        width = "100px",
+        // height = "300px",
         value
     }=props
 
@@ -16,7 +16,7 @@ export default function Video(props){
     const View = document.getElementById("Video_View")
     const VideoPlay = document.getElementById("Video_Play")
     const [controls,setControls] = useState(false)
-    const [SvgSize,SetSvgSize] = useState("32")
+    const [SvgSize,SetSvgSize] = useState("20")
     const [playing,SetPlaying] = useState(true)
     const [opacity,SetOpacity] = useState("1")
 
@@ -50,7 +50,7 @@ export default function Video(props){
         return clearother
       };
 
-      const Url = JSON.parse(value)[0].fileUrl
+      const Url = value
 
       let fileType = fileSet(Url)
 
@@ -63,7 +63,7 @@ export default function Video(props){
         VideoPlay.classList.remove("VP_Big")
         Mock.classList.remove("view")
         setControls(false)
-        SetSvgSize("32")
+        SetSvgSize("20")
         SetPlaying(false)
         SetOpacity("1")
         return SvgSize,opacity
@@ -74,8 +74,9 @@ export default function Video(props){
 
     return <div className="Video_Container">
         <div id="Video_Mock" onClick={hideClick}></div>
-        <div id="Video_Play" onClick={handleClick} onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg}>
-        <video id="Video_View"  src={fileType==="mp4"||fileType==="avi"||fileType==="mov"?APISrc:src} autoPlay={false} width={width} height={height}></video>
-        {playing?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} />:<StopSvg width={SvgSize} height={SvgSize} opacity={opacity}/>}</div>
+        {fileType==="mp4"||fileType==="mov"?<div id="Video_Play" style={{width:width}} onClick={handleClick} onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg}>
+        <video id="Video_View"  autoPlay={false} width={width}
+        src={APISrc}/>
+        {playing?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} />:<StopSvg width={SvgSize} height={SvgSize} opacity={opacity}/>}</div>:<p style={{color:"red"}}>不支持的视频格式</p>}
     </div>
 }
