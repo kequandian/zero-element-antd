@@ -50,7 +50,7 @@ export default function Video(props){
         return clearother
       };
 
-      const Url = value
+      const Url = JSON.parse(value)[0].url
 
       let fileType = fileSet(Url)
 
