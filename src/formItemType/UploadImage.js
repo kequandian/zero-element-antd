@@ -4,6 +4,8 @@ import { get } from 'zero-element/lib/utils/request/endpoint';
 import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { get as getEndpoint } from 'zero-element/lib/utils/request/endpoint';
+const endpoint = getEndpoint()
 
 const initFileList = [];
 export default function UploadImage(props) {
@@ -98,7 +100,7 @@ function format(value) {
   } catch (e) {
     rst.push({
       name: '图片',
-      url: value,
+      url: endpoint+value,
     });
   }
   rst.length > 0 && rst.map((item, index) => {
