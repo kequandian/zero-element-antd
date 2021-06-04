@@ -1,3 +1,4 @@
+import React from 'react'
 export const AvatarSvg = (props) =>{
     const{
         width="32",
