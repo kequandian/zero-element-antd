@@ -1,6 +1,6 @@
 import { Avatar } from "antd";
 import { get } from 'zero-element/lib/utils/request/endpoint';
-
+import './Avatars.less'
 export default function Avatars(props) { 
     const{
         value,
@@ -22,8 +22,6 @@ export default function Avatars(props) {
     return <Avatar
     className="User_Avatar"
       style={{
-        marginBottom:'50px',
-        // backgroundColor:'#1890FF'
         width:100,
         height:100
       }}
