@@ -57,6 +57,7 @@ LASet({
   "onPath": onPath
 });
 FITSet({
+  avatars:Load("formItemType/Avatars/Avatars"),
   videoview: Load("formItemType/VideoView/VideoView"),
   plain: Load('formItemType/Plain'),
   image: Load('formItemType/Image'),
@@ -80,7 +81,7 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
-  "inputType":Load('formItemType/InputType'),
+  "inputType": Load('formItemType/InputType'),
   "TopTips": Load("formItemType/Toptips"),
   'Space': Load("formItemType/Space"),
   'direct-upload': Load('formItemType/DirectUpload'),
@@ -116,7 +117,7 @@ VTSet({
   'join': Load('valueType/join'),
   'map': Load('valueType/map'),
   'image': Load('valueType/image'),
-  'thumb':Load("valueType/thumb"),
+  'thumb': Load("valueType/thumb"),
   'tag': Load('valueType/tag'),
   'dot': Load('valueType/dot'),
   'currency': Load('valueType/currency'),
