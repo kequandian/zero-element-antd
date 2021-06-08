@@ -6,7 +6,7 @@ import {get as getEndPoint } from 'zero-element/lib/utils/request/endpoint';
 export default function Video(props){
     const{
         // API,
-        src = "http://edge.ivideo.sina.com.cn/139420602.mp4?KID=sina,viask&Expires=1622304000&ssig=Rpl5SCDqCj&reqid=",
+        src ,
         width = "100px",
         // height = "300px",
         value
@@ -49,8 +49,12 @@ export default function Video(props){
         let clearother = getname.split(/\?/)[0]
         return clearother
       };
-
-      const Url = JSON.parse(value)[0].url
+      let Url
+      if(value.indexOf("url")===-1){
+        Url = JSON.parse(value)
+      }else{
+        Url = JSON.parse(value)[0].url
+      }
 
       let fileType = fileSet(Url)
 
@@ -72,11 +76,12 @@ export default function Video(props){
     const endpoint = getEndPoint()
     const APISrc = endpoint+Url
 
-    return <div className="Video_Container">
-        <div id="Video_Mock" onClick={hideClick}></div>
-        {fileType==="mp4"||fileType==="mov"?<div id="Video_Play" style={{width:width}} onClick={handleClick} onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg}>
+    return  <>{value?<div className="Video_Container">
+       <div id="Video_Mock" onClick={hideClick}></div>
+        {fileType==="mp4"?<div id="Video_Play" style={{width:width}} onClick={handleClick} onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg}>
         <video id="Video_View"  autoPlay={false} width={width}
         src={APISrc}/>
-        {playing?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} />:<StopSvg width={SvgSize} height={SvgSize} opacity={opacity}/>}</div>:<p style={{color:"red"}}>不支持的视频格式</p>}
-    </div>
+        {playing?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} />:<StopSvg width={SvgSize} height={SvgSize} opacity={opacity}/>}</div>:<p style={{color:"red"}}>不支持的视频格式,仅支持mp4!</p>}
+    </div>:<h1 style={{color:"red"}}>无视频，请检查</h1>}
+    </>
 }
