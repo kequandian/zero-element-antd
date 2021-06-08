@@ -13,6 +13,9 @@ export default ({ props = {},  content,
 
   return toptips?<>
   <Input.TextArea
+  style={{
+    minWidth:"400px"
+  }}
     autoSize={{
       minRows: 2,
     }}
@@ -21,6 +24,9 @@ export default ({ props = {},  content,
   />
   <Toptips title={toptips} content={content} svg={svg} placement={placement} trigger={trigger}></Toptips>
   </>:<Input.TextArea
+  style={{
+    minWidth:"400px"
+  }}
     autoSize={{
       minRows: 2,
     }}
