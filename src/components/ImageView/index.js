@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Image, Modal } from 'antd';
 import './index.css';
+import { get as getEndpoint } from 'zero-element/lib/utils/request/endpoint';
 
 export default function ImageView(props) {
   const {
@@ -14,7 +15,7 @@ export default function ImageView(props) {
   } = props;
   const [visible, setVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
-
+  const endpoint = getEndpoint()
   const list = format(value).slice(0, max - 1);
 
   function handleCancel() {
@@ -72,6 +73,8 @@ export default function ImageView(props) {
 
 function format(value) {
   let rst = [];
+  const endpoint = getEndpoint()
+
   try {
     if (typeof (value) === 'string') {
       rst = JSON.parse(value);
@@ -79,9 +82,16 @@ function format(value) {
       rst = value;
     }
   } catch (e) {
-    rst.push({
-      url: value,
-    });
+    if(value.search("https")!=-1){
+      rst.push({
+        url: value,
+      });
+    }else{
+      console.log(value);
+      rst.push({
+        url: endpoint+value,
+      });
+    }
   }
   rst.length > 0 && rst.forEach((item, index) => {
     rst[index] = {
