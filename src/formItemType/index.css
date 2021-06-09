@@ -66,6 +66,6 @@
 .TagList{
   margin-top: 10px;
 }
-.ant-col .ant-form-item-control{
+.ant-col.ant-form-item-label.ant-col-xs-8>label{
   color:#aaa
 }
