@@ -1,14 +1,24 @@
 
 #Video_Mock{
     background-color: #333;
-    opacity: .5;
+    opacity: .7;
     display: none;
     height: 100%;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 101;
+    z-index: 103;
+
+}
+a.exit{
+    position: fixed;
+    top:10px;
+    left: 10px;
+    z-index: 500;
+    svg:hover{
+        opacity: .8;
+    }
 }
 .view{
     display: block!important;
@@ -33,6 +43,7 @@
     position: relative;
     // width: 300px;
     // height: 300px;
+    z-index: 106;
 }
 .VP_Big{
     position: fixed!important;
@@ -41,7 +52,6 @@
     width: 100%!important;
     height: 100%!important;
     // background-color: #333;
-    z-index: 100;
 }
 #Video_Play>svg{
     top: 50%;

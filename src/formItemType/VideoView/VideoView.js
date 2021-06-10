@@ -1,6 +1,6 @@
 import React,{useState,useEffect,useRef} from "react"
 import './VideoView.less'
-import {PlaySvg,StopSvg} from './svg'
+import {BackSvg, PlaySvg,StopSvg} from './svg'
 import {get as getEndPoint } from 'zero-element/lib/utils/request/endpoint';
 
 export default function Video(props){
@@ -33,12 +33,12 @@ export default function Video(props){
         return SvgSize,opacity
     } 
 
-    const LeaveSvg=()=>{
-        SetOpacity("1")
-    }
-    const HoverSvg=()=>{
-        SetOpacity("0")
-    }
+    // const LeaveSvg=()=>{
+    //     SetOpacity("1")
+    // }
+    // const HoverSvg=()=>{
+    //     SetOpacity("0")
+    // }
 
     const fileSet=(filename)=>{
         if(!filename||typeof filename!='string'){
@@ -77,8 +77,10 @@ export default function Video(props){
     const APISrc = endpoint+Url
 
     return  <>{value?<div className="Video_Container">
-       <div id="Video_Mock" onClick={hideClick}></div>
-        {fileType==="mp4"?<div id="Video_Play" style={{width:width}} onClick={handleClick} onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg}>
+       <div id="Video_Mock">
+       </div>
+       {opacity==="0"?<a className="exit" onClick={hideClick}><BackSvg width={SvgSize} height={SvgSize}/></a>:null}
+        {fileType==="mp4"?<div id="Video_Play" style={{width:width}} onClick={handleClick}>
         <video id="Video_View"  autoPlay={false} width={width}
         src={APISrc}/>
         {playing?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} />:<StopSvg width={SvgSize} height={SvgSize} opacity={opacity}/>}</div>:<p style={{color:"red"}}>不支持的视频格式,仅支持mp4!</p>}
