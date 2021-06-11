@@ -27,7 +27,7 @@ export default function Video(props){
         setControls(true)
         Mock.classList.add("view")
         VideoPlay.classList.add("VP_Big")
-        SetSvgSize("80")
+        SetSvgSize("40")
         SetPlaying(true)
         SetOpacity("0")
         return SvgSize,opacity
@@ -69,7 +69,7 @@ export default function Video(props){
         setControls(false)
         SetSvgSize("20")
         SetPlaying(false)
-        SetOpacity("1")
+        SetOpacity(".5")
         return SvgSize,opacity
     }
 
