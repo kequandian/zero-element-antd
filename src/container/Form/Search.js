@@ -16,8 +16,8 @@ const defaultLabelCol = {
   sm: { span: 8, },
 };
 const defaultWrapperCol = {
-  xs: { /* span: 24,  */},
-  sm: {/*  span: 16, */ },
+  xs: { span: 24, },
+  sm: { span: 16, },
 };
 export default function BaseSearch(props) {
   const [form] = Form.useForm();
@@ -198,7 +198,7 @@ export default function BaseSearch(props) {
           form={form}
           layout={layoutType}
           labelCol={defaultLabelCol}
-          wrapperCol={defaultWrapperCol}
+          wrapperCol={type?null:defaultWrapperCol}
           initialValues={initData.current}
           onValuesChange={handleValuesChange}
           onFinish={handleSubmitForm}

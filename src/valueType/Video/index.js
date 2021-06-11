@@ -23,7 +23,7 @@ export default function VideoPreview(props) {
     const [SvgSize, SetSvgSize] = useState("20");
     const [playing, SetPlaying] = useState(true);
     const [opacity, SetOpacity] = useState(false);
-
+    const [count,setCount] = useState(0);
     const [videoUrl, setVideoUrl] = useState('');
     const [fileType, setFileType] = useState('');
     // console.log(text);
@@ -50,16 +50,19 @@ export default function VideoPreview(props) {
     }, []);
 
     const handleClick = (url) => {
-        View.classList.add("BigVideo");
-        View.setAttribute('src', url);
-        View.play();
-        setControls(true);
-        Mock.classList.add("view");
-        VideoPlay.classList.add("VP_Big");
-        SetSvgSize("40");
-        SetPlaying(true);
-        SetOpacity(true);
-       console.log(opacity);
+       setCount(count+1)
+        if(count<1){
+            View.classList.add("BigVideo");
+            View.setAttribute('src', url);
+            View.play();
+            setControls(true);
+            Mock.classList.add("view");
+            VideoPlay.classList.add("VP_Big");
+            SetSvgSize("40");
+            SetPlaying(true);
+            SetOpacity(true);
+           console.log(opacity);
+        }
     }
 
     // const LeaveSvg = () => {
@@ -89,6 +92,7 @@ export default function VideoPreview(props) {
         SetPlaying(false);
         SetOpacity(false);
         console.log(opacity);
+        setCount(0)
     }
 
     return <>{text ? <div className="Video_Container">
