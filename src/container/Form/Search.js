@@ -3,21 +3,21 @@ import { Form } from 'antd';
 import useBaseSearch from 'zero-element/lib/helper/form/useBaseSearch';
 import { useWillUnmount, useForceUpdate } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { Spin, Button, Tooltip } from 'antd';
-import { getFormItem } from '@/utils/readConfig';
+import { getFormItem } from '../../utils/readConfig';
 import { Render } from 'zero-element/lib/config/layout';
 import { CheckOutlined, RollbackOutlined } from '@ant-design/icons';
 import useFormHandle from './utils/useFormHandle';
-import useLongPress from '@/utils/hooks/useLongPress';
+import useLongPress from '../../utils/hooks/useLongPress';
 import { useDebounceFn } from 'ahooks';
 import { setPageData, getPageData } from 'zero-element/lib/Model';
 const SearchSvg = <svg t="1620899300269" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="8750" width="14" height="14"><path d="M415.1 698.1c-156.4-0.9-283-127.6-283.7-284.1-0.4-74.9 29.1-146.8 82-199.7 52.9-53 124.8-82.6 199.6-82.3 156.4 0.9 283 127.6 283.7 284.1 0.4 74.9-29.1 146.8-82 199.7-52.8 52.9-124.7 82.6-199.6 82.3z m531.7 173.8L699.7 624.7c44.3-60.4 68-133.5 67.7-208.4-0.8-195.5-159-353.9-354.6-355.1-93.5-0.4-183.4 36.6-249.5 102.8-66.1 66.2-103 156.1-102.5 249.7 0.8 195.6 159 354 354.6 355.1 75.2 0.3 148.5-23.7 209-68.4l0.3-0.2 246.9 247c13.3 14 33.2 19.7 52 14.8 18.7-4.9 33.3-19.5 38.2-38.2 4.7-18.7-1-38.6-15-51.9z" fill="#ffffff" p-id="8751"></path></svg>
 const defaultLabelCol = {
-  xs: { span: 3, },
-  sm: { span: 8, },
+  // xs: { span: 3, },
+  // sm: { span: 8, },
 };
 const defaultWrapperCol = {
-  xs: { span: 21, },
-  sm: { span: 16, },
+  // xs: { span: 24, },
+  // sm: { span: 16, },
 };
 export default function BaseSearch(props) {
   const [form] = Form.useForm();

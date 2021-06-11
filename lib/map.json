@@ -43,6 +43,7 @@
     "hidden": "formItemType/Hidden",
     "group": "formItemType/Group",
     "input": "formItemType/Input",
+    "search":"formItemType/Search",
     "inputType":"formItemType/InputType",
     "password": "formItemType/Password",
     "number": "formItemType/Number",

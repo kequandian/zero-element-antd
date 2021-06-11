@@ -81,6 +81,7 @@ FITSet({
   week: Load('formItemType/Date/week'),
   month: Load('formItemType/Date/month'),
   range: Load('formItemType/Date/range'),
+  "search":Load("formItemType/Search"),
   "inputType": Load('formItemType/InputType'),
   "TopTips": Load("formItemType/Toptips"),
   'Space': Load("formItemType/Space"),
