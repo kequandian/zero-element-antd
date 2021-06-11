@@ -90,6 +90,7 @@
   },
   "VTSet": {
     "index": "valueType/index",
+    "video":"valueType/Video",
     "plain": "valueType/plain",
     "join": "valueType/join",
     "map": "valueType/map",

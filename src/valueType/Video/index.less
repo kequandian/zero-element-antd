@@ -1,5 +1,5 @@
 
-#Video_Mock{
+.Video_Mock_css{
     background-color: #000;
     opacity: .9;
     display: none;
@@ -8,23 +8,14 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 103;
-
-}
-a.exit{
-    position: fixed;
-    top:10px;
-    left: 10px;
-    z-index: 500;
-    svg:hover{
-        opacity: .8;
-    }
+    z-index: 101;
 }
 .view{
     display: block!important;
+    z-index: 110;
 }
 
-#Video_View{
+.Video_View_css{
     border-radius: 5px;
     z-index: 105;
     position: relative;
@@ -38,12 +29,16 @@ a.exit{
     top: 50% !important;;
     left: 50%!important;
     transform: translate(-50%,-50%);
+    z-index: 120;
 }
-#Video_Play{
+.Video_Play_css{
     position: relative;
     // width: 300px;
     // height: 300px;
-    z-index: 106;
+    z-index: 100;
+    svg{
+        z-index: 106;
+    }
 }
 .VP_Big{
     position: fixed!important;
@@ -52,13 +47,14 @@ a.exit{
     width: 100%!important;
     height: 100%!important;
     // background-color: #333;
+    z-index: 110;
 }
-#Video_Play>svg{
+.Video_Play_css>svg{
     top: 50%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
-    z-index: 500;
+    z-index: 106;
 }
 .hide{
     display: none;

@@ -114,6 +114,7 @@ AITSet({
 });
 VTSet({
   'index': Load('valueType/index'),
+  'video':Load("valueType/Video"),
   'plain': Load('valueType/plain'),
   'join': Load('valueType/join'),
   'map': Load('valueType/map'),
