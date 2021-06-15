@@ -50,7 +50,9 @@ export default function VideoPreview(props) {
     }, []);
 
     const handleClick = (url) => {
-       setCount(count+1)
+        if(count<1){
+            setCount(count+1)
+        }
         if(count<1){
             View.classList.add("BigVideo");
             View.setAttribute('src', url);
