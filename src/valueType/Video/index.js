@@ -13,7 +13,7 @@ export default function VideoPreview(props) {
     //     value
     // } = props
 
-    const { value,data: { text = '', record, index }, options = {}, width = "100px", } = props;
+    const { value,data: { text = '', record, index }, options = {}, width = "150px", } = props;
     const { path, query = { id: 'id' }, blank = false } = options;
 
     const Mock = document.getElementById(`Video_Mock_${index}`);
@@ -104,7 +104,7 @@ export default function VideoPreview(props) {
             fileType === "mp4" ? (
                 <div id={`Video_Play_${index}`} className="Video_Play_css" style={{ width: width }} onClick={() => handleClick(videoUrl)}/*  onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg} */>
 
-                    <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width}
+                    <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width} height={width/2+25}
                         src={videoUrl} />
 
                     {opacity?null:( playing ?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} /> : <StopSvg width={SvgSize} height={SvgSize} opacity={opacity} />)}
