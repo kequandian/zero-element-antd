@@ -94,10 +94,17 @@ function format(value) {
     }
   }
   rst.length > 0 && rst.forEach((item, index) => {
+    if(item.url.indexOf("https"||"http")===-1){
+      rst[index] = {
+        id: index,
+        url: endpoint+item.url
+      };
+    }else{
     rst[index] = {
       id: index,
-      url: item.url,
-    }
-  });
+      url: item.url
+    };
+  }}
+  );
   return Array.isArray(rst) ? rst : [];
 }

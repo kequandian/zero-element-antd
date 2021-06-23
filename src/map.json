@@ -77,7 +77,8 @@
     "number-range": "formItemType/NumberRange",
     "pcdm": "formItemType/PCDM",
     "pcdForSearch": "formItemType/PCDForSearch",
-    "toptips":"formItemType/Toptips"
+    "toptips":"formItemType/Toptips",
+    "imageBox":"formItemType/ImageBox"
   },
   "AITSet": {
     "modal": "actionItemType/Modal",
