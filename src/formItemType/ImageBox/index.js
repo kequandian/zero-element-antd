@@ -5,6 +5,8 @@ import { getToken } from 'zero-element/lib/utils/request/token';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { get as getEndpoint } from 'zero-element/lib/utils/request/endpoint';
+import { AddSvg } from './svg';
+import './index.less'
 const endpoint = getEndpoint()
 
 const initFileList = [];
@@ -34,10 +36,12 @@ export default function UploadImage(props) {
     setPreviewVisible(false);
   }
   const uploadButton = (
-    <div>
+    <div className="Image">
       {/* {loading ? <LoadingOutlined /> : <PlusOutlined />} */}
       {/* <div className="ant-upload-text">点击上传</div> */}
-      <div style={{backgroundColor:"#888",width:"200px",height:"100px"}}>
+      <div className="ImageBox" style={{width: "auto",minWidth:"200px",minHeight:"100px",height: "auto"}}>
+        <div className="ImageBox_add"></div>
+        <div className="icon_add"><AddSvg/></div>
             {fileList[0]?<img alt="image"  style={{ maxWidth: '200px',maxHeight:"100px",position:"relative",left:"50%",transform:"translate(-50%)"}} src={ishttp(fileList[0].url)?fileList[0].url:endpoint+fileList[0].url} />:<div style={{width:"100%",height:"100%",position: "relative",left: "95px",top: "40px"}}><LoadingOutlined /></div>}
       </div>
     </div>

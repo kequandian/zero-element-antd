@@ -1,0 +1,39 @@
+.Image{
+    border: 1px dotted #222;
+    overflow: hidden;
+}
+.ImageBox{
+    position: relative;
+    clear: both;
+}
+.ImageBox_add{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 200px;
+    height: 100px;
+    cursor: pointer;
+    z-index: 500;
+    display: none;
+}
+.icon_add{
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 501;
+    display: none;
+    svg{
+        z-index: 1000;
+    }
+}
+.ImageBox:hover .ImageBox_add{
+    display: block;
+    transition: all ease 5s;
+    background-color: black;
+    opacity: .5;
+}
+.ImageBox:hover .icon_add{
+    display: block;
+    cursor: pointer;
+}
