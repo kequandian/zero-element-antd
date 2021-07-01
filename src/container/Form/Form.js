@@ -221,7 +221,6 @@ export default function BaseForm(props) {
     if (data.code === 200) {
       if (msg) {
         message.success(msg);
-        window.location.href=""
       }
       if (onClose) {
         onClose(data);
