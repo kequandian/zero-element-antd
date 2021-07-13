@@ -3,11 +3,16 @@ import { Space } from 'antd';
 import { Render } from 'zero-element/lib/config/valueType';
 import _ from 'lodash';
 
+/**
+ * 2021-7-13
+ * @param {size} 间距属性 'small' | 'middle' | 'large' | number
+ */
+
 export default function valueTypeComplex(props) {
   const { options, handle, data: { index, record }, } = props;
-  const { fields, direction = 'horizontal' } = options;
+  const { fields, direction = 'horizontal', size = 'small' } = options;
 
-  return <Space direction={direction}>{fields.map((field, i) => {
+  return <Space direction={direction} size={size} >{fields.map((field, i) => {
     const { type } = field;
     return <Render
       key={field.field}
