@@ -30,20 +30,24 @@ export default function VideoPreview(props) {
     useEffect(() => {
 
         let Url
-        if (text.indexOf("url") === -1) {
-            Url = text
-        } else {
-            Url = JSON.parse(text)[0].url;
-        }
-
-        const endpoint = getEndPoint();
-        const path = endpoint + Url;
-
-        let type = fileSet(path);
-        setFileType(type);
-        if (type) {
-            setVideoUrl(path);
-        } else {
+        if(Url){
+            if (text.indexOf("url") === -1) {
+                Url = text
+            } else {
+                Url = JSON.parse(text)[0].url;
+            }
+    
+            const endpoint = getEndPoint();
+            const path = endpoint + Url;
+    
+            let type = fileSet(path);
+            setFileType(type);
+            if (type) {
+                setVideoUrl(path);
+            } else {
+                setVideoUrl('xxx.avi');
+            }
+        }else{
             setVideoUrl('xxx.avi');
         }
 
