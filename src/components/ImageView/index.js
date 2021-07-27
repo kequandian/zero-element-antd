@@ -87,7 +87,7 @@ function format(value) {
         url: value,
       });
     }else{
-      console.log(value);
+      // console.log(value);
       rst.push({
         url: endpoint+value,
       });

@@ -30,24 +30,24 @@ export default function VideoPreview(props) {
     useEffect(() => {
 
         let Url
-        if(Url){
+
+        if (text === null){
+            // return 1;
+          }else{
             if (text.indexOf("url") === -1) {
-                Url = text
+              Url = text;
             } else {
-                Url = JSON.parse(text)[0].url;
+              Url = JSON.parse(text)[0].url;
             }
-    
-            const endpoint = getEndPoint();
-            const path = endpoint + Url;
-    
-            let type = fileSet(path);
-            setFileType(type);
-            if (type) {
-                setVideoUrl(path);
-            } else {
-                setVideoUrl('xxx.avi');
-            }
-        }else{
+          }
+        const endpoint = getEndPoint();
+        const path = endpoint + Url;
+
+        let type = fileSet(path);
+        setFileType(type);
+        if (type) {
+            setVideoUrl(path);
+        } else {
             setVideoUrl('xxx.avi');
         }
 
@@ -67,7 +67,7 @@ export default function VideoPreview(props) {
             SetSvgSize("40");
             SetPlaying(true);
             SetOpacity(true);
-           console.log(opacity);
+        //    console.log(opacity);
         }
     }
 
@@ -97,7 +97,7 @@ export default function VideoPreview(props) {
         SetSvgSize("20");
         SetPlaying(false);
         SetOpacity(false);
-        console.log(opacity);
+        // console.log(opacity);
         setCount(0)
     }
 
