@@ -37,15 +37,12 @@ export default function BaseForm(props) {
     API = {},
     layout = 'Empty', layoutConfig = {},
     fields: fieldsCfg,
-    otherProps,
+    otherProps={footerButton:true},
     path,
     goBack: gobackOpt = true,
     footer: footerOpt,
     requestOptions,
   } = config;
-  const {
-    footerButton
-  }=otherProps
   const { layoutType = 'inline' } = layoutConfig; // inline vertical horizontal
   const formProps = useBaseForm({
     namespace,
@@ -306,6 +303,6 @@ export default function BaseForm(props) {
         </Form>
       ) : <Form form={form} />}
     </div>
-    {footerButton?renderFooter():null}
+    {!otherProps ? renderFooter() : otherProps.footerButton?renderFooter():null}
   </Spin>
 }
