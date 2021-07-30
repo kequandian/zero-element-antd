@@ -78,7 +78,8 @@
     "pcdm": "formItemType/PCDM",
     "pcdForSearch": "formItemType/PCDForSearch",
     "toptips":"formItemType/Toptips",
-    "imageBox":"formItemType/ImageBox"
+    "imageBox":"formItemType/ImageBox",
+    "path":"formItemType/path"
   },
   "AITSet": {
     "modal": "actionItemType/Modal",
