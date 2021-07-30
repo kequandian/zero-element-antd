@@ -30,6 +30,7 @@ export default function VideoPreview(props) {
     useEffect(() => {
 
         let Url
+
         if (text === null){
             // return 1;
           }else{

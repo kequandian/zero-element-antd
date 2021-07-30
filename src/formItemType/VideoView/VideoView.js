@@ -49,17 +49,16 @@ export default function Video(props){
         let clearother = getname.split(/\?/)[0]
         return clearother
       };
-      let Url
-      if(value.indexOf("url")===-1){
-        Url = JSON.parse(value)
-      }else{
-        Url = JSON.parse(value)[0].url
+      let Url = '';
+      if(value){
+        if(value.indexOf("url")===-1){
+          Url = value
+        }else{
+          Url = JSON.parse(value)[0].url
+        }
       }
 
       let fileType = fileSet(Url)
-
-      
-
 
     const hideClick = () =>{
         View.classList.remove("BigVideo");
