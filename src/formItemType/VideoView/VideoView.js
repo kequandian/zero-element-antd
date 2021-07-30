@@ -52,7 +52,7 @@ export default function Video(props){
       let Url = '';
       if(value){
         if(value.indexOf("url")===-1){
-          Url = JSON.parse(value)
+          Url = value
         }else{
           Url = JSON.parse(value)[0].url
         }
