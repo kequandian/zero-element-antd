@@ -24,7 +24,7 @@ export default function Export(props) {
   const [loading, setLoading] = useState(false);
 
   function handleClick() {
-    const { pageNum, pageSize, ...rest } = searchData;
+    const { /* pageNum, pageSize,  */...rest } = searchData;
     setLoading(true);
     const fAPI = formatAPI(API, {
       namespace,

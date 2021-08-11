@@ -37,6 +37,7 @@ export default function BaseForm(props) {
     API = {},
     layout = 'Empty', layoutConfig = {},
     fields: fieldsCfg,
+    otherProps={footerButton:true},
     path,
     goBack: gobackOpt = true,
     footer: footerOpt,
@@ -302,6 +303,6 @@ export default function BaseForm(props) {
         </Form>
       ) : <Form form={form} />}
     </div>
-    {renderFooter()}
+    {!otherProps ? renderFooter() : otherProps.footerButton?renderFooter():null}
   </Spin>
 }

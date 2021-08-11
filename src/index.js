@@ -102,7 +102,8 @@ FITSet({
   'number-range': Load('formItemType/NumberRange'),
   'pcdm': Load('formItemType/PCDM'),
   pcdForSearch: Load('formItemType/PCDForSearch'),
-  "imageBox":Load("formItemType/ImageBox")
+  "imageBox":Load("formItemType/ImageBox"),
+  "path":Load("formItemType/path")
 });
 AITSet({
   modal: Load('actionItemType/Modal'),
