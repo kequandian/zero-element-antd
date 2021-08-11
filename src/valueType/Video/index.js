@@ -108,8 +108,8 @@ export default function VideoPreview(props) {
 
         if(image){
             return <Image
-                width={150}
-                src={image}
+                width={60}
+                src={`${getEndPoint()}${image}`}
             />
         }else{
             return <div style={{height:'150px'}}>-</div>
