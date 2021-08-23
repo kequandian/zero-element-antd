@@ -103,7 +103,8 @@ FITSet({
   'pcdm': Load('formItemType/PCDM'),
   pcdForSearch: Load('formItemType/PCDForSearch'),
   "imageBox":Load("formItemType/ImageBox"),
-  "path":Load("formItemType/path")
+  "path":Load("formItemType/path"),
+  "switch":Load("formItemType/switch")
 });
 AITSet({
   modal: Load('actionItemType/Modal'),
