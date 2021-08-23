@@ -3,6 +3,7 @@ import './index.less';
 import { PlaySvg, StopSvg,BackSvg } from './svg';
 import Thumb  from '@/../zero-antd-dep/components/Thumb'
 import { get as getEndPoint } from 'zero-element/lib/utils/request/endpoint';
+import { Image } from 'antd';
 
 export default function VideoPreview(props) {
     // const {
@@ -101,22 +102,56 @@ export default function VideoPreview(props) {
         setCount(0)
     }
 
-    return <>{text ? <div className="Video_Container">
-        <div id={`Video_Mock_${index}`} className="Video_Mock_css" onClick={hideClick}></div>
-        {opacity?<a className="exit" onClick={hideClick}><BackSvg width={SvgSize} height={SvgSize}/></a>:null}
-        {
-            fileType === "mp4" ? (
-                <div id={`Video_Play_${index}`} className="Video_Play_css" style={{ width: width }} onClick={() => handleClick(videoUrl)}/*  onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg} */>
+    function handleImg(recordThumbnail, videoThumbnail){
 
-                    <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width} height={width/2+25}
-                        src={videoUrl} />
+        var image = recordThumbnail || videoThumbnail ? recordThumbnail || videoThumbnail : '';
 
-                    {opacity?null:( playing ?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} /> : <StopSvg width={SvgSize} height={SvgSize} opacity={opacity} />)}
-                </div>
-            ) : (
-                <Thumb value={text}></Thumb>
-                )
+        if(image){
+            return <Image
+                width={60}
+                src={`${getEndPoint()}${image}`}
+            />
+        }else{
+            return <div style={{height:'150px'}}>-</div>
         }
-    </div> : <Thumb value={text}></Thumb>}
-    </>
+        
+    }
+
+    // return <>{text ? <div className="Video_Container">
+    //     <div id={`Video_Mock_${index}`} className="Video_Mock_css" onClick={hideClick}></div>
+    //     {opacity?<a className="exit" onClick={hideClick}><BackSvg width={SvgSize} height={SvgSize}/></a>:null}
+    //     {
+    //         fileType === "mp4" ? (
+    //             <div id={`Video_Play_${index}`} className="Video_Play_css" style={{ width: width }} onClick={() => handleClick(videoUrl)}/*  onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg} */>
+
+    //                 <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width} height={width/2+25}
+    //                     src={videoUrl} />
+
+    //                 {opacity?null:( playing ?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} /> : <StopSvg width={SvgSize} height={SvgSize} opacity={opacity} />)}
+    //             </div>
+    //         ) : (
+    //             <Thumb value={text}></Thumb>
+    //             )
+    //     }
+    // </div> : <Thumb value={text}></Thumb>}
+    // </>
+    return <>{text ? <div className="Video_Container">
+    <div id={`Video_Mock_${index}`} className="Video_Mock_css" onClick={hideClick}></div>
+    {opacity?<a className="exit" onClick={hideClick}><BackSvg width={SvgSize} height={SvgSize}/></a>:null}
+    {
+        fileType === "mp4" ? (
+            <div id={`Video_Play_${index}`} className="Video_Play_css" style={{ width: width }} onClick={() => handleClick(videoUrl)}/*  onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg} */>
+
+                <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width} height={width/2+25}
+                    src={videoUrl} />
+
+                {opacity?null:( playing ?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} /> : <StopSvg width={SvgSize} height={SvgSize} opacity={opacity} />)}
+            </div>
+        ) : (
+            <Thumb value={text}></Thumb>
+            )
+    }
+    </div> : handleImg(record.recordThumbnail, record.videoThumbnail)
+    }
+</>
 }
