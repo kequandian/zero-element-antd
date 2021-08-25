@@ -14,7 +14,7 @@ export default function VideoPreview(props) {
     //     value
     // } = props
 
-    const { value,data: { text = '', record, index }, options = {}, width = "150px", } = props;
+    const { value,data: { text = '', record, index }, options = {}, width = "150px", height="100px" } = props;
     const { path, query = { id: 'id' }, blank = false } = options;
 
     const Mock = document.getElementById(`Video_Mock_${index}`);
@@ -107,10 +107,13 @@ export default function VideoPreview(props) {
         var image = recordThumbnail || videoThumbnail ? recordThumbnail || videoThumbnail : '';
 
         if(image){
-            return <Image
-                width={60}
-                src={`${getEndPoint()}${image}`}
-            />
+            return <div style={{width:'150px', height:'100px', textAlign:'center'}}>
+                <Image
+                    width={60}
+                    src={`${getEndPoint()}${image}`}
+                />
+            </div>
+            
         }else{
             return <div style={{height:'150px'}}>-</div>
         }
@@ -140,9 +143,9 @@ export default function VideoPreview(props) {
     {opacity?<a className="exit" onClick={hideClick}><BackSvg width={SvgSize} height={SvgSize}/></a>:null}
     {
         fileType === "mp4" ? (
-            <div id={`Video_Play_${index}`} className="Video_Play_css" style={{ width: width }} onClick={() => handleClick(videoUrl)}/*  onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg} */>
+            <div id={`Video_Play_${index}`} className="Video_Play_css" style={{ height: height, textAlign:'center' }} onClick={() => handleClick(videoUrl)}/*  onMouseLeave={HoverSvg} onMouseEnter={LeaveSvg} */>
 
-                <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width} height={width/2+25}
+                <video id={`Video_View_${index}`} className="Video_View_css" autoPlay={false} width={width} height={height}
                     src={videoUrl} />
 
                 {opacity?null:( playing ?<PlaySvg width={SvgSize} height={SvgSize} opacity={opacity} /> : <StopSvg width={SvgSize} height={SvgSize} opacity={opacity} />)}
