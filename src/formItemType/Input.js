@@ -3,7 +3,6 @@ import { Input } from 'antd';
 import Toptips from './Toptips'
 export default (({
   props,
-  content,
   svg,
   placement,
   trigger,
@@ -13,6 +12,6 @@ export default (({
 }) => {
   return toptips?<>
   <Input {...props} {...rest} style={{width:width}}></Input>
-  <Toptips title={toptips} content={content} svg={svg} placement={placement} trigger={trigger}></Toptips>
+  <Toptips content={toptips} svg={svg} placement={placement} trigger={trigger}></Toptips>
   </>:<Input {...props} {...rest}  style={{width:width}}></Input>
 });

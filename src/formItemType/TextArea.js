@@ -2,7 +2,7 @@ import React from 'react';
 import { Input } from 'antd';
 import Toptips from './Toptips'
 
-export default ({ props = {},  content,
+export default ({ props = {},
   svg,
   placement,
   trigger,
@@ -22,7 +22,7 @@ export default ({ props = {},  content,
     {...rest}
     {...props}
   />
-  <Toptips title={toptips} content={content} svg={svg} placement={placement} trigger={trigger}></Toptips>
+  <Toptips content={toptips} svg={svg} placement={placement} trigger={trigger}></Toptips>
   </>:<Input.TextArea
   style={{
     minWidth:"400px"

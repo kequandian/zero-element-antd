@@ -3,7 +3,6 @@ import { Input,Tag } from 'antd';
 import Toptips from './Toptips'
 export default (({
   props,
-  content,
   svg,
   placement,
   trigger,
@@ -39,7 +38,7 @@ export default (({
   console.log(Taglist);
   return toptips?<>
   <Input {...props} {...rest} style={{width:width}}  ref={InputRef} onChange={handleChange}></Input>
-  <Toptips title={toptips} content={content} svg={svg} placement={placement} trigger={trigger}></Toptips>
+  <Toptips content={toptips} svg={svg} placement={placement} trigger={trigger}></Toptips>
   <div className="TagList" style={{width:'100%'}}>
       {NewTag?NewTag.map((text,i)=><Tag color="#108ee9">{NewTag[i]}</Tag>):null}
   </div>
