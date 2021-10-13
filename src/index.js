@@ -69,7 +69,7 @@ FITSet({
   number: Load('formItemType/Number'),
   radio: Load('formItemType/Radio'),
   select: Load('formItemType/Select'),
-  switch: Load('formItemType/Switch'),
+  Switch: Load('formItemType/Switch'),
   checkbox: Load('formItemType/Checkbox'),
   map: Load('formItemType/Map'),
   pcd: Load('formItemType/PCD'),
@@ -104,7 +104,8 @@ FITSet({
   pcdForSearch: Load('formItemType/PCDForSearch'),
   "imageBox":Load("formItemType/ImageBox"),
   "path":Load("formItemType/path"),
-  "switch":Load("formItemType/switch")
+  "switch":Load("formItemType/switch"),
+  "TimeSelect":Load("formItemType/TimeSelect")
 });
 AITSet({
   modal: Load('actionItemType/Modal'),

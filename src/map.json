@@ -80,7 +80,8 @@
     "pcdForSearch": "formItemType/PCDForSearch",
     "toptips":"formItemType/Toptips",
     "imageBox":"formItemType/ImageBox",
-    "path":"formItemType/path"
+    "path":"formItemType/path",
+    "TimeSelect":"formItemType/TimeSelect"
   },
   "AITSet": {
     "modal": "actionItemType/Modal",
