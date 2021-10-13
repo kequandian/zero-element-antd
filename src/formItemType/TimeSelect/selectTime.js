@@ -10,7 +10,7 @@
  * Year：获取本年的月份范围 格式：2021
  * 其他值或无值：返回今天的所有时间 格式：2021/10/13 下午 12:41:17
  */
-export default function selectTime(selectType){
+ export default function selectTime(selectType){
     let value
     let date = new Date()
     let Today = date.toLocaleDateString()
@@ -76,7 +76,7 @@ export default function selectTime(selectType){
             value = `${startYear}/${startMonth}/${startTime}~${endYear}/${endMonth}/${endTime}`
         }
     }else if(selectType === "Month"){
-        value = year+"/"+month
+        value = `${year}/${month}/1~${year}/${month}/${dayMap[month]}`
     }else if(selectType === "Quarter"){
         let startMonth;
         let endMonth;
@@ -98,9 +98,9 @@ export default function selectTime(selectType){
             case 12:
                 startMonth = 10;endMonth = 12;break;
         }
-        value = `${year}/${startMonth}~${year}/${endMonth}`
+        value = `${year}/${startMonth}/1~${year}/${endMonth}/${dayMap[endMonth]}`
     }else if(selectType === "Year"){
-        value = year
+        value = `${year}/1/1~${year}/12/31`
     }else{
         value = date.toLocaleString()
     }
