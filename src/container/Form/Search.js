@@ -134,16 +134,25 @@ export default function BaseSearch(props) {
     handleSubmitForm(data);
   }
 
-  function Footer(){
-    return  <Button 
+  function Footer(validLength){
+    return  <div>
+    <Button 
     type="primary" 
     htmlType="submit" 
     loading={loading}
     className={`_Search_ ${type} button`}
+    style={{borderRadius:"0px"}}
     >
       {SearchSvg}
     </Button>
-
+    {validLength > collapse ? (
+        <ExpandButton
+          expand={expand}
+          onExpand={handleExpand}
+          onCollapse={handleCollapse}
+        />
+      ) : null}
+    </div>
  }
 
 
