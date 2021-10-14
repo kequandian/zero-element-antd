@@ -197,7 +197,7 @@ export default function BaseSearch(props) {
 
   return <Spin spinning={false}>
     {renderFieldsAndButton.length > 1 ? (
-      <Render n="SearchLayout" >
+      <Render n="MoreSearchLayout" >
         <Form
           form={form}
           layout={layoutType}
