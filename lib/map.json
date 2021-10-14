@@ -8,6 +8,7 @@
     "Loading": "layout/Loading",
     "Alone": "layout/Alone",
     "Row": "layout/Row",
+    "MoreSearchLayout": "layout/MoreSearchLayout",
     "SearchLayout": "layout/SearchLayout",
     "Grid": "layout/Grid",
     "Content": "layout/Content",
@@ -24,6 +25,7 @@
     "TableSelect": "container/List/TableSelect",
     "ItemList": "container/List/ItemList",
     "Search": "container/Form/Search",
+    "MoreSearch": "container/Form/MoreSearch",
     "AutoReportSearch": "container/Form/AutoReportSearch",
     "Form": "container/Form/Form",
     "ChildrenForm": "container/Form/ChildrenForm"
