@@ -10,7 +10,7 @@ const endpoint = getEndpoint()
 const initFileList = [];
 export default function UploadImage(props) {
   const { value, options, namespace, props: restProps } = props;
-  const { API = '/api/fs/uploadfile', max = 9, type = 'json' } = options;
+  const { API = '/api/fs/uploadfile', max = 9, type = 'json',folderName/* 文件夹名 */ } = options;
   const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -62,7 +62,11 @@ export default function UploadImage(props) {
     }
   }
 
-  const uploadProps = {
+  let Bucket = folderName?{
+    "X-FS-BUCKET":folderName
+  }:{}
+
+  let uploadProps = {
     accept: 'image/*',
     name: 'file',
     action: /^http(s)*:\/\//.test(API) ? fAPI : `${get()}${fAPI}`,
@@ -71,6 +75,7 @@ export default function UploadImage(props) {
     showUploadList: true,
     headers: {
       authorization: `Bearer ${getToken()}`,
+      ...Bucket
     },
     onPreview: handlePreview,
     onChange: handleChange

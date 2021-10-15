@@ -17,6 +17,7 @@ export default function UploadFile(props) {
     fileNameField = 'fileName',
     type = 'json',
     dragger = false,
+    folderName //文件夹名
   } = options;
   const { onSaveOtherValue } = handle;
   const [fileList, setFileList] = useState(initFileList);
@@ -82,6 +83,10 @@ export default function UploadFile(props) {
     }
   }
 
+  let Bucket = folderName?{
+    "X-FS-BUCKET":folderName
+  }:{}
+
   const uploadProps = {
     name: 'file',
     action: /^http(s)*:\/\//.test(API) ? fAPI : `${get()}${fAPI}`,
@@ -89,6 +94,7 @@ export default function UploadFile(props) {
     showUploadList: true,
     headers: {
       authorization: `Bearer ${getToken()}`,
+      ...Bucket
     },
     onChange: handleChange
   }
