@@ -218,7 +218,7 @@ export default function BaseSearch(props) {
           <Render n={layout} value={value} {...layoutConfig}>
             {renderFieldsAndButton}
           </Render>
-          <div style={{position: "absolute",right: "20px",bottom: "5px"}}>{type?Footer(validLength):renderFooter(validLength)}</div>
+          <div style={{position: "absolute",right: "20px",bottom: "5px"}}>{type==="default"?Footer(validLength):renderFooter(validLength)}</div>
         </Form>
       </Render>
     ) : null}

@@ -198,7 +198,7 @@ export default function BaseSearch(props) {
     renderFieldsAndButton.splice(collapse);
   }
 
-  renderFieldsAndButton.splice(collapse, 0, type?Footer(validLength):renderFooter(validLength));
+  renderFieldsAndButton.splice(collapse, 0, type==="default"?Footer(validLength):renderFooter(validLength));
 
   return <Spin spinning={false}>
     {renderFieldsAndButton.length > 1 ? (
