@@ -94,16 +94,18 @@ function format(value) {
     }
   }
   rst.length > 0 && rst.forEach((item, index) => {
-    if(item.url.indexOf("https"||"http")===-1){
+    if(item.url){
+      if(item.url.indexOf("https"||"http")===-1){
+        rst[index] = {
+          id: index,
+          url: endpoint+item.url
+        };
+      }else{
       rst[index] = {
         id: index,
-        url: endpoint+item.url
+        url: item.url
       };
-    }else{
-    rst[index] = {
-      id: index,
-      url: item.url
-    };
+    }
   }}
   );
   return Array.isArray(rst) ? rst : [];
