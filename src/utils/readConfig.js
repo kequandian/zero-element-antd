@@ -1,12 +1,12 @@
 import React from 'react';
 import { Form, Tooltip } from 'antd';
-import FormIten from '@/container/Form/FormItemWrapped';
-import ActionItem from '@/container/List/ActionItemWrapped';
+import FormIten from '@/../zero-antd-dep/container/Form/FormItemWrapped';
+import ActionItem from '@/../zero-antd-dep/container/List/ActionItemWrapped';
 import { getPageData } from 'zero-element/lib/Model';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import checkExpected from './checkExpected';
-import Penetrate from '@/components/Penetrate';
+import Penetrate from '@/../zero-antd-dep/components/Penetrate';
 
 const iconStyle = { color: '#108ee9', marginLeft: 4 };
 export function getFormItem(field, model,
@@ -45,7 +45,7 @@ export function getFormItem(field, model,
     className={tips ? 'ZEleA-Form-tips-container' : ''}
     name={fieldName}
     defaultValue={value}
-    rules={[...rules.map(rule => handleRule(rule, values, handle))]}
+    rules={[...rules.map(rule => handleRule(rule, namespace, handle))]}
     {...rest}
   >
     <Penetrate>
@@ -101,7 +101,8 @@ function handleRule(rule, ...args) {
 }
 
 const defaultRule = {
-  required: (msg, options, formData, handle) => {
+  required: (msg, options, namespace, handle) => {
+    let formData = getPageData(namespace).formData
     if (options) {
       const { expect } = options;
       if (expect && expect.field) {
@@ -149,9 +150,9 @@ const defaultRule = {
       },
     }
   },
-  password: (msg = '两次输入的密码不一致', options, formData, handle) => {
+  password: (msg = '两次输入的密码不一致', options, namespace, handle) => {
     const { field = 'password' } = options;
-
+    let formData = getPageData(namespace).formData
     return {
       validator(rule, value) {
         if (!value && value !== 0) return Promise.resolve();
