@@ -1,12 +1,12 @@
 import React from 'react';
 import { Form, Tooltip } from 'antd';
-import FormIten from '@/../zero-antd-dep/container/Form/FormItemWrapped';
-import ActionItem from '@/../zero-antd-dep/container/List/ActionItemWrapped';
+import FormIten from '@/container/Form/FormItemWrapped';
+import ActionItem from '@/container/List/ActionItemWrapped';
 import { getPageData } from 'zero-element/lib/Model';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 
 import checkExpected from './checkExpected';
-import Penetrate from '@/../zero-antd-dep/components/Penetrate';
+import Penetrate from '@/components/Penetrate';
 
 const iconStyle = { color: '#108ee9', marginLeft: 4 };
 export function getFormItem(field, model,
