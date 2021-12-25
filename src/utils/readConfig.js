@@ -102,7 +102,8 @@ function handleRule(rule, ...args) {
 
 const defaultRule = {
   required: (msg, options, namespace, handle) => {
-    let formData = getPageData(namespace).formData
+    let pageData = getPageData(namespace)||{}
+    let formData = pageData.formData||{};
     if (options) {
       const { expect } = options;
       if (expect && expect.field) {
@@ -152,7 +153,8 @@ const defaultRule = {
   },
   password: (msg = '两次输入的密码不一致', options, namespace, handle) => {
     const { field = 'password' } = options;
-    let formData = getPageData(namespace).formData
+    let pageData = getPageData(namespace)||{}
+    let formData = pageData.formData||{};
     return {
       validator(rule, value) {
         if (!value && value !== 0) return Promise.resolve();
