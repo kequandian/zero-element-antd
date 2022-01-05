@@ -396,6 +396,28 @@
           margin-left: -15px;
         }
       }
+      &.red{
+        &.default{
+          color: #fff!important;
+          background-color: @TAGOp-RED-Color!important;
+        }
+        &.Online{
+          color: @TAGOp-RED-Color!important;
+          background-color: transparent!important;
+          border: 1px @TAGOp-RED-Color solid!important;
+        }
+        &.Dot{
+          color: #000!important;
+          border: none!important;;
+          background: transparent!important;
+        }
+        &.Dot::before{
+          content: "●";
+          color: @TAGOp-RED-Color!important;
+          margin-right: 5px;
+          margin-left: -15px;
+        }
+      }
       &.gray{
         &.default{
           color: #fff!important;
