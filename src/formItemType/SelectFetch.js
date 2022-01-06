@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Select, Spin } from 'antd';
-import { query } from '@/utils/request';
+import { query } from '@/../zero-antd-dep/utils/request';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { useWillMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
@@ -25,17 +25,22 @@ export default function SelectFetch(props) {
     label: optLabel = 'label', value: optValue = 'value',
     saveData,
     effectField,
+    childField,
+    groupField
   } = options;
-
   const { onFormFieldMap } = hooks;
   const { onSaveOtherValue } = handle;
   const [loading, setLoading] = useState(false);
   const [optionList, setOptionList] = useState([]);
+  // 默认值
+  const [defaultValue,setDefaultValue] = useState()
+  const [isFindObj,setIsFindObj] = useState()
   const initRef = useRef(false);
   const effectFieldValue = formdata[effectField];
-
+  const groupFieldValue = formdata[groupField]
+  console.log(formdata,"formData")
   useWillMount(_ => {
-    if (effectField === undefined) {
+    if (effectField === undefined&&groupField === undefined) {
       getData();
     }
   });
@@ -47,8 +52,33 @@ export default function SelectFetch(props) {
       getData();
     }
   }, [effectFieldValue]);
+  useEffect(_=>{
+    if(groupFieldValue){
+      handleChange(groupFieldValue[optValue])
+    }
+    getData()
+  },[groupFieldValue])
   useEffect(_ => {
-    handleChange(value);
+    if(typeof groupFieldValue === 'object'&&!childField){
+      console.error("SelectFetch组件提示","使用字段值为Object需要在options中添加childField属性")
+      setDefaultValue(value)
+    }else if(typeof groupFieldValue === 'string'){
+      setDefaultValue(groupFieldValue)
+    }else if(typeof groupFieldValue ==='object' &&childField){
+      setDefaultValue(groupFieldValue[childField])
+    }else{
+      setDefaultValue(value)
+    }
+    // handleChange(value);
+    if(optionList.length>0){
+      let find = optionList.find(i=>i[optValue] == defaultValue)
+      setIsFindObj(find)
+      if(find){
+        handleChange(defaultValue)
+      }else if(value){
+        handleChange(value)
+      }
+    }
   }, [optionList])
 
   function getData() {
@@ -76,10 +106,22 @@ export default function SelectFetch(props) {
         })
     }
   }
-  function handleChange(value) {
+  function handleChange(val) {
+    console.log(val)
+    let newValue = value
+    let findGroup = optionList.find(i=>i[optValue] == val)
+    if(findGroup){
+      setDefaultValue(findGroup[optLabel])
+    }
+
+    // if(childField){
+    //   newValue[childField] = val
+    // }else{
+      newValue = val
+    // }
     onChange({
       target: {
-        value,
+        value:newValue
       }
     });
 
@@ -107,9 +149,9 @@ export default function SelectFetch(props) {
   }
 
   return <Spin className={className} spinning={loading}>
-    <Select onChange={handleChange} value={value} {...pProps}>
-      {optionList.map(opt => (
-        <Option key={opt[optValue]} value={opt[optValue]}>
+    <Select onChange={handleChange} value={defaultValue} {...pProps}>
+      {optionList.map((opt,o) => (
+        <Option key={opt[optValue]+o} value={opt[optValue]}>
           {opt[optLabel]}
         </Option>
       ))}
