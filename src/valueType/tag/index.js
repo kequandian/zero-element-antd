@@ -6,7 +6,7 @@ import '../../rewrite.less'
 export default function valueTypeTag(props) {
   const { options = {}, data: { text = '-' },theme,type,state} = props;
   const { map = {},chy = {},colorMap={} } = options;
-  return <Tag className={colorMap[text]?'':`_tag_color ${theme} ${type} ${state||chy[text]}`||`_tag_color tag`} color={colorMap[text]}>
+  return <Tag className={colorMap[text]?'':`_tag_color ${theme} ${type} ${state||chy[text]}`||`_tag_color tag`} style={{"background":colorMap[text],"color":"#fff"}}>
     {map[text] || defaultMap[text] || text}
   </Tag>
 }
