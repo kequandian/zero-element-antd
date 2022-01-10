@@ -104,7 +104,7 @@ function format(value) {
         if(item.url.indexOf("http"||"https")===-1){
           let ItemObj = {
             ...item,
-            "url":endpoint+"/"+item.url
+            "url":endpoint+item.url
           }
           newRst.push(ItemObj)
         }else{
