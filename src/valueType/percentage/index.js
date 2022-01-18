@@ -10,10 +10,14 @@ export default function valueTypePercentage(props) {
     v = nullPlaceholder;
   }
   if (v === undefined) {
-    v = returnFloatOne(toNumber(text));
+    if(text){
+      v = `${returnFloatOne(toNumber(text))} %`;
+    }else{
+      v = '-'
+    }
   }
 
   return <span style={{ color }}>
-    {`${v} %`}
+    {`${v}`}
   </span>
 }
