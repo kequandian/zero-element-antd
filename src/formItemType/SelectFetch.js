@@ -23,6 +23,7 @@ export default function SelectFetch(props) {
   const {
     API, dataField = 'records',
     label: optLabel = 'label', value: optValue = 'value',
+    dataChildField,
     saveData,
     effectField,
     childField,
@@ -38,7 +39,7 @@ export default function SelectFetch(props) {
   const initRef = useRef(false);
   const effectFieldValue = formdata[effectField];
   const groupFieldValue = formdata[groupField]
-  console.log(formdata,"formData")
+  //console.log(formdata,"formData")
   useWillMount(_ => {
     if (effectField === undefined&&groupField === undefined) {
       getData();
@@ -95,7 +96,17 @@ export default function SelectFetch(props) {
             : data[dataField];
 
           if (Array.isArray(list)) {
-            setOptionList(list);
+            if(dataChildField){
+              const nList = [];
+              list.map(item =>{
+                if(item[dataChildField]){
+                  nList.push(item[dataChildField])
+                }
+              })
+              setOptionList(nList);
+            }else{
+              setOptionList(list);
+            }
           } else {
             console.warn(`API ${fAPI} 返回的 data 预期应该为 Array, 实际: `, list);
           }
