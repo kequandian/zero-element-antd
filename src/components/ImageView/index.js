@@ -73,40 +73,48 @@ export default function ImageView(props) {
 
 function format(value) {
   let rst = [];
-  const endpoint = getEndpoint()
+  const endpoint = getEndpoint();
 
   try {
-    if (typeof (value) === 'string') {
+    if (typeof value === 'string') {
       rst = JSON.parse(value);
     } else if (Array.isArray(value)) {
       rst = value;
     }
   } catch (e) {
-    if(value.search("https")!=-1){
+    if (value.search("https") != -1) {
       rst.push({
-        url: value,
+        url: value
       });
-    }else{
+    } else {
       // console.log(value);
       rst.push({
-        url: endpoint+value,
+        url: endpoint + value
       });
     }
   }
+
   rst.length > 0 && rst.forEach((item, index) => {
-    if(item.url){
-      if(item.url.indexOf("https"||"http")===-1){
-        rst[index] = {
-          id: index,
-          url: endpoint+item.url
-        };
-      }else{
-      rst[index] = {
-        id: index,
-        url: item.url
-      };
+    if (item.url) {
+      rst = formatImgUrl(endpoint, rst, item.url, index)
+    }else if(typeof item === 'string'){
+      rst = formatImgUrl(endpoint, rst, item, index)
     }
-  }}
-  );
+  });
   return Array.isArray(rst) ? rst : [];
+}
+
+function formatImgUrl(endpoint, rst, value, index){
+  if (value.indexOf("https" || "http") === -1) {
+    rst[index] = {
+      id: index,
+      url: endpoint + value
+    };
+  } else {
+    rst[index] = {
+      id: index,
+      url: value
+    };
+  }
+  return rst
 }
