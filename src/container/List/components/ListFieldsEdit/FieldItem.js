@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex } from 'layout-flex';
+import { Flex } from '@/layout/Flex';
 import { Checkbox } from 'antd';
 import { ArrowUpOutlined, ArrowDownOutlined, SettingOutlined } from '@ant-design/icons';
 import '../../index.css';

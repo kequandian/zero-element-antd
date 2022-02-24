@@ -1,3 +1,7 @@
 node_modules
 README.md
 package-lock.json
+.umi/
+dist/
+*.zip
+.DS_Store
