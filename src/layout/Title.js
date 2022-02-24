@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Flex } from '@/layout/Flex';
+import Flex from '@/layout/Flex';
 import './index.css';
 
 const { FlexItem } = Flex;
