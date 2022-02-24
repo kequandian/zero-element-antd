@@ -6,7 +6,9 @@ import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 
 /**
  * 
- * @param {formatField} formatField 自定义 提交的json字段，比如 formatField = "id"，即提交的参数为 [{"id": 1}]
+ * @param {formatField} formatField 自定义 提交的json字段
+ * 比如 formatField = "id"，即提交的参数为 [{"id": 1}]。
+ * formatField 为空, 即提交的 ["1", "2"] 
  */
 
 export default function CheckboxFetch({
