@@ -92,7 +92,7 @@ function formatDate(value, format) {
       formatDate(value[1], format),
     ]
   }
-  return value ? moment(value || new Date(), format) : undefined
+  return value ? moment(new Date(value), format) : undefined
 }
 
 export default date;

@@ -75,7 +75,7 @@ export default function CheckboxFetch({
     if(data && Array.isArray(data) && data.length > 0){
       if(data[0] && data[0][formatField]){
         data.map(item => {
-          d.push(item[formatField]+'')
+          d.push(item[formatField])
         })
         return d;
       }else{

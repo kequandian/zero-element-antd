@@ -8,9 +8,14 @@ import { get as getEndpoint } from 'zero-element/lib/utils/request/endpoint';
 const endpoint = getEndpoint()
 
 const initFileList = [];
+
+/**
+ * 新增 hasKey 2022年3月1日
+ */
+
 export default function UploadImage(props) {
   const { value, options, namespace, props: restProps } = props;
-  const { API = '/api/fs/uploadfile', max = 9, type = 'json',folderName/* 文件夹名 */ } = options;
+  const { API = '/api/fs/uploadfile', max = 9, type = 'json', hasKey=true,folderName/* 文件夹名 */ } = options;
   const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -56,7 +61,17 @@ export default function UploadImage(props) {
       const saveimageList = doneImageList.map(file => ({ url: file.response ? file.response.data.url : file.url }));
       if (type === 'json') {
         props.onChange(saveimageList);
-      } else {
+      } else if(type == 'string'){
+         if(hasKey){
+          props.onChange(JSON.stringify(saveimageList))
+         }else{
+          let imageList = [];
+          if(saveimageList.length > 0){
+            saveimageList.map(o => imageList.push(o.url));
+          }
+          props.onChange(JSON.stringify(imageList));
+         }
+      }else{
         props.onChange(saveimageList.map(i => i.url).join(';'));
       }
     }
@@ -100,6 +115,13 @@ function format(value) {
   try {
     if (typeof (value) === 'string') {
       rst = JSON.parse(value);
+      //判断item是否含有url字段，没有则添加
+      if (rst && rst.length > 0) {
+        if (!rst[0].url) {
+          rst = rst.map(item => ({url: item}));
+        }
+      }
+      
       rst.map((item,i)=>{
         if(item.url.indexOf("http"||"https")===-1){
           let ItemObj = {

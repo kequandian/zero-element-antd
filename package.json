@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf lib/",
     "build": "npm run clean && gulp",
-	  "buildB": "umi build"
+    "buildB": "umi build"
   },
   "dependencies": {
     "@loadable/component": "^5.10.1",
