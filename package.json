@@ -5,14 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "clean": "rimraf lib/",
-    "build": "npm run clean && gulp"
+    "build": "npm run clean && gulp",
+	  "buildB": "umi build"
   },
   "dependencies": {
     "@loadable/component": "^5.10.1",
     "ahooks": "^2.4.0",
     "antd": "^4.5.4",
     "braft-editor": "^2.3.7",
-    "layout-flex": "github:kequandian/layout-flex",
     "lodash": "^4.17.19",
     "react": "^16.8.6",
     "react-contextmenu": "^2.11.0",
@@ -21,6 +21,9 @@
     "zero-element": "^1.0.0"
   },
   "devDependencies": {
+    "@umijs/preset-react": "^1.5.12",
+    "eslint-config-umi": "^1.4.0",
+    "umi": "^3.2.6",
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",

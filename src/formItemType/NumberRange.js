@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { InputNumber } from 'antd';
-import { Flex } from 'layout-flex';
+import Flex from '@/layout/Flex';
 import { toNumber } from '@/utils/tool';
 
 const { FlexItem } = Flex;

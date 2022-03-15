@@ -39,7 +39,7 @@ export default function SelectFetch(props) {
   const initRef = useRef(false);
   const effectFieldValue = formdata[effectField];
   const groupFieldValue = formdata[groupField]
-  
+  //console.log(formdata,"formData")
   useWillMount(_ => {
     if (effectField === undefined&&groupField === undefined) {
       getData();
