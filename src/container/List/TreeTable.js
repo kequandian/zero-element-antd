@@ -47,10 +47,10 @@ export default function TreeTable(props) {
     extraData,
     model,
   });
-
+  const { searchData } = model
   useDidMount(_ => {
     if (API.listAPI) {
-      handleInitData({});
+      handleInitData(searchData);
     }
   });
   useEffect(_ => {
@@ -70,8 +70,9 @@ export default function TreeTable(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [treeData, expandedRowKeys]);
 
-  function handleInitData() {
-    const api = formatAPI(API.listAPI, { namespace });
+  function handleInitData(searchData) {
+    const apiPath = getUrl(API.listAPI, searchData)
+    const api = formatAPI(apiPath, { namespace });
 
     setLoading(true);
     query(api)
@@ -79,6 +80,34 @@ export default function TreeTable(props) {
       .catch(err => console.warn('数据初始化失败', err))
       .finally(_ => setLoading(false))
   }
+
+    /**
+   * 传入对象返回url参数
+   * @param {Object} data {a:1}
+   * @returns {string}
+   */
+  function getParam(data){
+    let url = '';
+    for(var k in data){
+      if(data[k]){
+        let value = data[k];
+        url += `&${k}=${encodeURIComponent(value)}`
+      }
+    }
+    return url ? url.substring(1) : ''
+  }
+  
+  /**
+   * 将url和参数拼接成完整地址
+   * @param {string} url url地址
+   * @param {Json} data json对象
+   * @returns {string}
+   */
+  function getUrl(url, data){
+    //看原始url地址中开头是否带?，然后拼接处理好的参数
+    return url += (url.indexOf('?') < 0 ? '?' : '') + getParam(data)
+  }
+
   function handleExpand(expanded, record) {
     if (expanded && API.appendAPI) {
       handleAppend(record.id);
@@ -112,7 +141,7 @@ export default function TreeTable(props) {
     if (expandedRowKeys.includes(oData.pid)) {
       handleAppend(oData.pid);
     } else {
-      handleInitData();
+      handleInitData(searchData);
       setExpandedRowKeys([]);
     }
   }
