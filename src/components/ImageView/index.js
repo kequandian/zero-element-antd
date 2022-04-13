@@ -12,6 +12,7 @@ export default function ImageView(props) {
     circle,
     border,
     background,
+    margin
   } = props;
   const [visible, setVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -41,6 +42,7 @@ export default function ImageView(props) {
             width,
             height,
             display: 'inline-block',
+            margin: margin? margin: ''
           }}
         >
           {background ? (

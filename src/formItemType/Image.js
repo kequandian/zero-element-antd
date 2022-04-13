@@ -4,5 +4,11 @@ import ImageView from '@/components/ImageView';
 export default function Image(props) {
   const { value, options, } = props;
 
-  return <ImageView {...options} value={value} />
+  let imageList = value;
+
+  if(imageList.indexOf(',') != -1){
+    imageList = imageList.split(',')
+  }
+
+  return <ImageView {...options} value={imageList} />
 }
