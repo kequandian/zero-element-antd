@@ -6,8 +6,8 @@ export default function Image(props) {
 
   let imageList = value;
 
-  if(imageList && imageList.indexOf(',') != -1){
-    imageList = imageList.split(',')
+  if (imageList && typeof imageList === 'string' && imageList.indexOf('[') == -1 && imageList.indexOf(',') != -1) {
+    imageList = imageList.split(',');
   }
 
   return <ImageView {...options} value={imageList} />
