@@ -104,20 +104,31 @@ function echoName(value, formData, {
   editLabel,
 }) {
 
-  if (formData) {
-    if (typeof formData === 'object') {
-      if (Array.isArray(formData[editLabel])) {
-        return formData[editLabel].map(item => item[label]).join(', ');
-      }
-      if (Array.isArray(formData[field])) {
-        return formData[field].map(item => item[editLabel]).join(', ');
-      }
-    }
-  }
-
   if (value) {
     if (Array.isArray(value.value)) {
       return value.value.map(value => value[label]).join(', ');
+    }
+  }
+
+  if (formData) {
+    if (typeof formData === 'object') {
+      if (Array.isArray(formData[editLabel])) {
+
+        let formatString = ''
+        formData[editLabel].map(value => {
+          if (typeof value == 'object') {
+            formatString += (value[label] + ', ')
+          } else {
+            formatString += (value + ', ')
+          }
+        })
+        formatString = formatString.substring(0, formatString.length - 2)
+        return formatString;
+      }
+
+      if (Array.isArray(formData[field])) {
+        return formData[field].map(item => item[editLabel]).join(', ');
+      }
     }
   }
 
