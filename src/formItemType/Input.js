@@ -11,7 +11,7 @@ export default (({
   ...rest
 }) => {
   return toptips?<>
-  <Input {...props} {...rest} style={{width:width}}></Input>
+  <Input  style={{width:width}} {...props} {...rest}></Input>
   <Toptips content={toptips} svg={svg} placement={placement} trigger={trigger}></Toptips>
-  </>:<Input {...props} {...rest}  style={{width:width}}></Input>
+  </>:<Input style={{width:width}} {...props} {...rest} ></Input>
 });

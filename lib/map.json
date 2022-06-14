@@ -114,6 +114,7 @@
     "input-number": "valueType/inputNumber",
     "input-text": "valueType/inputText",
     "input-select": "valueType/inputSelect",
-    "input-select-fetch": "valueType/inputSelectFetch"
+    "input-select-fetch": "valueType/inputSelectFetch",
+    "time-convert": "valueType/timeConvert"
   }
 }
