@@ -12,6 +12,7 @@ const methodMap = {
   'delete': remove,
   'download': download
 };
+let loading = false
 export default function onRequest(props) {
   const {
     options,
@@ -35,13 +36,18 @@ export default function onRequest(props) {
 
   // console.log(data)
 
-  // console.log(record.rawFrameImage)
+  if(loading){
+    return
+  }
+  
+  loading = true
 
   if (method === 'download') {
     return download(endpoint+API, {
       method: options.downloadMethod,
       fileName: record[fileNameField] || options.fileName
     }).then(_ => {
+      loading = false
       if (message) {
         msg.success(message);
       }
@@ -50,6 +56,7 @@ export default function onRequest(props) {
 
 
   return match(endpoint+API, data).then(_ => {
+    loading = false
     if (message) {
       msg.success(message);
     }
