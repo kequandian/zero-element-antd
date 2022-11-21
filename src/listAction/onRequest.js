@@ -37,6 +37,7 @@ export default function onRequest(props) {
   // console.log(data)
 
   if(loading){
+    msg.warning('请勿重复操作');
     return
   }
   
