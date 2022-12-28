@@ -107,7 +107,7 @@ function format(value) {
 }
 
 function formatImgUrl(endpoint, rst, value, index){
-  if (value.indexOf("https" || "http") === -1) {
+  if (value.indexOf("http") === -1) {
     rst[index] = {
       id: index,
       url: endpoint + value
