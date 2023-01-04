@@ -85,8 +85,7 @@
     "path":"formItemType/path",
     "TimeSelect":"formItemType/TimeSelect",
     "link-button":"formItemType/LinkButton",
-    "rich-text-plain":"formItemType/RichTextPlain",
-    "one-mary-plain":"formItemType/OneMaryPlain"
+    "rich-text-plain":"formItemType/RichTextPlain"
   },
   "AITSet": {
     "modal": "actionItemType/Modal",

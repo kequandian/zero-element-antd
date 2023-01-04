@@ -41,7 +41,8 @@
 
 .ZEleA-PCDM-body .ant-checkbox-group .ant-checkbox-group-item {
   padding: 8px 4px;
-  display: block;
+  display: flex;
+  flex-direction: row;
 }
 
 .ZEleA-PCDM-footer {

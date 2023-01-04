@@ -67,7 +67,8 @@ export default function PCDMContainer({
   function handleClick(e) {
     const id = e.target.value;
     if (id) {
-      const nId = toNumber(id);
+      // const nId = toNumber(id);
+      const nId = id;
       const data = listData.find(i => i.id === nId);
       onClick && onClick(data.id);
     }
@@ -78,7 +79,7 @@ export default function PCDMContainer({
 
   const selectedCount = selectedList.length;
   const listCount = (listData && listData.length) || 0;
-
+  
   return <div className="ZEleA-PCDM-container">
     <div className="ZEleA-PCDM-title">
       <Checkbox
