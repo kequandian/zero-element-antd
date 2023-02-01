@@ -15,7 +15,7 @@ const initFileList = [];
 
 export default function UploadImage(props) {
   const { value, options, namespace, props: restProps } = props;
-  const { API = '/api/fs/uploadfile', max = 9, type = 'json', hasKey=true,folderName/* 文件夹名 */ } = options;
+  const { API = '/api/fs/uploadfile', max = 9, type = 'json', hasKey=true,folderName/* 文件夹名 */, headerConfig } = options;
   const [fileList, setFileList] = useState(initFileList);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState('');
@@ -79,7 +79,7 @@ export default function UploadImage(props) {
 
   let Bucket = folderName?{
     "X-FS-BUCKET":folderName
-  }:{}
+  }: headerConfig ? headerConfig : {}
 
   let uploadProps = {
     accept: 'image/*',
