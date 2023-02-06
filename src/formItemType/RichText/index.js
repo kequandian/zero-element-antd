@@ -7,7 +7,7 @@ import 'braft-editor/dist/index.css';
 
 export default function RichText(props) {
   const { name, value, handle, onChange, options, props: p, ...rest } = props;
-  const { API = '/api/fs/uploadfile' } = options;
+  const { API = '/api/fs/uploadfile', headers } = options;
   const [canDo, setCanDo] = useState(false);
   const braftEditor = useRef(BraftEditor.createEditorState(value));
 
@@ -30,7 +30,7 @@ export default function RichText(props) {
   }
 
   const media = {
-    uploadFn: uploadFile.bind(null, API),
+    uploadFn: uploadFile.bind(null, options),
   };
 
   if (canDo) {
