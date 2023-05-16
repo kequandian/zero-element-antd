@@ -26,7 +26,7 @@ export default function valueTypeEllipsis(props) {
 
   return t.length < max ? t : (
     <Tooltip title={t}>
-      {t.slice(0, max)}...
+      {t && t.slice(0, max)}...
     </Tooltip>
   )
 }
