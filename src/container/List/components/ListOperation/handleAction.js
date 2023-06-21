@@ -43,7 +43,7 @@ export default function handleAction(type, options, props, dispatch, other = {})
         type: 'openConfirm',
         payload: {
           title: tips || '确定要删除该项吗？',
-          operationIndex: -1,
+          operationIndex: outside ? index : -1, // 源码为 -1 修改为 outside ? index : -1
           type: actionFunc.bind(null, { record }),
         }
       });
