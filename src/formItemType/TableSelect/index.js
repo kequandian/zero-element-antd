@@ -7,6 +7,7 @@ export default function TableSelectWrapped(props) {
     options, namespace,
     onChange,
     data,
+    extraData,
     columns,
     ...restProps
   } = props;
@@ -33,7 +34,34 @@ export default function TableSelectWrapped(props) {
   } else if (searchFields === false) {
     config.current.items[0] = { layout: 'Empty', component: 'Empty' };
   }
-  config.current.items[1].config.API = { listAPI: API };
+
+  // ====== 优化代码 ======
+   //替换小括号内容
+  function formatParams(value, data){
+    if(value.indexOf('(') === -1){
+      return
+    }
+    let regex = /\((.*?)\)/g; //匹配<*> 大括号里面任意内容的正则
+    let arr = value.match(regex); //字符串匹配出来的数组
+    let formatString = value
+    arr.map(item => {
+      const str = item.substring(1, item.length - 1)
+      let v = data[str]
+      if(data[str] === null || data[str] === undefined){
+        v = '-'
+      }
+      formatString = formatString.replace(`${item}`, data[str])
+    })
+    return formatString
+  }
+
+  let newApi = API;
+  if(newApi && newApi.indexOf('(') != -1){
+    newApi = formatParams(API, extraData);
+  }
+  // ======================
+
+  config.current.items[1].config.API = { listAPI: newApi };
   config.current.items[1].config.fields = fields;
 
   return <ZEle
