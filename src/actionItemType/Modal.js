@@ -32,7 +32,7 @@ export default (props) => {
   }
 
   return <>
-    <Button onClick={handleOpen} className={className}>
+    <Button onClick={handleOpen} className={className} style={{marginRight: "10px"}}>
       {title}
     </Button>
     <Modal
