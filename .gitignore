@@ -5,3 +5,4 @@ package-lock.json
 dist/
 *.zip
 .DS_Store
+._*

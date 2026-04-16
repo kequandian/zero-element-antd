@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { getActionItem } from '@/utils/readConfig';
@@ -92,7 +92,7 @@ export default function AutoReport(props) {
         {actionsItems}
       </Render>
     </>)}
-    <Table
+    <ProTable
       rowKey="id"
       size="middle"
       className="ZEleA-ReportTable"
@@ -107,6 +107,8 @@ export default function AutoReport(props) {
         onShowSizeChange: handlePageChange,
       }}
       {...propsCfg}
+      search={false}
+      options={false}
     />
   </Render>
 }

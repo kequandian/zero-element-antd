@@ -3,7 +3,7 @@ import useBaseList from 'zero-element/lib/helper/list/useBaseList';
 import { useDidMount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 import { formatAPI } from 'zero-element/lib/utils/format';
 import { query } from '@/utils/request';
@@ -160,7 +160,7 @@ export default function TreeTable(props) {
         config,
       }))}
     </Render>
-    <Table
+    <ProTable
       rowKey="id"
       size="middle"
       dataSource={treeData}
@@ -168,9 +168,13 @@ export default function TreeTable(props) {
       loading={loading}
       pagination={false}
       {...propsCfg}
-      expandedRowKeys={expandedRowKeys}
-      onExpand={handleExpand}
-      onExpandedRowsChange={handleExpandedChange}
+      expandable={{
+        expandedRowKeys,
+        onExpand: handleExpand,
+        onExpandedRowsChange: handleExpandedChange,
+      }}
+      search={false}
+      options={false}
     />
   </Render>
 }

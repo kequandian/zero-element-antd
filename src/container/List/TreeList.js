@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDidMount, useWillUnmount } from 'zero-element/lib/utils/hooks/lifeCycle';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 
 import useListHandle from './utils/useListHandle';
@@ -78,12 +78,15 @@ export default function TreeList(props) {
         />
       </FlexItem>) : null}
       <FlexItem flex={1}>
-        <Table
+        <ProTable
           rowKey="id"
           dataSource={props.data || tableData}
           childrenColumnName={field}
           {...tableProps}
           {...propsCfg}
+          search={false}
+          options={false}
+          pagination={tableProps.pagination}
         />
       </FlexItem>
     </Flex>

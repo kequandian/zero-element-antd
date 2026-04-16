@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
 
@@ -33,7 +33,7 @@ export default function ReportTable(props) {
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actionsItems}
     </Render>
-    <Table
+    <ProTable
       rowKey="id"
       size="middle"
       className="ZEleA-ReportTable"
@@ -41,6 +41,9 @@ export default function ReportTable(props) {
       rowClassName={handleRowClassName}
       {...tableProps}
       {...propsCfg}
+      search={false}
+      options={false}
+      pagination={tableProps.pagination}
     />
   </Render>
 }

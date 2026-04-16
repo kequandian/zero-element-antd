@@ -9,6 +9,7 @@
     "buildB": "umi build"
   },
   "dependencies": {
+    "@ant-design/pro-components": "^2.8.10",
     "@loadable/component": "^5.16.0",
     "ahooks": "^3.8.0",
     "antd": "^5.22.0",

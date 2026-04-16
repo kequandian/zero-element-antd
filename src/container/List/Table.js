@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
 import tableFooter from './components/TableFooter';
@@ -42,7 +42,7 @@ export default function BaseTable(props) {
         {actionsItems}
       </Render>
     </>)}
-    <Table
+    <ProTable
       rowKey="id"
       size="middle"
       rowClassName={handleRowClassName}
@@ -57,6 +57,9 @@ export default function BaseTable(props) {
             props.data || tableData,
             tableProps.columns)
       }
+      search={false}
+      options={false}
+      pagination={tableProps.pagination}
     />
   </Render>
 }

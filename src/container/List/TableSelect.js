@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 import useListHandle from './utils/useListHandle';
 import { getPageData, removeModel } from 'zero-element/lib/Model';
@@ -184,7 +184,7 @@ export default function TableSelect(props) {
     <Render n={actionLayout} {...actionLayoutConfig}>
       {actionsItems}
     </Render>
-    <Table
+    <ProTable
       // rowKey={rowKey || optValue}
       rowKey={
         typeof rowKey === 'function' ? rowKey : getKey.bind(null, rowKey, optValue)
@@ -214,6 +214,8 @@ export default function TableSelect(props) {
           getCheckboxProps: requireValid ? handleDisabled : undefined,
         } : rowSelection
       }
+      search={false}
+      options={false}
     />
   </Render>
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import useBaseChildren from 'zero-element/lib/helper/form/useBaseChildren';
 import { formatTableFields } from './utils/format';
 import { getActionItem } from '@/utils/readConfig';
-import { Table } from 'antd';
+import { ProTable } from '@ant-design/pro-components';
 import { Render } from 'zero-element/lib/config/layout';
 
 export default function ChildrenTable(props) {
@@ -38,11 +38,14 @@ export default function ChildrenTable(props) {
         namespace,
       }))}
     </Render>
-    <Table
+    <ProTable
       rowKey={row => String(row._id || row.id)}
       dataSource={data}
       columns={columns}
       {...propsCfg}
+      search={false}
+      options={false}
+      pagination={false}
     />
   </Render>
 }
